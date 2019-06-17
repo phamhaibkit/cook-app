@@ -81,7 +81,7 @@ export class Main extends Component {
     if (this.state.showRealApp) {
       return (
         <View >
-          <Text >2222222222222222222222222!</Text>
+          <Text >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!</Text>
           <Text >To get started, edit App.js</Text>
         </View>
       );
