@@ -8,10 +8,10 @@ import {
   createAppContainer,
 } from 'react-navigation';
 //import createStackNavigator, createBottomTabNavigator, createAppContainer in our project
-import PageHome from '../page-home/PageHome';
-import PageSetting from '../page-setting/PageSetting';
-import PageDetail from '../page-detail/PageDetail';
-import PageProfile from '../page-profile/PageProfile';
+import PageHome from '../page-home/page-home';
+import PageSetting from '../page-setting/page-setting';
+import PageDetail from '../page-detail/page-detail';
+import PageProfile from '../page-profile/page-profile';
 import styles from './main-style';
 
 const HomeStack = createStackNavigator(
@@ -109,7 +109,7 @@ export class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showRealApp: false
+      showRealApp: true
     }
   }
 

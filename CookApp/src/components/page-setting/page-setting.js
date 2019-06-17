@@ -1,10 +1,9 @@
-//This is an example code for Bottom Navigation//
-import React from 'react';
+import React, { Component } from 'react';
 //import react in our code.
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 //import all the basic component we have used
  
-export default class PageSetting extends React.Component {
+export default class PageSetting extends Component {
   //Setting Screen to show in Setting Option
   render() {
     return (
