@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import RecipeItem from '../recipe-item/recipe-item';
-import { ScrollView } from 'react-native-gesture-handler';
+import Trending from '../trending/trending';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -12,8 +12,9 @@ export default class PageHome extends Component {
 		return (
 			<ScrollView>
 				<View style={{flex: 1, flexDirection: 'column'}}>
+          <Trending></Trending>
 					<RecipeItem />
-					<View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
+					{/* <View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
 					  <Text style={{ marginTop: 50, fontSize: 25 }}>Home!</Text>
 						<TouchableOpacity
 							style={styles.button}
@@ -27,7 +28,7 @@ export default class PageHome extends Component {
 						>
 							<Text>Open Details Screen</Text>
 						</TouchableOpacity>
-					</View>
+					</View> */}
 				</View>
 			</ScrollView>
 		);

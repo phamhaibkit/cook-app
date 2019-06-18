@@ -5,11 +5,16 @@ const height = Dimensions.get('window').height;
 export default StyleSheet.create({
 	container: {
 		flex: 1,
-    height: 0.3*height,
-    marginTop: 20,
-	},
+  },
+  containerlabel: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },  
 	frame: {
-		padding: 12,
+    height: 0.32*height,
+    padding: 12,
     fontSize: 18,
     width:width - 48,
     backgroundColor: 'lightblue',
@@ -44,6 +49,15 @@ export default StyleSheet.create({
     alignItems: 'flex-end',
     // justifyContent: 'flex-end',
   },
+  labelText: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  moreText: {
+    color: 'blue',
+    textDecorationLine: 'underline'
+  },  
   titleText: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -54,5 +68,8 @@ export default StyleSheet.create({
   image: {
     width: 20,
     height: 20
+  },
+  textButton: {
+    padding: 4,
   }
 });
