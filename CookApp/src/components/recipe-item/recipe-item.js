@@ -24,7 +24,7 @@ export default class RecipeItem extends Component {
 	renderFrame = (item, index) => {
 		const endStyle = this.data.length - 1 === index ? [styles.frame, styles.endFrame] : styles.frame;
 		return (
-			<View style={endStyle}>
+			<TouchableOpacity style={endStyle}>
         <View style={styles.emptyContent}></View>
 				<View style={styles.containerContent}>
 					<View style={styles.tile}>
@@ -41,7 +41,7 @@ export default class RecipeItem extends Component {
 						</Text>
 					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		);
 	};
 

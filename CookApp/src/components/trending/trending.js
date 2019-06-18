@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
-import IMG from '../../utils/variables';
 
 import styles from './trending-style';
 export default class Trending extends Component {
@@ -28,7 +27,7 @@ export default class Trending extends Component {
 	renderFrame = (item, index) => {
 		const endStyle = this.data.length - 1 === index ? [styles.frame, styles.endFrame] : styles.frame;
 		return (
-			<View style={endStyle}>
+			<TouchableOpacity style={endStyle}>
         <View style={styles.square}></View>
         <View style={styles.containerText}>
 					<Text style={styles.text}>{item.key}</Text>
@@ -47,7 +46,7 @@ export default class Trending extends Component {
 						</Text>
 					</View>
 				</View> */}
-			</View>
+			</TouchableOpacity>
 		);
 	};
 
