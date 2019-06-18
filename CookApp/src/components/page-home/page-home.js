@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import RecipeItem from '../recipe-item/recipe-item';
 import { ScrollView } from 'react-native-gesture-handler';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export default class PageHome extends Component {
 	//Home Screen to show in Home Option
@@ -10,10 +13,7 @@ export default class PageHome extends Component {
 			<ScrollView>
 				<View style={{flex: 1, flexDirection: 'column'}}>
 					<RecipeItem />
-          {/* <View style={{flex: 1, backgroundColor: 'green',justifyContent: 'center', alignItems: 'center', height: 500}}>
-            <Text>AAAAAAAAAAAAAAAAAAAA</Text>
-          </View> */}
-					<View style={{flex: 1,justifyContent: 'center', alignItems: 'center', borderColor: 'yellow', borderWidth: 2 }}>
+					<View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
 					  <Text style={{ marginTop: 50, fontSize: 25 }}>Home!</Text>
 						<TouchableOpacity
 							style={styles.button}

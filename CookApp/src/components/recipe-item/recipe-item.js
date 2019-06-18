@@ -1,15 +1,42 @@
 import React, { Component } from 'react';
-import { Text, View} from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import IMG from '../../utils/variables';
 
 import styles from './recipe-item-style';
 export default class RecipeItem extends Component {
-	//Detail Screen to show from any Open detail button
+	constructor(props) {
+		super(props);
+		this.state = {};
+		this.data = [
+			{ key: 'Những món ăn giành cho những ngày đầu mùa mưa', recipes: '20 công thức', saves: '200 lưu lại' },
+			{ key: 'Những món ăn giành cho những người thất tình', recipes: '20 công thức', saves: '200 lưu lại' },
+      { key: 'Cay và nóng là 2 món được ưa thích', recipes: '20 công thức', saves: '200 lưu lại' },
+      { key: 'Neu nhu mot ngay em khong giong', recipes: '20 công thức', saves: '200 lưu lại' },
+			{ key: 'Tai sao ma do ta khong do nang vay', recipes: '20 công thức', saves: '200 lưu lại' },
+		];
+	}
 
-	renderFrame = data => {
+	renderFrame = (item, index) => {
+		const endStyle = this.data.length - 1 === index ? [styles.frame, styles.endFrame] : styles.frame;
 		return (
-			<View >
-				<Text>{data.key}</Text>
+			<View style={endStyle}>
+        <View style={styles.emptyContent}></View>
+				<View style={styles.containerContent}>
+					<View style={styles.tile}>
+						<View style={styles.left}>
+							<Text style={styles.titleText}>{item.key}</Text>
+						</View>
+						<View style={styles.right}>
+							<Image source= {IMG.bookmark} style={styles.image}></Image>
+						</View>
+					</View>
+					<View style={styles.bottom}>
+						<Text style={styles.normalText}>
+							{item.recipes} - {item.saves}
+						</Text>
+					</View>
+				</View>
 			</View>
 		);
 	};
@@ -17,28 +44,7 @@ export default class RecipeItem extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<FlatList
-					data={[
-						{ key: 'Ahihih' },
-						{ key: 'Dokngoc' },
-						{ key: 'James' },
-						{ key: 'Joel' },
-						{ key: 'John' },
-						{ key: 'Jillian' },
-						{ key: 'Jimmy' },
-						{ key: 'Julie' },
-						{ key: 'Devin1' },
-						{ key: 'Jackson1' },
-						{ key: 'James1' },
-						{ key: 'Joel1' },
-						{ key: 'John1' },
-						{ key: 'Jillian1' },
-						{ key: 'Jimmy1' },
-						{ key: 'Julie1' },
-					]}
-					renderItem={({ item }) => this.renderFrame(item)}
-          horizontal
-				/>
+				<FlatList data={this.data} renderItem={({ item, index }) => this.renderFrame(item, index)} horizontal />
 			</View>
 		);
 	}
