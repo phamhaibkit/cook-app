@@ -12,6 +12,7 @@ import PageHome from '../page-home/page-home';
 import PageSetting from '../page-setting/page-setting';
 import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
+import PageSearch from '../page-search/page-search';
 import styles from './main-style';
 
 const HomeStack = createStackNavigator(
@@ -19,16 +20,18 @@ const HomeStack = createStackNavigator(
     //Defination of Navigaton from home screen
     Home: { screen: PageHome },
     Details: { screen: PageDetail },
+    Search: { screen: PageSearch}
   },
   {
     //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
     defaultNavigationOptions: {
       //Header customization of the perticular Screen
-      headerStyle: {
-        backgroundColor: '#42f44b',
-      },
-      headerTintColor: '#FFFFFF',
-      title: 'Home',
+      header: null,
+      // headerStyle: {
+      //   backgroundColor: '#42f44b',
+      // },
+      // headerTintColor: '#FFFFFF',
+      // title: 'Home',
       //Header title
     },
   }
@@ -109,7 +112,7 @@ export class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showRealApp: true
+      showRealApp: false
     }
   }
 
