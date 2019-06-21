@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, AsyncStorage, TouchableOpacity} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
@@ -7,26 +7,35 @@ import {
   createBottomTabNavigator,
   createAppContainer,
 } from 'react-navigation';
-//import createStackNavigator, createBottomTabNavigator, createAppContainer in our project
+
+import styles from './main-style';
 import PageHome from '../page-home/page-home';
 import PageSetting from '../page-setting/page-setting';
 import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
 import PageSearch from '../page-search/page-search';
-import styles from './main-style';
+import {ASYNC_STORAGE} from '../../utils/variables';
 
 const HomeStack = createStackNavigator(
   {
     //Defination of Navigaton from home screen
-    Home: { screen: PageHome },
+    Home: { screen: PageHome,
+      navigationOptions: {
+        header: null
+      }
+    },
     Details: { screen: PageDetail },
-    Search: { screen: PageSearch}
+    Search: { screen: PageSearch,
+      navigationOptions: {
+        title: 'Search',
+      }
+    }
   },
   {
     //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
     defaultNavigationOptions: {
       //Header customization of the perticular Screen
-      header: null,
+      // header: null,
       // headerStyle: {
       //   backgroundColor: '#42f44b',
       // },
@@ -47,11 +56,12 @@ const SettingsStack = createStackNavigator(
     //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
     defaultNavigationOptions: {
       //Header customization of the perticular Screen
-      headerStyle: {
-        backgroundColor: '#42f44b',
-      },
-      headerTintColor: '#FFFFFF',
-      title: 'Settings',
+      header: null,
+      // headerStyle: {
+      //   backgroundColor: '#42f44b',
+      // },
+      // headerTintColor: '#FFFFFF',
+      // title: 'Settings',
       //Header title
     },
   }
@@ -76,7 +86,7 @@ const bottomTabNav = createBottomTabNavigator(
       },
     }),
     tabBarOptions: {
-      activeTintColor: '#42f44b',
+      activeTintColor: 'blue',
       inactiveTintColor: 'gray',
     },
   }
@@ -112,9 +122,19 @@ export class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showRealApp: false
+      showRealApp: false,
+      isLoad: true
     }
   }
+
+  componentWillMount = async () => {
+    const isReal = await this.showRealApp();
+    this.setState({
+      showRealApp: isReal,
+      isLoad: false
+    })
+  }
+
 
   _renderItem = (item) => {
     return (
@@ -126,18 +146,29 @@ export class Main extends Component {
     );
   }
   _onDone = () => {
-    // User finished the introduction. Show real app through
-    // navigation or simply by controlling state
+    AsyncStorage.setItem(ASYNC_STORAGE.INTRO, 'true');
     this.setState({ showRealApp: true });
   }
 
+  showRealApp = async () => {
+    const isIntro = await AsyncStorage.getItem(ASYNC_STORAGE.INTRO);
+    if(!isIntro) {
+      return false;
+    };
+    if(isIntro !== 'true'){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   render() {
-    if (this.state.showRealApp) {
-      return (
-        <AppContainer></AppContainer>
-      );
-    } else {
-      return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone}/>;
+    const {showRealApp, isLoad } = this.state;
+    if (!showRealApp && !isLoad) {
+      return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone}/>
+    }
+    else {
+      return <AppContainer></AppContainer>
     }
   }
 
