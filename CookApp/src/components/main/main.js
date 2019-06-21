@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Text, View, Image} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, Image } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
@@ -13,6 +13,7 @@ import PageSetting from '../page-setting/page-setting';
 import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
 import PageSearch from '../page-search/page-search';
+import PageSignin from '../page-signin/page-signin';
 import styles from './main-style';
 
 const HomeStack = createStackNavigator(
@@ -112,13 +113,14 @@ export class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showRealApp: false
+      showRealApp: false,
+      loginPage: false
     }
   }
 
   _renderItem = (item) => {
     return (
-      <View style={[styles.mainContent, {backgroundColor:item.backgroundColor}]}>
+      <View style={[styles.mainContent, { backgroundColor: item.backgroundColor }]}>
         <Text style={styles.title}>{item.title}</Text>
         <Image style={styles.image} source={item.image} />
         <Text style={styles.text}>{item.text}</Text>
@@ -128,18 +130,23 @@ export class Main extends Component {
   _onDone = () => {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
-    this.setState({ showRealApp: true });
+    this.setState({ loginPage: true });
   }
 
   render() {
+    const { loginPage } = this.state;
     if (this.state.showRealApp) {
       return (
         <AppContainer></AppContainer>
       );
+    } else if (loginPage) {
+      return (
+        <PageSignin></PageSignin>
+      );
     } else {
-      return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone}/>;
+      return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone} />;
     }
   }
 
-  
+
 }
