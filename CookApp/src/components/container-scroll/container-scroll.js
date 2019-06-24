@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image, ScrollView, Animated } from 'react-native';
 
 import SearchBarHeader from '../search-bar/search-bar';
-import IMG from '../../utils/variables';
+import {IMG} from '../../utils/variables';
 
 HEADER_MAX_HEIGHT = 180;
 HEADER_MIN_HEIGHT = 50;

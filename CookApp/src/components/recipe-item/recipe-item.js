@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
-import IMG from '../../utils/variables';
+import {IMG} from '../../utils/variables';
 
 import styles from './recipe-item-style';
 export default class RecipeItem extends Component {
