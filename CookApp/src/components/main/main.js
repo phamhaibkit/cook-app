@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
+=======
+import React, {Component} from 'react';
+import {Text, View, Image, AsyncStorage, TouchableOpacity} from 'react-native';
+>>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
@@ -7,27 +12,40 @@ import {
   createBottomTabNavigator,
   createAppContainer,
 } from 'react-navigation';
-//import createStackNavigator, createBottomTabNavigator, createAppContainer in our project
+
+import styles from './main-style';
 import PageHome from '../page-home/page-home';
 import PageSetting from '../page-setting/page-setting';
 import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
 import PageSearch from '../page-search/page-search';
+<<<<<<< HEAD
 import PageSignin from '../page-signin/page-signin';
 import styles from './main-style';
+=======
+import {ASYNC_STORAGE} from '../../utils/variables';
+>>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
 
 const HomeStack = createStackNavigator(
   {
     //Defination of Navigaton from home screen
-    Home: { screen: PageHome },
+    Home: { screen: PageHome,
+      navigationOptions: {
+        header: null
+      }
+    },
     Details: { screen: PageDetail },
-    Search: { screen: PageSearch}
+    Search: { screen: PageSearch,
+      navigationOptions: {
+        title: 'Search',
+      }
+    }
   },
   {
     //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
     defaultNavigationOptions: {
       //Header customization of the perticular Screen
-      header: null,
+      // header: null,
       // headerStyle: {
       //   backgroundColor: '#42f44b',
       // },
@@ -48,11 +66,12 @@ const SettingsStack = createStackNavigator(
     //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
     defaultNavigationOptions: {
       //Header customization of the perticular Screen
-      headerStyle: {
-        backgroundColor: '#42f44b',
-      },
-      headerTintColor: '#FFFFFF',
-      title: 'Settings',
+      header: null,
+      // headerStyle: {
+      //   backgroundColor: '#42f44b',
+      // },
+      // headerTintColor: '#FFFFFF',
+      // title: 'Settings',
       //Header title
     },
   }
@@ -77,7 +96,7 @@ const bottomTabNav = createBottomTabNavigator(
       },
     }),
     tabBarOptions: {
-      activeTintColor: '#42f44b',
+      activeTintColor: 'blue',
       inactiveTintColor: 'gray',
     },
   }
@@ -114,9 +133,22 @@ export class Main extends Component {
     super(props);
     this.state = {
       showRealApp: false,
+<<<<<<< HEAD
       loginPage: false
+=======
+      isLoad: true
+>>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
     }
   }
+
+  componentWillMount = async () => {
+    const isReal = await this.showRealApp();
+    this.setState({
+      showRealApp: isReal,
+      isLoad: false
+    })
+  }
+
 
   _renderItem = (item) => {
     return (
@@ -128,12 +160,30 @@ export class Main extends Component {
     );
   }
   _onDone = () => {
+<<<<<<< HEAD
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
     this.setState({ loginPage: true });
+=======
+    AsyncStorage.setItem(ASYNC_STORAGE.INTRO, 'true');
+    this.setState({ showRealApp: true });
+>>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
+  }
+
+  showRealApp = async () => {
+    const isIntro = await AsyncStorage.getItem(ASYNC_STORAGE.INTRO);
+    if(!isIntro) {
+      return false;
+    };
+    if(isIntro !== 'true'){
+      return false;
+    }else{
+      return true;
+    }
   }
 
   render() {
+<<<<<<< HEAD
     const { loginPage } = this.state;
     if (this.state.showRealApp) {
       return (
@@ -145,6 +195,14 @@ export class Main extends Component {
       );
     } else {
       return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone} />;
+=======
+    const {showRealApp, isLoad } = this.state;
+    if (!showRealApp && !isLoad) {
+      return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone}/>
+    }
+    else {
+      return <AppContainer></AppContainer>
+>>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
     }
   }
 
