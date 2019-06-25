@@ -63,7 +63,7 @@ export default class ContainerScroll extends Component {
         }}>
           <Animated.View style={{
             position: 'absolute', bottom: 0, width: '100%',justifyContent: 'center', height: 54}}>
-            <SearchBarHeader navigation={this.props.navigation}></SearchBarHeader>
+            <SearchBarHeader ></SearchBarHeader>
           </Animated.View>
         </Animated.View>
         <ScrollView style={{flex: 1}}
