@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-=======
-import React, {Component} from 'react';
-import {Text, View, Image, AsyncStorage, TouchableOpacity} from 'react-native';
->>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
@@ -19,12 +14,7 @@ import PageSetting from '../page-setting/page-setting';
 import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
 import PageSearch from '../page-search/page-search';
-<<<<<<< HEAD
-import PageSignin from '../page-signin/page-signin';
-import styles from './main-style';
-=======
 import {ASYNC_STORAGE} from '../../utils/variables';
->>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
 
 const HomeStack = createStackNavigator(
   {
@@ -133,11 +123,7 @@ export class Main extends Component {
     super(props);
     this.state = {
       showRealApp: false,
-<<<<<<< HEAD
-      loginPage: false
-=======
       isLoad: true
->>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
     }
   }
 
@@ -160,14 +146,8 @@ export class Main extends Component {
     );
   }
   _onDone = () => {
-<<<<<<< HEAD
-    // User finished the introduction. Show real app through
-    // navigation or simply by controlling state
-    this.setState({ loginPage: true });
-=======
     AsyncStorage.setItem(ASYNC_STORAGE.INTRO, 'true');
     this.setState({ showRealApp: true });
->>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
   }
 
   showRealApp = async () => {
@@ -183,26 +163,12 @@ export class Main extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const { loginPage } = this.state;
-    if (this.state.showRealApp) {
-      return (
-        <AppContainer></AppContainer>
-      );
-    } else if (loginPage) {
-      return (
-        <PageSignin></PageSignin>
-      );
-    } else {
-      return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone} />;
-=======
     const {showRealApp, isLoad } = this.state;
     if (!showRealApp && !isLoad) {
       return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone}/>
     }
     else {
       return <AppContainer></AppContainer>
->>>>>>> d80be0cbf8fde9b6311127bcd73b88d21fdfbe83
     }
   }
 

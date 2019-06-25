@@ -3,8 +3,9 @@ import { Text, TouchableOpacity, Platform, Modal, View } from 'react-native';
 
 import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
 // FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.WebView);
-
+// import navigationService from '../../services/navigation.service'
 import styles from './signin-by-facebook.style';
+import navigationService from '../../services/navigation.service';
 
 class SigninByFacebook extends Component {
 	constructor(props) {
@@ -49,24 +50,27 @@ class SigninByFacebook extends Component {
 	};
 
 	_loginFacebookHandle = (email, firstname, lastname, id) => {
-		return authService
-			.loginFacebook(email, firstname, lastname, id)
-			.then(data => {
-				this.timeout = setTimeout(() => this.hideLoading(), 200);
-				this.hideLoading();
-				this.props.setAccountInfo(data);
-				FBLoginManager.logout(() => {
-					console.log('Logout-Facebook');
-				});
-				navigationService.goBack();
-			})
-			.catch(error => {
-				FBLoginManager.logout(() => {
-					console.log('Logout-Facebook');
-				});
-				this.timeout = setTimeout(() => this.hideLoading(), 200);
-				console.log('ERRRRR', error);
-			});
+		console.log(this.props)
+		// return authService
+		// 	.loginFacebook(email, firstname, lastname, id)
+		// 	.then(data => {
+		// 		this.timeout = setTimeout(() => this.hideLoading(), 200);
+		// 		this.hideLoading();
+		// 		this.props.setAccountInfo(data);
+		// 		FBLoginManager.logout(() => {
+		// 			console.log('Logout-Facebook');
+		// 		});
+		// 		navigationService.goBack();
+		// 	})
+		// 	.catch(error => {
+		// 		FBLoginManager.logout(() => {
+		// 			console.log('Logout-Facebook');
+		// 		});
+		// 		this.timeout = setTimeout(() => this.hideLoading(), 200);
+		// 		console.log('ERRRRR', error);
+		// 	});
+		// navigationService.goBack();
+		navigationService.navigate('Details');
 	};
 
 	showLoading = () => {
@@ -93,16 +97,16 @@ class SigninByFacebook extends Component {
 				</View>
 				<View style={styles.buttonLogin}>
 					<FBLogin
-						// buttonView={
-						// 	<TouchableOpacity
-						// 		style={styles.loginWithFacebook}
-						// 		onPress={() => {
-						// 			this.fbLogin.login();
-						// 		}}
-						// 	>
-						// 		<Text style={styles.loginWithFacebookText}>{LANG.SIGN_IN_WITH_FACEBOOK}</Text>
-						// 	</TouchableOpacity>
-						// }
+						buttonView={
+							<TouchableOpacity
+								style={styles.loginWithFacebook}
+								onPress={() => {
+									this.fbLogin.login();
+								}}
+							>
+								<Text style={styles.loginWithFacebookText}>Facebook</Text>
+							</TouchableOpacity>
+						}
 						ref={fbLogin => {
 							this.fbLogin = fbLogin;
 						}}

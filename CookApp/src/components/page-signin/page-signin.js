@@ -4,6 +4,9 @@ import styles from './page-signin-style'
 import SigninByFacebook from '../signin-by-facebook/signin-by-facebook'
 
 export class PageSignin extends Component {
+    componentWillMount() {
+        
+    }
     render() {
         return (
             <View style={styles.container}>

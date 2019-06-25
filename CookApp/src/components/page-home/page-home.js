@@ -26,7 +26,7 @@ export default class PageHome extends Component {
 						</TouchableOpacity>
 						<TouchableOpacity
 							style={styles.button}
-							onPress={() => this.props.navigation.navigate('Details')}
+							onPress={() => this.props.navigation.navigate('SignIn')}
 						>
 							<Text>Open Details Screen</Text>
 						</TouchableOpacity>
