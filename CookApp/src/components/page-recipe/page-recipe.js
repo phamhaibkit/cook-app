@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 //import all the basic component we have used
  
-export default class PageSettings extends Component {
+export default class PageRecipe extends Component {
   //Setting Screen to show in Setting Option
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ marginTop: 50, fontSize: 25 }}>Setting!</Text>
+        <Text style={{ marginTop: 50, fontSize: 25 }}>Recipe!</Text>
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <TouchableOpacity

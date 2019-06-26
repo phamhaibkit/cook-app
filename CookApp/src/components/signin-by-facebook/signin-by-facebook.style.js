@@ -3,23 +3,31 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 export default styles = StyleSheet.create({
 	container: {
+		flex: 1,
 		alignItems: 'center',
-		marginBottom: 30,
+		marginBottom: 50,
 	},
 	textLogin: {
-		position: 'absolute',
+		flex: 1,
+		// position: 'absolute',
 	},
-	buttonLogin: {
-		position: 'absolute',
-		opacity: 0,
-	},
+	// buttonLogin: {
+	// 	flex: 1,
+	// 	// position: 'absolute',
+	// 	opacity: 0,
+	// },
 	loginWithFacebook: {
+		flex: 1,
 		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#f0f0f0',
+		paddingVertical: 20,
 	},
 	loginWithFacebookText: {
-		// color: CSS.colorBlue,
-		textDecorationLine: 'underline',
-		// fontSize: CSS.fontSize16,
-		marginBottom: 30,
+		flex: 1,
+		color: 'black',
+		// textDecorationLine: 'underline',
+		fontSize: 16,
+		// marginBottom: 30,
 	},
 });

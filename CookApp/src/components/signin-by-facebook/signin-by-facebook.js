@@ -21,17 +21,13 @@ class SigninByFacebook extends Component {
 		}
 	}
 
-	onLoginFbSucess = user => {
+	onLoginFbSucess = (user) => {
 		this.showLoading();
 		if (Platform.OS === 'ios') {
-			const api =
-				'https://graph.facebook.com/v3.1/' +
-				user.credentials.userId +
-				'?fields=name,email,first_name,last_name&access_token=' +
-				user.credentials.token;
+			const api = `https://graph.facebook.com/v3.1/${user.credentials.userId}?fields=name,email,first_name,last_name&access_token=${user.credentials.token}`;
 			fetch(api)
 				.then(response => response.json())
-				.then(responseData => {
+				.then((responseData) => {
 					return this._loginFacebookHandle(
 						responseData.email,
 						responseData.first_name,
@@ -70,7 +66,7 @@ class SigninByFacebook extends Component {
 		// 		console.log('ERRRRR', error);
 		// 	});
 		// navigationService.goBack();
-		navigationService.navigate('Details');
+		navigationService.goBack();
 	};
 
 	showLoading = () => {
@@ -92,9 +88,6 @@ class SigninByFacebook extends Component {
 		console.log('aaaa');
 		return (
 			<View style={styles.container}>
-				<View style={styles.textLogin}>
-					<Text style={styles.loginWithFacebookText}>AAAAAAAAA</Text>
-				</View>
 				<View style={styles.buttonLogin}>
 					<FBLogin
 						buttonView={
@@ -104,15 +97,15 @@ class SigninByFacebook extends Component {
 									this.fbLogin.login();
 								}}
 							>
-								<Text style={styles.loginWithFacebookText}>Facebook</Text>
+								<Text style={styles.loginWithFacebookText}>Đăng nhập với Facebook</Text>
 							</TouchableOpacity>
 						}
-						ref={fbLogin => {
+						ref={(fbLogin) => {
 							this.fbLogin = fbLogin;
 						}}
 						permissions={['email']}
 						loginBehavior={FBLoginManager.LoginBehaviors.Native}
-						onLogin={user => {
+						onLogin={(user) => {
 							this.onLoginFbSucess(user);
 						}}
 					/>

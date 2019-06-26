@@ -17,7 +17,8 @@ YellowBox.ignoreWarnings([
 	'Module RCTMFBLoginManager',
 	'Remote debugger',
 	'ListView',
-	'Require cycle',
+  'Require cycle',
+  'Failed prop type'
 ]);
 export default class App extends Component {
   render() {
