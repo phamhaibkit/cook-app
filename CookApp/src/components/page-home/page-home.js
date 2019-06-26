@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import RecipeItem from '../recipe-item/recipe-item';
+import ComboItem from '../combo-item/combo-item';
 import Trending from '../trending/trending';
 import ContainerScroll from '../container-scroll/container-scroll';
 import navigationService from '../../services/navigation.service';
@@ -17,6 +18,7 @@ export default class PageHome extends Component {
 				<View style={{ flex: 1, flexDirection: 'column' }}>
 					<Trending />
 					<RecipeItem />
+          <ComboItem></ComboItem>
 					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 						<Text style={{ marginTop: 50, fontSize: 25 }}>{LANG.HOME}</Text>
 						<TouchableOpacity

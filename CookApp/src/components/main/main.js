@@ -29,7 +29,12 @@ const HomeStack = createStackNavigator({
 	Search: { screen: PageSearch },
 });
 const StoreStack = createStackNavigator({
-	Store: { screen: PageStore },
+  Store: { screen: PageStore,
+    navigationOptions: {
+			header: null,
+			// gesturesEnabled: true,
+    },
+   },
 	Details: { screen: PageDetail },
 	Profile: { screen: PageProfile },
 });

@@ -14,15 +14,18 @@ export default StyleSheet.create({
   },  
 	frame: {
     height: 0.32*height,
-    padding: 12,
-    fontSize: 18,
+    // fontSize: 18,
     width:width - 48,
     backgroundColor: 'lightblue',
     marginLeft: 12,
-    borderRadius: 5,
   },
   endFrame: {
     marginRight: 12,
+  },
+  containerImg: {
+    flex: 1,
+    padding: 12,
+    // borderRadius: 5,
   },
   emptyContent: {
     flex: 7,
