@@ -3,7 +3,7 @@ export const COMBO_DATA = [
 		combo: [
 			{
 				name: 'Com chien ga xoi mo',
-				link: 'https://i.a4vn.com/2012/6/4/che-bien-com-xu-xi-ff5a90.jpg',
+				link: 'https://blog.beemart.vn/wp-content/uploads/2015/08/com-bento-2.jpg',
 			},
 			{
 				name: 'Ga tha vuon',
@@ -37,7 +37,7 @@ export const COMBO_DATA = [
 		combo: [
 			{
 				name: 'Com chien ga xoi mo',
-				link: 'https://i.a4vn.com/2012/6/4/che-bien-com-xu-xi-ff5a90.jpg',
+				link: 'https://massageishealthy.com/wp-content/uploads/2019/06/cach-trang-tri-mon-an-dep-mat-don-gian-thumb.jpg',
 			},
 			{
 				name: 'Ga tha vuon',
@@ -45,20 +45,40 @@ export const COMBO_DATA = [
 			},
 			{
 				name: 'Giau an tu cong',
-				link: 'https://media.cooky.vn/recipe/g4/38996/s800x500/cooky-recipe-cover-r38996.jpg',
+				link: 'https://img.sam.vn/public/upload/media/Demo/chameblog/uploads/2018/09/tong-hop-60-mau-trang-tri-mon-an-dep-mat-lai-sieu-don-gian-044150.jpg',
 			},
 			{
 				name: 'Giau ',
-				link: 'https://media.cooky.vn/recipe/g1/6572/s800x500/recipe6572-636437445152257781.jpg',
+				link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScBwn_M-s9R2cithvzZKtT_DhJScOSc_6WZVXFuYMs4Tj7KLjlwA',
 			},
 		],
 		orders: '20 người đặt',
 		views: '200 lượt xem',
 	},
 	{
-		combo: ['thit cho', 'Mam tom', 'culac', 'culac', 'culac'],
+		combo: [
+			{
+				name: 'Con chuot',
+				link: 'https://cdn.24h.com.vn/upload/1-2018/images/2018-01-20/1516414282-722-tron-mat-truoc-nhung-mon-an-duoc-trang-tri-dep-den-muc-kho-tin-cua-co-gai-9x-3-1--1516270125-width960height791.jpg',
+			},
+			{
+				name: 'Ga tha vuon',
+				link: 'https://media.tinybook.net/images/l2/kheo-tay-trang-tri-mon-an-dep-mat-3138.jpg',
+			},
+			{
+				name: 'Giau an tu cong',
+				link: 'https://afamilycdn.com/Images/Uploaded/Share/2010/08/12/36.jpg',
+			},
+			{
+				name: 'Giau ',
+				link: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
+      },
+      {
+				name: 'Hap dan ',
+				link: 'https://massageishealthy.com/wp-content/uploads/2019/06/cach-trang-tri-mon-an-dep-mat-don-gian-thumb.jpg',
+			},
+		],
 		orders: '20 người đặt',
 		views: '200 lượt xem',
 	},
-	{ combo: ['thit cho', 'Mam tom', 'culac'], orders: '20 người đặt', views: '200 lượt xem' },
 ];
