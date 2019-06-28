@@ -21,7 +21,7 @@ export default class PageHome extends Component {
 					<View style={{ height: 100 }}>
 					</View>
 					<Text style={{ marginLeft: 10, fontSize: 20, fontWeight: 'bold' }}>Combo Mon</Text>
-					{/* <ComboItem></ComboItem> */}
+					<ComboItem></ComboItem>
 					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 						<Text style={{ marginTop: 50, fontSize: 25 }}>{LANG.HOME}</Text>
 						<TouchableOpacity

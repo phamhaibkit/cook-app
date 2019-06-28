@@ -41,8 +41,8 @@ class PageSignin extends Component {
 	onChangeText = (value, err, type) => {
 		this.setState({
 			[type]: {
-				value: value,
-				err: err,
+				value,
+				err,
 			},
 			notMatch: false,
 		});

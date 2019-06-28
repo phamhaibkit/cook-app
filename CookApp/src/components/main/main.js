@@ -41,23 +41,22 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = ({ navigation }) => {
 	let tabBarVisible = true;
-	console.log(navigation.state);
 	if (navigation.state.index > 0) {
-	  tabBarVisible = false;
+		tabBarVisible = false;
 	}
-  
+
 	return {
-	  tabBarVisible,
+		tabBarVisible,
 	};
-  };
-  
+};
+
 const StoreStack = createStackNavigator({
 	Store: {
 		screen: PageStore,
 		navigationOptions: {
 			header: null,
 			// gesturesEnabled: true,
-			
+
 		},
 	},
 	Details: { screen: PageDetail },
@@ -72,7 +71,12 @@ const NotiStack = createStackNavigator({
 });
 
 const UserStack = createStackNavigator({
-	Noti: { screen: PageUser },
+	User: {
+		screen: PageUser,
+		navigationOptions: {
+			header: null,
+		},
+	},
 });
 
 const bottomTabNav = createBottomTabNavigator(
@@ -161,7 +165,7 @@ export class Main extends Component {
 		});
 	};
 
-	_renderItem = item => {
+	_renderItem = (item) => {
 		return (
 			<View style={[styles.mainContent, { backgroundColor: item.backgroundColor }]}>
 				<Text style={styles.title}>{item.title}</Text>
@@ -170,6 +174,7 @@ export class Main extends Component {
 			</View>
 		);
 	};
+
 	_onDone = () => {
 		AsyncStorage.setItem(ASYNC_STORAGE.INTRO, 'true');
 		this.setState({ showRealApp: true });
@@ -194,7 +199,7 @@ export class Main extends Component {
 		} else {
 			return (
 				<AppContainer
-					ref={navigatorRef => {
+					ref={(navigatorRef) => {
 						navigationService.setTopLevelNavigator(navigatorRef);
 					}}
 				/>
