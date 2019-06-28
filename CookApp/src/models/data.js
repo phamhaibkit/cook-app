@@ -1,3 +1,5 @@
+let rand = require('random-key');	
+
 export const COMBO_DATA = [
 	{
 		combo: [
@@ -81,4 +83,35 @@ export const COMBO_DATA = [
 		orders: '20 người đặt',
 		views: '200 lượt xem',
 	},
+];
+
+export const UPDATE_ORDERS = [
+	{
+		order_id: rand.generateDigits(10),
+		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
+		order_title: 'Cooking App',
+		order_status: 0,
+		order_created_date: '19:32 04/06/2019'
+	},
+	{
+		order_id: rand.generateDigits(10),
+		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
+		order_title: 'Cooking App',
+		order_status: 1,
+		order_created_date: '19:32 04/06/2019'
+	},
+	{
+		order_id: rand.generateDigits(10),
+		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
+		order_title: 'Cooking App',
+		order_status: 1,
+		order_created_date: '19:32 04/06/2019'
+	},
+	{
+		order_id: rand.generateDigits(10),
+		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
+		order_title: 'Cooking App',
+		order_status: 0,
+		order_created_date: '19:32 04/06/2019'
+	}
 ];
