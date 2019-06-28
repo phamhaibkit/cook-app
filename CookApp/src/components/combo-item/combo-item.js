@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-//import react in our code.
 import { Text, View, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
-//import all the basic component we have used
 import styles from './combo-item-style';
 import { COMBO_DATA } from '../../models/data';
 
@@ -10,7 +8,6 @@ export default class ComboItem extends Component {
 		super(props);
 		this.state = {};
 		this.data = COMBO_DATA;
-		// this.label = LANG.COLLECTION;
 	}
 
 	renderFrame = (item, index) => {
@@ -18,16 +15,16 @@ export default class ComboItem extends Component {
 		let combo;
 		switch (item.combo.length) {
 			case 2:
-				combo = this.render2Item(item);
+				combo = this.render2or4Item(item, false);
 				break;
 			case 3:
-				combo = this.render3Item(item);
+				combo = this.render3or5Item(item, false);
 				break;
 			case 4:
-				combo = this.render4Item(item);
+				combo = this.render2or4Item(item, true);
 				break;
 			case 5:
-				combo = this.render5Item();
+				combo = this.render3or5Item(item, true);
 				break;
 			default:
 				break;
@@ -35,15 +32,22 @@ export default class ComboItem extends Component {
 		return <TouchableOpacity style={endStyle}>{combo}</TouchableOpacity>;
 	};
 
-	render2Item = item => {
+	render2or4Item = (item, is4) => {
 		return (
 			<View style={styles.container2Item}>
 				<View style={styles.container2Img}>
 					<ImageBackground style={styles.left2} source={{ uri: item.combo[0].link }} />
 					<ImageBackground style={styles.right2} source={{ uri: item.combo[1].link }} />
 				</View>
+				{is4 && (
+					<View style={styles.container2Img}>
+						<ImageBackground style={styles.left4} source={{ uri: item.combo[2].link }} />
+						<ImageBackground style={styles.right4} source={{ uri: item.combo[3].link }} />
+					</View>
+				)}
 				<Text style={styles.textTitle}>
-					{item.combo[0].name} + {item.combo[1].name}
+					{item.combo[0].name} + {item.combo[1].name} + {is4 && item.combo[2].name} +{' '}
+					{is4 && item.combo[3].name}
 				</Text>
 				<Text>
 					{item.orders} - {item.views}
@@ -52,74 +56,33 @@ export default class ComboItem extends Component {
 		);
 	};
 
-	render3Item = item => {
+	render3or5Item = (item, is5) => {
 		return (
 			<View style={styles.container2Item}>
 				<View style={styles.container2Img}>
 					<ImageBackground style={styles.left3} source={{ uri: item.combo[0].link }} />
 					<View style={styles.right3}>
-						<ImageBackground style={styles.up3} source={{ uri: item.combo[1].link }} />
-						<ImageBackground style={styles.down3} source={{ uri: item.combo[2].link }} />
+						<View style={styles.container2Img}>
+							<ImageBackground style={styles.up3} source={{ uri: item.combo[1].link }} />
+							{is5 && <ImageBackground style={styles.up5} source={{ uri: item.combo[3].link }} />}
+						</View>
+						<View style={styles.container2Img}>
+							<ImageBackground style={styles.down3} source={{ uri: item.combo[2].link }} />
+							{is5 && <ImageBackground style={styles.down5} source={{ uri: item.combo[4].link }} />}
+						</View>
 					</View>
 				</View>
 				<Text style={styles.textTitle}>
-					{item.combo[0].name} + {item.combo[1].name} + {item.combo[2].name}
+					{item.combo[0].name} + {item.combo[1].name}+ {is5 && item.combo[3].name} + {item.combo[2].name} +{' '}
+					{is5 && item.combo[4].name}
 				</Text>
 				<Text>
 					{item.orders} - {item.views}
 				</Text>
-			</View>
-		);
-	};
-	render4Item = item => {
-		return (
-			<View style={styles.container2Item}>
-				<View style={styles.container2Img}>
-					<View style={styles.left4}>
-						<ImageBackground style={styles.up4} source={{ uri: item.combo[0].link }} />
-						<ImageBackground style={styles.down4} source={{ uri: item.combo[1].link }} />
-					</View>
-					<View style={styles.right4}>
-						<ImageBackground style={styles.up4} source={{ uri: item.combo[2].link }} />
-						<ImageBackground style={styles.down4} source={{ uri: item.combo[3].link }} />
-					</View>
-				</View>
-				<Text style={styles.textTitle}>
-					{item.combo[0].name} + {item.combo[1].name} + {item.combo[2].name} + {item.combo[3].name}
-				</Text>
-				<Text>
-					{item.orders} - {item.views}
-				</Text>
-			</View>
-		);
-	};
-	render5Item = () => {
-		return (
-			<View>
-				<View>
-					<View>
-						<Text>AAAAAAAAAAAAAA</Text>
-					</View>
-					<View>
-						<Text>4444444444444444</Text>
-					</View>
-				</View>
-				<View>
-					<View>
-						<Text>AAAAAAAAAAAAAA</Text>
-					</View>
-					<View>
-						<Text>4444444444444444</Text>
-					</View>
-					<View>
-						<Text>4444444444444444</Text>
-					</View>
-				</View>
 			</View>
 		);
 	};
 
-	//Detail Screen to show from any Open detail button
 	render() {
 		return (
 			<View style={styles.container}>

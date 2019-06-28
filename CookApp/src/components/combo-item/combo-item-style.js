@@ -55,18 +55,22 @@ export default StyleSheet.create({
   },
   left4: {
     flex: 1,
+    marginTop: 4,
     marginRight: 2,
   },
   right4: {
     flex: 1,
-    marginLeft: 2
+    marginTop: 4,
+    marginLeft: 2,
   },
-  up4: {
+  up5: {
     flex: 1,
+    marginLeft: 4,
     marginBottom: 2,
   },
-  down4: {
+  down5: {
     flex: 1,
+    marginLeft: 4,
     marginTop: 2,
   }
   
