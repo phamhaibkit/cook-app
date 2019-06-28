@@ -7,7 +7,7 @@ export class TextInputRender extends Component {
 	render() {
 		const { title, placeholder, value, onChangeText, error, inputErrorStyle, secureTextEntry } = this.props;
 		return <View style={{ flex: 1, marginBottom: 20 }}>
-			<Text style={styles.inputLabel}>{title}</Text>
+			{/* <Text style={styles.inputLabel}>{title}</Text> */}
 			<TextInput
 				secureTextEntry={secureTextEntry}
 				onChangeText={onChangeText}

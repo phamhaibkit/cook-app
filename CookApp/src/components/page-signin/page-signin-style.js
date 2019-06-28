@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: 'black'
+		color: 'black',
 	},
 	logo: {
 		width: 350,

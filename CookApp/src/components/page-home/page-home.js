@@ -18,10 +18,10 @@ export default class PageHome extends Component {
 				<View style={{ flex: 1, flexDirection: 'column' }}>
 					<Trending />
 					<RecipeItem />
-          <View style={{height: 100}}>
-          </View>
-          <Text style={{ marginLeft: 10, fontSize: 20,  fontWeight:'bold'}}>Combo Mon</Text>
-          <ComboItem></ComboItem>
+					<View style={{ height: 100 }}>
+					</View>
+					<Text style={{ marginLeft: 10, fontSize: 20, fontWeight: 'bold' }}>Combo Mon</Text>
+					{/* <ComboItem></ComboItem> */}
 					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 						<Text style={{ marginTop: 50, fontSize: 25 }}>{LANG.HOME}</Text>
 						<TouchableOpacity
@@ -36,10 +36,15 @@ export default class PageHome extends Component {
 						>
 							<Text>Open Details Screen</Text>
 						</TouchableOpacity>
+						<TouchableOpacity
+							style={styles.button}
+							onPress={() => this.props.navigation.navigate('SignIn')}>
+							<Text>Đăng nhập</Text>
+						</TouchableOpacity>
 					</View>
 				</View>
 
-        <View style={{height: 1000}}></View>
+				<View style={{ height: 1000 }}></View>
 			</ContainerScroll>
 		);
 	}

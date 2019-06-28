@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image, AsyncStorage, TouchableOpacity } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Icon  from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import styles from './main-style';
@@ -16,6 +16,7 @@ import navigationService from '../../services/navigation.service';
 import PageRecipe from '../page-recipe/page-recipe';
 import PageNoti from '../page-noti/page-noti';
 import PageUser from '../page-user/page-user';
+import SignIn from '../page-signin/page-signin';
 
 const HomeStack = createStackNavigator({
 	//Defination of Navigaton from home screen
@@ -27,14 +28,38 @@ const HomeStack = createStackNavigator({
 	},
 	Details: { screen: PageDetail },
 	Search: { screen: PageSearch },
+	SignIn: {
+		screen: SignIn,
+		navigationOptions: {
+			// header: null,
+			tabBarVisible: false,
+			gesturesEnabled: false,
+		},
+	},
+
 });
+
+HomeStack.navigationOptions = ({ navigation }) => {
+	let tabBarVisible = true;
+	console.log(navigation.state);
+	if (navigation.state.index > 0) {
+	  tabBarVisible = false;
+	}
+  
+	return {
+	  tabBarVisible,
+	};
+  };
+  
 const StoreStack = createStackNavigator({
-  Store: { screen: PageStore,
-    navigationOptions: {
+	Store: {
+		screen: PageStore,
+		navigationOptions: {
 			header: null,
 			// gesturesEnabled: true,
-    },
-   },
+			
+		},
+	},
 	Details: { screen: PageDetail },
 	Profile: { screen: PageProfile },
 });
@@ -62,16 +87,16 @@ const bottomTabNav = createBottomTabNavigator(
 		defaultNavigationOptions: ({ navigation }) => ({
 			tabBarIcon: ({ focused, horizontal, tintColor }) => {
 				const { routeName } = navigation.state;
-        // let IconComponent = Ionicons;
-        let IconComponent = Icon ;
+				// let IconComponent = Ionicons;
+				let IconComponent = Icon;
 				let iconName;
 				switch (routeName) {
 					case 'Home':
 						iconName = `home-outline`;
 						break;
-          case 'Store':
-            iconName = `store`;
-            break;
+					case 'Store':
+						iconName = `store`;
+						break;
 					case 'Recipe':
 						iconName = `chef-hat`;
 						break;

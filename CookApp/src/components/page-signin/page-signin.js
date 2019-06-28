@@ -87,7 +87,7 @@ class PageSignin extends Component {
 						<Text style={styles.loginText}>{LANG.SIGN_IN_UPTO_CASE}</Text>
 					</TouchableOpacity>
 					<View style={styles.paddingVertical}><Text>Or</Text></View>
-					<SigninByFacebook />
+					<SigninByFacebook style={{ flex: 1, display: 'flex' }} />
 				</ScrollView>
 
 			</View>

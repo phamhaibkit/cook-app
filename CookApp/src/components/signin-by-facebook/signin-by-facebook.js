@@ -85,21 +85,31 @@ class SigninByFacebook extends Component {
 
 	render() {
 		const { showModalLoading } = this.state;
-		console.log('aaaa');
 		return (
 			<View style={styles.container}>
+				<View style={styles.loginFbView}>
+					<TouchableOpacity
+						style={styles.loginWithFacebook}
+						onPress={() => {
+							this.fbLogin.login();
+						}}
+					>
+						<Text style={styles.loginWithFacebookText}>Đăng nhập với Facebook</Text>
+					</TouchableOpacity>
+				</View>
 				<View style={styles.buttonLogin}>
 					<FBLogin
-						buttonView={
-							<TouchableOpacity
-								style={styles.loginWithFacebook}
-								onPress={() => {
-									this.fbLogin.login();
-								}}
-							>
-								<Text style={styles.loginWithFacebookText}>Đăng nhập với Facebook</Text>
-							</TouchableOpacity>
-						}
+						style={{ flex: 1 }}
+						// buttonView={
+						// <TouchableOpacity
+						// 	style={styles.loginWithFacebook}
+						// 	onPress={() => {
+						// 		this.fbLogin.login();
+						// 	}}
+						// >
+						// 	<Text style={styles.loginWithFacebookText}>Đăng nhập với Facebook</Text>
+						// </TouchableOpacity>
+						// }
 						ref={(fbLogin) => {
 							this.fbLogin = fbLogin;
 						}}
