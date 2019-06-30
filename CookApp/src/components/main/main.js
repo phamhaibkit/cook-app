@@ -28,14 +28,7 @@ const HomeStack = createStackNavigator({
 	},
 	Details: { screen: PageDetail },
 	Search: { screen: PageSearch },
-	SignIn: {
-		screen: SignIn,
-		navigationOptions: {
-			// header: null,
-			tabBarVisible: false,
-			gesturesEnabled: false,
-		},
-	},
+	
 
 });
 
@@ -75,6 +68,14 @@ const UserStack = createStackNavigator({
 		screen: PageUser,
 		navigationOptions: {
 			header: null,
+		},
+	},
+	SignIn: {
+		screen: SignIn,
+		navigationOptions: {
+			// header: null,
+			tabBarVisible: false,
+			gesturesEnabled: false,
 		},
 	},
 });

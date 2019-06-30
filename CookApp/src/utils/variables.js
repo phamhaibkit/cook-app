@@ -35,3 +35,7 @@ export const CSS = {
 		paddingHorizontal: 20,
 	},
 };
+
+export const ACTION = {
+	SET_ACCOUNT_INFO: 'SET_ACCOUNT_INFO',
+};

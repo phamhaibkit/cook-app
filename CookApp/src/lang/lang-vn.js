@@ -24,4 +24,15 @@ export const LANG_VN = {
 	],
 	RECIPE: 'Công thức',
 	FOLLOWER: 'Người theo dõi',
+	RECIPE_DRAFT: 'Công thức nháp',
+	ORDER_DRAFT: 'Đơn hàng nháp',
+	RECIPE_WAITING: 'Công thức chờ duyệt',
+	FOLLOWING: 'Bạn đang theo dõi',
+	FOLLOWED: 'Người theo dõi bạn',
+	SAVED_RECIPE: 'Công thức đã lưu',
+	ORER: 'Đơn hàng',
+	DISCOUNT_CODE: 'Mẫ giảm giá',
+	DELIVERY_ADDRESS: 'Địa chỉ giao hàng',
+	SETUP: 'Cài đặt'
+
 };
