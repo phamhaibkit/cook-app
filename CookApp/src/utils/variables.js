@@ -2,7 +2,8 @@ export const IMG = {
 	bookmark: require('../../assets/book-mark.png'),
 	logo: require('../../assets/logo.png'),
 	tet: require('../../assets/tet.jpg'),
-	arrowRight: require('../../assets/icons/arrow-right-3x.png'),
+  arrowRight: require('../../assets/icons/arrow-right-3x.png'),
+  cart: require('../../assets/icons/add-to-cart-3x.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -12,7 +13,8 @@ export const ASYNC_STORAGE = {
 export default {
 	IMG,
 	ASYNC_STORAGE,
-	CSS,
+  CSS,
+  COLOR,
 };
 
 
@@ -35,6 +37,10 @@ export const CSS = {
 		paddingHorizontal: 20,
 	},
 };
+
+export const COLOR = {
+  headerColor: '#4fd63a',
+}
 
 export const ACTION = {
 	SET_ACCOUNT_INFO: 'SET_ACCOUNT_INFO',

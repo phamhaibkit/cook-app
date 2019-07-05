@@ -1,4 +1,5 @@
 export const LANG_VN = {
+  APP_NAME: 'Cooking App',
 	HOME: 'Trang chủ',
 	SETTINGS: 'Cài đặt',
 	COLLECTION: 'Bộ sưu tập',
