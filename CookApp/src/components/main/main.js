@@ -31,7 +31,7 @@ const HomeStack = createStackNavigator({
 	SignIn: {
 		screen: SignIn,
 		navigationOptions: {
-			// header: null,
+			header: null,
 			tabBarVisible: false,
 			gesturesEnabled: false,
 		},

@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './tex-input-style';
 
 export class TextInputRender extends Component {
 
 	render() {
-		const { title, placeholder, value, onChangeText, error, inputErrorStyle, secureTextEntry } = this.props;
-		return <View style={{ flex: 1, marginBottom: 20 }}>
+		const { title, placeholder, value, onChangeText, error, inputErrorStyle, secureTextEntry, styleConfig } = this.props;
+		return <View style={styles.searchSection}>
 			{/* <Text style={styles.inputLabel}>{title}</Text> */}
+			<Icon style={styles.searchIcon} name="ios-search" size={20} color="#000" />
 			<TextInput
 				secureTextEntry={secureTextEntry}
 				onChangeText={onChangeText}
 				placeholder={placeholder}
-				style={[[styles.input, inputErrorStyle, { marginBottom: 0 }, error ? { borderColor: '#ff2e2e' } : '']]}
+				style={[styleConfig, styles.input, [error ? { borderColor: '#ff2e2e' } : '']]}
 			/>
 		</View>;
 	}

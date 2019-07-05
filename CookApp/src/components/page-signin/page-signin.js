@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Modal, Image } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Modal, Image, KeyboardAvoidingView } from 'react-native';
 
 import styles from './page-signin-style';
 import { LANG } from '../../lang/lang';
@@ -54,15 +54,16 @@ class PageSignin extends Component {
 
 	render() {
 		let { email, password, showModalLoading, notMatch } = this.state;
-		return (
-			<View style={styles.container}>
-				<ScrollView style={{ flex: 1 }}>
+		// return <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
+		return <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+			<View style={[styles.container]}>
+				<View style={styles.loginPage}>
 					<View style={styles.headerLayoutLogin}>
 						<View style={styles.logo}>
-							<Image resizeMode="cover" source={IMG.logo} style={styles.image} />
+							<Text style={styles.nameApp}>{LANG.APP_NAME}</Text>
 						</View>
 						<View style={styles.title}>
-							<Text style={styles.titleText}>Đăng Nhập</Text>
+							<Text style={styles.titleText}>{LANG.LOGIN_TITLE}</Text>
 						</View>
 					</View>
 					<TextInputRender
@@ -70,12 +71,14 @@ class PageSignin extends Component {
 						title="User Name"
 						placeholder="User Name"
 						value={email}
+						styleConfig={styles.Input}
 					/>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
 						title="Password"
 						placeholder="Password"
 						value={password}
+						styleConfig={styles.Input}
 						secureTextEntry
 					/>
 
@@ -88,10 +91,9 @@ class PageSignin extends Component {
 					</TouchableOpacity>
 					<View style={styles.paddingVertical}><Text>Or</Text></View>
 					<SigninByFacebook style={{ flex: 1, display: 'flex' }} />
-				</ScrollView>
-
+				</View>
 			</View>
-		);
+		</ScrollView>;
 	}
 }
 

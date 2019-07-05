@@ -24,4 +24,6 @@ export const LANG_VN = {
 	],
 	RECIPE: 'Công thức',
 	FOLLOWER: 'Người theo dõi',
+	APP_NAME: 'Cooking App',
+	LOGIN_TITLE: 'Đăng nhập'
 };
