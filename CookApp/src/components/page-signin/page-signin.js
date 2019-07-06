@@ -69,21 +69,23 @@ class PageSignin extends Component {
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
 						title="User Name"
-						placeholder="User Name"
+						placeholder="Số điện thoại/Email"
 						value={email}
 						styleConfig={styles.Input}
+						icon={IMG.user}
 					/>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
 						title="Password"
-						placeholder="Password"
+						placeholder="Mật khẩu"
 						value={password}
 						styleConfig={styles.Input}
 						secureTextEntry
+						icon={IMG.clock}
 					/>
 
 					<TouchableOpacity style={styles.forgotButton} onPress={this.onPressSignin}>
-						<Text style={styles.forgotPassword}>Quên mật khẩu</Text>
+						<Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
 					</TouchableOpacity>
 
 					<TouchableOpacity style={styles.loginButton} onPress={this.onPressSignin}>

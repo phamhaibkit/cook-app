@@ -14,23 +14,19 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		justifyContent: 'center',
 	},
-	headerLayoutLogin: {
-	},
 	titleText: {
-		marginVertical: 10,
+		marginTop: 64,
+		marginBottom: 20,
 		fontSize: 25,
 		fontWeight: 'bold',
 		color: 'black',
-		textAlign: 'center'
-	},
-
-	image: {
-		// width: '70%',
+		textAlign: 'center',
+		textTransform: 'uppercase'
 	},
 	loginButton: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#f0f0f0',
+		backgroundColor: 'linear-gradient(29.5deg, #3BB556 11.24%, #72C91C 99.9%);',
 		paddingVertical: 20,
 	},
 	forgotButton: {
@@ -39,7 +35,8 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-end'
 	},
 	forgotPassword: {
-		textDecorationLine: 'underline',
+		// textDecorationLine: 'underline',
+		color: '#3ABF57'
 	},
 	paddingVertical: {
 		paddingVertical: 10,
@@ -57,7 +54,8 @@ const styles = StyleSheet.create({
 		borderColor: '#E0E0E0',
 		borderWidth: 1,
 		borderRadius: 5,
-		marginBottom: 20
+		marginBottom: 20,
+		flex: 1,
 	}
 });
 export default styles;

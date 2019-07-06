@@ -3,6 +3,8 @@ export const IMG = {
 	logo: require('../../assets/logo.png'),
 	tet: require('../../assets/tet.jpg'),
 	arrowRight: require('../../assets/icons/arrow-right-3x.png'),
+	user: require('../../assets/icons/user.png'),
+	clock: require('../../assets/icons/clock.png'),
 };
 
 export const ASYNC_STORAGE = {
