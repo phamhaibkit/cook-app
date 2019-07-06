@@ -4,8 +4,10 @@ import { Text, TouchableOpacity, Platform, Modal, View, AsyncStorage } from 'rea
 import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
 // FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.WebView);
 // import navigationService from '../../services/navigation.service'
+import { connect } from 'react-redux';
 import styles from './signin-by-facebook.style';
 import navigationService from '../../services/navigation.service';
+import { setAccountInfo } from '../../reducers/page-account-info.reducer';
 import authService from '../../services/auth.service';
 
 class SigninByFacebook extends Component {
@@ -55,7 +57,7 @@ class SigninByFacebook extends Component {
 				console.log(data, 'Logged');
 				this.timeout = setTimeout(() => this.hideLoading(), 200);
 				this.hideLoading();
-				// this.props.setAccountInfo(data);
+				this.props.setAccountInfo(data);
 				// FBLoginManager.logout(() => {
 				// 	console.log('Logout-Facebook');
 				// });
@@ -98,6 +100,7 @@ class SigninByFacebook extends Component {
 
 	render() {
 		const { showModalLoading } = this.state;
+		
 		return (
 			<View style={styles.container}>
 				<View style={styles.loginFbView}>
@@ -128,4 +131,10 @@ class SigninByFacebook extends Component {
 	}
 }
 
-export default SigninByFacebook;
+function mapStateToProps(state) {
+	return {};
+}
+export default connect(
+	mapStateToProps,
+	{ setAccountInfo }
+)(SigninByFacebook);

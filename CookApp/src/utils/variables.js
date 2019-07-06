@@ -5,6 +5,7 @@ export const IMG = {
 	arrowRight: require('../../assets/icons/arrow-right-3x.png'),
 	user: require('../../assets/icons/user.png'),
 	clock: require('../../assets/icons/clock.png'),
+	cart: require('../../assets/icons/add-to-cart-3x.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -15,6 +16,7 @@ export default {
 	IMG,
 	ASYNC_STORAGE,
 	CSS,
+	COLOR,
 };
 
 
@@ -36,4 +38,12 @@ export const CSS = {
 	padding20: {
 		paddingHorizontal: 20,
 	},
+};
+
+export const COLOR = {
+	headerColor: '#4fd63a',
+}
+
+export const ACTION = {
+	SET_ACCOUNT_INFO: 'SET_ACCOUNT_INFO',
 };

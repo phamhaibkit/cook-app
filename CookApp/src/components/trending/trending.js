@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, FlatList, ImageBackground  } from 'react-native';
+import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 
 import styles from './trending-style';
 export default class Trending extends Component {
@@ -7,31 +7,55 @@ export default class Trending extends Component {
 		super(props);
 		this.state = {};
 		this.data = [
-			{ key: 'Sản phẩm khuyến mãi ', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/pickles.jpg'},
-			{ key: 'Bán chạy', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/rhubarb-cordial_0.jpg'},
-      { key: 'Mâm cơm việt', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/poke_0.jpg'},
-      { key: 'BST hot', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/gts-together.png'},
-      { key: 'Công thức', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/tea.jpg'},
-      { key: 'Tốp thành viên', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/foraging-main.jpg'},
-      { key: 'Điểm hoạt động', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/impossible.jpg'},
-      { key: 'CCC ', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/plant-based-diet-guide-main-image-700-350.jpg'},
-			{ key: 'DDD ', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/01/potatoes.jpg'},
-    ];
-    this.label = "Bộ Sưu Tập";
-  }
-  
-  onPress = () => {
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-  }
+			{
+				key: 'Sản phẩm khuyến mãi ',
+				link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/pickles.jpg',
+			},
+			{
+				key: 'Bán chạy',
+				link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/rhubarb-cordial_0.jpg',
+			},
+			{
+				key: 'Mâm cơm việt',
+				link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/poke_0.jpg',
+			},
+			{
+				key: 'BST hot',
+				link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/gts-together.png',
+			},
+			{ key: 'Công thức', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/tea.jpg' },
+			{
+				key: 'Tốp thành viên',
+				link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/foraging-main.jpg',
+			},
+			{
+				key: 'Điểm hoạt động',
+				link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/impossible.jpg',
+			},
+			{
+				key: 'CCC ',
+				link:
+					'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/plant-based-diet-guide-main-image-700-350.jpg',
+			},
+			{ key: 'DDD ', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/01/potatoes.jpg' },
+		];
+		this.label = 'Bộ Sưu Tập';
+	}
+
+	onPress = () => {
+		console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	};
 
 	renderFrame = (item, index) => {
 		const endStyle = this.data.length - 1 === index ? [styles.frame, styles.endFrame] : styles.frame;
 		return (
 			<TouchableOpacity style={endStyle}>
-        <ImageBackground  style={styles.square} source={{uri: item.link}}></ImageBackground >
-        <View style={styles.containerText}>
+				<View style={styles.square}>
+					<Image style={styles.img} source={{ uri: item.link }} />
+				</View>
+				<View style={styles.containerText}>
 					<Text style={styles.text}>{item.key}</Text>
-        </View>
+				</View>
 			</TouchableOpacity>
 		);
 	};
@@ -39,7 +63,14 @@ export default class Trending extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<FlatList data={this.data} renderItem={({ item, index }) => this.renderFrame(item, index)} horizontal showsHorizontalScrollIndicator={false}/>
+				<View style={styles.belongHeader} />
+				<View style={styles.halfTrend} />
+				<FlatList
+					data={this.data}
+					renderItem={({ item, index }) => this.renderFrame(item, index)}
+					horizontal
+					showsHorizontalScrollIndicator={false}
+				/>
 			</View>
 		);
 	}
