@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 	loginButton: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: 'linear-gradient(29.5deg, #3BB556 11.24%, #72C91C 99.9%);',
 		paddingVertical: 20,
 	},
 	forgotButton: {
