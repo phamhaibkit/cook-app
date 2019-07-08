@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Modal, Image } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Modal, Image, KeyboardAvoidingView } from 'react-native';
 
 import styles from './page-signin-style';
 import { LANG } from '../../lang/lang';
@@ -41,8 +41,8 @@ class PageSignin extends Component {
 	onChangeText = (value, err, type) => {
 		this.setState({
 			[type]: {
-				value: value,
-				err: err,
+				value,
+				err,
 			},
 			notMatch: false,
 		});
@@ -54,44 +54,48 @@ class PageSignin extends Component {
 
 	render() {
 		let { email, password, showModalLoading, notMatch } = this.state;
-		return (
-			<View style={styles.container}>
-				<ScrollView style={{ flex: 1 }}>
+		// return <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
+		return <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+			<View style={[styles.container]}>
+				<View style={styles.loginPage}>
 					<View style={styles.headerLayoutLogin}>
 						<View style={styles.logo}>
-							<Image resizeMode="cover" source={IMG.logo} style={styles.image} />
+							<Text style={styles.nameApp}>{LANG.APP_NAME}</Text>
 						</View>
 						<View style={styles.title}>
-							<Text style={styles.titleText}>Đăng Nhập</Text>
+							<Text style={styles.titleText}>{LANG.LOGIN_TITLE}</Text>
 						</View>
 					</View>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
 						title="User Name"
-						placeholder="User Name"
+						placeholder="Số điện thoại/Email"
 						value={email}
+						styleConfig={styles.Input}
+						icon={IMG.user}
 					/>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
 						title="Password"
-						placeholder="Password"
+						placeholder="Mật khẩu"
 						value={password}
+						styleConfig={styles.Input}
 						secureTextEntry
+						icon={IMG.clock}
 					/>
 
 					<TouchableOpacity style={styles.forgotButton} onPress={this.onPressSignin}>
-						<Text style={styles.forgotPassword}>Quên mật khẩu</Text>
+						<Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
 					</TouchableOpacity>
 
 					<TouchableOpacity style={styles.loginButton} onPress={this.onPressSignin}>
 						<Text style={styles.loginText}>{LANG.SIGN_IN_UPTO_CASE}</Text>
 					</TouchableOpacity>
 					<View style={styles.paddingVertical}><Text>Or</Text></View>
-					<SigninByFacebook />
-				</ScrollView>
-
+					<SigninByFacebook style={{ flex: 1, display: 'flex' }} />
+				</View>
 			</View>
-		);
+		</ScrollView>;
 	}
 }
 

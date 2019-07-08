@@ -6,12 +6,6 @@ export default StyleSheet.create({
 	container: {
 		flex: 1,
   },
-  containerlabel: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },  
 	frame: {
     height: 0.32*height,
     // fontSize: 18,
@@ -52,15 +46,6 @@ export default StyleSheet.create({
     alignItems: 'flex-end',
     // justifyContent: 'flex-end',
   },
-  labelText: {
-    fontSize: 18,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  moreText: {
-    color: 'blue',
-    textDecorationLine: 'underline'
-  },  
   titleText: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -72,7 +57,4 @@ export default StyleSheet.create({
     width: 20,
     height: 20
   },
-  textButton: {
-    padding: 4,
-  }
 });

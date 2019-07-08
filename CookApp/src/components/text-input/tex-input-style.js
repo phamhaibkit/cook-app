@@ -10,15 +10,42 @@ const inputBase = {
 };
 
 export default StyleSheet.create({
-	inputLabel: {
-		// ...inputBase,
-		fontSize: 14,
-		color: '#222222',
-		marginBottom: 8,
-		fontWeight: '700',
+	Input: {
+		flex: 1,
+		paddingLeft: 20,
+		color: 'black',
+		fontSize: 14
 	},
-	input: {
-		...inputBase,
+	SectionStyle: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#fff',
+		borderWidth: 1,
+		borderColor: '#E0E0E0',
+		// height: 40,
+		borderRadius: 5,
+		flex: 1,
+		width: '100%',
+		padding: 10,
+	},
+
+	ImageStyle: {
+		alignItems: 'center',
+		borderRightColor: '#E0E0E0',
+		borderRightWidth: 1,
+		paddingRight: 10,
+	},
+	inputSection: {
 		marginBottom: 20,
 	},
+	image: {
+		padding: 10,
+		margin: 5,
+		height: 16,
+		width: 16,
+		resizeMode: 'stretch',
+	}
 });
+
+

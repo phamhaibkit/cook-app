@@ -85,33 +85,115 @@ export const COMBO_DATA = [
 	},
 ];
 
-export const UPDATE_ORDERS = [
+export const PRODUCT_DATA = [
 	{
-		order_id: rand.generateDigits(10),
-		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
-		order_title: 'Cooking App',
-		order_status: 0,
-		order_created_date: '19:32 04/06/2019'
+	  id: 1,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
 	},
 	{
-		order_id: rand.generateDigits(10),
-		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
-		order_title: 'Cooking App',
-		order_status: 1,
-		order_created_date: '19:32 04/06/2019'
+	  id: 2,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
 	},
 	{
-		order_id: rand.generateDigits(10),
-		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
-		order_title: 'Cooking App',
-		order_status: 1,
-		order_created_date: '19:32 04/06/2019'
+	  id: 3,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
 	},
 	{
-		order_id: rand.generateDigits(10),
-		order_thumbnail_img: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
-		order_title: 'Cooking App',
-		order_status: 0,
-		order_created_date: '19:32 04/06/2019'
-	}
-];
+	  id: 4,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
+	},
+	{
+	  id: 5,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
+	},
+	{
+	  id: 6,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
+	},
+	{
+	  id: 7,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
+	},
+	{
+	  id: 8,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
+	},
+	{
+	  id: 9,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
+	},
+	{
+	  id: 10,
+	  img: 'https://www.thitngonquocte.vn/vnt_upload/product/Bo_My/thumbs/278_crop__suon-bo-My-co-xuong.jpg',
+	  guarant: 'https://www.laghim.vn/templates/laghim/images/vietgap.png',
+	  name: 'Than Ngoai Bo My Co Xuong (Dong Goi Hut Chan Khong)',
+	  newPrice: '276.000d',
+	  oldPrice: '345.000d',
+	  discount: '30%',
+	  selling: 'ban chay',
+	  madeIn: 'My'
+	},
+  ];
