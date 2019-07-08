@@ -5,7 +5,8 @@ export const IMG = {
 	arrowRight: require('../../assets/icons/arrow-right-3x.png'),
 	user: require('../../assets/icons/user.png'),
 	clock: require('../../assets/icons/clock.png'),
-	cart: require('../../assets/icons/add-to-cart-3x.png'),
+	cartHome: require('../../assets/icons/cart-home.png'),
+	arrowRightGreen: require('../../assets/icons/arrow-right-green.png'),
 };
 
 export const ASYNC_STORAGE = {

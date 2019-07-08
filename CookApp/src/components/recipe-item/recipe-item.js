@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 import { IMG } from '../../utils/variables';
-import { LANG } from '../../lang/lang';
 import styles from './recipe-item-style';
 
 export default class RecipeItem extends Component {
@@ -15,7 +14,6 @@ export default class RecipeItem extends Component {
 			{ key: 'Neu nhu mot ngay em khong giong', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/goat-curry.jpg' },
 			{ key: 'Tai sao ma do ta khong do nang vay', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/pickles.jpg' },
 		];
-		this.label = LANG.COLLECTION;
 	}
 
   onPress = () => {
@@ -51,12 +49,6 @@ export default class RecipeItem extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={styles.containerlabel}>
-          	<Text style={styles.labelText}>{this.label}</Text>
-          	<TouchableOpacity style={styles.textButton} onPress={this.onPress}>
-            	<Text style={styles.moreText}>{LANG.VIEW_MORE}</Text>
-          	</TouchableOpacity>
-				</View>
 				<FlatList data={this.data} renderItem={({ item, index }) => this.renderFrame(item, index)} horizontal showsHorizontalScrollIndicator={false}/>
 			</View>
 		);

@@ -5,15 +5,20 @@ import ComboItem from '../combo-item/combo-item';
 import Trending from '../trending/trending';
 import ContainerScroll from '../container-scroll/container-scroll';
 import navigationService from '../../services/navigation.service';
-import { LANG } from '../../lang/lang';
 import ProductList from '../product-list/product-list';
+import ViewMoreHome from '../view-more-home/view-more-home';
+import { LANG } from '../../lang/lang';
 
 export default class PageHome extends Component {
+	viewMore = (type) => {
+	}
+
 	render() {
 		return (
 			<ContainerScroll>
 				<View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#eae8e8' }}>
 					<Trending />
+					<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore}/>
 					<RecipeItem />
 					<View style={{ height: 100 }} />
 					<Text style={{ marginLeft: 10, fontSize: 20, fontWeight: 'bold' }}>Combo Mon</Text>
