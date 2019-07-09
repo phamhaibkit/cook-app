@@ -19,7 +19,7 @@ export default class SearchBarHeader extends Component {
 				}}
 				onPress={() => navigationService.navigate('Search', { name: 'HaiPham' })}
 			>
-				<Text style={{ color: COLOR.greyColor }}>{LANG.SEARCH}</Text>
+				<Text style={{ fontFamily: CSS.fontText }}>{LANG.SEARCH}</Text>
 				<Image source={IMG.searchGreen} />
 			</TouchableOpacity>
 		);

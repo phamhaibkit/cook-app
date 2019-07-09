@@ -39,7 +39,10 @@ export const CSS = {
 	padding20: {
 		paddingHorizontal: 20,
 	},
-	padding15: 15,
+  padding15: 15,
+  fontBold: 'Nunito-ExtraBold',
+  fontTitle: 'Quicksand_Bold',
+  fontText: 'Quicksand_Book',
 };
 
 export const COLOR = {
@@ -49,6 +52,7 @@ export const COLOR = {
   whiteColor: '#FFFFFF',
   greyColor: '#AAAAAA',
   backgroundColor: '#E5E5E5',
+  greenColor: '#3ABF57'
 };
 
 export const ACTION = {

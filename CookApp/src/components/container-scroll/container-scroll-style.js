@@ -18,25 +18,26 @@ export default StyleSheet.create({
 	containerGadient: {
 		flex: 1,
 		paddingLeft: CSS.padding15,
-    justifyContent: 'flex-end',
-    paddingBottom: 5
+		justifyContent: 'flex-end',
+		paddingBottom: 5,
 	},
 	appNameView: {
-		paddingHorizontal:  CSS.padding15,
+		paddingHorizontal: CSS.padding15,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
 	appNameTxt: {
 		color: COLOR.whiteColor,
-		fontSize: 22,
-		fontWeight: 'bold',
+    fontSize: 25,
+    // lineHeight: 15,
 		marginTop: 10,
+    fontFamily: CSS.fontBold,
 	},
 	cartView: {
 		position: 'absolute',
 		right: 5,
 		zIndex: 2,
 		top: 10,
-		paddingRight: 8
+		paddingRight: 8,
 	},
 });
