@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { CSS } from '../../utils/variables';
 const styles = StyleSheet.create({
 	container: {
-		padding: 15,
+		paddingHorizontal: 15,
 		display: 'flex',
 		flex: 1,
 		// height: '100%',
@@ -15,13 +15,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	titleText: {
-		marginTop: 64,
 		marginBottom: 20,
 		fontSize: 25,
 		fontWeight: 'bold',
-		color: 'black',
+		color: '#444444',
 		textAlign: 'center',
-		textTransform: 'uppercase'
+		textTransform: 'uppercase',
 	},
 	loginButton: {
 		alignItems: 'center',
@@ -55,6 +54,46 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginBottom: 20,
 		flex: 1,
+	},
+	linearGradient: {
+		paddingLeft: 15,
+		paddingRight: 15,
+		borderRadius: 5,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 40,
+		marginBottom: 20
+	},
+	buttonText: {
+		fontSize: 18,
+		textAlign: 'center',
+		margin: 10,
+		color: '#ffffff',
+		backgroundColor: 'transparent',
+	},
+	loginText: {
+		fontSize: 15,
+		fontWeight: 'bold',
+		color: '#FFFFFF'
+	},
+	loginFacebookSection: { flex: 1, display: 'flex'},
+	createNewButtonText: {
+		fontWeight: 'bold',
+		fontSize: 15,
+		color: '#3ABF57',
+		textAlign: 'center'
+	}, createNewButton: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingVertical: 20,
+	},
+	image: {
+		// position: 'absolute',
+		width: '100%',
+		bottom: 0,
+		height: 149,
+		marginTop: -70
 	}
 });
 export default styles;

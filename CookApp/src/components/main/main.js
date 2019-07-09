@@ -30,16 +30,6 @@ const HomeStack = createStackNavigator({
 	Search: { screen: PageSearch },
 });
 
-HomeStack.navigationOptions = ({ navigation }) => {
-	let tabBarVisible = true;
-	if (navigation.state.index > 0) {
-		tabBarVisible = false;
-	}
-
-	return {
-		tabBarVisible,
-	};
-};
 
 const StoreStack = createStackNavigator({
 	Store: {
@@ -71,13 +61,34 @@ const UserStack = createStackNavigator({
 	SignIn: {
 		screen: SignIn,
 		navigationOptions: {
-			// header: null,
+			header: null,
 			tabBarVisible: false,
 			gesturesEnabled: false,
 		},
 	},
 });
 
+const SignInStack = createStackNavigator({
+	SignIn: {
+		screen: SignIn,
+		navigationOptions: {
+			header: null,
+			tabBarVisible: false,
+			gesturesEnabled: false,
+		},
+	},
+});
+
+UserStack.navigationOptions = ({ navigation }) => {
+	let tabBarVisible = true;
+	if (navigation.state.index > 0) {
+		tabBarVisible = false;
+	}
+
+	return {
+		tabBarVisible,
+	};
+};
 const bottomTabNav = createBottomTabNavigator(
 	{
 		Home: { screen: HomeStack },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Modal, Image, KeyboardAvoidingView } from 'react-native';
-
+import { Text, View, TouchableOpacity, ScrollView, Modal, Image, KeyboardAvoidingView, Button } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import styles from './page-signin-style';
 import { LANG } from '../../lang/lang';
 
@@ -87,14 +87,23 @@ class PageSignin extends Component {
 					<TouchableOpacity style={styles.forgotButton} onPress={this.onPressSignin}>
 						<Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
 					</TouchableOpacity>
-
-					<TouchableOpacity style={styles.loginButton} onPress={this.onPressSignin}>
-						<Text style={styles.loginText}>{LANG.SIGN_IN_UPTO_CASE}</Text>
+					<LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={styles.linearGradient}>
+						<TouchableOpacity style={styles.buttonText} onPress={this.onPressSignin}>
+							<Text style={styles.loginText}>{LANG.SIGN_IN_UPTO_CASE}</Text>
+						</TouchableOpacity>
+					</LinearGradient>
+					<SigninByFacebook style={styles.loginFacebookSection} />
+					<TouchableOpacity style={styles.createNewButton} onPress={this.onPressSignin}>
+						<Text style={styles.createNewButtonText}>Đăng ký tài khoản</Text>
 					</TouchableOpacity>
-					<View style={styles.paddingVertical}><Text>Or</Text></View>
-					<SigninByFacebook style={{ flex: 1, display: 'flex' }} />
+
 				</View>
+
 			</View>
+			<Image
+				source={IMG.signInImage}
+				style={styles.image}
+			/>
 		</ScrollView>;
 	}
 }

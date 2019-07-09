@@ -17,20 +17,30 @@ export default styles = StyleSheet.create({
 		display: "none",
 	},
 	loginWithFacebookText: {
-		color: 'black',
-		// textDecorationLine: 'underline',
-		fontSize: 16,
-		// marginBottom: 30,
+		fontWeight: 'bold',
+		fontSize: 15,
+		color: '#FFFFFF',
 	},
 	loginFbView: {
 		width: '100%',
 	},
 	loginWithFacebook: {
-		backgroundColor: '#f0f0f0',
+		backgroundColor: '#4967AD',
 		width: '100%',
 		textAlign: 'center',
 		alignItems: 'center',
 		justifyContent: 'center',
-		paddingVertical: 20
+		height: 40,
+		borderRadius: 5,
+		position: 'relative'
+	},
+	iconFacebook: {
+		position: 'absolute',
+		left: 18,
+		width: 40,
+		// paddingHorizontal: 18,
+		paddingVertical: 10,
+		borderRightColor: 'rgba(255, 255, 255, 0.2)',
+		borderRightWidth: 2,
 	}
 });
