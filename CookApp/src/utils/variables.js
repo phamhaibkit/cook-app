@@ -7,6 +7,8 @@ export const IMG = {
 	clock: require('../../assets/icons/clock.png'),
 	cart: require('../../assets/icons/add-to-cart-3x.png'),
 	signInImage: require('../../assets/icons/sign-in-image.png'),
+	phone: require('../../assets/icons/phone.png'),
+	mail: require('../../assets/icons/mail.png'),
 };
 
 export const ASYNC_STORAGE = {

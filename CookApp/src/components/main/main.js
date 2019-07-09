@@ -17,6 +17,8 @@ import PageRecipe from '../page-recipe/page-recipe';
 import PageNoti from '../page-noti/page-noti';
 import PageUser from '../page-user/page-user';
 import SignIn from '../page-signin/page-signin';
+import SignUp from '../page-signup/page-signup';
+import PageOTP from '../page-otp/page-otp';
 
 const HomeStack = createStackNavigator({
 	//Defination of Navigaton from home screen
@@ -66,6 +68,21 @@ const UserStack = createStackNavigator({
 			gesturesEnabled: false,
 		},
 	},
+	SignUp:  {
+		screen: SignUp,
+		navigationOptions: {
+			header: null,
+			tabBarVisible: false,
+			gesturesEnabled: false,
+		},
+	},
+	OTP: {
+		screen: PageOTP,
+		navigationOptions: {
+			tabBarVisible: false,
+			gesturesEnabled: false,
+		},
+	}
 });
 
 const SignInStack = createStackNavigator({

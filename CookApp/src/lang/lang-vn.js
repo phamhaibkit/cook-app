@@ -35,5 +35,7 @@ export const LANG_VN = {
 	DISCOUNT_CODE: 'Mẫ giảm giá',
 	DELIVERY_ADDRESS: 'Địa chỉ giao hàng',
 	LOGIN_TITLE: 'Đăng nhập',
-	SETUP: 'Cài đặt'
+	SETUP: 'Cài đặt',
+	RETURN_LOGIN: 'Quay lại đăng nhập',
+	SIGN_UP: 'Đăng ký'
 };
