@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { COLOR } from '../../utils/variables';
+import { CSS, COLOR } from '../../utils/variables';
 
-const padding = 12;
 export default StyleSheet.create({
 	containerAnimated: {
 		position: 'absolute',
@@ -14,20 +13,21 @@ export default StyleSheet.create({
 		position: 'absolute',
 		bottom: 0,
 		width: '100%',
-		justifyContent: 'center',
-		height: 55,
-		paddingLeft: padding,
-		paddingTop: padding,
-		paddingBottom: 5,
-		backgroundColor: COLOR.headerColor,
+		height: 60,
+	},
+	containerGadient: {
+		flex: 1,
+		paddingLeft: CSS.padding15,
+    justifyContent: 'flex-end',
+    paddingBottom: 5
 	},
 	appNameView: {
-		paddingHorizontal: padding,
+		paddingHorizontal:  CSS.padding15,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
 	appNameTxt: {
-		color: 'white',
+		color: COLOR.whiteColor,
 		fontSize: 22,
 		fontWeight: 'bold',
 		marginTop: 10,
@@ -37,7 +37,6 @@ export default StyleSheet.create({
 		right: 5,
 		zIndex: 2,
 		top: 10,
-		paddingVertical: 5,
-		paddingHorizontal: 8,
+		paddingRight: 8
 	},
 });
