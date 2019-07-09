@@ -7,6 +7,7 @@ export const IMG = {
 	clock: require('../../assets/icons/clock.png'),
 	cartHome: require('../../assets/icons/cart-home.png'),
 	arrowRightGreen: require('../../assets/icons/arrow-right-green.png'),
+	searchGreen: require('../../assets/icons/search-home.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -19,7 +20,6 @@ export default {
 	CSS,
 	COLOR,
 };
-
 
 export const userDefault = {
 	avatar: require('../../assets/tet.jpg'),
@@ -54,12 +54,22 @@ export const CSS = {
 			marginBottom: bottom,
 			marginLeft: left,
 		};
-	}
+	},
+	padding15: 15,
+	fontBold: 'Nunito-ExtraBold',
+	fontTitle: 'Quicksand_Bold',
+	fontText: 'Quicksand_Book',
 };
 
 export const COLOR = {
-	headerColor: '#4fd63a',
-}
+	gradientLeft: '#3BB556',
+	gradientRight: '#72C91C',
+	redColor: '#FF0000',
+	whiteColor: '#FFFFFF',
+	greyColor: '#AAAAAA',
+	backgroundColor: '#E5E5E5',
+	greenColor: '#3ABF57'
+};
 
 export const ACTION = {
 	SET_ACCOUNT_INFO: 'SET_ACCOUNT_INFO',

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
-
+import LinearGradient from 'react-native-linear-gradient';
 import styles from './trending-style';
+import { COLOR } from '../../utils/variables';
+
 export default class Trending extends Component {
 	constructor(props) {
 		super(props);
@@ -51,7 +53,7 @@ export default class Trending extends Component {
 		return (
 			<TouchableOpacity style={endStyle}>
 				<View style={styles.square}>
-					<Image style={styles.img} source={{ uri: item.link }} />
+					<Image style={styles.img} source={{ uri: item.link }} resizeMode="cover" />
 				</View>
 				<View style={styles.containerText}>
 					<Text style={styles.text}>{item.key}</Text>
@@ -63,8 +65,18 @@ export default class Trending extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={styles.belongHeader} />
-				<View style={styles.halfTrend} />
+				<LinearGradient
+					colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+					start={{ x: 0, y: 0 }}
+					end={{ x: 1, y: 0 }}
+					style={styles.belongHeader}
+				/>
+				<LinearGradient
+					colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+					start={{ x: 0, y: 0 }}
+					end={{ x: 1, y: 0 }}
+					style={styles.halfTrend}
+				/>
 				<FlatList
 					data={this.data}
 					renderItem={({ item, index }) => this.renderFrame(item, index)}
