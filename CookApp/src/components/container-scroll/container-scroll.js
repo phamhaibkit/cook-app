@@ -5,6 +5,7 @@ import SearchBarHeader from '../search-bar/search-bar';
 import CartHome from '../cart-home/cart-home';
 import { LANG } from '../../lang/lang';
 import styles from './container-scroll-style';
+import { COLOR } from '../../utils/variables';
 
 const HEADER_MAX_HEIGHT = 105;
 const HEADER_MIN_HEIGHT = 50;
@@ -31,18 +32,25 @@ export default class ContainerScroll extends Component {
 			extrapolate: 'clamp',
 		});
 
-		const searchPaddingLeft = scrollY.interpolate({
+		const searchPaddingRight = scrollY.interpolate({
 			inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-			outputRange: [10, 40],
+			outputRange: [15, 45],
 			extrapolate: 'clamp',
 		});
 
 		return (
 			<View style={{ flex: 1 }}>
 				<Animated.View style={[styles.containerAnimated, { height: headerHeight, zIndex: headerZindex }]}>
-					<Animated.View style={[styles.containerSearch, { paddingRight: searchPaddingLeft }]}>
-						<SearchBarHeader />
-					</Animated.View>
+					<LinearGradient
+						colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 0 }}
+						style={styles.containerSearch}
+					>
+						<Animated.View style={[styles.containerGadient, { paddingRight: searchPaddingRight }]}>
+							<SearchBarHeader />
+						</Animated.View>
+					</LinearGradient>
 				</Animated.View>
 				<ScrollView
 					style={{ flex: 1 }}
@@ -51,7 +59,9 @@ export default class ContainerScroll extends Component {
 					showsVerticalScrollIndicator={false}
 				>
 					<LinearGradient
-						colors={['#32b35d', '#4fd63a']}
+						colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 0 }}
 						style={{
 							height: HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
 							flex: 1,
@@ -61,7 +71,7 @@ export default class ContainerScroll extends Component {
 							<Text style={styles.appNameTxt}>{LANG.APP_NAME}</Text>
 						</View>
 					</LinearGradient>
-					<View style={{ marginTop: HEADER_MIN_HEIGHT }}>{this.props.children}</View>
+					<View style={{ marginTop: HEADER_MIN_HEIGHT - 5 }}>{this.props.children}</View>
 				</ScrollView>
 				<View style={styles.cartView}>
 					<CartHome />

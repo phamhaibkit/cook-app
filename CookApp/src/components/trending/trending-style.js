@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { COLOR } from '../../utils/variables';
+import { COLOR, CSS } from '../../utils/variables';
 
-const heightTreding = 50;
+const heightTreding = 60;
 export default StyleSheet.create({
 	container: {
 		flex: 1,
@@ -11,23 +11,23 @@ export default StyleSheet.create({
 		height: heightTreding,
 		width: 140,
 		fontSize: 18,
-		marginLeft: 10,
+		marginLeft: CSS.padding15,
 		borderRadius: 5,
 		flexDirection: 'row',
-		backgroundColor: 'white',
+		backgroundColor: COLOR.whiteColor,
 		padding: 4,
 	},
 	endFrame: {
-		marginRight: 12,
+		marginRight: CSS.padding15,
 	},
 
 	square: {
 		borderRadius: 4,
-		flex: 1,
+    flex: 1,
 	},
 	img: {
-		width: 38,
-		height: 42,
+		width: 40,
+		height: 50,
 	},
 
 	containerText: {
@@ -36,18 +36,15 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 	},
 	text: {
-		// textAlign: 'center',
 		fontWeight: 'bold',
 	},
 	belongHeader: {
 		height: heightTreding / 2 - 5,
-		backgroundColor: COLOR.headerColor,
 	},
 	halfTrend: {
 		height: heightTreding / 2 + 5,
 		width: '100%',
 		position: 'absolute',
 		top: heightTreding / 2 - 10,
-		backgroundColor: COLOR.headerColor,
 	},
 });

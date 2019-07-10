@@ -1,27 +1,34 @@
 export const LANG_VN = {
-  APP_NAME: 'Cooking App',
+	APP_NAME: 'Cooking App',
 	HOME: 'Trang chủ',
 	SETTINGS: 'Cài đặt',
-	COLLECTION: 'Bộ sưu tập',
+	COLLECTION: { name: 'BỘ SƯU TẬP', id: 1 },
+	COMBO: { name: 'COMBO MÓN', id: 2 },
+	RECIPE_HIGHLIGHT: { name: 'CÔNG THỨC NỖI BẬT', id: 3 },
+	BEST_SELL: { name: 'SẢN PHẨM ĐƯỢC MUA NHIỀU', id: 4 },
+	FOLLOWING_LIST: { name: 'NGƯỜI BẠN ĐANG THEO DÕI', id: 5 },
+	LIKED_RECIPE: { name: 'CÔNG THỨC BẠN ĐÃ THÍCH', id: 6 },
+	INFO_EVENT: { name: 'TIN TỨC VÀ SỰ KIỆN', id: 7 },
+	SEARCH: 'Tìm kiếm...',
 	VIEW_MORE: 'Xem thêm',
 	SIGN_IN_UPTO_CASE: 'Đăng nhập',
 	ACCOUNT_FIELD: [
 		{
 			id: 1,
-			fieldName: 'Thông tin tài khoản',
+			fieldName: 'Thông tin tài khoản'
 		},
 		{
 			id: 2,
-			fieldName: 'Sổ địa chỉ',
+			fieldName: 'Sổ địa chỉ'
 		},
 		{
 			id: 3,
-			fieldName: 'L.Point',
+			fieldName: 'L.Point'
 		},
 		{
 			id: 4,
-			fieldName: 'Đánh giá sản phẩm',
-		},
+			fieldName: 'Đánh giá sản phẩm'
+		}
 	],
 	RECIPE: 'Công thức',
 	FOLLOWER: 'Người theo dõi',

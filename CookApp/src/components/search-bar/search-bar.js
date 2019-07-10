@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Text, TouchableOpacity, Image } from 'react-native';
 import navigationService from '../../services/navigation.service';
+import { LANG } from '../../lang/lang';
+import { IMG, COLOR, CSS } from '../../utils/variables';
 
 export default class SearchBarHeader extends Component {
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
-				<TouchableOpacity
-					style={{
-						flexDirection: 'row',
-						padding: 5,
-						borderWidth: 2,
-						borderRadius: 4,
-						borderColor: 'grey',
-						backgroundColor: 'white',
-						alignItems: 'center',
-            flex: 1
-					}}
-					onPress={() => navigationService.navigate('Search', { name: 'HaiPham' })}
-				>
-					<Icon name="search" size={24} color="grey" />
-					<Text>Nấu gì hôm nay ...</Text>
-				</TouchableOpacity>
-			</View>
+			<TouchableOpacity
+				style={{
+					height: 40,
+					flexDirection: 'row',
+					paddingHorizontal: CSS.padding15,
+					borderRadius: 4,
+					alignItems: 'center',
+					backgroundColor: COLOR.whiteColor,
+					justifyContent: 'space-between',
+				}}
+				onPress={() => navigationService.navigate('Search', { name: 'HaiPham' })}
+			>
+				<Text style={{ fontFamily: CSS.fontText }}>{LANG.SEARCH}</Text>
+				<Image source={IMG.searchGreen} />
+			</TouchableOpacity>
 		);
 	}
 }
