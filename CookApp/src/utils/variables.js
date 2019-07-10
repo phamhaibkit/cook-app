@@ -54,16 +54,22 @@ export const CSS = {
 			marginBottom: bottom,
 			marginLeft: left,
 		};
-	},
+	},	
 	padding15: 15,
 	fontBold: 'Nunito-ExtraBold',
 	fontTitle: 'Quicksand_Bold',
 	fontText: 'Quicksand_Book',
+	lightBoxShadow: '0px 3px 40px rgba(0, 0, 0, 0.1)',
+	borderRadius5: {
+		borderRadius: 5
+	}
 };
 
 export const COLOR = {
 	gradientLeft: '#3BB556',
 	gradientRight: '#72C91C',
+	gradientBlackTopColor:'rgba(0, 16, 8, 0)',
+	gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
 	redColor: '#FF0000',
 	whiteColor: '#FFFFFF',
 	greyColor: '#AAAAAA',

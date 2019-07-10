@@ -5,10 +5,9 @@ export default StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: 'column',
-		backgroundColor: COLOR.backgroundColor,
-		paddingLeft: CSS.padding15
+		backgroundColor: COLOR.backgroundColor,		
 	},
 	wrapContent: {
-		paddingRight: CSS.padding15
+		paddingLeft: CSS.padding15
 	}
 });

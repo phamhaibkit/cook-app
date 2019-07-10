@@ -27,7 +27,6 @@ export default class ViewMoreHome extends Component {
 const styles = StyleSheet.create({
 	containerlabel: {
 		width: '100%',
-		paddingHorizontal: 12,
 		paddingVertical: 4,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

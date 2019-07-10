@@ -22,8 +22,7 @@ export default class PageHome extends Component {
 					<View style={styles.wrapContent}>
 						<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore}/>
 						<RecipeItem />
-						<View style={{ height: 100 }} />
-						<Text style={{ marginLeft: 10, fontSize: 20, fontWeight: 'bold' }}>Combo Mon</Text>
+						<ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore}/>
 						<ComboItem />
 						<ProductList />
 					</View>
