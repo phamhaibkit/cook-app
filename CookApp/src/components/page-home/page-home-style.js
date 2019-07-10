@@ -8,4 +8,7 @@ export default StyleSheet.create({
 		backgroundColor: COLOR.backgroundColor,
 		paddingLeft: CSS.padding15
 	},
+	wrapContent: {
+		paddingRight: CSS.padding15
+	}
 });

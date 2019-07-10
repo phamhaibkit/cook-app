@@ -26,9 +26,9 @@ export default class RecipeItem extends Component {
 		return (
 			<View style={{padding: 10, backgroundColor: '#fff'}}>
 				<TouchableOpacity style={endStyle}>
-				<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={{background: 'linear-gradient(180deg, rgba(0, 16, 8, 0) 29.75%, rgba(0, 16, 8, 0.87) 93.23%)'}}>
+				<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
 					{/* <ImageBackground source={{ uri: item.link }} />	 */}
-					<Image source={require(item.link)} style={{width: 50, height: 50}} />					
+					<Image source={require('../../../assets/collections/collection-1.png')} style={{width: 50, height: 50}} />					
 				</LinearGradient>
 					{/* <ImageBackground style={styles.containerImg} source={{ uri: item.link }}>
 						<View style={styles.emptyContent}/>

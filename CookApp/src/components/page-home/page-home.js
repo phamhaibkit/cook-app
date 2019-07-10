@@ -19,12 +19,14 @@ export default class PageHome extends Component {
 			<ContainerScroll>
 				<View style={styles.container}>
 					<Trending />
-					<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore}/>
-					<RecipeItem />
-					<View style={{ height: 100 }} />
-					<Text style={{ marginLeft: 10, fontSize: 20, fontWeight: 'bold' }}>Combo Mon</Text>
-					<ComboItem />
-					<ProductList />
+					<View style={styles.wrapContent}>
+						<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore}/>
+						<RecipeItem />
+						<View style={{ height: 100 }} />
+						<Text style={{ marginLeft: 10, fontSize: 20, fontWeight: 'bold' }}>Combo Mon</Text>
+						<ComboItem />
+						<ProductList />
+					</View>
 					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 						<TouchableOpacity style={styles.button} onPress={() => navigationService.navigate('SignIn')}>
 							<Text>Đăng nhập</Text>
