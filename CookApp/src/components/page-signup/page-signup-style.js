@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { CSS } from '../../utils/variables';
+
 const styles = StyleSheet.create({
 	container: {
 		paddingHorizontal: 30,
@@ -16,11 +17,22 @@ const styles = StyleSheet.create({
 	},
 	titleText: {
 		marginBottom: 20,
-		fontSize: 25,
-		fontWeight: 'bold',
+		fontFamily: CSS.fontBold,
+		fontSize: 20,
 		color: '#444444',
 		textAlign: 'center',
 		textTransform: 'uppercase',
+	},
+	nameApp: {
+		fontFamily: CSS.fontBold,
+		fontSize: 28,
+		fontWeight: '900',
+		color: '#3ABF57',
+		textAlign: 'center'
+	},
+	logo: {
+		marginBottom: 64,
+		fontFamily: 'Nunito',
 	},
 	loginButton: {
 		alignItems: 'center',
@@ -40,13 +52,6 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		alignItems: 'center',
 		justifyContent: 'center',
-	},
-	nameApp: {
-		fontFamily: 'Nunito',
-		fontSize: 28,
-		fontWeight: '900',
-		color: '#3ABF57',
-		textAlign: 'center'
 	},
 	Input: {
 		borderColor: '#E0E0E0',
@@ -74,19 +79,20 @@ const styles = StyleSheet.create({
 	},
 	loginText: {
 		fontSize: 15,
-		fontWeight: 'bold',
-		color: '#FFFFFF'
+		color: '#FFFFFF',
+		fontFamily: CSS.fontTitle,
 	},
-	loginFacebookSection: { flex: 1, display: 'flex'},
+	loginFacebookSection: { flex: 1, display: 'flex' },
 	createNewButtonText: {
-		fontWeight: 'bold',
+		fontFamily: CSS.fontTitle,
 		fontSize: 15,
 		color: '#3ABF57',
 		textAlign: 'center'
-	}, createNewButton: {
+	},
+	createNewButton: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingVertical: 20,
+		paddingVertical: 7
 	},
 	image: {
 		// position: 'absolute',

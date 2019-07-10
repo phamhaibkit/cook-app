@@ -10,7 +10,7 @@ import navigationService from '../../services/navigation.service';
 
 import SigninByFacebook from '../signin-by-facebook/signin-by-facebook';
 import TextInputRender from '../text-input/text-input';
-import { IMG } from '../../utils/variables';
+import { IMG, CSS } from '../../utils/variables';
 
 const TYPE_MODAL = {
 	EMAIL: 'email',
@@ -89,7 +89,7 @@ class PageSignin extends Component {
 					</TouchableOpacity>
 					<LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={styles.linearGradient}>
 						<TouchableOpacity style={styles.buttonText} onPress={this.onPressSignin}>
-							<Text style={styles.loginText}>{LANG.SIGN_IN_UPTO_CASE}</Text>
+							<Text style={CSS.textTitleButton}>{LANG.SIGN_IN_UPTO_CASE}</Text>
 						</TouchableOpacity>
 					</LinearGradient>
 					<SigninByFacebook style={styles.loginFacebookSection} />

@@ -111,7 +111,7 @@ class SigninByFacebook extends Component {
 							this.fbLogin.login();
 						}}
 					>
-						<Icon name="facebook-f" size={24} color="white" style={styles.iconFacebook}/>
+						<Icon name="facebook-f" size={26} color="white" style={styles.iconFacebook}/>
 						<Text style={styles.loginWithFacebookText}>Đăng nhập với Facebook</Text>
 					</TouchableOpacity>
 				</View>

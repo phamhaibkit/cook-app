@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { CSS } from '../../utils/variables';
+
 const styles = StyleSheet.create({
 	container: {
 		paddingHorizontal: 30,
@@ -9,11 +10,7 @@ const styles = StyleSheet.create({
 		alignItems: 'stretch',
 		justifyContent: 'center',
 	},
-	loginPage: {
-		flex: 1,
-		display: 'flex',
-		justifyContent: 'center',
-	},
+
 	titleText: {
 		marginBottom: 20,
 		fontSize: 25,
@@ -21,39 +18,6 @@ const styles = StyleSheet.create({
 		color: '#444444',
 		textAlign: 'center',
 		textTransform: 'uppercase',
-	},
-	loginButton: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		paddingVertical: 20,
-	},
-	forgotButton: {
-		justifyContent: 'flex-end',
-		paddingBottom: 10,
-		alignItems: 'flex-end'
-	},
-	forgotPassword: {
-		// textDecorationLine: 'underline',
-		color: '#3ABF57'
-	},
-	paddingVertical: {
-		paddingVertical: 10,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	nameApp: {
-		fontFamily: 'Nunito',
-		fontSize: 28,
-		fontWeight: '900',
-		color: '#3ABF57',
-		textAlign: 'center'
-	},
-	Input: {
-		borderColor: '#E0E0E0',
-		borderWidth: 1,
-		borderRadius: 5,
-		marginBottom: 20,
-		flex: 1,
 	},
 	linearGradient: {
 		paddingLeft: 15,
@@ -65,19 +29,11 @@ const styles = StyleSheet.create({
 		height: 40,
 		marginBottom: 20
 	},
-	buttonText: {
-		fontSize: 18,
-		textAlign: 'center',
-		margin: 10,
-		color: '#ffffff',
-		backgroundColor: 'transparent',
-	},
-	loginText: {
+	textTitleButton: {
 		fontSize: 15,
 		fontWeight: 'bold',
 		color: '#FFFFFF'
 	},
-	loginFacebookSection: { flex: 1, display: 'flex'},
 	createNewButtonText: {
 		fontWeight: 'bold',
 		fontSize: 15,
@@ -94,6 +50,39 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		height: 149,
 		marginTop: -70
+	},
+	inputInform: {
+		color: '#001D12'
+	},
+	color767676: {
+		color: '#767676'
+	},
+	phoneInfor: {
+		marginBottom: 26,
+	},
+	otpInput: {
+		marginBottom: 49,
+	},
+	sendCode: {
+		marginBottom: 52,
+	},
+	reSendCode: {
+		justifyContent: 'center',
+		width: 118,
+		marginBottom: 30,
+		borderRadius: 5,
+		borderColor: '#E0E0E0',
+		borderWidth: 1,
+		padding: 13,
+		fontFamily: CSS.fontText,
+	},
+	reSendCodeDuring: {
+		fontFamily: CSS.fontTitle,
+		color: '#3ABF57',
+		paddingLeft: 4,
+	},
+	agreeOtP: {
+		marginBottom: 20,
 	}
 });
 export default styles;

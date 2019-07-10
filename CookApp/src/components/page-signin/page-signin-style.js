@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { CSS } from '../../utils/variables';
 const styles = StyleSheet.create({
 	container: {
+		fontFamily: 'Nunito',
 		paddingHorizontal: 30,
 		display: 'flex',
 		flex: 1,
@@ -16,11 +17,22 @@ const styles = StyleSheet.create({
 	},
 	titleText: {
 		marginBottom: 20,
-		fontSize: 25,
-		fontWeight: 'bold',
+		fontFamily: CSS.fontBold,
+		fontSize: 20,
 		color: '#444444',
 		textAlign: 'center',
 		textTransform: 'uppercase',
+	},
+	nameApp: {
+		fontFamily: CSS.fontBold,
+		fontSize: 28,
+		fontWeight: '900',
+		color: '#3ABF57',
+		textAlign: 'center'
+	},
+	logo: {
+		marginBottom: 64,
+		fontFamily: 'Nunito',
 	},
 	loginButton: {
 		alignItems: 'center',
@@ -29,7 +41,7 @@ const styles = StyleSheet.create({
 	},
 	forgotButton: {
 		justifyContent: 'flex-end',
-		paddingBottom: 10,
+		paddingBottom: 30,
 		alignItems: 'flex-end'
 	},
 	forgotPassword: {
@@ -40,13 +52,6 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		alignItems: 'center',
 		justifyContent: 'center',
-	},
-	nameApp: {
-		fontFamily: 'Nunito',
-		fontSize: 28,
-		fontWeight: '900',
-		color: '#3ABF57',
-		textAlign: 'center'
 	},
 	Input: {
 		borderColor: '#E0E0E0',
@@ -72,28 +77,23 @@ const styles = StyleSheet.create({
 		color: '#ffffff',
 		backgroundColor: 'transparent',
 	},
-	loginText: {
-		fontSize: 15,
-		fontWeight: 'bold',
-		color: '#FFFFFF'
-	},
 	loginFacebookSection: { flex: 1, display: 'flex'},
 	createNewButtonText: {
-		fontWeight: 'bold',
 		fontSize: 15,
 		color: '#3ABF57',
-		textAlign: 'center'
+		textAlign: 'center',
+		fontFamily: CSS.fontTitle,
 	}, createNewButton: {
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingVertical: 20,
 	},
 	image: {
-		// position: 'absolute',
+		zIndex: -1,
 		width: '100%',
 		bottom: 0,
 		height: 149,
 		marginTop: -70
-	}
+	},
 });
 export default styles;

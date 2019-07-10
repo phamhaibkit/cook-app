@@ -14,9 +14,9 @@ export class TextInputRender extends Component {
 					<Image
 						source={icon}
 						style={styles.image}
+						resizeMode="contain"
 					/>
 				</View>
-
 				<TextInput
 					style={styles.Input}
 					secureTextEntry={secureTextEntry}

@@ -10,7 +10,7 @@ import navigationService from '../../services/navigation.service';
 
 import SigninByFacebook from '../signin-by-facebook/signin-by-facebook';
 import TextInputRender from '../text-input/text-input';
-import { IMG } from '../../utils/variables';
+import { IMG, CSS } from '../../utils/variables';
 
 const TYPE_MODAL = {
 	EMAIL: 'email',
@@ -53,7 +53,7 @@ class PageSignUp extends Component {
 	};
 
 	render() {
-		let { email, password, showModalLoading, notMatch } = this.state;
+		const { email, password, showModalLoading, notMatch } = this.state;
 		// return <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
 		return <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 			<View style={[styles.container]}>
@@ -92,7 +92,7 @@ class PageSignUp extends Component {
 					/>
 					<LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={styles.linearGradient}>
 						<TouchableOpacity style={styles.buttonText} onPress={() => navigationService.navigate('OTP')}>
-							<Text style={styles.loginText}>{LANG.SIGN_UP}</Text>
+							<Text style={CSS.textTitleButton}>{LANG.SIGN_UP}</Text>
 						</TouchableOpacity>
 					</LinearGradient>
 					<TouchableOpacity style={styles.createNewButton} onPress={() => navigationService.navigate('SignIn')}>

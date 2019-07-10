@@ -44,5 +44,9 @@ export const LANG_VN = {
 	LOGIN_TITLE: 'Đăng nhập',
 	SETUP: 'Cài đặt',
 	RETURN_LOGIN: 'Quay lại đăng nhập',
-	SIGN_UP: 'Đăng ký'
+	SIGN_UP: 'Đăng ký',
+	OTP_INFORM: 'Đăng ký đồng nghĩa với việc bạn đồng ý với các Điều khoản sử dụng của chúng tôi',
+	SEND_CODE_DURING: 'Gửi lại mã trong',
+	CONFIRM: 'Xác nhận',
+	RE_SEND_CODE_DURING: 'Gửi lại mã'
 };

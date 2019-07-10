@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-// import { CSS } from '../../utils/variables';
+import { CSS } from '../../utils/variables';
 
 export default styles = StyleSheet.create({
 	container: {
@@ -17,9 +17,9 @@ export default styles = StyleSheet.create({
 		display: "none",
 	},
 	loginWithFacebookText: {
-		fontWeight: 'bold',
 		fontSize: 15,
 		color: '#FFFFFF',
+		fontFamily: CSS.fontTitle,
 	},
 	loginFbView: {
 		width: '100%',
@@ -37,7 +37,8 @@ export default styles = StyleSheet.create({
 	iconFacebook: {
 		position: 'absolute',
 		left: 18,
-		width: 40,
+		height: 45,
+		width: 30,
 		// paddingHorizontal: 18,
 		paddingVertical: 10,
 		borderRightColor: 'rgba(255, 255, 255, 0.2)',
