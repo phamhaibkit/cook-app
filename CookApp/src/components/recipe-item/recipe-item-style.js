@@ -1,60 +1,27 @@
-import { StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const { width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
+
 export default StyleSheet.create({
 	container: {
 		flex: 1,
-  },
-	frame: {
-    height: 0.32*height,
-    // fontSize: 18,
-    width:width - 48,
-    backgroundColor: 'lightblue',
-    marginLeft: 12,
-  },
-  endFrame: {
-    marginRight: 12,
-  },
-  containerImg: {
-    flex: 1,
-    padding: 12,
-    // borderRadius: 5,
-  },
-  emptyContent: {
-    flex: 7,
-  },  
-  containerContent: {
-    flex:3,
-  },
-  tile: {
-    flex: 1,
-    flexDirection:'row',
-  },
-  left: {
-    flex: 9,
-    // borderColor: 'red',
-    // borderWidth: 2,
-    paddingRight: 5,
-    // justifyContent: 'flex-end',
-  },
-  right: {
-    flex: 1,
-    // borderColor: 'blue',
-    // borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    // justifyContent: 'flex-end',
-  },
-  titleText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  normalText: {
-    fontSize: 12
-  },
-  image: {
-    width: 20,
-    height: 20
-  },
+		color: 'white'
+	},
+	collectionTitle: {
+		fontSize: 16,
+		marginBottom: 10,
+		color: 'white',
+		letterSpacing: -0.02
+	},
+	separator: {
+		marginHorizontal: 13,
+		width: 1,
+		height: 13,
+		backgroundColor: 'white'
+	},
+	statisticalNumber: {
+		marginLeft: 5,
+		color: 'white'
+	}
 });

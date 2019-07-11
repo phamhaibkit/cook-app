@@ -125,6 +125,10 @@ export const CSS = {
   fontSize11: {
     fontSize: 11,
   },
+    lightBoxShadow: '0px 3px 40px rgba(0, 0, 0, 0.1)',
+    borderRadius5: {
+    	borderRadius: 5
+    }
 };
 
 export const COLOR = {
@@ -138,6 +142,8 @@ export const COLOR = {
   blackColor: '#000000',
   lineColor: '#D3D3D3',
   lineHoriColor: '#E9E9E9'
+	gradientBlackTopColor:'rgba(0, 16, 8, 0)',
+	gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
 };
 
 export const ACTION = {

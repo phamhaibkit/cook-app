@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 import styles from './combo-item-style';
 import { COMBO_DATA } from '../../models/data';
+import { COLOR, CSS } from '../../utils/variables';
 
 export default class ComboItem extends Component {
 	constructor(props) {
@@ -29,7 +30,7 @@ export default class ComboItem extends Component {
 			default:
 				break;
 		}
-		return <TouchableOpacity style={endStyle}>{combo}</TouchableOpacity>;
+		return <TouchableOpacity style={[endStyle, CSS.lightBoxShadow, CSS.borderRadius5]}>{combo}</TouchableOpacity>;
 	};
 
 	render2or4Item = (item, is4) => {
@@ -58,7 +59,7 @@ export default class ComboItem extends Component {
 
 	render3or5Item = (item, is5) => {
 		return (
-			<View style={styles.container2Item}>
+			<View style={[styles.container2Item, { backgroundColor: 'white', padding: 10}]}>
 				<View style={styles.container2Img}>
 					<ImageBackground style={styles.left3} source={{ uri: item.combo[0].link }} />
 					<View style={styles.right3}>
