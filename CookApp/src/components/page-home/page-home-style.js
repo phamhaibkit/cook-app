@@ -5,7 +5,7 @@ export default StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: 'column',
-		backgroundColor: COLOR.backgroundColor,
+		backgroundColor: COLOR.backgroundColor,		
 	},
 	advertisement: {
     marginTop: 30,
@@ -18,4 +18,7 @@ export default StyleSheet.create({
 		height: 120,
 		width: null,
 	},
+	wrapContent: {
+		paddingLeft: CSS.padding15
+	}
 });

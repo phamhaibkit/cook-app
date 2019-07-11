@@ -62,6 +62,25 @@ export const CSS = {
     fontSize: 15,
     color: '#FFFFFF'
   },
+  buttonText: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 10,
+    width: '100%',
+    height: 40,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
+  },
+  linearGradientButton: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    marginBottom: 20
+  },
   dFlex: {
     flex: 1,
   },
@@ -126,6 +145,10 @@ export const CSS = {
   fontSize11: {
     fontSize: 11,
   },
+  lightBoxShadow: '0px 3px 40px rgba(0, 0, 0, 0.1)',
+  borderRadius5: {
+    borderRadius: 5
+  }
 };
 
 export const COLOR = {
@@ -138,7 +161,9 @@ export const COLOR = {
   greenColor: '#3ABF57',
   blackColor: '#000000',
   lineColor: '#D3D3D3',
-  lineHoriColor: '#E9E9E9'
+  lineHoriColor: '#E9E9E9',
+	gradientBlackTopColor:'rgba(0, 16, 8, 0)',
+	gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
 };
 
 export const ACTION = {

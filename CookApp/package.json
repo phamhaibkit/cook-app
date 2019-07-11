@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "dev": "react-native run-android --port 8088",
     "test": "jest",
     "react-devtools": "react-devtools"
   },
@@ -47,7 +48,8 @@
     "eslint-plugin-flowtype": "^3.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.0"
+    "eslint-plugin-react": "^7.11.0",
+    "react-native-i18n": "^2.0.15"
   },
   "jest": {
     "preset": "react-native"
