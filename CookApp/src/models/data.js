@@ -1,3 +1,5 @@
+// let rand = require('random-key');	
+
 export const COMBO_DATA = [
 	{
 		combo: [

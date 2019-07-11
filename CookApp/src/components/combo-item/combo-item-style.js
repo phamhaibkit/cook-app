@@ -5,14 +5,15 @@ const height = Dimensions.get('window').height;
 export default StyleSheet.create({
 	container: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 15,
+    padding: 0
   },
   frame: {
     height: 0.4*height,
     // padding: 12,
     fontSize: 18,
     width:width - 48,
-    marginLeft: 12,
+    marginRight: 15,
     borderRadius: 5,
   },
   endFrame: {

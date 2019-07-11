@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import RecipeItem from '../recipe-item/recipe-item';
+import CollectionList from '../collection-list/collection-list';
 import ComboItem from '../combo-item/combo-item';
 import Trending from '../trending/trending';
 import ContainerScroll from '../container-scroll/container-scroll';
@@ -25,7 +25,7 @@ export default class PageHome extends Component {
 					<Trending />
 					<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
 					<View style={{ height: 10 }} />
-					<RecipeItem />
+					<CollectionList />
 					<View style={styles.advertisement}>
 						<Image style={styles.adverImg} source={img} resizeMode="cover" />
 					</View>
