@@ -1,3 +1,4 @@
+/* eslint-env es6 */
 export const IMG = {
   bookmark: require('../../assets/book-mark.png'),
   logo: require('../../assets/logo.png'),
@@ -20,7 +21,6 @@ export const IMG = {
   loveHome: require('../../assets/icons/love-home.png'),
   commentHome: require('../../assets/icons/comment-home.png'),
   shareHome: require('../../assets/icons/share-home.png'),
-  reverseCircle: require('../../assets/icons/reverse-circle.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -54,15 +54,33 @@ export const CSS = {
   },
   padding15: 15,
   fontBold: 'Nunito-ExtraBold',
-  fontTitle: 'Quicksand_Bold',
-  fontText: 'Quicksand_Book',
+  fontTitle: 'Quicksand-Bold',
+  fontText: 'Quicksand-Regular',
   textTitleButton: {
-    fontFamily: 'Quicksand_Bold',
+    fontFamily: 'Quicksand-Bold',
     fontSize: 15,
     color: '#FFFFFF'
   },
   dFlex: {
     flex: 1,
+  },
+  fontNuBlack: {
+    fontFamily: 'Nunito-Black'
+  },
+  fontNuExBold: {
+    fontFamily: 'Nunito-ExtraBold'
+  },
+  fontQuiBold: {
+    fontFamily: 'Quicksand-Bold'
+  },
+  fontQuiBook: {
+    fontFamily: 'Quicksand_Book'
+  },
+  fontQuiLight: {
+    fontFamily: 'Quicksand_Light'
+  },
+  fontQuiBookOblique: {
+    fontFamily: 'Quicksand_Book_Oblique'
   },
   justifyContentCenter: {
     justifyContent: 'center',
@@ -90,7 +108,7 @@ export const CSS = {
     fontSize: 24,
     height: 56,
     width: 43,
-    fontFamily: 'Quicksand_Bold'
+    fontFamily: 'Quicksand-Bold'
   },
   fontSize24: {
     fontSize: 24,
