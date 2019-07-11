@@ -4,15 +4,15 @@ export const COMBO_DATA = [
 	{
 		combo: [
 			{
-				name: 'Com chien ga xoi mo',
+				name: 'Cơm chiên gà xối mỡ hành',
 				link: 'https://blog.beemart.vn/wp-content/uploads/2015/08/com-bento-2.jpg',
 			},
 			{
-				name: 'Ga tha vuon',
+				name: 'Gà thả trong vườn nhà nuôi',
 				link: 'https://media.cooky.vn/recipe/g3/20486/s800x500/recipe20486-636353068303797684.jpg',
 			},
 			{
-				name: 'Giau an tu cong',
+				name: 'Dầu ăn chiết suất từ cống',
 				link: 'https://media.cooky.vn/recipe/g4/38996/s800x500/cooky-recipe-cover-r38996.jpg',
 			},
 		],
@@ -73,7 +73,7 @@ export const COMBO_DATA = [
 			},
 			{
 				name: 'Giau ',
-				link: 'https://cachlammoi.com/wp-content/uploads/2017/06/hqdefault-25.jpg',
+				link: 'https://afamilycdn.com/Images/Uploaded/Share/2010/08/12/36.jpg',
       },
       {
 				name: 'Hap dan ',

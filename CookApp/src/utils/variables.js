@@ -56,6 +56,7 @@ export const CSS = {
     paddingHorizontal: 20,
   },
   padding15: 15,
+  padding10: 10,
   fontBold: 'Nunito-ExtraBold',
   fontTitle: 'Quicksand-Bold',
   fontText: 'Quicksand-Regular',

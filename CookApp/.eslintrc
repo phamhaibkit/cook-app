@@ -16,7 +16,7 @@
     "one-var": "off",
     "eol-last": "off",
     "comma-dangle": "off",
-     "indent": ["error", 2],
+    "indent": ["error", 2],
     "array-bracket-spacing": "off",
     "object-property-newline": "off",
     "object-curly-newline": "off",

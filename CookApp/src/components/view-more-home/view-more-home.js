@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 	},
 	moreText: {
 		color: COLOR.greenColor,
-		fontFamily: CSS.fontTitle,
+		fontFamily: CSS.fontText,
 		fontSize: 13,
 		lineHeight: 18,
 	},
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
 	img: {
 		width: 12,
 		height: 7,
-		marginLeft: 3,
+    marginLeft: 3,
+    marginTop: 4
 	},
 });
