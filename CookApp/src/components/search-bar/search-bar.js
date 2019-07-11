@@ -9,17 +9,17 @@ export default class SearchBarHeader extends Component {
 		return (
 			<TouchableOpacity
 				style={{
-					height: 40,
+					height: 38,
 					flexDirection: 'row',
 					paddingHorizontal: CSS.padding15,
-					borderRadius: 4,
+					borderRadius: 5,
 					alignItems: 'center',
 					backgroundColor: COLOR.whiteColor,
 					justifyContent: 'space-between',
 				}}
 				onPress={() => navigationService.navigate('Search', { name: 'HaiPham' })}
 			>
-				<Text style={{ fontFamily: CSS.fontText }}>{LANG.SEARCH}</Text>
+				<Text style={{ fontFamily: CSS.fontText, color: '#AAAAAA', fontSize: 15 }}>{LANG.SEARCH}</Text>
 				<Image source={IMG.searchGreen} />
 			</TouchableOpacity>
 		);
