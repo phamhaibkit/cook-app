@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-export class PageInforUser extends Component {
+export default class PageInforUser extends Component {
   static propTypes = {
     prop: PropTypes
+  }
+  
+  componentWillMount() {
+    console.log('disss')
   }
 
   render() {

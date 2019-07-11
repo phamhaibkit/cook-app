@@ -34,7 +34,7 @@ export default class PageHome extends Component {
 					<ComboItem />
 					<ProductList />
 					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-						<TouchableOpacity style={styles.button} onPress={() => navigationService.navigate('SignIn')}>
+						<TouchableOpacity style={styles.button} onPress={() => navigationService.navigate('InforUser')}>
 							<Text>Đăng nhập</Text>
 						</TouchableOpacity>
 					</View>

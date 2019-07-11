@@ -20,6 +20,7 @@ import SignIn from '../page-signin/page-signin';
 import SignUp from '../page-signup/page-signup';
 import PageOTP from '../page-otp/page-otp';
 import PageConfirmPassword from '../page-password-confirm/page-password-confirm';
+import PageInforUser from '../page-infor-user/page-infor-user';
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
@@ -87,6 +88,12 @@ const UserStack = createStackNavigator({
   },
   ConfirmPassword: {
     screen: PageConfirmPassword,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  InforUser: {
+    screen: PageInforUser,
     navigationOptions: {
       header: null,
     },
