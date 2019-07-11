@@ -12,7 +12,7 @@ export const IMG = {
 	searchGreen: require('../../assets/icons/search-home.png'),
 	sandClokHome: require('../../assets/icons/sand-clock.png'),
 	reverseCircle: require('../../assets/icons/reverse-circle.png'),
-	dollaHome: require('../../assets/icons/dolla.png'),
+	dollaHome: require('../../assets/icons/dola-home.png'),
 	personHome: require('../../assets/icons/person-home.png'),
 	reportHome: require('../../assets/icons/dot-home.png'),
 	avatarHome: require('../../assets/icons/avata-home.png'),
