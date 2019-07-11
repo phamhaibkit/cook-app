@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, ScrollView } from 'react-native';
+import { Text, StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import LinearGradient from 'react-native-linear-gradient';
+import navigationService from '../../services/navigation.service';
 import TextInputRender from '../text-input/text-input';
-import { IMG, CSS } from '../../utils/variables';
+import { IMG, CSS, COLOR } from '../../utils/variables';
+import { LANG } from '../../lang/lang';
 
 
 export default class PageConfirmPassword extends Component {
@@ -26,16 +29,23 @@ export default class PageConfirmPassword extends Component {
     const { password, rePassword, params } = this.state;
     const pageName = _.get(params, 'params.pageName');
     return (
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <ScrollView >
         <View style={[styles.container]}>
           <View style={{
             flex: 1,
             display: 'flex',
           }}>
-            <Text>{pageName}</Text>
+            <Text style={[
+              styles.titlePage,
+              CSS.justifyContentCenter,
+              CSS.alignItemsCenter,
+              CSS.textAlignCenter,
+              CSS.fontNuExBold]}>
+              {pageName}
+            </Text>
             <TextInputRender
               onChangeText={(value, err) => this.onChangeText(value, err, 'password')}
-              title="Password"
+              title="Mật khẩu"
               placeholder="Nhập Mật khẩu"
               value={password}
               styleConfig={styles.Input}
@@ -49,9 +59,14 @@ export default class PageConfirmPassword extends Component {
               styleConfig={styles.Input}
               secureTextEntry
             />
+            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
+              <TouchableOpacity style={[styles.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={() => navigationService.navigate('OTP')}>
+                <Text style={CSS.textTitleButton}>{LANG.SIGN_UP}</Text>
+              </TouchableOpacity>
+            </LinearGradient>
           </View>
         </View>
-      </ScrollView>
+      </ScrollView >
     );
   }
 }
@@ -60,10 +75,9 @@ const styles = StyleSheet.create({
   container: {
     fontFamily: 'Nunito',
     paddingHorizontal: 30,
-    display: 'flex',
     flex: 1,
     // height: '100%',
-    alignItems: 'stretch',
+    // alignItems: 'stretch',
   },
   Input: {
     borderColor: '#E0E0E0',
@@ -71,6 +85,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     flex: 1,
+  },
+  titlePage: {
+    marginVertical: 25,
+    fontSize: 16,
+    color: '#001D12'
+  },
+  linearGradient: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    marginBottom: 20
   },
 });
 

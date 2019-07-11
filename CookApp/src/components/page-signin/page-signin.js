@@ -81,8 +81,8 @@ class PageSignin extends Component {
           <TouchableOpacity style={styles.forgotButton} onPress={this.onPressSignin}>
             <Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
           </TouchableOpacity>
-          <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={styles.linearGradient}>
-            <TouchableOpacity style={styles.buttonText} onPress={this.onPressSignin}>
+          <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
+            <TouchableOpacity style={[CSS.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={this.onPressSignin}>
               <Text style={CSS.textTitleButton}>{LANG.SIGN_IN_UPTO_CASE}</Text>
             </TouchableOpacity>
           </LinearGradient>

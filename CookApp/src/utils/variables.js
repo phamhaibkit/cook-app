@@ -61,6 +61,25 @@ export const CSS = {
     fontSize: 15,
     color: '#FFFFFF'
   },
+  buttonText: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 10,
+    width: '100%',
+    height: 40,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
+  },
+  linearGradientButton: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    marginBottom: 20
+  },
   dFlex: {
     flex: 1,
   },
