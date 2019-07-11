@@ -4,10 +4,10 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { Text, View, Image, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 import { IMG } from '../../utils/variables';
-import styles from './recipe-item-style';
+import styles from './collection-list-style';
 import { COLOR, CSS } from '../../utils/variables';
 
-export default class RecipeItem extends Component {
+export default class CollectionList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -22,7 +22,7 @@ export default class RecipeItem extends Component {
 
   onPress = () => {	}
 
-	renderFrame = (item, index) => {
+	renderRecipeItem = (item, index) => {
 		const endStyle = this.data.length - 1 === index ? [styles.frame, styles.endFrame] : styles.frame;
 		return (
 			<View style={[{padding: 10, backgroundColor: '#fff', marginRight: 10 }, CSS.lightBoxShadow, CSS.borderRadius5]}>
@@ -39,7 +39,7 @@ export default class RecipeItem extends Component {
 						</View>
 						<View style={{ position: 'absolute', bottom: 15, left: 15, right: 15, color: 'white' }}>
 							<View>
-								<Text style={[styles.collectionTitle, CSS.fontTitle ]}>{item.key}</Text>
+								<Text style={[styles.collectionTitle, CSS.fontTitle, CSS.fontQuiBold ]}>{item.key}</Text>
 							</View>								
 							<View style={{ flex: 1, flexDirection: 'row' }}>
 								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -62,7 +62,7 @@ export default class RecipeItem extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<FlatList data={this.data} renderItem={({ item, index }) => this.renderFrame(item, index)} horizontal showsHorizontalScrollIndicator={false}/>
+				<FlatList data={this.data} renderItem={({ item, index }) => this.renderRecipeItem(item, index)} horizontal showsHorizontalScrollIndicator={false}/>
 			</View>
 		);
 	}
