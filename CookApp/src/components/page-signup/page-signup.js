@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Modal, Image, KeyboardAvoidingView, Button } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import styles from './page-signin-style';
+import styles from './page-signup-style';
 import { LANG } from '../../lang/lang';
 
 // import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ const TYPE_MODAL = {
 	PASSWORD: 'password',
 };
 
-class PageSignin extends Component {
+class PageSignUp extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -53,7 +53,7 @@ class PageSignin extends Component {
 	};
 
 	render() {
-		let { email, password, showModalLoading, notMatch } = this.state;
+		const { email, password, showModalLoading, notMatch } = this.state;
 		// return <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
 		return <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 			<View style={[styles.container]}>
@@ -69,32 +69,34 @@ class PageSignin extends Component {
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
 						title="User Name"
-						placeholder="Số điện thoại/Email"
+						placeholder="Nhập họ và tên"
 						value={email}
 						styleConfig={styles.Input}
 						icon={IMG.user}
 					/>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
-						title="Password"
-						placeholder="Mật khẩu"
+						placeholder="Nhập email"
 						value={password}
 						styleConfig={styles.Input}
 						secureTextEntry
-						icon={IMG.clock}
+						icon={IMG.mail}
 					/>
-
-					<TouchableOpacity style={styles.forgotButton} onPress={this.onPressSignin}>
-						<Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
-					</TouchableOpacity>
+					<TextInputRender
+						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
+						placeholder="Nhập số điện thoại"
+						value={password}
+						styleConfig={styles.Input}
+						secureTextEntry
+						icon={IMG.phone}
+					/>
 					<LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={styles.linearGradient}>
-						<TouchableOpacity style={styles.buttonText} onPress={this.onPressSignin}>
-							<Text style={CSS.textTitleButton}>{LANG.SIGN_IN_UPTO_CASE}</Text>
+						<TouchableOpacity style={styles.buttonText} onPress={() => navigationService.navigate('OTP')}>
+							<Text style={CSS.textTitleButton}>{LANG.SIGN_UP}</Text>
 						</TouchableOpacity>
 					</LinearGradient>
-					<SigninByFacebook style={styles.loginFacebookSection} />
-					<TouchableOpacity style={styles.createNewButton} onPress={() => navigationService.navigate('SignUp')}>
-						<Text style={styles.createNewButtonText}>Đăng ký tài khoản</Text>
+					<TouchableOpacity style={styles.createNewButton} onPress={() => navigationService.navigate('SignIn')}>
+						<Text style={styles.createNewButtonText}>{LANG.RETURN_LOGIN}</Text>
 					</TouchableOpacity>
 
 				</View>
@@ -114,4 +116,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default PageSignin;
+export default PageSignUp;

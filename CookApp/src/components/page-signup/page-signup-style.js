@@ -1,8 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { CSS } from '../../utils/variables';
+
 const styles = StyleSheet.create({
 	container: {
-		fontFamily: 'Nunito',
 		paddingHorizontal: 30,
 		display: 'flex',
 		flex: 1,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 	},
 	forgotButton: {
 		justifyContent: 'flex-end',
-		paddingBottom: 30,
+		paddingBottom: 10,
 		alignItems: 'flex-end'
 	},
 	forgotPassword: {
@@ -77,23 +77,29 @@ const styles = StyleSheet.create({
 		color: '#ffffff',
 		backgroundColor: 'transparent',
 	},
-	loginFacebookSection: { flex: 1, display: 'flex'},
+	loginText: {
+		fontSize: 15,
+		color: '#FFFFFF',
+		fontFamily: CSS.fontTitle,
+	},
+	loginFacebookSection: { flex: 1, display: 'flex' },
 	createNewButtonText: {
+		fontFamily: CSS.fontTitle,
 		fontSize: 15,
 		color: '#3ABF57',
-		textAlign: 'center',
-		fontFamily: CSS.fontTitle,
-	}, createNewButton: {
+		textAlign: 'center'
+	},
+	createNewButton: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingVertical: 20,
+		paddingVertical: 7
 	},
 	image: {
-		zIndex: -1,
+		// position: 'absolute',
 		width: '100%',
 		bottom: 0,
 		height: 149,
 		marginTop: -70
-	},
+	}
 });
 export default styles;

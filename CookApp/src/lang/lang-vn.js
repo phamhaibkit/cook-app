@@ -15,20 +15,20 @@ export const LANG_VN = {
 	ACCOUNT_FIELD: [
 		{
 			id: 1,
-			fieldName: 'Thông tin tài khoản',
+			fieldName: 'Thông tin tài khoản'
 		},
 		{
 			id: 2,
-			fieldName: 'Sổ địa chỉ',
+			fieldName: 'Sổ địa chỉ'
 		},
 		{
 			id: 3,
-			fieldName: 'L.Point',
+			fieldName: 'L.Point'
 		},
 		{
 			id: 4,
-			fieldName: 'Đánh giá sản phẩm',
-		},
+			fieldName: 'Đánh giá sản phẩm'
+		}
 	],
 	RECIPE: 'Công thức',
 	FOLLOWER: 'Người theo dõi',
@@ -43,4 +43,10 @@ export const LANG_VN = {
 	DELIVERY_ADDRESS: 'Địa chỉ giao hàng',
 	LOGIN_TITLE: 'Đăng nhập',
 	SETUP: 'Cài đặt',
+	RETURN_LOGIN: 'Quay lại đăng nhập',
+	SIGN_UP: 'Đăng ký',
+	OTP_INFORM: 'Đăng ký đồng nghĩa với việc bạn đồng ý với các Điều khoản sử dụng của chúng tôi',
+	SEND_CODE_DURING: 'Gửi lại mã trong',
+	CONFIRM: 'Xác nhận',
+	RE_SEND_CODE_DURING: 'Gửi lại mã'
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableOpacity, Platform, Modal, View, AsyncStorage } from 'react-native';
 
 import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
+import Icon from 'react-native-vector-icons/FontAwesome';
 // FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.WebView);
 // import navigationService from '../../services/navigation.service'
 import { connect } from 'react-redux';
@@ -110,6 +111,7 @@ class SigninByFacebook extends Component {
 							this.fbLogin.login();
 						}}
 					>
+						<Icon name="facebook-f" size={26} color="white" style={styles.iconFacebook}/>
 						<Text style={styles.loginWithFacebookText}>Đăng nhập với Facebook</Text>
 					</TouchableOpacity>
 				</View>

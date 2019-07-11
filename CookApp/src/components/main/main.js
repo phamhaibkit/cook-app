@@ -17,9 +17,11 @@ import PageRecipe from '../page-recipe/page-recipe';
 import PageNoti from '../page-noti/page-noti';
 import PageUser from '../page-user/page-user';
 import SignIn from '../page-signin/page-signin';
+import SignUp from '../page-signup/page-signup';
+import PageOTP from '../page-otp/page-otp';
 
 const HomeStack = createStackNavigator({
-	//Defination of Navigaton from home screen
+	// Defination of Navigaton from home screen
 	Home: {
 		screen: PageHome,
 		navigationOptions: {
@@ -30,16 +32,6 @@ const HomeStack = createStackNavigator({
 	Search: { screen: PageSearch },
 });
 
-HomeStack.navigationOptions = ({ navigation }) => {
-	let tabBarVisible = true;
-	if (navigation.state.index > 0) {
-		tabBarVisible = false;
-	}
-
-	return {
-		tabBarVisible,
-	};
-};
 
 const StoreStack = createStackNavigator({
 	Store: {
@@ -71,13 +63,49 @@ const UserStack = createStackNavigator({
 	SignIn: {
 		screen: SignIn,
 		navigationOptions: {
-			// header: null,
+			tabBarVisible: false,
+			gesturesEnabled: false,
+		},
+	},
+	SignUp:  {
+		screen: SignUp,
+		navigationOptions: {
+			header: null,
+			tabBarVisible: false,
+			gesturesEnabled: false,
+		},
+	},
+	OTP: {
+		title: 'Xác thực',
+		screen: PageOTP,
+		navigationOptions: {
+			tabBarVisible: false,
+			gesturesEnabled: false,
+		},
+	}
+});
+
+const SignInStack = createStackNavigator({
+	SignIn: {
+		screen: SignIn,
+		navigationOptions: {
+			header: null,
 			tabBarVisible: false,
 			gesturesEnabled: false,
 		},
 	},
 });
 
+UserStack.navigationOptions = ({ navigation }) => {
+	let tabBarVisible = true;
+	if (navigation.state.index > 0) {
+		tabBarVisible = false;
+	}
+
+	return {
+		tabBarVisible,
+	};
+};
 const bottomTabNav = createBottomTabNavigator(
 	{
 		Home: { screen: HomeStack },
@@ -91,24 +119,25 @@ const bottomTabNav = createBottomTabNavigator(
 			tabBarIcon: ({ focused, horizontal, tintColor }) => {
 				const { routeName } = navigation.state;
 				// let IconComponent = Ionicons;
-				let IconComponent = Icon;
+				const IconComponent = Icon;
 				let iconName;
+				// eslint-disable-next-line default-case
 				switch (routeName) {
-					case 'Home':
-						iconName = `home-outline`;
-						break;
-					case 'Store':
-						iconName = `store`;
-						break;
-					case 'Recipe':
-						iconName = `chef-hat`;
-						break;
-					case 'Notification':
-						iconName = `bell-outline`;
-						break;
-					case 'User':
-						iconName = `account-circle-outline`;
-						break;
+				case 'Home':
+					iconName = 'home-outline';
+					break;
+				case 'Store':
+					iconName = 'store';
+					break;
+				case 'Recipe':
+					iconName = 'chef-hat';
+					break;
+				case 'Notification':
+					iconName = 'bell-outline';
+					break;
+				case 'User':
+					iconName = 'account-circle-outline';
+					break;
 				}
 
 				return <IconComponent name={iconName} size={25} color={tintColor} />;
@@ -135,14 +164,14 @@ const slides = [
 		key: 'somethun-dos',
 		title: 'Title 2',
 		text: 'Other cool stuff',
-		image: require('../../../assets/2.jpg'),
+		// image: require('../../../assets/2.jpg'),
 		backgroundColor: '#febe29',
 	},
 	{
 		key: 'somethun1',
 		title: 'Rocket guy',
 		text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
-		image: require('../../../assets/3.jpg'),
+		// image: require('../../../assets/3.jpg'),
 		backgroundColor: '#22bcb5',
 	},
 ];
