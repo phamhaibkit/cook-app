@@ -4,7 +4,6 @@ import { CSS } from '../../utils/variables';
 export default StyleSheet.create({
 	Input: {
 		flex: 1,
-		paddingLeft: 20,
 		color: 'black',
 		fontSize: 14,
 		height: 40,

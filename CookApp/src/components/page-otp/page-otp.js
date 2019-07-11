@@ -7,6 +7,7 @@ import styles from './page-otp-style';
 import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { IMG, CSS } from '../../utils/variables';
+import PageConfirmPassword from '../page-password-confirm/page-password-confirm';
 
 const TYPE_MODAL = {
 	EMAIL: 'email',
@@ -15,12 +16,17 @@ const TYPE_MODAL = {
 
 
 class PageOTP extends Component {
+
 	static navigationOptions = {
-		// headerTitle instead of title
-		// headerTitle: <View style={[CSS.justifyContentCenter, CSS.alignItemsCenter, { backgroundColor: 'red' }]}><Text style={[CSS.textAlignCenter]} >dddd</Text></View>,
-		headerTitle: 'SignIn',
-		headerTintColor: '#F44336'
-	};
+		title: 'Xác Thực',
+		headerTitleStyle: {
+			textAlign: 'center',
+			flex: 1,
+			marginLeft: -36,
+			fontSize: 16,
+			fontFamily: 'Nunito',
+		},
+	}
 
 	constructor(props, context) {
 		super(props, context);
@@ -105,6 +111,14 @@ class PageOTP extends Component {
 		}
 	}
 
+	onPressConfirm = () => {
+		const params = {
+			pageName: LANG.SET_TUP_PASSWORD,
+			pageKey: 'setPassword'
+		};
+		navigationService.navigate('ConfirmPassword', params);
+	}
+
 	render() {
 		const { time } = this.state;
 		// return <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
@@ -148,7 +162,7 @@ class PageOTP extends Component {
 					đồng ý với các của chúng tôi<Text> Điều khoản sử dụng</Text>của chúng tôi</Text>
 				</View>
 				<LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={styles.linearGradient}>
-					<TouchableOpacity style={styles.buttonText} onPress={this.onPressSignin}>
+					<TouchableOpacity style={styles.buttonText} onPress={this.onPressConfirm}>
 						<Text style={CSS.textTitleButton}>{LANG.CONFIRM}</Text>
 					</TouchableOpacity>
 				</LinearGradient>

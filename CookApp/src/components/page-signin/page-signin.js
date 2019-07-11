@@ -68,7 +68,6 @@ class PageSignin extends Component {
 					</View>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
-						title="User Name"
 						placeholder="Số điện thoại/Email"
 						value={email}
 						styleConfig={styles.Input}
@@ -76,7 +75,6 @@ class PageSignin extends Component {
 					/>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
-						title="Password"
 						placeholder="Mật khẩu"
 						value={password}
 						styleConfig={styles.Input}

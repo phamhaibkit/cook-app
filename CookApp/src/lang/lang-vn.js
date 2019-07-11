@@ -48,5 +48,6 @@ export const LANG_VN = {
 	OTP_INFORM: 'Đăng ký đồng nghĩa với việc bạn đồng ý với các Điều khoản sử dụng của chúng tôi',
 	SEND_CODE_DURING: 'Gửi lại mã trong',
 	CONFIRM: 'Xác nhận',
-	RE_SEND_CODE_DURING: 'Gửi lại mã'
+	RE_SEND_CODE_DURING: 'Gửi lại mã',
+	SET_TUP_PASSWORD: 'Thiết lập mật khẩu'
 };

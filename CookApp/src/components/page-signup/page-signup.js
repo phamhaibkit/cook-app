@@ -68,7 +68,6 @@ class PageSignUp extends Component {
 					</View>
 					<TextInputRender
 						onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
-						title="User Name"
 						placeholder="Nhập họ và tên"
 						value={email}
 						styleConfig={styles.Input}
