@@ -77,12 +77,14 @@ export default class Trending extends Component {
 					end={{ x: 1, y: 0 }}
 					style={styles.halfTrend}
 				/>
-				<FlatList
-					data={this.data}
-					renderItem={({ item, index }) => this.renderFrame(item, index)}
-					horizontal
-					showsHorizontalScrollIndicator={false}
-				/>
+				<View style={styles.containerTrending}>
+					<FlatList
+						data={this.data}
+						renderItem={({ item, index }) => this.renderFrame(item, index)}
+						horizontal
+						showsHorizontalScrollIndicator={false}
+					/>
+				</View>
 			</View>
 		);
 	}

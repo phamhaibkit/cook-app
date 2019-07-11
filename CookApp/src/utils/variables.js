@@ -1,13 +1,21 @@
 export const IMG = {
 	bookmark: require('../../assets/book-mark.png'),
 	logo: require('../../assets/logo.png'),
-	tet: require('../../assets/tet.jpg'),
 	arrowRight: require('../../assets/icons/arrow-right-3x.png'),
 	user: require('../../assets/icons/user.png'),
 	clock: require('../../assets/icons/clock.png'),
 	cartHome: require('../../assets/icons/cart-home.png'),
 	arrowRightGreen: require('../../assets/icons/arrow-right-green.png'),
 	searchGreen: require('../../assets/icons/search-home.png'),
+	sandClokHome: require('../../assets/icons/sand-clock.png'),
+	dollaHome: require('../../assets/icons/dolla.png'),
+	personHome: require('../../assets/icons/person-home.png'),
+	reportHome: require('../../assets/icons/dot-home.png'),
+	avatarHome: require('../../assets/icons/avata-home.png'),
+	rankHome: require('../../assets/icons/rank-home.png'),
+	loveHome: require('../../assets/icons/love-home.png'),
+	commentHome: require('../../assets/icons/comment-home.png'),
+	shareHome: require('../../assets/icons/share-home.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -39,20 +47,23 @@ export const CSS = {
 	padding20: {
 		paddingHorizontal: 20,
 	},
-  padding15: 15,
-  fontBold: 'Nunito-ExtraBold',
-  fontTitle: 'Quicksand_Bold',
-  fontText: 'Quicksand_Book',
+	padding15: 15,
+	fontBold: 'Nunito-ExtraBold',
+	fontTitle: 'Quicksand_Bold',
+	fontText: 'Quicksand_Book',
 };
 
 export const COLOR = {
 	gradientLeft: '#3BB556',
-  gradientRight: '#72C91C',
-  redColor: '#FF0000',
-  whiteColor: '#FFFFFF',
-  greyColor: '#AAAAAA',
-  backgroundColor: '#E5E5E5',
-  greenColor: '#3ABF57'
+	gradientRight: '#72C91C',
+	redColor: '#FF0000',
+	whiteColor: '#FFFFFF',
+	greyColor: '#AAAAAA',
+	backgroundColor: '#E5E5E5',
+  greenColor: '#3ABF57',
+  blackColor: '#000000',
+  lineColor: '#D3D3D3',
+  lineHoriColor: '#E9E9E9'
 };
 
 export const ACTION = {

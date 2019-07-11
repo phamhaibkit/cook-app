@@ -27,14 +27,15 @@ export default class ViewMoreHome extends Component {
 const styles = StyleSheet.create({
 	containerlabel: {
 		width: '100%',
-		paddingHorizontal: 12,
-		paddingVertical: 4,
+		paddingHorizontal: CSS.padding15,
+		marginTop: 20,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 	labelText: {
 		fontSize: 15,
-		color: 'black',
+		color: '#444444',
 		fontFamily: CSS.fontBold,
 		lineHeight: 20,
 	},
