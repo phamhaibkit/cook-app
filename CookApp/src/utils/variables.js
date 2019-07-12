@@ -21,6 +21,12 @@ export const IMG = {
   loveHome: require('../../assets/icons/love-home.png'),
   commentHome: require('../../assets/icons/comment-home.png'),
   shareHome: require('../../assets/icons/share-home.png'),
+  userAvatar: require('../../assets/icons/user-avatar.png'),
+  camera: require('../../assets/icons/camera.png'),
+  male: require('../../assets/icons/male.png'),
+  greenBookmarkIcon: require('./../../assets/icons/save-icon-3x.png'),
+  recipeIcon: require('./../../assets/icons/recipe-icon-3x.png'),
+  whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -53,6 +59,7 @@ export const CSS = {
     paddingHorizontal: 20,
   },
   padding15: 15,
+  padding10: 10,
   fontBold: 'Nunito-ExtraBold',
   fontTitle: 'Quicksand-Bold',
   fontText: 'Quicksand-Regular',
@@ -60,6 +67,25 @@ export const CSS = {
     fontFamily: 'Quicksand-Bold',
     fontSize: 15,
     color: '#FFFFFF'
+  },
+  buttonText: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 10,
+    width: '100%',
+    height: 40,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
+  },
+  linearGradientButton: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    marginBottom: 20
   },
   dFlex: {
     flex: 1,
@@ -73,6 +99,9 @@ export const CSS = {
   fontQuiBold: {
     fontFamily: 'Quicksand-Bold'
   },
+  fontQuiRegular: {
+    fontFamily: 'Quicksand-Regular'
+  },
   fontQuiBook: {
     fontFamily: 'Quicksand_Book'
   },
@@ -84,6 +113,9 @@ export const CSS = {
   },
   justifyContentCenter: {
     justifyContent: 'center',
+  },
+  justifySpaceBetween: {
+    justifyContent: 'space-between',
   },
   alignItemsCenter: {
     alignItems: 'center'
@@ -113,11 +145,17 @@ export const CSS = {
   fontSize24: {
     fontSize: 24,
   },
+  fontSize16: {
+    fontSize: 16,
+  },
   fontSize15: {
     fontSize: 15,
   },
   fontSize14: {
     fontSize: 14,
+  },
+  fontSize13: {
+    fontSize: 13,
   },
   fontSize12: {
     fontSize: 12,
@@ -125,10 +163,13 @@ export const CSS = {
   fontSize11: {
     fontSize: 11,
   },
-    lightBoxShadow: '0px 3px 40px rgba(0, 0, 0, 0.1)',
-    borderRadius5: {
-    	borderRadius: 5
-    }
+  lightBoxShadow: '0px 3px 40px rgba(0, 0, 0, 0.1)',
+  borderRadius5: {
+    borderRadius: 5
+  },
+  headerMargin: {
+    marginTop: 35
+  },
 };
 
 export const COLOR = {
@@ -141,7 +182,7 @@ export const COLOR = {
   greenColor: '#3ABF57',
   blackColor: '#000000',
   lineColor: '#D3D3D3',
-  lineHoriColor: '#E9E9E9'
+  lineHoriColor: '#E9E9E9',
 	gradientBlackTopColor:'rgba(0, 16, 8, 0)',
 	gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
 };

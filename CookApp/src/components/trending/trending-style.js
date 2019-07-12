@@ -44,7 +44,7 @@ export default StyleSheet.create({
 		fontFamily: CSS.fontTitle,
 		marginLeft: 5,
 		lineHeight: 15,
-		color: 'black',
+    color: 'black',
 	},
 	belongHeader: {
 		height: heightTreding / 2 - 5,

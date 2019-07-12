@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import RecipeItem from '../recipe-item/recipe-item';
-import ComboItem from '../combo-item/combo-item';
+import CollectionHome from '../collection-home/collection-home';
+import ComboHome from '../combo-home/combo-home';
 import Trending from '../trending/trending';
 import ContainerScroll from '../container-scroll/container-scroll';
 import navigationService from '../../services/navigation.service';
@@ -19,22 +19,23 @@ export default class PageHome extends Component {
 	viewMore = type => {};
 
 	render() {
-		return (
+    return (
 			<ContainerScroll>
 				<View style={styles.container}>
 					<Trending />
 					<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
 					<View style={{ height: 10 }} />
-					<RecipeItem />
+					<CollectionHome />
 					<View style={styles.advertisement}>
 						<Image style={styles.adverImg} source={img} resizeMode="cover" />
 					</View>
 					<ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
 					<RecipeHighlightHome />
-					<ComboItem />
+					<ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
+					<ComboHome />
 					<ProductList />
 					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-						<TouchableOpacity style={styles.button} onPress={() => navigationService.navigate('SignIn')}>
+						<TouchableOpacity style={styles.button} onPress={() => navigationService.navigate('InforUser')}>
 							<Text>Đăng nhập</Text>
 						</TouchableOpacity>
 					</View>

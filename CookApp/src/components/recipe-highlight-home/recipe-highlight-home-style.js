@@ -103,7 +103,7 @@ export default StyleSheet.create({
     fontSize: 13,
     fontFamily: CSS.fontText,
     color: COLOR.blackColor,
-    letterSpacing: -1.2
+    letterSpacing: -0.5
 	},
 	recipeView: {
 		height: 140,
