@@ -24,6 +24,9 @@ export const IMG = {
   userAvatar: require('../../assets/icons/user-avatar.png'),
   camera: require('../../assets/icons/camera.png'),
   male: require('../../assets/icons/male.png'),
+  greenBookmarkIcon: require('./../../assets/icons/save-icon-3x.png'),
+  recipeIcon: require('./../../assets/icons/recipe-icon-3x.png'),
+  whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
 };
 
 export const ASYNC_STORAGE = {
