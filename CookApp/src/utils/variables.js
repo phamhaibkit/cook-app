@@ -24,6 +24,8 @@ export const IMG = {
   userAvatar: require('../../assets/icons/user-avatar.png'),
   camera: require('../../assets/icons/camera.png'),
   male: require('../../assets/icons/male.png'),
+  female: require('../../assets/icons/female.png'),
+  calendar: require('../../assets/icons/calendar.png'),
 };
 
 export const ASYNC_STORAGE = {

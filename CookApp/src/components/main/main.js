@@ -101,14 +101,12 @@ const UserStack = createStackNavigator({
 });
 
 const SignInStack = createStackNavigator({
-  SignIn: {
-    screen: SignIn,
+  InforUser: {
+    screen: PageInforUser,
     navigationOptions: {
       header: null,
-      tabBarVisible: false,
-      gesturesEnabled: false,
     },
-  },
+  }
 });
 
 UserStack.navigationOptions = ({ navigation }) => {
@@ -123,7 +121,7 @@ UserStack.navigationOptions = ({ navigation }) => {
 };
 const bottomTabNav = createBottomTabNavigator(
   {
-    Home: { screen: HomeStack },
+    Home: { screen: SignInStack },
     Store: { screen: StoreStack },
     Recipe: { screen: RecipeStack },
     Notification: { screen: NotiStack },

@@ -1,30 +1,72 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Button } from 'react-native';
 import PropTypes from 'prop-types';
-import LinearGradient from 'react-native-linear-gradient';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import moment from 'moment';
 import { LANG } from '../../lang/lang';
 import { CSS, IMG } from '../../utils/variables';
 import SigninByFacebook from '../signin-by-facebook/signin-by-facebook';
 import TextInputRendernder from '../text-input/text-input';
+import RadioSelect from '../radio-select/radio-select';
+
 
 export default class PageInforUser extends Component {
   static propTypes = {
-    prop: PropTypes
+    // prop: PropTypes
   }
 
   constructor(props) {
     super(props);
     this.state = {
       password: '',
+      isDateTimePickerVisible: false,
+      radioObject: {
+        date: '',
+        label: 'Giới tính',
+        arrayObject: [
+          {
+            name: 'Nam',
+            icon: 'mars',
+            active: false
+          },
+          {
+            name: 'Nữ',
+            icon: 'venus',
+            active: true
+          },
+        ]
+      }
     };
     // const { params } = this.props.navigation.state;
   }
 
   componentWillMount() {
+
+
   }
 
+  showDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: true });
+  };
+
+  hideDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: false });
+  };
+
+  handleDatePicked = (date) => {
+    console.log('A date has been picked: ', date);
+    const StartDate = moment(date).format('YYYY-MM-DD');
+
+    this.setState({
+      date: StartDate,
+    });
+    console.log(date, 'date');
+    this.hideDateTimePicker();
+  };
+
   render() {
-    const { password } = this.state;
+    const { password, radioObject, isDateTimePickerVisible, date } = this.state;
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
@@ -75,21 +117,16 @@ export default class PageInforUser extends Component {
             styleConfig={styles.Input}
             secureTextEntry
           />
-          <View style={[CSS.flexRow]}>
-            <View><Text>Giới tính</Text></View>
-            <View>
-              <Text>sadasd</Text>
-
-              {/* <Image source={IMG.male} resizeMode="contain" /> */}
-              {/* <LinearGradient style={{ width: 34 }} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} >
-                <TouchableOpacity
-                  onPress={() => console.log()}>
-                  <Text>sadasd</Text>
-                </TouchableOpacity>
-              </LinearGradient> */}
-            </View>
-
-          </View>
+          <RadioSelect radioObject={radioObject} />
+          <TouchableOpacity style={[{ borderColor: '#E0E0E0', borderRadius: 5, borderWidth: 1, padding: 12 }, CSS.flexRow, CSS.justifySpaceBetween]} onPress={this.showDateTimePicker}>
+            <Text>{date || ''}</Text>
+            <Image source={IMG.calendar} resizeMode="contain" />
+          </TouchableOpacity>
+          <DateTimePicker
+            isVisible={isDateTimePickerVisible}
+            onConfirm={this.handleDatePicked}
+            onCancel={this.hideDateTimePicker}
+          />
         </View>
       </ScrollView>
     );
