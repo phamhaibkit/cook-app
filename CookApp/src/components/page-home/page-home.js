@@ -33,8 +33,9 @@ export default class PageHome extends Component {
 					<RecipeHighlightHome />
 					<ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
 					<ComboHome />
+          <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
 					<ProductList />
-					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 50 }}>
 						<TouchableOpacity style={styles.button} onPress={() => navigationService.navigate('InforUser')}>
 							<Text>Đăng nhập</Text>
 						</TouchableOpacity>

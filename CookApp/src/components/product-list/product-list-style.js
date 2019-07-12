@@ -1,10 +1,15 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { COLOR, CSS } from '../../utils/variables';
 
-const width = Dimensions.get ('window').width;
-const height = Dimensions.get ('window').height;
-export default StyleSheet.create ({
+const widthImg = 200;
+const heightImg = 120;
+export default StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    backgroundColor: COLOR.whiteColor,
+    margin: CSS.padding15,
+    borderRadius: 10,
+    paddingBottom: 20
   },
   containerlabel: {
     paddingVertical: 4,
@@ -12,27 +17,28 @@ export default StyleSheet.create ({
     justifyContent: 'space-between',
   },
   frame: {
-    height: 0.35 * height,
+    height: 273,
     // fontSize: 18,
-    width: width / 2 + 30,
-    // backgroundColor: 'lightblue',
+    width: 210,
     // marginLeft: 12,
-    marginTop: 12,
     // borderColor: 'red',
-    // borderWidth: 2
+    // borderWidth: 2,
+    marginTop: 20
   },
   endFrame: {
-    marginRight: 12,
+    marginRight: CSS.padding10,
   },
   containerTouch: {
-    flex: 2,
-    paddingLeft: 10,
+    // flex: 2,
+    paddingLeft: CSS.padding10,
   },
   containerDown: {
-    flex: 1,
+    // flex: 1,
+    marginTop: 35
   },
   img: {
-    flex: 3,
+    width: widthImg,
+    height: heightImg
   },
   guarantImg: {
     backgroundColor: 'white',
@@ -50,25 +56,35 @@ export default StyleSheet.create ({
     flexDirection: 'row',
   },
   discount: {
-    // paddingVertical: 3,
-    paddingHorizontal: 5,
-    backgroundColor: 'red',
-    borderRadius: 4,
+    paddingHorizontal: 6,
+    borderRadius: 10,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 3,
+    backgroundColor: COLOR.redColor,
   },
   selling: {
-    marginLeft: 5,
-    paddingHorizontal: 5,
-    backgroundColor: 'green',
-    borderRadius: 4,
+    paddingHorizontal: 6,
+    borderRadius: 10,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 6,
+    paddingBottom: 3,
+    backgroundColor: COLOR.greenSelling,
   },
   discountText: {
-    fontSize: 10,
-    color: 'white',
-    fontWeight: 'bold',
+    fontSize: 12,
+    color: COLOR.whiteColor,
+    fontFamily: CSS.fontTitle,
   },
   madeIn: {
-    marginVertical: 5,
-    fontSize: 12
+    // marginVertical: 5,
+    fontSize: 13,
+    fontFamily: CSS.fontText,
+    lineHeight: 18,
+    color: COLOR.madeIn
   },
   titleView: {
     flex: 1,
@@ -76,34 +92,47 @@ export default StyleSheet.create ({
     // paddingHorizontal: 12
   },
   title:{
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 14,
+    fontFamily: CSS.fontTitle,
+    color: COLOR.blackColor
   },
   containerDown: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginTop: 38
   },
   priceView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10
+    marginVertical: 10
   },
   newPrice:{
-    color: 'red',
-    fontSize: 16
+    color: COLOR.redColor,
+    fontSize: 18,
+    fontFamily: CSS.fontTitle,
+    lineHeight: 20
   },
   oldPrice: {
-    fontSize: 12,
+    fontSize: 15,
     textDecorationLine: 'line-through',
-    marginLeft: 5
+    marginLeft: CSS.padding15,
+    lineHeight: 20,
+    color: COLOR.oldPrice
   },
   addCart: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 5,
+    height: 40,
+    width: 200,
     borderWidth: 1,
-    borderColor: 'grey',
-    borderRadius: 4
+    borderRadius: 5,
+    borderColor: COLOR.borderAddCart
   },
   addCartText: {
-    color: 'green'
+    color: COLOR.addCartHome,
+    fontFamily: CSS.fontText,
+    fontSize: 15,
+    alignSelf: 'center',
+    marginBottom: 4
   }
 });
