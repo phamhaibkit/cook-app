@@ -26,6 +26,9 @@ export const IMG = {
   male: require('../../assets/icons/male.png'),
   female: require('../../assets/icons/female.png'),
   calendar: require('../../assets/icons/calendar.png'),
+  greenBookmarkIcon: require('./../../assets/icons/save-icon-3x.png'),
+  recipeIcon: require('./../../assets/icons/recipe-icon-3x.png'),
+  whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -183,7 +186,12 @@ export const COLOR = {
   lineColor: '#D3D3D3',
   lineHoriColor: '#E9E9E9',
 	gradientBlackTopColor:'rgba(0, 16, 8, 0)',
-	gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
+  gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
+  greenSelling: '#7BCC46',
+  madeIn: '#767676',
+  oldPrice: '#001D12',
+  addCartHome: '#5DC11B',
+  borderAddCart: '#E0E0E0',
 };
 
 export const ACTION = {

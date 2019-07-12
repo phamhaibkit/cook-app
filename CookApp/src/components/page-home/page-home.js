@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import CollectionList from '../collection-list/collection-list';
+import CollectionHome from '../collection-home/collection-home';
 import ComboHome from '../combo-home/combo-home';
 import Trending from '../trending/trending';
 import ContainerScroll from '../container-scroll/container-scroll';
@@ -25,7 +25,7 @@ export default class PageHome extends Component {
 					<Trending />
 					<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
 					<View style={{ height: 10 }} />
-					<CollectionList />
+					<CollectionHome />
 					<View style={styles.advertisement}>
 						<Image style={styles.adverImg} source={img} resizeMode="cover" />
 					</View>
@@ -33,8 +33,9 @@ export default class PageHome extends Component {
 					<RecipeHighlightHome />
 					<ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
 					<ComboHome />
+          <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
 					<ProductList />
-					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 50 }}>
 						<TouchableOpacity style={styles.button} onPress={() => navigationService.navigate('InforUser')}>
 							<Text>Đăng nhập</Text>
 						</TouchableOpacity>

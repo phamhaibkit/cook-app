@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { Text, View, Image, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 import { IMG } from '../../utils/variables';
-import styles from './collection-list-style';
+import styles from './collection-home-style';
 import { COLOR, CSS } from '../../utils/variables';
 
 export default class CollectionList extends Component {
@@ -25,31 +25,31 @@ export default class CollectionList extends Component {
 	renderRecipeItem = (item, index) => {
 		const endStyle = this.data.length - 1 === index ? [styles.frame, styles.endFrame] : styles.frame;
 		return (
-			<View style={[{padding: 10, backgroundColor: '#fff', marginRight: 10 }, CSS.lightBoxShadow, CSS.borderRadius5]}>
+			<View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5]}>
 				<TouchableOpacity style={endStyle}>
-					<ImageBackground  style={{ width: 290, height: 190 }} source={require('../../../assets/collections/collection-1.png')}>
+					<ImageBackground  style={styles.imgBgWrap} source={require('../../../assets/collections/collection-1.png')}>
 						<LinearGradient
 							colors={[COLOR.gradientBlackTopColor, COLOR.gradientBlackBottomColor]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 0, y: 1 }}
-							style={{ width: 290, height: 190 }}
+							style={styles.linearGradientLayer}
 						/>
-						<View style={{ position: 'absolute', top: 10, right: 10, padding: 8, backgroundColor: '#fff', borderRadius: 10 }}>
-							<Image style={{ height: 17, width: 16 }} source={require('../../../assets/icons/save-icon-3x.png')}/>
+						<View style={styles.saveCollection}>
+							<Image style={styles.saveIcon} source={IMG.greenBookmarkIcon}/>
 						</View>
-						<View style={{ position: 'absolute', bottom: 15, left: 15, right: 15, color: 'white' }}>
+						<View style={styles.blockContentWrap}>
 							<View>
 								<Text style={[styles.collectionTitle, CSS.fontTitle, CSS.fontQuiBold ]}>{item.key}</Text>
 							</View>								
-							<View style={{ flex: 1, flexDirection: 'row' }}>
-								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-									<Image style={{ width: 12, height: 7 }} source={require('../../../assets/icons/recipe-icon-1x.png')}/>
-									<Text style={styles.statisticalNumber}>{item.recipes}</Text>
+							<View style={styles.statisticalWrap}>
+								<View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+									<Image style={styles.recipeIcon} source={IMG.recipeIcon}/>
+									<Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.recipes}</Text>
 								</View>
 								<View style={styles.separator} />
-								<View style={{flexDirection: 'row', alignItems: 'center'}}>
-									<Image style={{ width: 10, height: 10 }} source={require('../../../assets/icons/bookmark-icon-3x.png')}/>
-									<Text style={styles.statisticalNumber}>{item.saves}</Text>
+								<View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+									<Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
+									<Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.saves}</Text>
 								</View>
 							</View>								
 						</View>						
