@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, AsyncStorage, TouchableOpacity } from 'react-native';
+import { Text, View, Image, AsyncStorage, TouchableOpacity, TouchableHighlight } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,6 +21,23 @@ import SignUp from '../page-signup/page-signup';
 import PageOTP from '../page-otp/page-otp';
 import PageConfirmPassword from '../page-password-confirm/page-password-confirm';
 import PageInforUser from '../page-infor-user/page-infor-user';
+import CollectionList from '../collection-list/collection-list';
+
+const LeftButton = ({ onPress }) => (
+  <TouchableHighlight onPress={onPress} style={{paddingLeft: 15}}>
+    <Image
+      source={require('../../../assets/icons/arrow-left-green.png')}
+    />
+  </TouchableHighlight>
+);
+
+const RightButton = ({ onPress }) => (
+  <TouchableHighlight onPress={onPress} style={{paddingRight: 15}}>
+    <Image
+      source={require('../../../assets/icons/search-green-icon.png')}
+    />
+  </TouchableHighlight>
+);
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
@@ -32,6 +49,19 @@ const HomeStack = createStackNavigator({
   },
   Details: { screen: PageDetail },
   Search: { screen: PageSearch },
+  CollectionList: { 
+    screen: CollectionList,
+    navigationOptions: {      
+      title: 'Bộ Sưu Tập',
+      headerLeft: <LeftButton />,
+      headerRight: <RightButton />,
+      headerTitleContainerStyle: {        
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }
+  }
 });
 
 

@@ -6,7 +6,8 @@ const { height } = Dimensions.get('window');
 export default StyleSheet.create({
 	container: {
 		flex: 1,
-		color: 'white'
+    color: 'white',
+    marginLeft: 15
 	},
 	blockContainer: { 
 		padding: 10, 
@@ -23,7 +24,7 @@ export default StyleSheet.create({
   },
   saveCollection: { 
     position: 'absolute', 
-    top: 10, 
+    bottom: 10, 
     right: 10, 
     padding: 8, 
     backgroundColor: '#fff', 

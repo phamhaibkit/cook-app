@@ -7,7 +7,7 @@ import { IMG } from '../../utils/variables';
 import styles from './collection-home-style';
 import { COLOR, CSS } from '../../utils/variables';
 
-export default class CollectionList extends Component {
+export default class CollectionItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
