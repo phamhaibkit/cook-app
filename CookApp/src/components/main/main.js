@@ -23,6 +23,7 @@ import SignUp from '../page-signup/page-signup';
 import PageOTP from '../page-otp/page-otp';
 import PageConfirmPassword from '../page-password-confirm/page-password-confirm';
 import PageInforUser from '../page-infor-user/page-infor-user';
+import ForgotPasswordPage from '../forgot-password/forgot-password';
 import CollectionList from '../collection-list/collection-list';
 import ComboList from '../combo-list/combo-list';
 
@@ -122,18 +123,26 @@ const UserStack = createStackNavigator({
     navigationOptions: {
       header: null,
     },
+  },
+  ForgotPassword: {
+    title: 'Quên mật khẩu',
+    screen: ForgotPasswordPage,
+    navigationOptions: {
+      tabBarVisible: false,
+      gesturesEnabled: false,
+    },
   }
 });
 
 const SignInStack = createStackNavigator({
-  SignIn: {
-    screen: SignIn,
+  ForgotPassword: {
+    title: 'Quên mật khẩu',
+    screen: ForgotPasswordPage,
     navigationOptions: {
-      header: null,
       tabBarVisible: false,
       gesturesEnabled: false,
     },
-  },
+  }
 });
 
 UserStack.navigationOptions = ({ navigation }) => {

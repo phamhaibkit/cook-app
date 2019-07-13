@@ -24,9 +24,13 @@ export const IMG = {
   userAvatar: require('../../assets/icons/user-avatar.png'),
   camera: require('../../assets/icons/camera.png'),
   male: require('../../assets/icons/male.png'),
+  female: require('../../assets/icons/female.png'),
+  calendar: require('../../assets/icons/calendar.png'),
   greenBookmarkIcon: require('./../../assets/icons/save-icon-3x.png'),
   recipeIcon: require('./../../assets/icons/recipe-icon-3x.png'),
   whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
+  forgotPassword: require('./../../assets/icons/forgot-password.png'),
+  backButton: require('./../../assets/icons/back-button.png'),
   greenBackIcon: require('./../../assets/icons/arrow-left-green.png'),
   whiteBackIcon: require('./../../assets/icons/arrow-left-white.png')
 };
@@ -172,6 +176,10 @@ export const CSS = {
   headerMargin: {
     marginTop: 35
   },
+  placeholderStyle: {
+    fontSize: 14,
+    color: '#CECECE'
+  }
 };
 
 export const COLOR = {
@@ -185,8 +193,13 @@ export const COLOR = {
   blackColor: '#000000',
   lineColor: '#D3D3D3',
   lineHoriColor: '#E9E9E9',
-	gradientBlackTopColor:'rgba(0, 16, 8, 0)',
-	gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
+  gradientBlackTopColor: 'rgba(0, 16, 8, 0)',
+  gradientBlackBottomColor: 'rgba(0, 16, 8, 0.65)',
+  greenSelling: '#7BCC46',
+  madeIn: '#767676',
+  oldPrice: '#001D12',
+  addCartHome: '#5DC11B',
+  borderAddCart: '#E0E0E0',
 };
 
 export const ACTION = {

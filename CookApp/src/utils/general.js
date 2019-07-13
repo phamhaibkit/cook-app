@@ -1,22 +1,22 @@
 import { AsyncStorage } from 'react-native';
 
 export const ASYNC_STORAGE = {
-	CART_ID: 'CART_ID',
-	USER_INFO: 'userInfo',
-	RECENT_SEARCH: 'RECENT_SEARCH',
-	COUNTRY_INFO: 'COUNTRY_INFO',
+  CART_ID: 'CART_ID',
+  USER_INFO: 'userInfo',
+  RECENT_SEARCH: 'RECENT_SEARCH',
+  COUNTRY_INFO: 'COUNTRY_INFO',
 };
 export async function setUserInfo(userInfo, token) {
-	console.log(userInfo, 'userInfo');
-	userInfo.token = token;
-	const briefName = createBriefName(userInfo.lastname, userInfo.firstname);
-	const userName = `${userInfo.lastname} ${userInfo.firstname}`;
-	userInfo.userNameBrief = briefName;
-	userInfo.userName = userName;
-	await AsyncStorage.setItem(ASYNC_STORAGE.USER_INFO, JSON.stringify(userInfo)).catch((e) => {
-		return userInfo;
-	});
-	return userInfo;
+  console.log(userInfo, 'userInfo');
+  userInfo.token = token;
+  const briefName = createBriefName(userInfo.lastname, userInfo.firstname);
+  const userName = `${userInfo.lastname} ${userInfo.firstname}`;
+  userInfo.userNameBrief = briefName;
+  userInfo.userName = userName;
+  await AsyncStorage.setItem(ASYNC_STORAGE.USER_INFO, JSON.stringify(userInfo)).catch((e) => {
+    return userInfo;
+  });
+  return userInfo;
 }
 
 /**
@@ -24,7 +24,7 @@ export async function setUserInfo(userInfo, token) {
  * @param {string} string : string to get first capitalize character
  */
 export function capitalizeFirst(string) {
-	return string && string.charAt(0).toUpperCase();
+  return string && string.charAt(0).toUpperCase();
 }
 
 /**
@@ -33,5 +33,5 @@ export function capitalizeFirst(string) {
  * @param {string} lastname
  */
 export function createBriefName(fisrtname, lastname) {
-	return capitalizeFirst(fisrtname) + capitalizeFirst(lastname);
+  return capitalizeFirst(fisrtname) + capitalizeFirst(lastname);
 }
