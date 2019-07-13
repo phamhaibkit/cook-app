@@ -10,9 +10,7 @@ const imgComboRatio = 0.4831;
 const imageRatio1st = 1.1459;
 const imageRatio2nd = 0.4167;
 const imgLeftSideVsRightSideRatio = 0.7527; // based on width
-const imgHeghtCombo = 157;
 const spaceImg = 4;
-const widthImg = 325;
 
 const blockWidth = width - containerPadding * 2;
 const blockHeight = blockWidth * blockRatio;
@@ -38,12 +36,12 @@ export default StyleSheet.create({
 		width: blockWidth,
 		marginLeft: CSS.padding15,
 		borderRadius: 5,
+		marginTop: 15
 	},
 	endFrame: {
 		marginRight: CSS.padding15,
 	},
 	containerWhite: {
-		backgroundColor: COLOR.whiteColor,
 		width: '100%',
 		height: '100%',
 		borderRadius: 5,
@@ -52,12 +50,11 @@ export default StyleSheet.create({
 	containerImg: {
 		flex: 1,
 		flexDirection: 'row',
-		height: imgLeftSideHeight,
-		width: imgComboWrapWidth,
+		height: imgComboHeight,
+		width: imgComboWidth,
 		marginHorizontal: 10,
 		borderRadius: 5,
-    	overflow: 'hidden',
-    // backgroundColor: 'red'
+    overflow: 'hidden'
 	},
 	container2Item: {
 		paddingTop: 20,
@@ -65,52 +62,50 @@ export default StyleSheet.create({
 	container2Img: {
 		flex: 1,
 		flexDirection: 'row',
-    	position: 'absolute',
-		// top: -10
+    position: 'absolute',
 	},
 	imgLeftView: {
-		width: 140,
-		height: imgHeghtCombo,
+		width: imgLeftSideWidth,
+		height: imgComboHeight,
 	},
 	imgRightView: {
 		marginLeft: 4,
-		width: 185,
-    	height: imgHeghtCombo,
-    // overflow: 'hidden'
+		width: imgRightSideWidth,
+    height: imgComboHeight,
 	},
 	imgUp3: {
-		width: 162,
-		height: 70,
+		width: imgRightSideWidth,
+		height: (imgComboHeight - spaceImg) / 2 ,
   },
   imgUp5: {
-		width: 79,
-		height: 70,
+		width: (imgRightSideWidth - spaceImg) / 2,
+		height: (imgComboHeight - spaceImg) / 2 ,
 	},
 	imgDown3: {
-		width: 162,
-		height: 70,
-		marginTop: 4,
+		width: imgRightSideWidth,
+		height: (imgComboHeight - spaceImg) / 2 ,
+		marginTop: spaceImg,
   },
   imgDown5: {
-		width: 79,
-		height: 70,
-		marginTop: 4,
+		width: (imgRightSideWidth - spaceImg) / 2,
+		height: (imgComboHeight - spaceImg) / 2 ,
+		marginTop: spaceImg,
   },
   imgRightUp5: {
-    width: 80,
-    height: 70,
+    width: (imgRightSideWidth - spaceImg) / 2,
+    height: (imgComboHeight - spaceImg) / 2 ,
     marginLeft: 4,
   },
   imgRightDown5: {
-    width: 80,
-    height: 70,
+    width: (imgRightSideWidth - spaceImg) / 2,
+    height:(imgComboHeight - spaceImg) / 2 ,
     marginLeft: 4,
     marginTop: 4,
   },
 	textTitle: {
 		fontSize: 14,
 		fontFamily: CSS.fontTitle,
-    marginTop: imgHeghtCombo - 10,
+    marginTop: imgComboHeight - 10,
     color: COLOR.blackColor,
     lineHeight: 20,
     letterSpacing: -0.5
@@ -128,26 +123,26 @@ export default StyleSheet.create({
     color: COLOR.blackColor
   },
   img2LeftView: {
-    height: imgHeghtCombo,
-    width: 143
+    height: imgComboHeight,
+    width: imgComboWidth / 2 - spaceImg / 2
   },
   img2RightView: {
-    height: imgHeghtCombo,
-    width: widthImg / 2 - spaceImg / 2,
+    height: imgComboHeight,
+    width: imgComboWidth / 2 - spaceImg / 2,
     marginLeft: spaceImg
   },
   img4LeftUp: {
-    height: imgHeghtCombo / 2 - spaceImg / 2,
-    width: widthImg / 2 - spaceImg / 2,
+    height: imgComboHeight / 2 - spaceImg / 2,
+    width: imgComboWidth / 2 - spaceImg / 2,
   },
   img4RighttUp: {
-    height: imgHeghtCombo / 2 - spaceImg / 2,
-    width: widthImg / 2 - spaceImg / 2,
+    height: imgComboHeight / 2 - spaceImg / 2,
+    width: imgComboWidth / 2 - spaceImg / 2,
     marginLeft: spaceImg
   },
   img4LeftDown: {
     marginTop: 4,
-    height: imgHeghtCombo / 2 - spaceImg / 2,
-    width: widthImg / 2 - spaceImg / 2,
+    height: imgComboHeight / 2 - spaceImg / 2,
+    width: imgComboWidth / 2 - spaceImg / 2,
   }
 });
