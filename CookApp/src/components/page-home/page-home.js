@@ -16,14 +16,17 @@ const img = {
 };
 
 export default class PageHome extends Component {
-	viewMore = type => {};
+	viewMore = type => {
+    if (type == LANG.COLLECTION) { navigationService.navigate('CollectionList'); }
+    if (type == LANG.COMBO) { navigationService.navigate('ComboList');		}
+	};
 
 	render() {
     return (
 			<ContainerScroll>
 				<View style={styles.container}>
 					<Trending />
-					<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
+					<ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore}/>
 					<View style={{ height: 10 }} />
 					<CollectionHome />
 					<View style={styles.advertisement}>

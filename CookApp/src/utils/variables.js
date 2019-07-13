@@ -31,6 +31,8 @@ export const IMG = {
   whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
   forgotPassword: require('./../../assets/icons/forgot-password.png'),
   backButton: require('./../../assets/icons/back-button.png'),
+  greenBackIcon: require('./../../assets/icons/arrow-left-green.png'),
+  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png')
 };
 
 export const ASYNC_STORAGE = {
