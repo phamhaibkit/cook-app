@@ -1,20 +1,41 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { CSS, COLOR } from '../../utils/variables';
 
-const width = 345;
-const height = 260;
+const containerPadding = 15;
+const { width } = Dimensions.get('window');
+
+// suppose ratio is imgheight/imgwidth
+const blockRatio = 0.7536;
+const imgComboRatio = 0.4831;
+const imageRatio1st = 1.1459;
+const imageRatio2nd = 0.4167;
+const imgLeftSideVsRightSideRatio = 0.7527; // based on width
 const imgHeghtCombo = 157;
 const spaceImg = 4;
 const widthImg = 325;
+
+const blockWidth = width - containerPadding * 2;
+const blockHeight = blockWidth * blockRatio;
+
+const imgComboWidth = blockWidth - (containerPadding * 2);
+const imgComboHeight = imgComboWidth * imgComboRatio;
+
+const imgLeftSideHeight = imgComboHeight;
+const imgRightSideHeight = imgComboHeight;
+
+const imgLeftSideWidth = imgLeftSideHeight / imageRatio1st;
+
+const imgRightSideWidth = imgRightSideHeight / imageRatio2nd;
+
 export default StyleSheet.create({
 	container: {
 		flex: 1,
 		marginTop: 6,
 	},
 	frame: {
-		height: height,
+		height: blockHeight,
 		fontSize: 18,
-		width: width,
+		width: blockWidth,
 		marginLeft: CSS.padding15,
 		borderRadius: 5,
 	},
@@ -31,11 +52,11 @@ export default StyleSheet.create({
 	containerImg: {
 		flex: 1,
 		flexDirection: 'row',
-		height: imgHeghtCombo,
-		width: widthImg,
+		height: imgLeftSideHeight,
+		width: imgComboWrapWidth,
 		marginHorizontal: 10,
 		borderRadius: 5,
-    overflow: 'hidden',
+    	overflow: 'hidden',
     // backgroundColor: 'red'
 	},
 	container2Item: {
