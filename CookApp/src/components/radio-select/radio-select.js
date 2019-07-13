@@ -9,6 +9,7 @@ export default class RadioSelect extends Component {
   static propTypes = {
     // prop: PropTypes
     radioObject: PropTypes.any,
+    onChangeSelect: PropTypes.any,
   }
 
   constructor(props) {
@@ -22,9 +23,11 @@ export default class RadioSelect extends Component {
 
   isCheck = (stt) => {
     const { arrayOption } = this.state;
+    const { onChangeSelect } = this.props;
     arrayOption.forEach((item, index) => {
       if (stt === index) {
         arrayOption[index].active = true;
+        onChangeSelect(item.key);
       } else {
         arrayOption[index].active = false;
       }

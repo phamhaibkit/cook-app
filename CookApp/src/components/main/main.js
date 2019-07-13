@@ -21,6 +21,7 @@ import SignUp from '../page-signup/page-signup';
 import PageOTP from '../page-otp/page-otp';
 import PageConfirmPassword from '../page-password-confirm/page-password-confirm';
 import PageInforUser from '../page-infor-user/page-infor-user';
+import ForgotPasswordPage from '../forgot-password/forgot-password';
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
@@ -97,14 +98,24 @@ const UserStack = createStackNavigator({
     navigationOptions: {
       header: null,
     },
+  },
+  ForgotPassword: {
+    title: 'Quên mật khẩu',
+    screen: ForgotPasswordPage,
+    navigationOptions: {
+      tabBarVisible: false,
+      gesturesEnabled: false,
+    },
   }
 });
 
 const SignInStack = createStackNavigator({
-  InforUser: {
-    screen: PageInforUser,
+  ForgotPassword: {
+    title: 'Quên mật khẩu',
+    screen: ForgotPasswordPage,
     navigationOptions: {
-      header: null,
+      tabBarVisible: false,
+      gesturesEnabled: false,
     },
   }
 });
@@ -121,7 +132,7 @@ UserStack.navigationOptions = ({ navigation }) => {
 };
 const bottomTabNav = createBottomTabNavigator(
   {
-    Home: { screen: SignInStack },
+    Home: { screen: HomeStack },
     Store: { screen: StoreStack },
     Recipe: { screen: RecipeStack },
     Notification: { screen: NotiStack },

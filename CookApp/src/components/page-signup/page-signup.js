@@ -66,14 +66,12 @@ class PageSignUp extends Component {
             onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
             placeholder="Nhập họ và tên"
             value={email}
-            styleConfig={styles.Input}
             icon={IMG.user}
           />
           <TextInputRender
             onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
             placeholder="Nhập email"
             value={password}
-            styleConfig={styles.Input}
             secureTextEntry
             icon={IMG.mail}
           />
@@ -81,7 +79,6 @@ class PageSignUp extends Component {
             onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
             placeholder="Nhập số điện thoại"
             value={password}
-            styleConfig={styles.Input}
             secureTextEntry
             icon={IMG.phone}
           />

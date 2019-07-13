@@ -35,7 +35,9 @@ export default StyleSheet.create({
   image: {
     padding: 10,
     margin: 0,
+  },
+  placeholderStyle: {
+    fontSize: 14,
+    color: '#CECECE',
   }
 });
-
-

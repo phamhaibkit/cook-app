@@ -40,7 +40,6 @@ class PageSignin extends Component {
         value,
         err,
       },
-      notMatch: false,
     });
   };
 
@@ -66,19 +65,17 @@ class PageSignin extends Component {
             onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
             placeholder="Số điện thoại/Email"
             value={email}
-            styleConfig={styles.Input}
             icon={IMG.user}
           />
           <TextInputRender
             onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.PASSWORD)}
             placeholder="Mật khẩu"
             value={password}
-            styleConfig={styles.Input}
             secureTextEntry
             icon={IMG.clock}
           />
 
-          <TouchableOpacity style={styles.forgotButton} onPress={this.onPressSignin}>
+          <TouchableOpacity style={styles.forgotButton} onPress={() => navigationService.navigate('ForgotPassword')}>
             <Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
           </TouchableOpacity>
           <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>

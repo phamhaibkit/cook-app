@@ -21,9 +21,14 @@ export default class PageConfirmPassword extends Component {
     // const { params } = this.props.navigation.state;
   }
 
-  onChangeText = () => {
-
-  }
+  onChangeText = (value, err, type) => {
+    this.setState({
+      [type]: {
+        value,
+        err,
+      },
+    });
+  };
 
   render() {
     const { password, rePassword, params } = this.state;
@@ -48,7 +53,6 @@ export default class PageConfirmPassword extends Component {
               title="Mật khẩu"
               placeholder="Nhập Mật khẩu"
               value={password}
-              styleConfig={styles.Input}
               secureTextEntry
             />
             <TextInputRender
@@ -56,11 +60,10 @@ export default class PageConfirmPassword extends Component {
               title="Nhập lại mật khẩu"
               placeholder="Nhập lại mật khẩu"
               value={rePassword}
-              styleConfig={styles.Input}
               secureTextEntry
             />
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
-              <TouchableOpacity style={[styles.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={() => navigationService.navigate('OTP')}>
+              <TouchableOpacity style={[styles.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={() => navigationService.navigate('InforUser')}>
                 <Text style={CSS.textTitleButton}>{LANG.SIGN_UP}</Text>
               </TouchableOpacity>
             </LinearGradient>
