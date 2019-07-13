@@ -19,8 +19,10 @@ export const IMG = {
   avatarHome: require('../../assets/icons/avata-home.png'),
   rankHome: require('../../assets/icons/rank-home.png'),
   loveHome: require('../../assets/icons/love-home.png'),
+  loveActiveHome: require('../../assets/icons/love-active.png'),
   commentHome: require('../../assets/icons/comment-home.png'),
   shareHome: require('../../assets/icons/share-home.png'),
+  saveHome: require('../../assets/icons/save.png'),
   userAvatar: require('../../assets/icons/user-avatar.png'),
   camera: require('../../assets/icons/camera.png'),
   male: require('../../assets/icons/male.png'),
@@ -29,10 +31,19 @@ export const IMG = {
   greenBookmarkIcon: require('./../../assets/icons/save-icon-3x.png'),
   recipeIcon: require('./../../assets/icons/recipe-icon-3x.png'),
   whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
+  calenderHome: require('../../assets/icons/calender-home.png'),
+  home: require('../../assets/icons/home.png'),
+  homeActive: require('../../assets/icons/home-active.png'),
+  recipe: require('../../assets/icons/recipe.png'),
   forgotPassword: require('./../../assets/icons/forgot-password.png'),
   backButton: require('./../../assets/icons/back-button.png'),
   greenBackIcon: require('./../../assets/icons/arrow-left-green.png'),
-  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png')
+  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png'),
+  recipeActive: require('../../assets/icons/recipe-active.png'),
+  store: require('../../assets/icons/store.png'),
+  bell: require('../../assets/icons/bell.png'),
+  bellActive: require('../../assets/icons/bell-active.png'),
+  individual: require('../../assets/icons/individual.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -200,6 +211,8 @@ export const COLOR = {
   oldPrice: '#001D12',
   addCartHome: '#5DC11B',
   borderAddCart: '#E0E0E0',
+  blackName: '#001D12',
+  dateEvent: '#FF8A00'
 };
 
 export const ACTION = {
