@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { CSS } from '../../utils/variables';
+
 export default StyleSheet.create({
 	mainContent: {
 		flex: 1,
@@ -25,7 +27,8 @@ export default StyleSheet.create({
 		marginTop: 20,
 	},
 	headerTitleStyle: {
-    fontSize: 16
+		fontFamily: CSS.fontBold,
+    	fontSize: 16
 	},
 	headerTitleContainerStyle: {
 		flex: 1,
