@@ -99,13 +99,13 @@ export default class ComboList extends Component {
 					<View style={styles.containerImg}>
 						<ImageBackground style={styles.imgLeftView} source={{ uri: item.combo[0].link }} />
 						<View style={styles.imgRightView}>
-							<View style={{ flexDirection: 'row', width: 163, height: 70 }}>
+							<View style={{ flexDirection: 'row', flex: 1 }}>
 								<ImageBackground style={imgUpStyle} source={{ uri: item.combo[1].link }} />
 								{is5 && (
 									<ImageBackground style={styles.imgRightUp5} source={{ uri: item.combo[3].link }} />
 								)}
 							</View>
-							<View style={{ flexDirection: 'row', width: 163, height: 70 }}>
+							<View style={{ flexDirection: 'row', flex: 1}}>
 								<ImageBackground style={imgDownStyle} source={{ uri: item.combo[2].link }} />
 								{is5 && (
 									<ImageBackground
