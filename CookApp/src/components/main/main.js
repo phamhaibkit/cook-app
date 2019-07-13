@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {
+import { Text, View, Image, AsyncStorage, TouchableOpacity, TouchableHighlight } from 'react-native';
   Text,
   View,
   Image,
@@ -16,6 +16,8 @@ import {
 } from 'react-navigation';
 
 import styles from './main-style';
+import BackButton from '../back-button/back-button';
+import SearchButton from '../search-button/search-button';
 import PageHome from '../page-home/page-home';
 import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
@@ -32,6 +34,10 @@ import PageOTP from '../page-otp/page-otp';
 import PageConfirmPassword from '../page-password-confirm/page-password-confirm';
 import PageInforUser from '../page-infor-user/page-infor-user';
 import IconWithNumber from '../icon-with-number/icon-with-number';
+import ForgotPasswordPage from '../forgot-password/forgot-password';
+import CollectionList from '../collection-list/collection-list';
+import ComboList from '../combo-list/combo-list';
+
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
@@ -43,6 +49,26 @@ const HomeStack = createStackNavigator({
   },
   Details: { screen: PageDetail },
   Search: { screen: PageSearch }
+  CollectionList: { 
+    screen: CollectionList,
+    navigationOptions: {      
+      title: 'Bộ Sưu Tập',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft: <BackButton />,
+      headerRight: <SearchButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    }
+  },
+  ComboList: { 
+    screen: ComboList,
+    navigationOptions: {      
+      title: 'Combo món',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft:  <BackButton />,
+      headerRight: <SearchButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle 
+    }
+  }
 });
 
 const StoreStack = createStackNavigator({
@@ -106,15 +132,25 @@ const UserStack = createStackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  ForgotPassword: {
+    title: 'Quên mật khẩu',
+    screen: ForgotPasswordPage,
+    navigationOptions: {
+      tabBarVisible: false,
+      gesturesEnabled: false,
+    },
   }
 });
 
 const SignInStack = createStackNavigator({
-  InforUser: {
-    screen: PageInforUser,
+  ForgotPassword: {
+    title: 'Quên mật khẩu',
+    screen: ForgotPasswordPage,
     navigationOptions: {
-      header: null
-    }
+      tabBarVisible: false,
+      gesturesEnabled: false,
+    },
   }
 });
 

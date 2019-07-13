@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Button } from 'react-native';
 import PropTypes from 'prop-types';
-import DateTimePicker from 'react-native-modal-datetime-picker';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
+// import ImagePicker from 'react-native-image-picker';
 import { LANG } from '../../lang/lang';
 import { CSS, IMG } from '../../utils/variables';
 import SigninByFacebook from '../signin-by-facebook/signin-by-facebook';
 import TextInputRendernder from '../text-input/text-input';
 import RadioSelect from '../radio-select/radio-select';
+import DatePickerCustom from '../date-picker-custom/date-picker-custom';
+import Avatar from '../avatar/avatar';
 
 
 export default class PageInforUser extends Component {
@@ -26,11 +28,13 @@ export default class PageInforUser extends Component {
         label: 'Giới tính',
         arrayObject: [
           {
+            key: 'male',
             name: 'Nam',
             icon: 'mars',
             active: false
           },
           {
+            key: 'female',
             name: 'Nữ',
             icon: 'venus',
             active: true
@@ -46,27 +50,70 @@ export default class PageInforUser extends Component {
 
   }
 
-  showDateTimePicker = () => {
-    this.setState({ isDateTimePickerVisible: true });
-  };
-
-  hideDateTimePicker = () => {
-    this.setState({ isDateTimePickerVisible: false });
-  };
-
-  handleDatePicked = (date) => {
-    console.log('A date has been picked: ', date);
-    const StartDate = moment(date).format('YYYY-MM-DD');
-
+  onChangeText = (value, err, type) => {
     this.setState({
-      date: StartDate,
+      [type]: {
+        value,
+        err,
+      },
     });
-    console.log(date, 'date');
-    this.hideDateTimePicker();
   };
+
+  handleFinish = () => {
+    console.log(this.state);
+  }
+
+  getInforFacebook = (inforFacebook) => {
+    console.log(inforFacebook);
+    this.setState({
+      user: inforFacebook
+    });
+  }
+
+  onChangeSelect = (value, err, type) => {
+    this.setState({
+      [type]: {
+        value,
+        err,
+      },
+    });
+  }
+
+  // chooseFile = () => {
+  //   const options = {
+  //     title: 'Select Image',
+  //     customButtons: [
+  //       { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
+  //     ],
+  //     storageOptions: {
+  //       skipBackup: true,
+  //       path: 'images',
+  //     },
+  //   };
+
+  //   ImagePicker.showImagePicker(options, (response) => {
+  //     console.log('Response = ', response);
+
+  //     if (response.didCancel) {
+  //       console.log('User cancelled image picker');
+  //     } else if (response.error) {
+  //       console.log('ImagePicker Error: ', response.error);
+  //     } else if (response.customButton) {
+  //       console.log('User tapped custom button: ', response.customButton);
+  //       alert(response.customButton);
+  //     } else {
+  //       const source = response;
+  //       // You can also display the image using data:
+  //       // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+  //       this.setState({
+  //         avatarSource: source,
+  //       });
+  //     }
+  //   });
+  // };
 
   render() {
-    const { password, radioObject, isDateTimePickerVisible, date } = this.state;
+    const { password, radioObject, placeBorn, placeLive, desctiption, user } = this.state;
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
@@ -92,41 +139,50 @@ export default class PageInforUser extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-          <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { marginTop: 23, color: '#000000', marginBottom: 20 }]}>{LANG.USER_INFOR_PAGE_DES}</Text>
-          <SigninByFacebook style={{ marginTop: 20 }} />
+          <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { marginTop: 23, color: '#000000', marginBottom: 20, lineHeight: 16, letterSpacing: -0.02 }]}>{LANG.USER_INFOR_PAGE_DES}</Text>
+          <SigninByFacebook titleButton="Sử dụng thông tin Facebook" getLoginFaceBookInfor={this.getInforFacebook} style={{ marginTop: 20 }} />
           <Text style={[{ marginTop: 20, color: '#898989' }, CSS.fontQuiRegular, CSS.fontSize13, CSS.textAlignCenter]}>Hoặc nhập thông tin</Text>
-          <View style={[CSS.alignItemsCenter, CSS.justifyContentCenter, { marginBottom: 26 }]}>
-            <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />
-            <TouchableOpacity style={styles.iconCamera} >
+          <View style={[
+            CSS.alignItemsCenter,
+            CSS.justifyContentCenter,
+            { marginBottom: 26, marginTop: 20 }]}>
+            {user ? <Avatar style={styles.Avatar} user={user} size={76} /> : <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />}
+            {/* {this.state.avatarSource && <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />} */}
+            <TouchableOpacity style={styles.iconCamera} onPress={() => { this.chooseFile(); }} >
               <Image source={IMG.camera} resizeMode="contain" />
             </TouchableOpacity>
           </View>
           <TextInputRendernder
-            onChangeText={(value, err) => this.onChangeText(value, err, 'password')}
+            onChangeText={(value, err) => this.onChangeText(value, err, 'placeLive')}
             title="Nơi sinh sống"
             placeholder="Nhập nơi sinh sống"
-            value={password}
-            styleConfig={styles.Input}
-            secureTextEntry
+            value={placeLive}
           />
           <TextInputRendernder
-            onChangeText={(value, err) => this.onChangeText(value, err, 'password')}
+            onChangeText={(value, err) => this.onChangeText(value, err, 'placeBorn')}
             title="Bạn sinh ra ở"
-            placeholder="Nhạp nơi sinh"
+            placeholder="Nhập nơi sinh"
+            value={placeBorn}
+          />
+          <RadioSelect onChangeSelect={value => this.onChangeSelect(value, '', 'sex')} radioObject={radioObject} />
+          <DatePickerCustom changeDateSelected={value => this.onChangeSelect(value, '', 'dateOfBirth')} title="Ngày sinh" placeholder="Chọn ngày sinh" style={{ paddingVertical: 20 }} />
+          <TextInputRendernder
+            onChangeText={(value, err) => this.onChangeText(value, err, 'desctiption')}
+            title="Mô tả"
+            placeholder="Nhập mô tả về bản thân bạn"
             value={password}
-            styleConfig={styles.Input}
-            secureTextEntry
+            styleConfig={{ height: 60 }}
           />
-          <RadioSelect radioObject={radioObject} />
-          <TouchableOpacity style={[{ borderColor: '#E0E0E0', borderRadius: 5, borderWidth: 1, padding: 12 }, CSS.flexRow, CSS.justifySpaceBetween]} onPress={this.showDateTimePicker}>
-            <Text>{date || ''}</Text>
-            <Image source={IMG.calendar} resizeMode="contain" />
-          </TouchableOpacity>
-          <DateTimePicker
-            isVisible={isDateTimePickerVisible}
-            onConfirm={this.handleDatePicked}
-            onCancel={this.hideDateTimePicker}
-          />
+          <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
+            <TouchableOpacity
+              style={[
+                CSS.buttonText,
+                CSS.alignItemsCenter,
+                CSS.justifyContentCenter]}
+              onPress={this.handleFinish}>
+              <Text style={CSS.textTitleButton}>Hoàn tất</Text>
+            </TouchableOpacity>
+          </LinearGradient>
         </View>
       </ScrollView>
     );
@@ -147,7 +203,6 @@ const styles = StyleSheet.create({
     color: '#3ABF57'
   },
   Avatar: {
-    marginTop: 20,
     position: 'relative'
   },
   iconCamera: {

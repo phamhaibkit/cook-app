@@ -20,9 +20,10 @@ const img = {
 };
 
 export default class PageHome extends Component {
-  viewMore = (type) => {
-    console.log('Type= ', type);
-  };
+	viewMore = type => {
+    if (type == LANG.COLLECTION) { navigationService.navigate('CollectionList'); }
+    if (type == LANG.COMBO) { navigationService.navigate('ComboList');		}
+	};
 
   render() {
     return (

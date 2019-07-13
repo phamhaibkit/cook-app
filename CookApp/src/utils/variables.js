@@ -35,6 +35,10 @@ export const IMG = {
   home: require('../../assets/icons/home.png'),
   homeActive: require('../../assets/icons/home-active.png'),
   recipe: require('../../assets/icons/recipe.png'),
+  forgotPassword: require('./../../assets/icons/forgot-password.png'),
+  backButton: require('./../../assets/icons/back-button.png'),
+  greenBackIcon: require('./../../assets/icons/arrow-left-green.png'),
+  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png')
   recipeActive: require('../../assets/icons/recipe-active.png'),
   store: require('../../assets/icons/store.png'),
   bell: require('../../assets/icons/bell.png'),
@@ -183,6 +187,10 @@ export const CSS = {
   headerMargin: {
     marginTop: 35
   },
+  placeholderStyle: {
+    fontSize: 14,
+    color: '#CECECE'
+  }
 };
 
 export const COLOR = {
@@ -196,8 +204,8 @@ export const COLOR = {
   blackColor: '#000000',
   lineColor: '#D3D3D3',
   lineHoriColor: '#E9E9E9',
-	gradientBlackTopColor:'rgba(0, 16, 8, 0)',
-  gradientBlackBottomColor:'rgba(0, 16, 8, 0.65)',
+  gradientBlackTopColor: 'rgba(0, 16, 8, 0)',
+  gradientBlackBottomColor: 'rgba(0, 16, 8, 0.65)',
   greenSelling: '#7BCC46',
   madeIn: '#767676',
   oldPrice: '#001D12',

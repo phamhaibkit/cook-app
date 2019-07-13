@@ -44,4 +44,11 @@ export default StyleSheet.create({
     width: 22,
     height: 22
   }
+	headerTitleStyle: {
+    fontSize: 16
+	},
+	headerTitleContainerStyle: {
+		flex: 1,
+		justifyContent: 'center'
+	}
 });
