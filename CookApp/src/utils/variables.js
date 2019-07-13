@@ -27,6 +27,8 @@ export const IMG = {
   greenBookmarkIcon: require('./../../assets/icons/save-icon-3x.png'),
   recipeIcon: require('./../../assets/icons/recipe-icon-3x.png'),
   whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
+  greenBackIcon: require('./../../assets/icons/arrow-left-green.png'),
+  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png')
 };
 
 export const ASYNC_STORAGE = {

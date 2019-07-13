@@ -197,3 +197,16 @@ export const PRODUCT_DATA = [
 	  madeIn: 'My'
 	},
   ];
+
+export const COLLECTION_DATA = [
+	{ id: 1, title: 'Những món ăn giành cho những ngày đầu mùa mưa', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 2, title: 'Những món ăn giành cho những người thất tình', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 3, title: 'Cay và nóng là 2 món được ưa thích', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 4, title: 'Neu nhu mot ngay em khong giong', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 5, title: 'Tai sao ma do ta khong do nang vay', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 6, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 7, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 8, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 9, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 10, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+];

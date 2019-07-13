@@ -24,4 +24,11 @@ export default StyleSheet.create({
 		textAlign: 'center',
 		marginTop: 20,
 	},
+	headerTitleStyle: {
+    fontSize: 16
+	},
+	headerTitleContainerStyle: {
+		flex: 1,
+		justifyContent: 'center'
+	}
 });
