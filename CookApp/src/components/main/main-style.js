@@ -43,12 +43,12 @@ export default StyleSheet.create({
   individual: {
     width: 22,
     height: 22
-  }
-	headerTitleStyle: {
+  },
+  headerTitleStyle: {
     fontSize: 16
-	},
-	headerTitleContainerStyle: {
-		flex: 1,
-		justifyContent: 'center'
-	}
+  },
+  headerTitleContainerStyle: {
+    flex: 1,
+    justifyContent: 'center'
+  }
 });

@@ -38,7 +38,7 @@ export const IMG = {
   forgotPassword: require('./../../assets/icons/forgot-password.png'),
   backButton: require('./../../assets/icons/back-button.png'),
   greenBackIcon: require('./../../assets/icons/arrow-left-green.png'),
-  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png')
+  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png'),
   recipeActive: require('../../assets/icons/recipe-active.png'),
   store: require('../../assets/icons/store.png'),
   bell: require('../../assets/icons/bell.png'),

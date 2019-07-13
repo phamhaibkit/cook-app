@@ -144,7 +144,8 @@ export default StyleSheet.create({
   nameChef: {
     fontFamily: CSS.fontTitle,
     fontSize: 12,
-    color: COLOR.blackColor
+    color: COLOR.blackColor,
+    marginLeft: 5
   },
   lineHori: {
     height: 1,

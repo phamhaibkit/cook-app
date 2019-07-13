@@ -57,7 +57,6 @@ export default class RecipeHighlightHome extends Component {
             <Image style={styles.dollaImg} source={IMG.dollaHome} />
             <Text style={styles.textTime}>
               {item.price}
-
               <Text> đ</Text>
             </Text>
           </View>
@@ -68,7 +67,6 @@ export default class RecipeHighlightHome extends Component {
             <Image style={styles.personImg} source={IMG.personHome} />
             <Text style={styles.textTime}>
               {item.quantity}
-
               <Text> người</Text>
             </Text>
           </View>
@@ -82,7 +80,7 @@ export default class RecipeHighlightHome extends Component {
           </View>
           <TouchableOpacity style={styles.containerChef}>
             <Image style={styles.avataImg} source={IMG.avatarHome} />
-            <Text style={styles.nameChef}>{item.name}</Text>
+            <Text style={styles.nameChef}>{item.chef}</Text>
             <Image style={styles.rankImg} source={IMG.rankHome} />
           </TouchableOpacity>
         </View>

@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, Image, AsyncStorage, TouchableOpacity, TouchableHighlight } from 'react-native';
-  Text,
-  View,
-  Image,
-  AsyncStorage,
-  TouchableOpacity
-} from 'react-native';
+import { Text, View, Image, AsyncStorage } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -48,7 +41,7 @@ const HomeStack = createStackNavigator({
     }
   },
   Details: { screen: PageDetail },
-  Search: { screen: PageSearch }
+  Search: { screen: PageSearch },
   CollectionList: { 
     screen: CollectionList,
     navigationOptions: {      
