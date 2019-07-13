@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { CSS, COLOR } from '../../utils/variables';
 
-const width = 310;
-const height = 235;
-const imgHeghtCombo = 140;
+const width = 345;
+const height = 260;
+const imgHeghtCombo = 157;
 const spaceImg = 4;
-const widthImg = 290;
+const widthImg = 325;
 export default StyleSheet.create({
 	container: {
 		flex: 1,
@@ -44,17 +44,17 @@ export default StyleSheet.create({
 	container2Img: {
 		flex: 1,
 		flexDirection: 'row',
-    position: 'absolute',
+    	position: 'absolute',
 		// top: -10
 	},
 	imgLeftView: {
-		width: 123,
+		width: 140,
 		height: imgHeghtCombo,
 	},
 	imgRightView: {
 		marginLeft: 4,
-		width: 162,
-    height: imgHeghtCombo,
+		width: 185,
+    	height: imgHeghtCombo,
     // overflow: 'hidden'
 	},
 	imgUp3: {
