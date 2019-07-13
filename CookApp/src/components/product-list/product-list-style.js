@@ -7,9 +7,10 @@ export default StyleSheet.create({
   container: {
     // flex: 1,
     backgroundColor: COLOR.whiteColor,
-    margin: CSS.padding15,
+    marginHorizontal: CSS.padding15,
     borderRadius: 10,
-    paddingBottom: 20
+    paddingBottom: 20,
+    marginTop: CSS.padding15
   },
   containerlabel: {
     paddingVertical: 4,
@@ -32,10 +33,6 @@ export default StyleSheet.create({
     // flex: 2,
     paddingLeft: CSS.padding10,
   },
-  containerDown: {
-    // flex: 1,
-    marginTop: 35
-  },
   img: {
     width: widthImg,
     height: heightImg
@@ -51,8 +48,8 @@ export default StyleSheet.create({
   },
   containerDiscount: {
     position: 'absolute',
-    bottom: -8,
-    left: 10,
+    top: heightImg - 10,
+    left: 20,
     flexDirection: 'row',
   },
   discount: {
@@ -98,7 +95,7 @@ export default StyleSheet.create({
     color: COLOR.blackColor
   },
   containerDown: {
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
     marginTop: 38
   },
   priceView: {

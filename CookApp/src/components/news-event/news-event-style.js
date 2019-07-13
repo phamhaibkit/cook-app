@@ -1,8 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { CSS, COLOR } from '../../utils/variables';
 
-const height = 296;
 const width = 310;
+const height = 283;
 const paddingContent = 10;
 
 export default StyleSheet.create({
@@ -37,7 +37,9 @@ export default StyleSheet.create({
     fontFamily: CSS.fontTitle,
     fontSize: 14,
     lineHeight: 20,
-    color: COLOR.blackColor
+    color: COLOR.blackColor,
+    marginLeft: paddingContent,
+    marginTop: 4
   },
   reportView: {
     flex: 1,
@@ -45,11 +47,6 @@ export default StyleSheet.create({
     alignItems: 'flex-end',
     paddingHorizontal: paddingContent,
     paddingTop: 11
-  },
-  dotImg: {
-    width: 13,
-    height: 3,
-    marginTop: 10
   },
   containerTimePrice: {
     flexDirection: 'row',
@@ -107,7 +104,7 @@ export default StyleSheet.create({
   },
   recipeView: {
     height: 140,
-    marginTop: 18,
+    marginTop: 15,
     marginHorizontal: paddingContent,
     borderRadius: 5,
     overflow: 'hidden'
@@ -116,35 +113,21 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  containerChef: {
-    position: 'absolute',
+  dateView: {
     flexDirection: 'row',
-    bottom: -12,
-    left: 25,
-    height: 26,
-    backgroundColor: COLOR.whiteColor,
-    borderRadius: 20,
-    paddingLeft: 3,
-    paddingRight: paddingContent,
+    marginTop:10,
     alignItems: 'center',
-    borderWidth: 0.5,
-    borderColor: '#ffeeee'
+    paddingHorizontal: paddingContent
   },
-  avataImg: {
-    width: 20,
-    height: 20,
-    borderRadius: 10
+  dateImg:{
+    width: 12,
+    height: 12
   },
-  rankImg: {
-    width: 13,
-    height: 12,
-    marginLeft: 5,
-    marginBottom: 3
-  },
-  nameChef: {
-    fontFamily: CSS.fontTitle,
+  dateText: {
     fontSize: 12,
-    color: COLOR.blackColor
+    lineHeight: 18,
+    color: COLOR.dateEvent,
+    fontFamily: CSS.fontText
   },
   lineHori: {
     height: 1,
@@ -169,13 +152,5 @@ export default StyleSheet.create({
     height: 20,
     marginLeft: 18
   },
-  saveView: {
-    position:'absolute',
-    top: paddingContent,
-    right: paddingContent
-  },
-  saveImg: {
-    width: 19,
-    height: 20
-  }
+
 });

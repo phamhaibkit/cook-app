@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View, Image, AsyncStorage, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  AsyncStorage,
+  TouchableOpacity
+} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createAppContainer
+} from 'react-navigation';
 
 import styles from './main-style';
 import PageHome from '../page-home/page-home';
@@ -11,7 +21,7 @@ import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
 import PageSearch from '../page-search/page-search';
 import PageStore from '../page-store/page-store';
-import { ASYNC_STORAGE } from '../../utils/variables';
+import { ASYNC_STORAGE, IMG } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
 import PageRecipe from '../page-recipe/page-recipe';
 import PageNoti from '../page-noti/page-noti';
@@ -21,82 +31,81 @@ import SignUp from '../page-signup/page-signup';
 import PageOTP from '../page-otp/page-otp';
 import PageConfirmPassword from '../page-password-confirm/page-password-confirm';
 import PageInforUser from '../page-infor-user/page-infor-user';
+import IconWithNumber from '../icon-with-number/icon-with-number';
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
   Home: {
     screen: PageHome,
     navigationOptions: {
-      header: null,
-    },
+      header: null
+    }
   },
   Details: { screen: PageDetail },
-  Search: { screen: PageSearch },
+  Search: { screen: PageSearch }
 });
-
 
 const StoreStack = createStackNavigator({
   Store: {
     screen: PageStore,
     navigationOptions: {
-      header: null,
+      header: null
       // gesturesEnabled: true,
-
-    },
+    }
   },
   Details: { screen: PageDetail },
-  Profile: { screen: PageProfile },
+  Profile: { screen: PageProfile }
 });
 const RecipeStack = createStackNavigator({
-  Recipe: { screen: PageRecipe },
+  Recipe: { screen: PageRecipe }
 });
 
 const NotiStack = createStackNavigator({
-  Noti: { screen: PageNoti },
+  Noti: { screen: PageNoti }
 });
 
 const UserStack = createStackNavigator({
   User: {
     screen: PageUser,
     navigationOptions: {
-      header: null,
-    },
+      header: null
+    }
   },
   SignIn: {
     screen: SignIn,
     navigationOptions: {
       header: null,
       tabBarVisible: false,
-      gesturesEnabled: false,
-    },
+      gesturesEnabled: false
+    }
   },
   SignUp: {
     screen: SignUp,
     navigationOptions: {
       header: null,
       tabBarVisible: false,
-      gesturesEnabled: false,
-    },
+      gesturesEnabled: false
+    }
   },
   OTP: {
     title: 'Xác thực',
     screen: PageOTP,
     navigationOptions: {
       tabBarVisible: false,
-      gesturesEnabled: false,
-    },
+      gesturesEnabled: false
+    }
   },
   ConfirmPassword: {
     screen: PageConfirmPassword,
     navigationOptions: {
-      header: null,
-    },
+      header: null
+    }
   },
   InforUser: {
     screen: PageInforUser,
     navigationOptions: {
-      header: null,
-    },
+      header: null
+    }
   }
 });
 
@@ -104,8 +113,8 @@ const SignInStack = createStackNavigator({
   InforUser: {
     screen: PageInforUser,
     navigationOptions: {
-      header: null,
-    },
+      header: null
+    }
   }
 });
 
@@ -116,50 +125,56 @@ UserStack.navigationOptions = ({ navigation }) => {
   }
 
   return {
-    tabBarVisible,
+    tabBarVisible
   };
 };
 const bottomTabNav = createBottomTabNavigator(
   {
-    Home: { screen: SignInStack },
+    Home: { screen: HomeStack },
     Store: { screen: StoreStack },
     Recipe: { screen: RecipeStack },
     Notification: { screen: NotiStack },
-    User: { screen: UserStack },
+    User: { screen: UserStack }
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
-        // let IconComponent = Ionicons;
-        const IconComponent = Icon;
-        let iconName;
+        let iconImg;
+        let iconStyle;
+        let number = 0;
         // eslint-disable-next-line default-case
         switch (routeName) {
-          case 'Home':
-            iconName = 'home-outline';
-            break;
-          case 'Store':
-            iconName = 'store';
-            break;
-          case 'Recipe':
-            iconName = 'chef-hat';
-            break;
-          case 'Notification':
-            iconName = 'bell-outline';
-            break;
-          case 'User':
-            iconName = 'account-circle-outline';
-            break;
+        case 'Home':
+          iconImg = focused ? IMG.homeActive : IMG.home;
+          iconStyle = styles.home;
+          break;
+        case 'Store':
+          iconImg = focused ? IMG.storeActive : IMG.store;
+          iconStyle = styles.store;
+          break;
+        case 'Recipe':
+          iconImg = focused ? IMG.recipeActive : IMG.recipe;
+          iconStyle = styles.recipe;
+          break;
+        case 'Notification':
+          number = 3;
+          iconImg = (focused || number > 0) ? IMG.bellActive : IMG.bell;
+          iconStyle = styles.bell;
+          break;
+        case 'User':
+          iconImg = focused ? IMG.individualActive : IMG.individual;
+          iconStyle = styles.individual;
+          break;
         }
 
-        return <IconComponent name={iconName} size={25} color={tintColor} />;
-      },
+        return <IconWithNumber iconImg={iconImg} iconStyle={iconStyle} number={number}/>;
+      }
     }),
     tabBarOptions: {
-      activeTintColor: 'black',
-      inactiveTintColor: '#e4e4e4',
-    },
+      activeTintColor: '#3ABF57',
+      inactiveTintColor: '#767676',
+    }
   }
 );
 
@@ -171,22 +186,22 @@ const slides = [
     title: 'Title 1',
     text: 'Description.\nSay something cool',
     image: require('../../../assets/1.jpg'),
-    backgroundColor: '#59b2ab',
+    backgroundColor: '#59b2ab'
   },
   {
     key: 'somethun-dos',
     title: 'Title 2',
     text: 'Other cool stuff',
     // image: require('../../../assets/2.jpg'),
-    backgroundColor: '#febe29',
+    backgroundColor: '#febe29'
   },
   {
     key: 'somethun1',
     title: 'Rocket guy',
     text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
     // image: require('../../../assets/3.jpg'),
-    backgroundColor: '#22bcb5',
-  },
+    backgroundColor: '#22bcb5'
+  }
 ];
 
 export class Main extends Component {
@@ -194,7 +209,7 @@ export class Main extends Component {
     super(props);
     this.state = {
       showRealApp: false,
-      isLoad: true,
+      isLoad: true
     };
   }
 
@@ -202,13 +217,15 @@ export class Main extends Component {
     const isReal = await this.showRealApp();
     this.setState({
       showRealApp: isReal,
-      isLoad: false,
+      isLoad: false
     });
   };
 
   _renderItem = (item) => {
     return (
-      <View style={[styles.mainContent, { backgroundColor: item.backgroundColor }]}>
+      <View
+        style={[styles.mainContent, { backgroundColor: item.backgroundColor }]}
+      >
         <Text style={styles.title}>{item.title}</Text>
         <Image style={styles.image} source={item.image} />
         <Text style={styles.text}>{item.text}</Text>
@@ -236,7 +253,13 @@ export class Main extends Component {
   render() {
     const { showRealApp, isLoad } = this.state;
     if (!showRealApp && !isLoad) {
-      return <AppIntroSlider renderItem={this._renderItem} slides={slides} onDone={this._onDone} />;
+      return (
+        <AppIntroSlider
+          renderItem={this._renderItem}
+          slides={slides}
+          onDone={this._onDone}
+        />
+      );
     } else {
       return (
         <AppContainer

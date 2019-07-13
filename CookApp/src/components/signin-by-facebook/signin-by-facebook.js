@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, Platform, Modal, View, AsyncStorage } from 'react-native';
 
-import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
+// import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.WebView);
 // import navigationService from '../../services/navigation.service'
@@ -116,7 +116,7 @@ class SigninByFacebook extends Component {
 					</TouchableOpacity>
 				</View>
 				<View style={styles.buttonLogin}>
-					<FBLogin
+					{/* <FBLogin
 						style={{ flex: 1 }}
 						ref={(fbLogin) => {
 							this.fbLogin = fbLogin;
@@ -126,7 +126,7 @@ class SigninByFacebook extends Component {
 						onLogin={(user) => {
 							this.onLoginFbSucess(user);
 						}}
-					/>
+					/> */}
 				</View>
 			</View>
 		);
