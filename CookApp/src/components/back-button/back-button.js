@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, Animated, TouchableOpacity } from 'react-native';
 
-import { IMG } from '../../utils/variables';
+import { IMG, CSS } from '../../utils/variables';
 import Navigation from '../../services/navigation.service'
 
 export default class BackButton extends Component {
@@ -28,7 +28,7 @@ export default class BackButton extends Component {
 						},
 					]}
 				>
-          <Image source={IMG.greenBackIcon}/>
+          <Image source={IMG.greenBackIcon} style={CSS.backIconStyle}/>
 				</Animated.View>
 
         <Animated.View
@@ -39,7 +39,7 @@ export default class BackButton extends Component {
 						},
 					]}
 				>
-					<Image source={IMG.whiteBackIcon} />
+					<Image source={IMG.whiteBackIcon} style={CSS.backIconStyle}/>
 				</Animated.View>
       </TouchableOpacity>
     );
