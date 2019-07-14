@@ -10,7 +10,7 @@ const widthAfterCalculate = width - 2 * (containerPadding + blockPadding);
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: COLOR.backgroundColor,		
+    backgroundColor: '#f6f6f6',		
     flex: 1,
     paddingHorizontal: 15,
   },

@@ -40,32 +40,34 @@ export default class ComboList extends Component {
 		const imgLeftStyle = is4 ? styles.img4LeftUp : styles.img2LeftView;
 		const imgRightStyle = is4 ? styles.img4RighttUp : styles.img2RightView;
 		return (
-			<View style={{ height: '100%', width: '100%' }}>
+			<View>
 				<View style={styles.container2Item}>
-					<View style={styles.containerWhite}>
+					<View>
 						<TouchableOpacity>
 							<Text style={styles.textTitle} numberOfLines={2}>
 								{titleText}
 							</Text>
 						</TouchableOpacity>
 						<View style={styles.lineHori} />
-						<Text style={styles.ordersText}>
-							{item.orders} - {item.views}
-						</Text>
+						<View style={styles.statisticalNumber}>
+							<Text style={styles.ordersText}>{item.orders}</Text>
+							<Text style={[styles.ordersText, styles.separator]}>|</Text>
+							<Text style={styles.ordersText}>{item.views}</Text>
+						</View>
 					</View>
 				</View>
 				<View style={styles.container2Img}>
-					<View style={[styles.containerImg, { flexDirection: 'row' }]}>
-						<View >
+					<View style={styles.containerImg}>
+						<View style={styles.imgLeftViewRadius}>
 							<ImageBackground style={imgLeftStyle} source={{ uri: item.combo[0].link }} />
 							{is4 && (
 								<ImageBackground style={styles.img4LeftDown} source={{ uri: item.combo[2].link }} />
 							)}
 						</View>
-						<View >
+						<View style={styles.imgRightViewRadius}>
 							<ImageBackground style={imgRightStyle} source={{ uri: item.combo[1].link }} />
 							{is4 && (
-								<ImageBackground style={[styles.img4LeftDown, { marginLeft: 4 }]} source={{ uri: item.combo[3].link }} />
+								<ImageBackground style={styles.img4RightDown} source={{ uri: item.combo[3].link }} />
 							)}
 						</View>
 					</View>
@@ -81,24 +83,26 @@ export default class ComboList extends Component {
 		const imgUpStyle = is5 ? styles.imgUp5 : styles.imgUp3;
 		const imgDownStyle = is5 ? styles.imgDown5 : styles.imgDown3;
 		return (
-			<View style={{ height: '100%', width: '100%' }}>
+			<View>
 				<View style={styles.container2Item}>
-					<View style={styles.containerWhite}>
+					<View>
 						<TouchableOpacity>
 							<Text style={styles.textTitle} numberOfLines={2}>
 								{titleText}
 							</Text>
 						</TouchableOpacity>
 						<View style={styles.lineHori} />
-						<Text style={styles.ordersText}>
-							{item.orders} - {item.views}
-						</Text>
+						<View style={styles.statisticalNumber}>
+							<Text style={styles.ordersText}>{item.orders}</Text>
+							<Text style={[styles.ordersText, styles.separator]}>|</Text>
+							<Text style={styles.ordersText}>{item.views}</Text>
+						</View>
 					</View>
 				</View>
 				<View style={styles.container2Img}>
 					<View style={styles.containerImg}>
-						<ImageBackground style={styles.imgLeftView} source={{ uri: item.combo[0].link }} />
-						<View style={styles.imgRightView}>
+						<ImageBackground style={[styles.imgLeftView, styles.imgLeftViewRadius]} source={{ uri: item.combo[0].link }} />
+						<View style={[styles.imgRightView, styles.imgRightViewRadius]}>
 							<View style={{ flexDirection: 'row', flex: 1 }}>
 								<ImageBackground style={imgUpStyle} source={{ uri: item.combo[1].link }} />
 								{is5 && (

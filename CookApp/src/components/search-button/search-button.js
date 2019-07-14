@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, Animated, TouchableOpacity } from 'react-native';
 
-import { IMG } from '../../utils/variables';
+import { IMG, CSS } from '../../utils/variables';
 import Navigation from '../../services/navigation.service'
 
 export default class SearchButton extends Component {
@@ -18,7 +18,7 @@ export default class SearchButton extends Component {
     return (
       <TouchableOpacity onPress={this.onPress}>        
         <Animated.View
-					style={[
+					style={[						
 						style,
 						{
 							position: 'absolute',
@@ -27,11 +27,12 @@ export default class SearchButton extends Component {
 						},
 					]}
 				>
-          <Image source={IMG.searchGreen}/>
+          <Image source={IMG.searchGreen} style={CSS.searchIconStyle}/>
 				</Animated.View>
 
         <Animated.View
 					style={[
+						CSS.searchIconStyle,
 						style,
 						{
 							opacity: oppositeOpacity,
@@ -39,7 +40,7 @@ export default class SearchButton extends Component {
 					]}
 				>
           {/* change the image for oppositeOpacity */}
-					<Image source={IMG.searchGreen} />
+					<Image source={IMG.searchGreen} style={CSS.searchIconStyle} />
 				</Animated.View>
       </TouchableOpacity>
     );

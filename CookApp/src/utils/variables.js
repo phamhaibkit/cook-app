@@ -37,8 +37,8 @@ export const IMG = {
   recipe: require('../../assets/icons/recipe.png'),
   forgotPassword: require('./../../assets/icons/forgot-password.png'),
   backButton: require('./../../assets/icons/back-button.png'),
-  greenBackIcon: require('./../../assets/icons/arrow-left-green.png'),
-  whiteBackIcon: require('./../../assets/icons/arrow-left-white.png'),
+  greenBackIcon: require('./../../assets/icons/left-green-arrow.png'),
+  whiteBackIcon: require('./../../assets/icons/left-white-arrow.png'),
   recipeActive: require('../../assets/icons/recipe-active.png'),
   store: require('../../assets/icons/store.png'),
   bell: require('../../assets/icons/bell.png'),
@@ -190,6 +190,14 @@ export const CSS = {
   placeholderStyle: {
     fontSize: 14,
     color: '#CECECE'
+  },
+  searchIconStyle: {
+    width: 22,
+    height: 22
+  },
+  backIconStyle: {
+    width: 26,
+    height: 16
   }
 };
 
