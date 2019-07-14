@@ -23,7 +23,11 @@ export default class PageHome extends Component {
 	viewMore = type => {
     if (type == LANG.COLLECTION) { navigationService.navigate('CollectionList'); }
     if (type == LANG.COMBO) { navigationService.navigate('ComboList');		}
-	};
+  };
+  
+  gotoDetail = () => {
+    navigationService.navigate('CollectionDetail');
+  }
 
   render() {
     return (
@@ -31,7 +35,7 @@ export default class PageHome extends Component {
         <View style={styles.container}>
           <Trending />
           <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
-          <CollectionHome />
+          <CollectionHome gotoDetail={this.gotoDetail}/>
           <View style={styles.advertisement}>
             <Image style={styles.adverImg} source={img} resizeMode="cover" />
           </View>

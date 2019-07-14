@@ -30,7 +30,7 @@ import IconWithNumber from '../icon-with-number/icon-with-number';
 import ForgotPasswordPage from '../forgot-password/forgot-password';
 import CollectionList from '../collection-list/collection-list';
 import ComboList from '../combo-list/combo-list';
-
+import CollectionDetail from '../collection-detail/collection-detail';
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
@@ -60,6 +60,12 @@ const HomeStack = createStackNavigator({
       headerLeft:  <BackButton />,
       headerRight: <SearchButton />,
       headerTitleContainerStyle: styles.headerTitleContainerStyle 
+    }
+  },
+  CollectionDetail: {
+    screen: CollectionDetail,
+    navigationOptions: {
+      headerLeft: <BackButton/>
     }
   }
 });

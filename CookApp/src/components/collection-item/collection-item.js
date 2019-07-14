@@ -9,10 +9,10 @@ import { COLOR, CSS } from '../../utils/variables';
 
 class CollectionItem extends Component {
   render() {
-    let { item, imgBgWrap, blockMargin } = this.props;
-    
+    let { item, imgBgWrap, blockMargin, onPress } = this.props;
+ 
     return (
-       <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]}>
+       <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} onPress={() => { onPress }}>
         <TouchableOpacity>
           <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={ item.link }>
             <LinearGradient
