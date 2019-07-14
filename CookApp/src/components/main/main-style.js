@@ -47,7 +47,7 @@ export default StyleSheet.create({
     height: 22
   },
   headerTitleStyle: {
-    fontSize: 16
+    fontSize: 16,
 	fontFamily: CSS.fontBold,
   },
   headerTitleContainerStyle: {
