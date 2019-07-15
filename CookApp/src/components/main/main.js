@@ -16,7 +16,7 @@ import PageDetail from '../page-detail/page-detail';
 import PageProfile from '../page-profile/page-profile';
 import PageSearch from '../page-search/page-search';
 import PageStore from '../page-store/page-store';
-import { ASYNC_STORAGE, IMG } from '../../utils/variables';
+import { ASYNC_STORAGE, IMG, CSS } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
 import PageRecipe from '../page-recipe/page-recipe';
 import PageNoti from '../page-noti/page-noti';
@@ -30,11 +30,13 @@ import IconWithNumber from '../icon-with-number/icon-with-number';
 import ForgotPasswordPage from '../forgot-password/forgot-password';
 import CollectionList from '../collection-list/collection-list';
 import ComboList from '../combo-list/combo-list';
+import { LANG } from '../../lang/lang';
 
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
   Home: {
+    title: 'Trang chu',
     screen: PageHome,
     navigationOptions: {
       header: null
@@ -159,11 +161,41 @@ UserStack.navigationOptions = ({ navigation }) => {
 };
 const bottomTabNav = createBottomTabNavigator(
   {
-    Home: { screen: HomeStack },
-    Store: { screen: StoreStack },
-    Recipe: { screen: RecipeStack },
-    Notification: { screen: NotiStack },
-    User: { screen: UserStack }
+    Home: { 
+      screen: HomeStack, 
+      navigationOptions: 
+      {
+        tabBarLabel: LANG.HOME
+      } 
+    },
+    Store: { 
+      screen: StoreStack ,
+      navigationOptions: 
+      {
+        tabBarLabel: LANG.STORE
+      } 
+    },
+    Recipe: { 
+      screen: RecipeStack,
+      navigationOptions: 
+      {
+        tabBarLabel: LANG.RECIPE_TAB
+      } 
+    },
+    Notification: { 
+      screen: NotiStack,
+      navigationOptions: 
+      {
+        tabBarLabel: LANG.NOTI
+      } 
+    },
+    User: { 
+      screen: UserStack,
+      navigationOptions:
+      {
+        tabBarLabel: LANG.USER
+      } 
+    }
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -188,7 +220,7 @@ const bottomTabNav = createBottomTabNavigator(
           break;
         case 'Notification':
           number = 3;
-          iconImg = (focused || number > 0) ? IMG.bellActive : IMG.bell;
+          iconImg = focused ? IMG.bellActive : IMG.bell;
           iconStyle = styles.bell;
           break;
         case 'User':
@@ -203,6 +235,15 @@ const bottomTabNav = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: '#3ABF57',
       inactiveTintColor: '#767676',
+      style: {
+        paddingTop: 10,
+        height: 60,
+      },
+      labelStyle: {
+        fontSize: 11,
+        fontFamily: CSS.fontTitle,
+        lineHeight: 18,
+      },
     }
   }
 );

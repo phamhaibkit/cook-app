@@ -41,9 +41,11 @@ export const IMG = {
   whiteBackIcon: require('./../../assets/icons/left-white-arrow.png'),
   recipeActive: require('../../assets/icons/recipe-active.png'),
   store: require('../../assets/icons/store.png'),
+  storeActive: require('../../assets/icons/store-active.png'),
   bell: require('../../assets/icons/bell.png'),
   bellActive: require('../../assets/icons/bell-active.png'),
   individual: require('../../assets/icons/individual.png'),
+  individualActive: require('../../assets/icons/individual-active.png'),
 };
 
 export const ASYNC_STORAGE = {

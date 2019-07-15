@@ -1,6 +1,10 @@
 export const LANG_VN = {
   APP_NAME: 'beChef',
-  HOME: 'Trang chủ',
+  HOME: 'Trang Chủ',
+  STORE: 'Cửa Hàng',
+  RECIPE_TAB: 'Công Thức',
+  NOTI: 'Thông Báo',
+  USER: 'Cá Nhân',
   SETTINGS: 'Cài đặt',
   COLLECTION: { name: 'BỘ SƯU TẬP', id: 1 },
   COMBO: { name: 'COMBO MÓN', id: 2 },

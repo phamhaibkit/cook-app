@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, Image, SafeAreaView } from 'react-native';
 import CollectionHome from '../collection-home/collection-home';
 import ComboHome from '../combo-home/combo-home';
 import Trending from '../trending/trending';
@@ -27,31 +27,33 @@ export default class PageHome extends Component {
 
   render() {
     return (
-      <ContainerScroll>
-        <View style={styles.container}>
-          <Trending />
-          <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
-          <CollectionHome />
-          <View style={styles.advertisement}>
-            <Image style={styles.adverImg} source={img} resizeMode="cover" />
-          </View>
-          <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
-          <RecipeHighlightHome recipes={RECIPES}/>
-          <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
-          <ComboHome />
-          <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
-          <ProductList />
-          <View style={styles.advertisement}>
-            <Image style={styles.adverImg} source={img} resizeMode="cover" />
-          </View>
-          <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
-          <FollowingHome />
-          <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
-          <RecipeHighlightHome recipes={RECIPES_LOVED}/>
-          <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
-          <NewsEvent newsEvent={RECIPES_LOVED}/>
-        </View>
-      </ContainerScroll>
+        <SafeAreaView style={{flex: 1}}>
+          <ContainerScroll>
+            <View style={styles.container}>
+              <Trending />
+              <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
+              <CollectionHome />
+              <View style={styles.advertisement}>
+                <Image style={styles.adverImg} source={img} resizeMode="cover" />
+              </View>
+              <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
+              <RecipeHighlightHome recipes={RECIPES}/>
+              <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
+              <ComboHome />
+              <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
+              <ProductList />
+              <View style={styles.advertisement}>
+                <Image style={styles.adverImg} source={img} resizeMode="cover" />
+              </View>
+              <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
+              <FollowingHome />
+              <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
+              <RecipeHighlightHome recipes={RECIPES_LOVED}/>
+              <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
+              <NewsEvent newsEvent={RECIPES_LOVED}/>
+            </View>
+          </ContainerScroll>
+        </SafeAreaView>
     );
   }
 }
