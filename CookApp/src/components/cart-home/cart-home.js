@@ -5,6 +5,7 @@ import { IMG, COLOR } from '../../utils/variables';
 export default class CartHome extends Component {
 	render() {
 		const cartImg = Platform.OS === 'ios' ? IMG.cartHomeIos : IMG.cartHome;
+		const cartNum = Platform.OS === 'ios' ? COLOR.appNameIos : COLOR.redColor;
 		return (
 			<TouchableOpacity style={{ flex: 1 }}>
 				<View>
@@ -15,12 +16,14 @@ export default class CartHome extends Component {
 						position: 'absolute',
 						right: -5,
 						top: 0,
-						backgroundColor: COLOR.redColor,
+						backgroundColor: cartNum,
 						borderRadius: 8,
-						width: 16,
-						height: 16,
+						width: 18,
+						height: 18,
 						alignItems: 'center',
 						justifyContent: 'center',
+						borderWidth: 2,
+						borderColor: COLOR.whiteColor
 					}}
 				>
 					<Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>3</Text>
