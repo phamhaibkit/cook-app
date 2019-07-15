@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Platform } from 'react-native';
 import { IMG, COLOR } from '../../utils/variables';
 
 export default class CartHome extends Component {
 	render() {
+		const cartImg = Platform.OS === 'ios' ? IMG.cartHomeIos : IMG.cartHome;
 		return (
 			<TouchableOpacity style={{ flex: 1 }}>
 				<View>
-					<Image style={{ width: 26, height: 26 }} source={IMG.cartHome} />
+					<Image style={{ width: 26, height: 26 }} source={cartImg} />
 				</View>
 				<View
 					style={{

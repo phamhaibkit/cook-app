@@ -4,7 +4,8 @@ import {
   View,
   Image,
   FlatList,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback, 
+  Platform
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './trending-style';
@@ -94,16 +95,17 @@ export default class Trending extends Component {
   };
 
   render() {
+    const colorHeader = Platform.OS === 'ios' ? ['white', 'white'] : [COLOR.gradientLeft, COLOR.gradientRight] ;
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+          colors={colorHeader}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={styles.belongHeader}
         />
         <LinearGradient
-          colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+          colors={colorHeader}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={styles.halfTrend}

@@ -28,10 +28,13 @@ export default StyleSheet.create({
 	},
 	appNameTxt: {
 		color: COLOR.whiteColor,
-    fontSize: 25,
+    	fontSize: 25,
     // lineHeight: 15,
 		marginTop: 10,
-    fontFamily: CSS.fontBold,
+    	fontFamily: CSS.fontBold,
+	},
+	appNameIos: {
+		color: COLOR.appNameIos
 	},
 	cartView: {
 		position: 'absolute',
