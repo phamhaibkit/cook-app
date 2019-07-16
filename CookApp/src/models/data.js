@@ -389,6 +389,9 @@ export const SLIDER_IMAGES = [
   {
     id: 3,
     sliderImgSrc: require('../../assets/collections/collection-1.png')
+  }
+]
+
 export const RECIPE_CATEGORY = [
 	{ id: 1, title: 'Ăn sáng', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 	{ id: 2, title: 'Ăn Vặt', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
@@ -401,8 +404,6 @@ export const RECIPE_CATEGORY = [
 	{ id: 9, title: 'Tráng Miệng', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 	{ id: 10, title: 'Bún-Mỳ-Phở', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 ];
-  }
-]
 
 export const COLLECTION_DETAIL = [
   {
