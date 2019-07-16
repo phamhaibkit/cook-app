@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Button } f
 import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
-// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
 import { LANG } from '../../lang/lang';
 import { CSS, IMG } from '../../utils/variables';
 import SigninByFacebook from '../signin-by-facebook/signin-by-facebook';
@@ -79,41 +79,44 @@ export default class PageInforUser extends Component {
     });
   }
 
-  // chooseFile = () => {
-  //   const options = {
-  //     title: 'Select Image',
-  //     customButtons: [
-  //       { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
-  //     ],
-  //     storageOptions: {
-  //       skipBackup: true,
-  //       path: 'images',
-  //     },
-  //   };
+  chooseFile = () => {
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [
+        { name: 'fb', title: 'Choose Photo from Facebook' },
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
 
-  //   ImagePicker.showImagePicker(options, (response) => {
-  //     console.log('Response = ', response);
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
 
-  //     if (response.didCancel) {
-  //       console.log('User cancelled image picker');
-  //     } else if (response.error) {
-  //       console.log('ImagePicker Error: ', response.error);
-  //     } else if (response.customButton) {
-  //       console.log('User tapped custom button: ', response.customButton);
-  //       alert(response.customButton);
-  //     } else {
-  //       const source = response;
-  //       // You can also display the image using data:
-  //       // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-  //       this.setState({
-  //         avatarSource: source,
-  //       });
-  //     }
-  //   });
-  // };
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source,
+        });
+      }
+    });
+  };
 
   render() {
-    const { password, radioObject, placeBorn, placeLive, desctiption, user } = this.state;
+    const { password, radioObject, placeBorn, placeLive, avatarSource, user } = this.state;
+    console.log(avatarSource, 'avatarSource');
+    console.log(IMG.userAvatar, 'aaaa');
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
@@ -147,7 +150,8 @@ export default class PageInforUser extends Component {
             CSS.justifyContentCenter,
             { marginBottom: 26, marginTop: 20 }]}>
             {user ? <Avatar style={styles.Avatar} user={user} size={76} /> : <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />}
-            {/* {this.state.avatarSource && <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />} */}
+
+            {avatarSource && <View><Image source={avatarSource} resizeMode="contain" /><Text>aaaaa</Text></View>}
             <TouchableOpacity style={styles.iconCamera} onPress={() => { this.chooseFile(); }} >
               <Image source={IMG.camera} resizeMode="contain" />
             </TouchableOpacity>
