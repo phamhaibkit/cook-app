@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Animated } from 'react-native';
+import { Text, View, ScrollView, Animated, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import SearchBarHeader from '../search-bar/search-bar';
 import CartHome from '../cart-home/cart-home';
@@ -38,11 +38,14 @@ export default class ContainerScroll extends Component {
 			extrapolate: 'clamp',
 		});
 
+		const colorHeader = Platform.OS === 'ios' ? ['white', 'white'] : [COLOR.gradientLeft, COLOR.gradientRight] ;
+		const colorAppName = Platform.OS === 'ios' ? [styles.appNameTxt, styles.appNameIos] : styles.appNameTxt ;
+
 		return (
 			<View style={{ flex: 1 }}>
 				<Animated.View style={[styles.containerAnimated, { height: headerHeight, zIndex: headerZindex }]}>
 					<LinearGradient
-						colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+						colors={colorHeader}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={styles.containerSearch}
@@ -59,7 +62,7 @@ export default class ContainerScroll extends Component {
 					showsVerticalScrollIndicator={false}
 				>
 					<LinearGradient
-						colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+						colors={colorHeader}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={{
@@ -68,7 +71,7 @@ export default class ContainerScroll extends Component {
 						}}
 					>
 						<View style={styles.appNameView}>
-							<Text style={styles.appNameTxt}>{LANG.APP_NAME}</Text>
+							<Text style={colorAppName}>{LANG.APP_NAME}</Text>
 						</View>
 					</LinearGradient>
 					<View style={{ marginTop: HEADER_MIN_HEIGHT - 5 }}>{this.props.children}</View>

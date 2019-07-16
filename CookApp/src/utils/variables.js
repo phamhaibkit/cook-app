@@ -9,6 +9,7 @@ export const IMG = {
   phone: require('../../assets/icons/phone.png'),
   mail: require('../../assets/icons/mail.png'),
   cartHome: require('../../assets/icons/cart-home.png'),
+  cartHomeIos: require('../../assets/icons/cart-home-ios.png'),
   arrowRightGreen: require('../../assets/icons/arrow-right-green.png'),
   searchGreen: require('../../assets/icons/search-home.png'),
   sandClokHome: require('../../assets/icons/sand-clock.png'),
@@ -41,9 +42,11 @@ export const IMG = {
   whiteBackIcon: require('./../../assets/icons/left-white-arrow.png'),
   recipeActive: require('../../assets/icons/recipe-active.png'),
   store: require('../../assets/icons/store.png'),
+  storeActive: require('../../assets/icons/store-active.png'),
   bell: require('../../assets/icons/bell.png'),
   bellActive: require('../../assets/icons/bell-active.png'),
   individual: require('../../assets/icons/individual.png'),
+  individualActive: require('../../assets/icons/individual-active.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -220,7 +223,9 @@ export const COLOR = {
   addCartHome: '#5DC11B',
   borderAddCart: '#E0E0E0',
   blackName: '#001D12',
-  dateEvent: '#FF8A00'
+  dateEvent: '#FF8A00',
+  appNameIos: '#06AF48',
+  searchBarIos: '#F8F8F8'
 };
 
 export const ACTION = {

@@ -13,17 +13,19 @@ export default class IconWithNumber extends Component {
               // If you're using react-native < 0.57 overflow outside of the parent
               // will not work on Android, see https://git.io/fhLJ8
               position: 'absolute',
-              right: -6,
-              top: -3,
+              right: -5,
+              top: -5,
               backgroundColor: 'red',
-              borderRadius: 6,
-              width: 12,
-              height: 12,
+              borderRadius: 9,
+              width: 18,
+              height: 18,
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              borderWidth: 2,
+              borderColor: 'white'
             }}
           >
-            <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
+            <Text style={{ color: 'white', fontSize: 11, fontWeight: 'bold' }}>
               {number}
             </Text>
           </View>

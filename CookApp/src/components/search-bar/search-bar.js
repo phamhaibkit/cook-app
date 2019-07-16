@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, Platform } from 'react-native';
 import navigationService from '../../services/navigation.service';
 import { LANG } from '../../lang/lang';
 import { IMG, COLOR, CSS } from '../../utils/variables';
@@ -9,6 +9,7 @@ export default class SearchBarHeader extends Component {
     navigationService.navigate('Search', { name: 'HaiPham' })
   }
   render() {
+    const backgroundSearch = Platform.OS === 'ios' ? COLOR.searchBarIos : COLOR.whiteColor;
     return (
       <TouchableWithoutFeedback
         onPress={this.onPress}
@@ -20,7 +21,7 @@ export default class SearchBarHeader extends Component {
             paddingHorizontal: CSS.padding15,
             borderRadius: 5,
             alignItems: 'center',
-            backgroundColor: COLOR.whiteColor,
+            backgroundColor: backgroundSearch,
             justifyContent: 'space-between'
           }}
         >
