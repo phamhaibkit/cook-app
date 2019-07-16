@@ -149,9 +149,10 @@ export default class PageInforUser extends Component {
             CSS.alignItemsCenter,
             CSS.justifyContentCenter,
             { marginBottom: 26, marginTop: 20 }]}>
-            {user ? <Avatar style={styles.Avatar} user={user} size={76} /> : <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />}
+            {/* {user ? <Avatar style={styles.Avatar} user={user} size={76} /> : <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />} */}
 
-            {avatarSource && <View><Image source={avatarSource} resizeMode="contain" /><Text>aaaaa</Text></View>}
+            {/* {avatarSource && <View><Image  source={avatarSource} resizeMode="contain" /><Text>aaaaa</Text></View>} */}
+            {avatarSource ? <Image style={styles.Avatar} source={avatarSource} resizeMode="cover" /> : <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />}
             <TouchableOpacity style={styles.iconCamera} onPress={() => { this.chooseFile(); }} >
               <Image source={IMG.camera} resizeMode="contain" />
             </TouchableOpacity>
@@ -207,7 +208,11 @@ const styles = StyleSheet.create({
     color: '#3ABF57'
   },
   Avatar: {
-    position: 'relative'
+    // position: 'relative',
+    width: 76,
+    height: 76,
+    // borderRadius: '50%',
+    borderRadius: 38,
   },
   iconCamera: {
     position: 'absolute',
