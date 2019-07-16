@@ -26,7 +26,7 @@ export default class PageHome extends Component {
   };
   
   gotoDetail = () => {
-    navigationService.navigate('CollectionDetail');
+    navigationService.navigate('ComboDetail');
   }
 
   render() {
