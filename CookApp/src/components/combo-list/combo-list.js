@@ -3,6 +3,7 @@ import { View, Text, FlatList, ImageBackground, TouchableOpacity } from 'react-n
 
 import styles from './combo-list-style';
 import { COMBO_DATA } from '../../models/data';
+import { LANG } from '../../lang/lang';
 
 export default class ComboList extends Component {
   constructor(props) {
@@ -50,9 +51,9 @@ export default class ComboList extends Component {
 						</TouchableOpacity>
 						<View style={styles.lineHori} />
 						<View style={styles.statisticalNumber}>
-							<Text style={styles.ordersText}>{item.orders}</Text>
+							<Text style={styles.ordersText}>{item.orders} {LANG.ORDER_OWNER}</Text>
 							<Text style={[styles.ordersText, styles.separator]}>|</Text>
-							<Text style={styles.ordersText}>{item.views}</Text>
+							<Text style={styles.ordersText}>{item.views} {LANG.VIEW}</Text>
 						</View>
 					</View>
 				</View>
@@ -93,9 +94,9 @@ export default class ComboList extends Component {
 						</TouchableOpacity>
 						<View style={styles.lineHori} />
 						<View style={styles.statisticalNumber}>
-							<Text style={styles.ordersText}>{item.orders}</Text>
+							<Text style={styles.ordersText}>{item.orders} {LANG.ORDER_OWNER}</Text>
 							<Text style={[styles.ordersText, styles.separator]}>|</Text>
-							<Text style={styles.ordersText}>{item.views}</Text>
+							<Text style={styles.ordersText}>{item.views} {LANG.VIEW}</Text>
 						</View>
 					</View>
 				</View>

@@ -19,8 +19,8 @@ export const COMBO_DATA = [
           'https://media.cooky.vn/recipe/g4/38996/s800x500/cooky-recipe-cover-r38996.jpg'
       }
     ],
-    orders: '20 người đặt',
-    views: '200 lượt xem'
+    orders: 20,
+    views: 200
   },
   {
     combo: [
@@ -35,8 +35,8 @@ export const COMBO_DATA = [
           'https://media.cooky.vn/images/blog-2016/cach-lam-cac-mon-bun-pho-banh-canh-noi-tieng-cop-mac-viet-nam%20(16).jpg'
       }
     ],
-    orders: '20 người đặt',
-    views: '200 lượt xem'
+    orders: 20,
+    views: 200
   },
   {
     combo: [
@@ -61,8 +61,8 @@ export const COMBO_DATA = [
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScBwn_M-s9R2cithvzZKtT_DhJScOSc_6WZVXFuYMs4Tj7KLjlwA'
       }
     ],
-    orders: '20 người đặt',
-    views: '200 lượt xem'
+    orders: 20,
+    views: 200
   },
   {
     combo: [
@@ -90,8 +90,8 @@ export const COMBO_DATA = [
           'https://massageishealthy.com/wp-content/uploads/2019/06/cach-trang-tri-mon-an-dep-mat-don-gian-thumb.jpg'
       }
     ],
-    orders: '20 người đặt',
-    views: '200 lượt xem'
+    orders: 20,
+    views: 200
   }
 ];
 
@@ -365,18 +365,30 @@ export const RECIPES_LOVED = [
 ];
 
 export const COLLECTION_DATA = [
-	{ id: 1, title: 'Những món ăn giành cho những ngày đầu mùa mưa', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 2, title: 'Những món ăn giành cho những người thất tình', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 3, title: 'Cay và nóng là 2 món được ưa thích', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 4, title: 'Neu nhu mot ngay em khong giong', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 5, title: 'Tai sao ma do ta khong do nang vay', recipes: '20 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 6, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 7, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 8, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 9, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
-	{ id: 10, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
+	{ id: 1, title: 'Những món ăn giành cho những ngày đầu mùa mưa', recipes: 20, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 2, title: 'Những món ăn giành cho những người thất tình', recipes: 20, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 3, title: 'Cay và nóng là 2 món được ưa thích', recipes: 20, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 4, title: 'Neu nhu mot ngay em khong giong', recipes: 20, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 5, title: 'Tai sao ma do ta khong do nang vay', recipes: 20, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 6, title: 'Tinh yeu ngay nang', recipes: 25, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 7, title: 'Tinh yeu ngay nang', recipes: 25, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 8, title: 'Tinh yeu ngay nang', recipes: 25, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 9, title: 'Tinh yeu ngay nang', recipes: 25, saves: 20, link: require('../../assets/collections/collection-1.png') },
+	{ id: 10, title: 'Tinh yeu ngay nang', recipes: 25, saves: 20, link: require('../../assets/collections/collection-1.png') },
 ];
 
+export const SLIDER_IMAGES = [
+  {
+    id: 1,
+    sliderImgSrc: require('../../assets/collections/collection-1.png')
+  },
+  {
+    id: 2,
+    sliderImgSrc: require('../../assets/collections/collection-1.png')
+  },
+  {
+    id: 3,
+    sliderImgSrc: require('../../assets/collections/collection-1.png')
 export const RECIPE_CATEGORY = [
 	{ id: 1, title: 'Ăn sáng', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 	{ id: 2, title: 'Ăn Vặt', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
@@ -389,3 +401,43 @@ export const RECIPE_CATEGORY = [
 	{ id: 9, title: 'Tráng Miệng', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 	{ id: 10, title: 'Bún-Mỳ-Phở', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 ];
+  }
+]
+
+export const COLLECTION_DETAIL = [
+  {
+    id: 1,
+    collectionTitle: 'Những món ăn giành cho những ngày đầu mùa mưa',
+    collectionDescription: 'Với những ngày mưa bão như thế này, hãy chế biến các món ăn đơn giản, ấm nóng, đậm đà cho cả nhà thưởng thức.',
+    saves: 200,
+    numberOfRecipes: 20,
+    recipesDetail: [
+      {
+        id: 1,
+        title: 'Mì udon súp miso và thịt heo cay',
+        duration: 60,
+        price: 150000,
+        numberPeople: 1,
+        chefName: 'Hoàng Thị Kiều Nga',
+        chefRank: '',
+        likes: 498,
+        comments: 200,
+        shares: 200,
+        views: 1500
+      },
+      {
+        id: 2,
+        title: 'Heo quay Lạng Sơn',
+        duration: 60,
+        price: 150000,
+        numberPeople: 1,
+        chefName: 'Hoàng Thị Kiều Nga',
+        chefRank: '',
+        likes: 498,
+        comments: 200,
+        shares: 200,
+        views: 1500
+      }
+    ]    
+  }
+]

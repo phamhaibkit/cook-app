@@ -58,5 +58,14 @@ export const LANG_VN = {
   INFOR_USER: 'Thông tin cá nhân',
   SKIP: 'Bỏ qua',
   USER_INFOR_PAGE_DES: 'Hãy cho chúng tôi biết về bạn để có thể phục vụ tốt hơn',
-  ADD_TO_CART: 'Thêm vào giỏ hàng'
+  ADD_TO_CART: 'Thêm vào giỏ hàng',
+  SAVE: 'lưu lại',
+  ORDER_OWNER: 'người đặt',
+  VIEW: 'Xem',
+  MINUTE: 'phút',
+  COMMENT: 'bình luận',
+  SHARE: 'chia sẻ',
+  PERSON: 'người',
+  VIETNAM_DONG: 'đ',
+  LIKE: 'thích'
 };

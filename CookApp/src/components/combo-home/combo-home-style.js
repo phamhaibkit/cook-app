@@ -115,13 +115,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  lineView: {
-    marginLeft: 10,
+  likeView: {
+    flexDirection: 'row',
     justifyContent: 'center'
   },
   lineLikeView: {
-    marginLeft: 5,
-    justifyContent: 'center'
+    marginHorizontal: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   line: {
     height: 11,

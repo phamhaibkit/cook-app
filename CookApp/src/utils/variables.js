@@ -166,6 +166,9 @@ export const CSS = {
   fontSize24: {
     fontSize: 24,
   },
+  fontSize18: {
+    fontSize: 18,
+  },
   fontSize16: {
     fontSize: 16,
   },
@@ -202,7 +205,7 @@ export const CSS = {
   backIconStyle: {
     width: 26,
     height: 16
-  }
+  },
 };
 
 export const COLOR = {

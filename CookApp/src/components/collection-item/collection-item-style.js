@@ -38,11 +38,11 @@ export default StyleSheet.create({
     flexDirection: 'row' 
   },
   recipeIcon: { 
-    width: 12, 
-    height: 7 
+    width: 13, 
+    height: 9 
   },
   smallSaveIcon: { 
-    width: 10, 
+    width: 9, 
     height: 10 
   }, 
 	separator: {
@@ -52,6 +52,7 @@ export default StyleSheet.create({
 		backgroundColor: 'white'
 	},
 	statisticalNumber: {
+    fontSize: 13,
 		marginLeft: 5,
 		color: 'white'
 	}

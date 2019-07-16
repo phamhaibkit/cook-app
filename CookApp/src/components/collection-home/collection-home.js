@@ -13,17 +13,19 @@ export default class CollectionHome extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-    this.data = COLLECTION_DATA;
+		this.data = COLLECTION_DATA;
+		
 	}
 
-	render() {    
+	render() { 
+		const { gotoDetail } = this.props;   
 		return (
 			<View style={styles.container}>
 				<FlatList
 					data={this.data} 
 					renderItem={({ item, index }) => {
 						return (
-							<CollectionItem item={item} index={index} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
+							<CollectionItem onPress= { gotoDetail} item={item} index={index} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
 						);
 					}} 
           keyExtractor={(item, index) => index.toString()}
