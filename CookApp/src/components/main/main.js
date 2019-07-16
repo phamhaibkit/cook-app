@@ -67,7 +67,8 @@ const HomeStack = createStackNavigator({
   CollectionDetail: {
     screen: CollectionDetail,
     navigationOptions: {
-      headerLeft: <BackButton/>
+      headerLeft: <BackButton opacity={1} oppositeOpacity={1}/>,
+      headerTransparent: true
     }
   }
 });

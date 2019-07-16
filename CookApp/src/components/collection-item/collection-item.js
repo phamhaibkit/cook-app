@@ -2,18 +2,19 @@
 import React, { Component } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Text, View, Image, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, ImageBackground } from 'react-native';
 import { IMG } from '../../utils/variables';
 import styles from './collection-item-style';
 import { COLOR, CSS } from '../../utils/variables';
+import { LANG } from '../../lang/lang';
 
 class CollectionItem extends Component {
   render() {
     let { item, imgBgWrap, blockMargin, onPress } = this.props;
  
     return (
-       <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} onPress={() => { onPress }}>
-        <TouchableOpacity>
+       <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]}>
+        <TouchableWithoutFeedback>
           <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={ item.link }>
             <LinearGradient
               colors={[COLOR.gradientBlackTopColor, COLOR.gradientBlackBottomColor]}
@@ -31,17 +32,17 @@ class CollectionItem extends Component {
               <View style={[styles.statisticalWrap, CSS.alignItemsCenter]}>
                 <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                   <Image style={styles.recipeIcon} source={IMG.recipeIcon}/>
-                  <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.recipes}</Text>
+                  <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.recipes} {LANG.RECIPE}</Text>
                 </View>
                 <View style={styles.separator} />
                 <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                   <Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
-                  <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.saves}</Text>
+                  <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.saves} {LANG.SAVE}</Text>
                 </View>
               </View>
             </View>
           </ImageBackground>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
       </View>
     );
   }

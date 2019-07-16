@@ -2,27 +2,59 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 import { CSS, COLOR } from '../../utils/variables';
 
-const height = 296;
-const width = 310;
-const paddingContent = 10;
+const { width } = Dimensions.get('window');
+const containerPadding = 15;
+const contentPadding = 10;
+const overflowHeight = 90;
+
+const basedRecipeFrameRation = 296 / 345;
+const basedRecipeImgRatio =  141 / 323;
+const frameWidth = width - containerPadding * 2;
+const frameHeight = basedRecipeFrameRation * frameWidth;
+
+const frameImgWidth = frameWidth - (contentPadding * 2);
+const frameImgHeight = basedRecipeImgRatio * frameImgWidth;
+
+
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'trs',
+    backgroundColor: COLOR.backgroundColor,
     borderRadius: 5,
-    marginTop: 15
-    // marginHorizontal: CSS.padding15
+    paddingHorizontal: CSS.padding15
+  },
+  comboDescriptionWrap: {
+    position: 'absolute',
+    zIndex: 1000,
+    top: - overflowHeight,
+    left: containerPadding,
+    padding: 15,
+    backgroundColor: COLOR.whiteColor,
+    borderRadius: 5
+  },
+  comboTitle: {
+    color: COLOR.blackColor,
+    fontSize: 20,
+    lineHeight: 20
+  },
+  comboDescription: {
+    color: COLOR.blackColor,
+    fontSize: 14,
+    lineHeight: 1.714
+  },
+  topRecipes: {
+    marginTop: overflowHeight
   },
   frame: {
-    height: height,
-    width: width,
+    height: frameHeight,
+    width: frameWidth,
     backgroundColor: 'white',
-    marginLeft: CSS.padding15,
+    marginTop: CSS.padding15,
     borderRadius: 5
   },
   endFrame: {
-    marginRight: CSS.padding15
+    marginBottom: CSS.padding15
   },
   containerTitle: {
     // flex: 1,
@@ -31,7 +63,7 @@ export default StyleSheet.create({
   },
   titleView: {
     flex: 8,
-    paddingHorizontal: paddingContent,
+    paddingHorizontal: contentPadding,
     paddingTop: 11
   },
   titleText: {
@@ -44,7 +76,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
-    paddingHorizontal: paddingContent,
+    paddingHorizontal: contentPadding,
     paddingTop: 11
   },
   dotImg: {
@@ -54,7 +86,7 @@ export default StyleSheet.create({
   },
   containerTimePrice: {
     flexDirection: 'row',
-    paddingHorizontal: paddingContent,
+    paddingHorizontal: contentPadding,
     marginTop: 5
   },
   priceView: {
@@ -63,7 +95,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   lineView: {
-    marginLeft: paddingContent,
+    marginLeft: contentPadding,
     justifyContent: 'center'
   },
   lineLikeView: {
@@ -79,7 +111,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: paddingContent
+    paddingLeft: contentPadding
   },
   likeView: {
     flexDirection: 'row',
@@ -106,16 +138,19 @@ export default StyleSheet.create({
     color: COLOR.blackColor,
     letterSpacing: -0.5
   },
+  textLight: {
+    color: COLOR.madeIn
+  },
   recipeView: {
-    height: 140,
+    height: frameImgHeight,
     marginTop: 18,
-    marginHorizontal: paddingContent,
+    marginHorizontal: contentPadding,
     borderRadius: 5,
     overflow: 'hidden'
   },
   recipeIMG: {
-    width: '100%',
-    height: '100%'
+    width: frameImgWidth,
+    height: frameImgHeight
   },
   containerChef: {
     position: 'absolute',
@@ -126,7 +161,7 @@ export default StyleSheet.create({
     backgroundColor: COLOR.whiteColor,
     borderRadius: 20,
     paddingLeft: 3,
-    paddingRight: paddingContent,
+    paddingRight: contentPadding,
     alignItems: 'center',
     borderWidth: 0.5,
     borderColor: '#ffeeee'
@@ -155,7 +190,7 @@ export default StyleSheet.create({
   },
   containerLoveCmt: {
     flexDirection: 'row',
-    padding: paddingContent
+    padding: contentPadding
   },
   loveImg: {
     width: 23,
@@ -173,8 +208,8 @@ export default StyleSheet.create({
   },
   saveView: {
     position:'absolute',
-    top: paddingContent,
-    right: paddingContent
+    top: contentPadding,
+    right: contentPadding
   },
   saveImg: {
     width: 19,

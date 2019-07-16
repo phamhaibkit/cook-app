@@ -24,7 +24,7 @@ export default class BackButton extends Component {
 						{
 							position: 'absolute',
               left: 15,
-							opacity: opacity,
+							opacity: 1,
 						},
 					]}
 				>
@@ -35,7 +35,7 @@ export default class BackButton extends Component {
 					style={[
 						style,
 						{
-							opacity: oppositeOpacity,
+							opacity: 0,
 						},
 					]}
 				>

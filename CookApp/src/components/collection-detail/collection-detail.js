@@ -5,19 +5,25 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ScrollView
 } from 'react-native';
 
-import { IMG } from '../../utils/variables';
+import { IMG, CSS, COLOR } from '../../utils/variables';
+import { RECIPES, SLIDER_IMAGES } from '../../models/data';
+import { LANG } from '../../lang/lang';
 import styles from './collection-detail-style';
+import SwiperImage from '../swiper-image/swiper-image';
 
 export default class CollectionDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.recipes = RECIPES;
   }
+
   renderFrame = (item, index) => {
-    const { recipes } = this.props;
+    const  recipes  = this.recipes;
     const endStyle =
       recipes.length - 1 === index
         ? [styles.frame, styles.endFrame]
@@ -39,30 +45,24 @@ export default class CollectionDetail extends Component {
         <View style={styles.containerTimePrice}>
           <View style={styles.priceView}>
             <Image style={styles.sandImg} source={IMG.sandClokHome} />
-            <Text style={styles.textTime}>
-              {item.duration}
-              <Text> phút</Text>
-            </Text>
+            <Text style={styles.textTime}>{item.duration}</Text>
+            <Text style={styles.textTime}>{LANG.MINUTE}</Text>
           </View>
           <View style={styles.lineView}>
             <View style={styles.line} />
           </View>
           <View style={styles.dollaView}>
             <Image style={styles.dollaImg} source={IMG.dollaHome} />
-            <Text style={styles.textTime}>
-              {item.price}
-              <Text> đ</Text>
-            </Text>
+            <Text style={styles.textTime}>{item.price}</Text>
+            <Text style={styles.textTime}>{LANG.VIETNAM_DONG}</Text>
           </View>
           <View style={styles.lineView}>
             <View style={styles.line} />
           </View>
           <View style={styles.dollaView}>
             <Image style={styles.personImg} source={IMG.personHome} />
-            <Text style={styles.textTime}>
-              {item.quantity}
-              <Text> người</Text>
-            </Text>
+            <Text style={styles.textTime}>{item.quantity}</Text>              
+            <Text style={styles.textTime}>{LANG.PERSON}</Text>
           </View>
         </View>
 
@@ -81,39 +81,29 @@ export default class CollectionDetail extends Component {
 
         <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
           <View style={styles.priceView}>
-            <Text style={styles.textTime}>
-              {item.likes}
-
-              <Text> thích</Text>
-            </Text>
+            <Text style={styles.textTime}>{item.likes}</Text>
+            <Text style={[styles.textTime, styles.textLight]}>{LANG.LIKE}</Text>
           </View>
           <View style={styles.lineLikeView}>
             <View style={styles.line} />
           </View>
           <View style={styles.likeView}>
-            <Text style={styles.textTime}>
-              {item.comments}
-
-              <Text> bình luận</Text>
-            </Text>
+            <Text style={styles.textTime}>{item.comments}</Text>
+            <Text style={[styles.textTime, styles.textLight]}>{LANG.COMMENT}</Text>
           </View>
           <View style={styles.lineLikeView}>
             <View style={styles.line} />
           </View>
           <View style={styles.likeView}>
-            <Text style={styles.textTime}>
-              {item.shares}
-              <Text> chia sẻ</Text>
-            </Text>
+            <Text style={styles.textTime}>{item.shares}</Text>
+            <Text style={[styles.textTime, styles.textLight]}>{LANG.SHARE}</Text>
           </View>
           <View style={styles.lineLikeView}>
             <View style={styles.line} />
           </View>
           <View style={styles.likeView}>
-            <Text style={styles.textTime}>
-              {item.xem}
-              <Text> xem</Text>
-            </Text>
+            <Text style={styles.textTime}>{item.xem}</Text>
+            <Text style={[styles.textTime, styles.textLight]}>{LANG.VIEW}</Text>
           </View>
         </View>
 
@@ -138,16 +128,32 @@ export default class CollectionDetail extends Component {
   };
 
   render() {
-    const { recipes } = this.props;
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={recipes}
-          renderItem={({ item, index }) => this.renderFrame(item, index)}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
+    let recipes = this.recipes;
+    return (    
+        <ScrollView>
+          <SwiperImage height={300} listItems={ SLIDER_IMAGES}/>
+          <View style={styles.container}>
+            <View style={styles.comboDescriptionWrap}>
+              <Text style={[styles.comboTitle, CSS.fontQuiBold]}>Những món ăn giành cho những n gày đầu mùa mưa</Text>
+              <Text style={[CSS.fontQuiRegular, ]}>Với những ngày mưa bão như thế này, hãy chế biến các món ăn đơn giản, ấm nóng, đậm đà cho cả nhà thưởng thức.</Text>
+              <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+                <View style={{flexDirection: 'row'}}>
+                  <Image source={IMG.saveHome} style={styles.saveImg} />
+                  <Text style={{fontSize: 13, color: '#000', marginLeft: 10, lineHeight: 18, fontFamily: CSS.fontText}}>200 {LANG.SAVE}</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.topRecipes}>
+              <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>20 { LANG.RECIPE.toUpperCase() }</Text>
+              <FlatList
+                data={this.recipes}
+                scrollEnabled={false}
+                renderItem={({ item, index }) => this.renderFrame(item, index)}        
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+          </View>
+        </ScrollView>
     );
   }
 }

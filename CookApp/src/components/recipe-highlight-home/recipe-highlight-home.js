@@ -90,7 +90,7 @@ export default class RecipeHighlightHome extends Component {
             <Text style={styles.textTime}>
               {item.likes}
 
-              <Text> thích</Text>
+              <Text style={styles.textLight}> thích</Text>
             </Text>
           </View>
           <View style={styles.lineLikeView}>
@@ -100,7 +100,7 @@ export default class RecipeHighlightHome extends Component {
             <Text style={styles.textTime}>
               {item.comments}
 
-              <Text> bình luận</Text>
+              <Text style={styles.textLight}> bình luận</Text>
             </Text>
           </View>
           <View style={styles.lineLikeView}>
@@ -109,7 +109,7 @@ export default class RecipeHighlightHome extends Component {
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
               {item.shares}
-              <Text> chia sẻ</Text>
+              <Text style={styles.textLight}> chia sẻ</Text>
             </Text>
           </View>
           <View style={styles.lineLikeView}>
@@ -118,7 +118,7 @@ export default class RecipeHighlightHome extends Component {
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
               {item.xem}
-              <Text> xem</Text>
+              <Text style={styles.textLight}> xem</Text>
             </Text>
           </View>
         </View>

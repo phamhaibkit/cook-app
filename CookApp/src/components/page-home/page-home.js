@@ -21,7 +21,7 @@ const img = {
 
 export default class PageHome extends Component {
 	viewMore = type => {
-    if (type == LANG.COLLECTION) { navigationService.navigate('CollectionList'); }
+    if (type == LANG.COLLECTION) { navigationService.navigate('CollectionDetail'); }
     if (type == LANG.COMBO) { navigationService.navigate('ComboList');		}
   };
   

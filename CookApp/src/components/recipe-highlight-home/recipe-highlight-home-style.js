@@ -105,6 +105,9 @@ export default StyleSheet.create({
     color: COLOR.blackColor,
     letterSpacing: -0.5
   },
+  textLight: {
+    color: COLOR.madeIn
+  },
   recipeView: {
     height: 140,
     marginTop: 18,
