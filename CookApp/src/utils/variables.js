@@ -47,6 +47,7 @@ export const IMG = {
   bellActive: require('../../assets/icons/bell-active.png'),
   individual: require('../../assets/icons/individual.png'),
   individualActive: require('../../assets/icons/individual-active.png'),
+  upRecipe: require('../../assets/icons/up-recipe.png'),
 };
 
 export const ASYNC_STORAGE = {

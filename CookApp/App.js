@@ -7,6 +7,7 @@
  */
 
 import React, { Component } from 'react';
+import { SafeAreaView } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import { YellowBox } from 'react-native';
 import { Provider } from 'react-redux';
@@ -43,7 +44,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Main />
+        <SafeAreaView style={{flex: 1}}>
+          <Main />
+        </SafeAreaView>
       </Provider>
     );
   }

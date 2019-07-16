@@ -6,9 +6,10 @@ import { IMG, CSS, COLOR } from '../../utils/variables';
 
 export default class ViewMoreHome extends Component {
   render() {
-    const { type, viewMore } = this.props;
+    const { type, viewMore, notMarginTop } = this.props;
+    const marginTopDis = notMarginTop == true ? [styles.containerlabel, styles.marginTop] : styles.containerlabel;
     return (
-      <View style={styles.containerlabel}>
+      <View style={marginTopDis}>
         <Text style={styles.labelText}>{type && type.name}</Text>
         <TouchableOpacity
           style={styles.textButton}
@@ -36,6 +37,9 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     // borderColor:'red'
   },
+  marginTop: {
+    marginTop: 0
+  },  
   labelText: {
     fontSize: 15,
     color: '#444444',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, SafeAreaView } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import CollectionHome from '../collection-home/collection-home';
 import ComboHome from '../combo-home/combo-home';
 import Trending from '../trending/trending';
@@ -27,7 +27,6 @@ export default class PageHome extends Component {
 
   render() {
     return (
-        <SafeAreaView style={{flex: 1}}>
           <ContainerScroll>
             <View style={styles.container}>
               <Trending />
@@ -53,7 +52,6 @@ export default class PageHome extends Component {
               <NewsEvent newsEvent={RECIPES_LOVED}/>
             </View>
           </ContainerScroll>
-        </SafeAreaView>
     );
   }
 }

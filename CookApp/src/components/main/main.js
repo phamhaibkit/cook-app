@@ -78,7 +78,18 @@ const StoreStack = createStackNavigator({
   Profile: { screen: PageProfile }
 });
 const RecipeStack = createStackNavigator({
-  Recipe: { screen: PageRecipe }
+  Recipe: { 
+    screen: PageRecipe,
+    navigationOptions: {
+      header: null,
+    }
+   },
+   Details: { 
+    screen: PageDetail,
+    navigationOptions: {
+      header: null,
+    }
+   },
 });
 
 const NotiStack = createStackNavigator({
@@ -150,6 +161,16 @@ const SignInStack = createStackNavigator({
 });
 
 UserStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible
+  };
+};
+RecipeStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;

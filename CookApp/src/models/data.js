@@ -376,3 +376,16 @@ export const COLLECTION_DATA = [
 	{ id: 9, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
 	{ id: 10, title: 'Tinh yeu ngay nang', recipes: '25 công thức', saves: '200 lưu lại', link: require('../../assets/collections/collection-1.png') },
 ];
+
+export const RECIPE_CATEGORY = [
+	{ id: 1, title: 'Ăn sáng', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 2, title: 'Ăn Vặt', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 3, title: 'Khai vị', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 4, title: 'Ăn Chay', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 5, title: 'Thi Thoảng Ăn', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 6, title: 'Ăn Dặm', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 7, title: 'Món Chính', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 8, title: 'Bánh ngọt', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 9, title: 'Tráng Miệng', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 10, title: 'Bún-Mỳ-Phở', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+];
