@@ -29,7 +29,7 @@ export const IMG = {
   male: require('../../assets/icons/male.png'),
   female: require('../../assets/icons/female.png'),
   calendar: require('../../assets/icons/calendar.png'),
-  greenBookmarkIcon: require('./../../assets/icons/save-icon-3x.png'),
+  greenBookmarkIcon: require('./../../assets/icons/save.png'),
   recipeIcon: require('./../../assets/icons/recipe-icon-3x.png'),
   whiteBookmarkIcon: require('./../../assets/icons//bookmark-icon-3x.png'),
   calenderHome: require('../../assets/icons/calender-home.png'),

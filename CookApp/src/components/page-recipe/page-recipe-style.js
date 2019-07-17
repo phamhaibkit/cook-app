@@ -50,5 +50,8 @@ export default StyleSheet.create({
     color: COLOR.greenColor,
     fontFamily: CSS.fontTitle,
     marginLeft: 7
+  },
+  gradienView: {
+    height: 35
   }
 });

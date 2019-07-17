@@ -9,7 +9,8 @@ import CategoryRecipe from '../category-recipe/category-recipe';
 import { LANG } from '../../lang/lang';
 import { RECIPES } from '../../models/data';
 import styles from './page-recipe-style';
-import { IMG } from '../../utils/variables';
+import { IMG, COLOR } from '../../utils/variables';
+import LinearGradient from "react-native-linear-gradient";
 
 const img = {
   uri:
@@ -20,7 +21,7 @@ export default class PageRecipe extends Component {
   //Setting Screen to show in Setting Option
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <View style={styles.contanerSearch}>
           <SearchBarHeader />
         </View>
@@ -32,6 +33,10 @@ export default class PageRecipe extends Component {
             <View>
               <CategoryRecipe />
             </View>
+            <LinearGradient
+              colors={[ COLOR.whiteColor, COLOR.searchBarIos ,COLOR.backgroundColor ]}
+              style={styles.gradienView}
+            />
             <View style={styles.container}>
               <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} notMarginTop={true}/>
               <RecipeHighlightHome recipes={RECIPES}/>

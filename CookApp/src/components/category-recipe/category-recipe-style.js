@@ -7,7 +7,7 @@ export default StyleSheet.create({
     backgroundColor: COLOR.whiteColor,
     // marginHorizontal: CSS.padding15,
     borderRadius: 10,
-    paddingBottom: 20,
+    // paddingBottom: 20,
     marginTop: CSS.padding15
   },
   frame: {
@@ -26,11 +26,14 @@ export default StyleSheet.create({
     // paddingLeft: CSS.padding10,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
     // flex: 1
   },
   imgCate: {
     width: 70,
     height: 50,
+    borderRadius: 5,
+    overflow: 'hidden'
   },
   cateText: {
     fontSize: 13,
