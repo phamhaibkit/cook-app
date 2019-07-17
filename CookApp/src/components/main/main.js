@@ -31,6 +31,7 @@ import ForgotPasswordPage from '../forgot-password/forgot-password';
 import CollectionList from '../collection-list/collection-list';
 import ComboList from '../combo-list/combo-list';
 import CollectionDetail from '../collection-detail/collection-detail';
+import ComboDetail from '../combo-detail/combo-detail';
 import { LANG } from '../../lang/lang';
 
 const HomeStack = createStackNavigator({
@@ -67,7 +68,14 @@ const HomeStack = createStackNavigator({
   CollectionDetail: {
     screen: CollectionDetail,
     navigationOptions: {
-      headerLeft: <BackButton opacity={1} oppositeOpacity={1}/>,
+      headerLeft: <BackButton opacity={0} oppositeOpacity={1}/>,
+      headerTransparent: true
+    }
+  },
+  ComboDetail: {
+    screen: ComboDetail,
+    navigationOptions: {
+      headerLeft: <BackButton/>,
       headerTransparent: true
     }
   }
@@ -85,7 +93,18 @@ const StoreStack = createStackNavigator({
   Profile: { screen: PageProfile }
 });
 const RecipeStack = createStackNavigator({
-  Recipe: { screen: PageRecipe }
+  Recipe: { 
+    screen: PageRecipe,
+    navigationOptions: {
+      header: null,
+    }
+   },
+   Details: { 
+    screen: PageDetail,
+    navigationOptions: {
+      header: null,
+    }
+   },
 });
 
 const NotiStack = createStackNavigator({
@@ -157,6 +176,16 @@ const SignInStack = createStackNavigator({
 });
 
 UserStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible
+  };
+};
+RecipeStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;

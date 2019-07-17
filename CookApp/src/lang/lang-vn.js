@@ -35,6 +35,7 @@ export const LANG_VN = {
     }
   ],
   RECIPE: 'Công thức',
+  UP_RECIPE: 'Đăng Công Thức',
   FOLLOWER: 'Người theo dõi',
   RECIPE_DRAFT: 'Công thức nháp',
   ORDER_DRAFT: 'Đơn hàng nháp',

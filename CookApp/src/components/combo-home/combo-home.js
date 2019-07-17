@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from './combo-home-style';
 import { COMBO_DATA } from '../../models/data';
+import { LANG } from '../../lang/lang';
 
 export default class ComboHome extends Component {
   constructor(props) {
@@ -59,12 +60,14 @@ export default class ComboHome extends Component {
           <View style={styles.containerTimePrice}>
             <View style={styles.priceView}>
               <Text style={styles.textTime}>{orders}</Text>
+              <Text style={styles.textTime}>{LANG.ORDER_OWNER}</Text>
             </View>
             <View style={styles.lineLikeView}>
               <View style={styles.line} />
             </View>
             <View style={styles.likeView}>
               <Text style={styles.textTime}>{views}</Text>
+              <Text style={styles.textTime}>{LANG.VIEW}</Text>
             </View>
           </View>
         </View>

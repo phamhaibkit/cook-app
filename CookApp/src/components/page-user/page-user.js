@@ -8,6 +8,7 @@ import { LANG } from '../../lang/lang';
 import Avatar from '../avatar/avatar';
 import { IMG, CSS } from '../../utils/variables';
 import { setAccountInfo } from '../../reducers/page-account-info.reducer';
+import navigationService from '../../services/navigation.service';
 
 export class PageUser extends Component {
   constructor(props) {
@@ -73,7 +74,8 @@ export class PageUser extends Component {
   renderItemManage = (arrayRender) => {
     return <View style={[styles.manageItems, CSS.padding20]}>
       {arrayRender.map((item, key) => {
-        return <View key={key} style={styles.contentItems}>
+        const { action } = item;
+        return <View key={key} style={styles.contentItems} onPress={() => action()}>
           <View>
             {/* <Avatar style={styles.avatar} user={user} size={80} /> */}
           </View>
@@ -90,6 +92,10 @@ export class PageUser extends Component {
 
   renderManageDraft = () => {
     const arrayItemDraft = [
+      {
+        name: 'Đăng nhập',
+        action: () => navigationService.navigate('SignIn')
+      },
       {
         name: LANG.RECIPE_DRAFT,
         action: ''

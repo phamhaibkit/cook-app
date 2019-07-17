@@ -392,6 +392,19 @@ export const SLIDER_IMAGES = [
   }
 ]
 
+export const RECIPE_CATEGORY = [
+	{ id: 1, title: 'Ăn sáng', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFQdXHkI7YQbFyqYZw_q8a9Ueq5dU3XT06uAEPHgy0Jt0w6tWQ' },
+	{ id: 2, title: 'Ăn Vặt', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1Nqgbvm1Qf2R8YACV6sOKmeR8YAL7GHXkCf-A1nigXu4WMSH' },
+	{ id: 3, title: 'Khai vị', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJCN9dUOMGRVmkIAJbSNBPRSv7q7bm5F_HO7fKJDxt7xz6PRmf' },
+	{ id: 4, title: 'Ăn Chay', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 5, title: 'Thi Thoảng Ăn', recipes: '20 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 6, title: 'Ăn Dặm', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://t4.ftcdn.net/jpg/01/71/07/29/500_F_171072995_9GCMX6hODAvTnibsNB1MfgEzr7nxNyqN.jpg' },
+	{ id: 7, title: 'Món Chính', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq7PAH_71M1Sw8Mq8PLCb8m9lfTol9TIUKHYsWNs2yZ4gwHHaNlA' },
+	{ id: 8, title: 'Bánh ngọt', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEMU0QXk9HQHF7fnfWkk0RTo7Nt8-wuJY1LAuSLIl_DEtpWuHcag' },
+	{ id: 9, title: 'Tráng Miệng', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+	{ id: 10, title: 'Bún-Mỳ-Phở', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
+];
+
 export const COLLECTION_DETAIL = [
   {
     id: 1,
