@@ -48,6 +48,7 @@ export const IMG = {
   individual: require('../../assets/icons/individual.png'),
   individualActive: require('../../assets/icons/individual-active.png'),
   upRecipe: require('../../assets/icons/up-recipe.png'),
+  recipeSolid: require('../../assets/icons/recipe-solid.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -82,6 +83,7 @@ export const CSS = {
   padding15: 15,
   padding10: 10,
   fontBold: 'Nunito-ExtraBold',
+  fontNutito: 'Nunito-Regular',
   fontTitle: 'Quicksand-Bold',
   fontText: 'Quicksand-Regular',
   textTitleButton: {

@@ -32,6 +32,7 @@ import CollectionList from '../collection-list/collection-list';
 import ComboList from '../combo-list/combo-list';
 import CollectionDetail from '../collection-detail/collection-detail';
 import ComboDetail from '../combo-detail/combo-detail';
+import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import { LANG } from '../../lang/lang';
 
 const HomeStack = createStackNavigator({
@@ -99,8 +100,8 @@ const RecipeStack = createStackNavigator({
       header: null,
     }
    },
-   Details: { 
-    screen: PageDetail,
+   PageSearchRecipe: { 
+    screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
     }

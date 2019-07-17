@@ -5,14 +5,12 @@ import { LANG } from '../../lang/lang';
 import { IMG, COLOR, CSS } from '../../utils/variables';
 
 export default class SearchBarHeader extends Component {
-  onPress= () => {
-    navigationService.navigate('Search', { name: 'HaiPham' })
-  }
   render() {
-    const backgroundSearch = Platform.OS === 'ios' ? COLOR.searchBarIos : COLOR.whiteColor;
+    const { isHome, onPress } = this.props;
+    const backgroundSearch = Platform.OS === 'ios' ? COLOR.searchBarIos : isHome ? COLOR.whiteColor : COLOR.searchBarIos;
     return (
       <TouchableWithoutFeedback
-        onPress={this.onPress}
+        onPress={() => onPress()}
       >
         <View
           style={{

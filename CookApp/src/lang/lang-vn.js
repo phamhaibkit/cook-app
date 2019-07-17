@@ -67,5 +67,7 @@ export const LANG_VN = {
   SHARE: 'chia sẻ',
   PERSON: 'người',
   VIETNAM_DONG: 'đ',
-  LIKE: 'thích'
+  LIKE: 'thích',
+  CANCEL: 'Hủy',
+  BEST_SEARCH: 'Tìm nhiều nhất'
 };

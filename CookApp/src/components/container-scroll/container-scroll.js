@@ -18,6 +18,10 @@ export default class ContainerScroll extends Component {
 		};
 	}
 
+	onPressSearch = () => {
+		alert('AAAAAA');
+	}
+
 	render() {
 		const { scrollY } = this.state;
 		const headerHeight = scrollY.interpolate({
@@ -51,7 +55,7 @@ export default class ContainerScroll extends Component {
 						style={styles.containerSearch}
 					>
 						<Animated.View style={[styles.containerGadient, { paddingRight: searchPaddingRight }]}>
-							<SearchBarHeader />
+							<SearchBarHeader isHome={ true } onPress={this.onPressSearch} />
 						</Animated.View>
 					</LinearGradient>
 				</Animated.View>
