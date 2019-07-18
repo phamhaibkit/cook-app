@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, FlatList, Dimensions, Image } from 'react-native';
 import { LANG } from '../../lang/lang';
 import { COLOR, CSS, IMG } from '../../utils/variables';
-import ElevatedView from 'react-native-elevated-view';
 
 const widthItem = Dimensions.get('window').width;
 export default class MostSearched extends Component {
@@ -17,7 +16,22 @@ export default class MostSearched extends Component {
 
   renderItem = (item, index) => {
     return (
-      <ElevatedView elevation={10} style={{ width: widthItem - 30, height: 70, marginHorizontal: 15, marginVertical: 10, marginRight: 15, borderRadius: 5 }} >
+      <View style={{
+        width: widthItem - 30,
+        height: 70,
+        marginHorizontal: 15,
+        marginVertical: 10,
+        borderRadius: 5,
+        shadowColor: '#123456',
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+        backgroundColor: 'white',
+      }} >
         <TouchableOpacity style={{ flexDirection: 'row', padding: 10 }}>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Image source={{ uri: item.link }} style={{ width: 60, height: 50, borderRadius: 5 }} />
@@ -32,7 +46,7 @@ export default class MostSearched extends Component {
             </View>
           </View>
         </TouchableOpacity>
-      </ElevatedView>
+      </View>
     )
   }
 
