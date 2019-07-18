@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, FlatList, Dimensions, Image } from 'react-native';
-import { LANG } from '../../lang/lang';
 import { COLOR, CSS, IMG } from '../../utils/variables';
+import { LANG } from '../../lang/lang';
 
 const widthItem = Dimensions.get('window').width;
 export default class MostSearched extends Component {
-  constructor(props) {
-    super(props);
-    this.data = [
-      { id: 1, title: 'Thit bo chien', chef: 'Hoang Kieu Nga', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
-      { id: 2, title: 'Thit bo xao khoai', chef: 'Binh Tang', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
-      { id: 3, title: 'Thit bo xao xa ot', chef: 'Trung Lu', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' }
-    ];
-  }
-
   renderItem = (item, index) => {
+    const { subData } = this.props;
     return (
       <View style={{
         width: widthItem - 30,
         height: 70,
         marginHorizontal: 15,
-        marginVertical: 10,
+        marginVertical: 5,
         borderRadius: 5,
         shadowColor: '#123456',
         shadowOffset: {
@@ -36,14 +28,24 @@ export default class MostSearched extends Component {
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Image source={{ uri: item.link }} style={{ width: 60, height: 50, borderRadius: 5 }} />
           </View>
-          <View style={{ marginLeft: 10 }}>
-            <Text>{item.title}</Text>
+          <View style={{ marginLeft: 10, justifyContent: 'center' }}>
+            <Text style={{ fontFamily: CSS.fontTitle, color: COLOR.blackName, fontSize: 14 }} numberOfLines={1}>{item.title}</Text>
+            { subData && 
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <Text>{item.chef}</Text>
               <Image source={IMG.recipeSolid} style={{ width: 13, height: 10 }} />
-              <Text>{item.time}</Text>
-              <Image source={IMG.sandClokHome} style={{ width: 9, height: 10 }} />
+              <Text style={{ fontFamily: CSS.fontText, color: COLOR.blackColor, fontSize: 13, marginLeft: 5 }}>{item.chef}</Text>
+              <View style={{ marginLeft: 5, justifyContent: 'center' }}>
+                <View style={{ height: 11, width: 1, backgroundColor: COLOR.lineColor }} />
+              </View>
+              <Image source={IMG.sandClokHome} style={{ width: 9, height: 10, marginLeft: 5 }} />
+              <Text style={{ fontFamily: CSS.fontText, color: COLOR.blackColor, fontSize: 13, marginLeft: 5 }}>
+                {item.time}
+                <Text>
+                  {LANG.SPACE + LANG.MINUTE.charAt(0).toUpperCase() + LANG.MINUTE.slice(1)}
+                </Text>
+              </Text>
             </View>
+            }
           </View>
         </TouchableOpacity>
       </View>
@@ -51,7 +53,7 @@ export default class MostSearched extends Component {
   }
 
   render() {
-    const { label } = this.props;
+    const { label, data } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Text style={{
@@ -61,11 +63,13 @@ export default class MostSearched extends Component {
           marginTop: 20,
           marginLeft: 15,
         }}> {label.toUpperCase()} </Text>
-        <FlatList
-          data={this.data}
-          renderItem={({ item, index }) => this.renderItem(item, index)}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        <View style={{ marginTop: 10 }}>
+          <FlatList
+            data={data}
+            renderItem={({ item, index }) => this.renderItem(item, index)}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
       </View>
     );
   }

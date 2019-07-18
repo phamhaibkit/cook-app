@@ -69,5 +69,6 @@ export const LANG_VN = {
   VIETNAM_DONG: 'đ',
   LIKE: 'thích',
   CANCEL: 'Hủy',
-  BEST_SEARCH: 'Tìm nhiều nhất'
+  BEST_SEARCH: 'Tìm nhiều nhất',
+  SPACE: ' '
 };

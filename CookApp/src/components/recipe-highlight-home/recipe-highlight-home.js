@@ -23,14 +23,13 @@ export default class RecipeHighlightHome extends Component {
   };
 
   renderFrame = (item, index) => {
-    const { recipes } = this.props;
-    const endStyle =
-      recipes.length - 1 === index
-        ? [styles.frame, styles.endFrame]
-        : styles.frame;
+    const { recipes, isHorizontal } = this.props;
+    const horizaltalStyle = recipes.length - 1 === index
+      ? [styles.frame, styles.endFrame]
+      : styles.frame;
     const iconLove = item.isLove ? IMG.loveActiveHome : IMG.loveHome;
     return (
-      <View style={endStyle}>
+      <View style={isHorizontal ? horizaltalStyle : styles.frameVer}>
         <View style={styles.containerTitle}>
           <TouchableOpacity style={styles.titleView} onPress={this.onPress}>
             <Text numberOfLines={1} style={styles.titleText}>
@@ -73,7 +72,7 @@ export default class RecipeHighlightHome extends Component {
         </View>
 
         <View>
-          <View style={styles.recipeView}>
+          <View style={isHorizontal ? styles.recipeView : styles.imgVer}>
             <TouchableWithoutFeedback onPress={this.onPress}>
               <Image style={styles.recipeIMG} source={{ uri: item.link }} />
             </TouchableWithoutFeedback>
@@ -144,13 +143,13 @@ export default class RecipeHighlightHome extends Component {
   };
 
   render() {
-    const { recipes } = this.props;
+    const { recipes, isHorizontal } = this.props;
     return (
       <View style={styles.container}>
         <FlatList
           data={recipes}
           renderItem={({ item, index }) => this.renderFrame(item, index)}
-          horizontal
+          horizontal={isHorizontal}
           showsHorizontalScrollIndicator={false}
         />
       </View>

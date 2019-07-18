@@ -33,12 +33,12 @@ import ComboList from '../combo-list/combo-list';
 import CollectionDetail from '../collection-detail/collection-detail';
 import ComboDetail from '../combo-detail/combo-detail';
 import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
+import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
 import { LANG } from '../../lang/lang';
 
 const HomeStack = createStackNavigator({
   // Defination of Navigaton from home screen
   Home: {
-    title: 'Trang chu',
     screen: PageHome,
     navigationOptions: {
       header: null
@@ -63,7 +63,7 @@ const HomeStack = createStackNavigator({
       headerTitleStyle: styles.headerTitleStyle,
       headerLeft:  <BackButton />,
       headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle 
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
     }
   },
   CollectionDetail: {
@@ -96,6 +96,7 @@ const StoreStack = createStackNavigator({
 const RecipeStack = createStackNavigator({
   Recipe: { 
     screen: PageRecipe,
+    // screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
     }
@@ -106,6 +107,36 @@ const RecipeStack = createStackNavigator({
       header: null,
     }
    },
+   RecipeHighlightList: {
+    screen: RecipeHighlightList,
+    navigationOptions: {      
+      title: 'Cong Thuc Noi Bat',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft: <BackButton />,
+      headerRight: <SearchButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    }
+   },
+   CollectionList: { 
+    screen: CollectionList,
+    navigationOptions: {      
+      title: 'Bộ Sưu Tập',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft: <BackButton />,
+      headerRight: <SearchButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    }
+  },
+  ComboList: { 
+    screen: ComboList,
+    navigationOptions: {      
+      title: 'Combo món',
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft:  <BackButton />,
+      headerRight: <SearchButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    }
+  },
 });
 
 const NotiStack = createStackNavigator({
@@ -199,7 +230,8 @@ RecipeStack.navigationOptions = ({ navigation }) => {
 const bottomTabNav = createBottomTabNavigator(
   {
     Home: { 
-      screen: HomeStack, 
+      screen: HomeStack,
+      // screen: RecipeStack, 
       navigationOptions: 
       {
         tabBarLabel: LANG.HOME

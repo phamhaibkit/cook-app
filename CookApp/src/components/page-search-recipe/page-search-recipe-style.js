@@ -8,6 +8,9 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  bodyView: {
+    // backgroundColor: COLOR.backgroundColor
+  },
   bestSellText: {
     color: '#888888',
     fontSize: 15,

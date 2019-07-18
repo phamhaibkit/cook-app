@@ -40,7 +40,7 @@ export default class PageHome extends Component {
                 <Image style={styles.adverImg} source={img} resizeMode="cover" />
               </View>
               <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
-              <RecipeHighlightHome recipes={RECIPES}/>
+              <RecipeHighlightHome recipes={RECIPES} isHorizontal/>
               <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
               <ComboHome />
               <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />

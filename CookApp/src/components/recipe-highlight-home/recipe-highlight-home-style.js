@@ -4,6 +4,7 @@ import { CSS, COLOR } from '../../utils/variables';
 const height = 296;
 const width = 310;
 const paddingContent = 10;
+const widthVer = Dimensions.get('window').width;
 
 export default StyleSheet.create({
   container: {
@@ -22,6 +23,16 @@ export default StyleSheet.create({
   },
   endFrame: {
     marginRight: CSS.padding15
+  },
+  frameVer: {
+    height: height,
+    width: widthVer,
+    backgroundColor: COLOR.whiteColor,
+    marginTop: CSS.padding15,
+    borderRadius: 5
+  },
+  endFrameVer: {
+
   },
   containerTitle: {
     // flex: 1,
@@ -113,11 +124,21 @@ export default StyleSheet.create({
     marginTop: 18,
     marginHorizontal: paddingContent,
     borderRadius: 5,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    borderColor: 'red',
+    borderWidth: 2
   },
   recipeIMG: {
     width: '100%',
     height: '100%'
+  },
+  imgVer: {
+    width: widthVer - 30 - 20,
+    height: 140,
+    marginTop: 18,
+    marginHorizontal: paddingContent,
+    borderRadius: 5,
+    overflow: 'hidden',
   },
   containerChef: {
     position: 'absolute',
