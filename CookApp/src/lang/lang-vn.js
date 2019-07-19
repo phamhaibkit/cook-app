@@ -1,5 +1,5 @@
 export const LANG_VN = {
-  APP_NAME: 'beChef',
+  APP_NAME: 'BeChef',
   HOME: 'Trang Chủ',
   STORE: 'Cửa Hàng',
   RECIPE_TAB: 'Công Thức',

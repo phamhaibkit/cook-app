@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Button, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
@@ -115,10 +115,9 @@ export default class PageInforUser extends Component {
 
   render() {
     const { password, radioObject, placeBorn, placeLive, avatarSource, user } = this.state;
-    console.log(avatarSource, 'avatarSource');
-    console.log(IMG.userAvatar, 'aaaa');
     return (
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50}>
+<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
           <View style={[
             CSS.headerMargin,
@@ -143,15 +142,12 @@ export default class PageInforUser extends Component {
             </TouchableOpacity>
           </View>
           <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { marginTop: 23, color: '#000000', marginBottom: 20, lineHeight: 16, letterSpacing: -0.02 }]}>{LANG.USER_INFOR_PAGE_DES}</Text>
-          <SigninByFacebook titleButton="Sử dụng thông tin Facebook" getLoginFaceBookInfor={this.getInforFacebook} style={{ marginTop: 20 }} />
+          <SigninByFacebook titleButton="Sử dụng thông tin Facebook" goto={'InforUser'} getLoginFaceBookInfor={this.getInforFacebook} style={{ marginTop: 20 }} />
           <Text style={[{ marginTop: 20, color: '#898989' }, CSS.fontQuiRegular, CSS.fontSize13, CSS.textAlignCenter]}>Hoặc nhập thông tin</Text>
           <View style={[
             CSS.alignItemsCenter,
             CSS.justifyContentCenter,
             { marginBottom: 26, marginTop: 20 }]}>
-            {/* {user ? <Avatar style={styles.Avatar} user={user} size={76} /> : <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />} */}
-
-            {/* {avatarSource && <View><Image  source={avatarSource} resizeMode="contain" /><Text>aaaaa</Text></View>} */}
             {avatarSource ? <Image style={styles.Avatar} source={avatarSource} resizeMode="cover" /> : <Image style={styles.Avatar} source={IMG.userAvatar} resizeMode="contain" />}
             <TouchableOpacity style={styles.iconCamera} onPress={() => { this.chooseFile(); }} >
               <Image source={IMG.camera} resizeMode="contain" />
@@ -190,6 +186,8 @@ export default class PageInforUser extends Component {
           </LinearGradient>
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
+      
     );
   }
 }

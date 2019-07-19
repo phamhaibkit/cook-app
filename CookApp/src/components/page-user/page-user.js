@@ -41,7 +41,6 @@ export class PageUser extends Component {
   };
 
   renderUserInfor = (user) => {
-    console.log(user, 'user');
     return <View style={[styles.topPageContainer, CSS.padding20]}>
       <View>
         <Avatar style={styles.avatar} user={user} size={80} />

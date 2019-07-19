@@ -35,6 +35,8 @@ export default StyleSheet.create({
   image: {
     padding: 10,
     margin: 0,
+    height:20,
+    width: 20,
   },
   placeholderStyle: {
     fontSize: 14,

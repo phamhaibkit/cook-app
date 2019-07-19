@@ -41,7 +41,6 @@ class SigninByFacebook extends Component {
         })
         .done();
     } else {
-      console.log(user);
       const email = user.profile.email;
       const firstname = user.profile.first_name;
       const lastname = user.profile.last_name;
@@ -51,35 +50,39 @@ class SigninByFacebook extends Component {
   };
 
   _loginFacebookHandle = (email, firstname, lastname, id) => {
-    const { getLoginFaceBookInfor } = this.props;
-    if (getLoginFaceBookInfor) {
-      const objectFaceBookInfor = {
-        email, firstname, lastname, facebookid: id
-      };
-      this.props.getLoginFaceBookInfor(objectFaceBookInfor);
-    } else {
-      return authService
-        .loginFacebook(email, firstname, lastname, id)
-        .then((data) => {
-          console.log(data, 'Logged');
-          this.timeout = setTimeout(() => this.hideLoading(), 200);
-          this.hideLoading();
-          this.props.setAccountInfo(data);
-          // FBLoginManager.logout(() => {
-          // 	console.log('Logout-Facebook');
-          // });
-          this._retrieveData();
-          navigationService.goBack();
-        })
-        .catch((error) => {
-          // FBLoginManager.logout(() => {
-          // 	console.log('Logout-Facebook');
-          // });
-          this.timeout = setTimeout(() => this.hideLoading(), 200);
-          console.log('ERRRRR', error);
-        });
-    }
-
+    const { getLoginFaceBookInfor, goto } = this.props;
+    return authService
+      .loginFacebook(email, firstname, lastname, id)
+      .then(data => {
+        console.log(data, "Logged");
+        this.timeout = setTimeout(() => this.hideLoading(), 200);
+        this.hideLoading();
+        this.props.setAccountInfo(data);
+        // FBLoginManager.logout(() => {
+        // 	console.log('Logout-Facebook');
+        // });
+        this._retrieveData();
+        if (goto) {
+          navigationService.navigate(goto);
+        }
+        if (getLoginFaceBookInfor) {
+          const objectFaceBookInfor = {
+            email,
+            firstname,
+            lastname,
+            facebookid: id
+          };
+          this.props.getLoginFaceBookInfor(objectFaceBookInfor);
+        }
+        // navigationService.goBack();
+      })
+      .catch(error => {
+        // FBLoginManager.logout(() => {
+        // 	console.log('Logout-Facebook');
+        // });
+        this.timeout = setTimeout(() => this.hideLoading(), 200);
+        console.log("ERRRRR", error);
+      });
   };
 
   _retrieveData = async () => {
@@ -117,7 +120,16 @@ class SigninByFacebook extends Component {
           <TouchableOpacity
             style={styles.loginWithFacebook}
             onPress={() => {
-              this.fbLogin.login();
+              FBLoginManager.loginWithPermissions(["email", "user_friends"], (error, data) => {
+                if (!error) {
+                  this.onLoginFbSucess(data);
+                } else {
+                  console.log("Error: ", error);
+                }
+              })
+              FBLoginManager.getCredentials((err, data) => {
+                console.log(data,'data')
+              })
             }}
           >
             <Icon name="facebook-f" size={26} color="white" style={styles.iconFacebook} />
@@ -130,11 +142,11 @@ class SigninByFacebook extends Component {
             ref={(fbLogin) => {
               this.fbLogin = fbLogin;
             }}
-            permissions={['email', 'user_photos']}
+            permissions={['email']}
             loginBehavior={FBLoginManager.LoginBehaviors.Native}
-            onLogin={(user) => {
-              this.onLoginFbSucess(user);
-            }}
+            // onLogin={(user) => {
+            //   this.onLoginFbSucess(user);
+            // }}
           />
         </View>
       </View>

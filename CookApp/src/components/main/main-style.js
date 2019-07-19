@@ -5,7 +5,7 @@ import { CSS } from '../../utils/variables';
 export default StyleSheet.create({
   mainContent: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: "center"
     // justifyContent: 'space-around',
   },
   image: {
@@ -13,17 +13,17 @@ export default StyleSheet.create({
     height: 320
   },
   text: {
-    color: 'rgba(255, 255, 255, 0.8)',
-    backgroundColor: 'transparent',
-    textAlign: 'center',
+    color: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "transparent",
+    textAlign: "center",
     paddingHorizontal: 16,
     marginTop: 40
   },
   title: {
     fontSize: 22,
-    color: 'white',
-    backgroundColor: 'transparent',
-    textAlign: 'center',
+    color: "white",
+    backgroundColor: "transparent",
+    textAlign: "center",
     marginTop: 20
   },
   home: {
@@ -48,10 +48,15 @@ export default StyleSheet.create({
   },
   headerTitleStyle: {
     fontSize: 16,
-	fontFamily: CSS.fontBold,
+    fontFamily: CSS.fontBold,
+    color: "#001D12"
   },
   headerTitleContainerStyle: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: "center",
+    shadowRadius: 0,
+    shadowOffset: {
+      height: 0
+    }
   }
 });
