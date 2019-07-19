@@ -59,7 +59,7 @@ class PageSignUp extends Component {
               <Text style={styles.nameApp}>{LANG.APP_NAME}</Text>
             </View>
             <View style={styles.title}>
-              <Text style={styles.titleText}>{LANG.LOGIN_TITLE}</Text>
+              <Text style={styles.titleText}>{LANG.SIGN_UP}</Text>
             </View>
           </View>
           <TextInputRender

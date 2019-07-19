@@ -161,11 +161,20 @@ const UserStack = createStackNavigator({
     }
   },
   OTP: {
-    title: 'Xác thực',
+    
     screen: PageOTP,
     navigationOptions: {
+      title: 'Xác thực',
       tabBarVisible: false,
-      gesturesEnabled: false
+      gesturesEnabled: false,
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft:  <BackButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle ,
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      }
     }
   },
   ConfirmPassword: {
@@ -181,12 +190,20 @@ const UserStack = createStackNavigator({
     }
   },
   ForgotPassword: {
-    title: 'Quên mật khẩu',
     screen: ForgotPasswordPage,
     navigationOptions: {
+      title: 'Quên mật khẩu',
       tabBarVisible: false,
       gesturesEnabled: false,
-    },
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft:  <BackButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle ,
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      }
+    }
   }
 });
 
