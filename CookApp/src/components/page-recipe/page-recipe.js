@@ -24,6 +24,13 @@ export default class PageRecipe extends Component {
     navigationService.navigate('PageSearchRecipe');
   }
 
+  viewMore = (type) => {
+    console.log('TYPE', type);
+    if (type === LANG.COLLECTION) { navigationService.navigate('CollectionList'); }
+    if (type === LANG.COMBO) { navigationService.navigate('ComboList');		}
+    if (type === LANG.RECIPE_HIGHLIGHT) { navigationService.navigate('RecipeHighlightList');		}
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -44,7 +51,7 @@ export default class PageRecipe extends Component {
           />
           <View style={styles.container}>
             <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} notMarginTop={true} />
-            <RecipeHighlightHome recipes={RECIPES} />
+            <RecipeHighlightHome recipes={RECIPES} isHorizontal/>
             <View style={styles.advertisement}>
               <Image style={styles.adverImg} source={img} resizeMode="cover" />
             </View>
