@@ -4,13 +4,14 @@ import { CSS, COLOR } from '../../utils/variables';
 const height = 296;
 const width = 310;
 const paddingContent = 10;
+const widthVer = Dimensions.get('window').width;
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: 'trs',
     borderRadius: 5,
-    marginTop: 15
+    // marginTop: 15
     // marginHorizontal: CSS.padding15
   },
   frame: {
@@ -22,6 +23,16 @@ export default StyleSheet.create({
   },
   endFrame: {
     marginRight: CSS.padding15
+  },
+  frameVer: {
+    height: height + 2 * CSS.padding15,
+    width: widthVer - 2 * CSS.padding15,
+    backgroundColor: COLOR.whiteColor,
+    marginVertical: CSS.padding10,
+    borderRadius: 5
+  },
+  endFrameVer: {
+
   },
   containerTitle: {
     // flex: 1,
@@ -113,11 +124,19 @@ export default StyleSheet.create({
     marginTop: 18,
     marginHorizontal: paddingContent,
     borderRadius: 5,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   recipeIMG: {
     width: '100%',
     height: '100%'
+  },
+  imgVer: {
+    width: widthVer - 2 * CSS.padding15 - 2 * CSS.padding10,
+    height: 140 + 2 * CSS.padding15,
+    marginTop: 18,
+    marginHorizontal: paddingContent,
+    borderRadius: 5,
+    overflow: 'hidden',
   },
   containerChef: {
     position: 'absolute',

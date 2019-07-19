@@ -17,17 +17,6 @@ const TYPE_MODAL = {
 
 class PageOTP extends Component {
 
-  static navigationOptions = {
-    title: 'Xác Thực',
-    headerTitleStyle: {
-      textAlign: 'center',
-      flex: 1,
-      marginLeft: -36,
-      fontSize: 16,
-      fontFamily: 'Nunito',
-    },
-  }
-
   constructor(props, context) {
     super(props, context);
     this.timer = 0;
@@ -154,12 +143,16 @@ class PageOTP extends Component {
           </View>
 
         </View>}
-        <View style={[styles.agreeOtP, CSS.justifyContentCenter, CSS.alignItemsCenter]}>
+        <View style={[styles.agreeOtP, CSS.justifyContentCenter, CSS.alignItemsCenter, CSS.flexRow, {flexWrap: 'wrap'}]}>
           <Text style={[CSS.textAlignCenter, styles.color767676, CSS.fontSize12,
           { fontFamily: CSS.fontText }]}
           >
             Đăng ký đồng nghĩa với việc bạn
-					đồng ý với các của chúng tôi<Text> Điều khoản sử dụng</Text>của chúng tôi</Text>
+					đồng ý với các của chúng tôi</Text>
+          <TouchableOpacity><Text style={[[CSS.textAlignCenter, CSS.fontSize12,
+          { fontFamily: CSS.fontText, color: '#3ABF57'}]]}> Điều khoản sử dụng </Text></TouchableOpacity>
+          <Text style={[[CSS.textAlignCenter, styles.color767676, CSS.fontSize12,
+          { fontFamily: CSS.fontText }]]}>của chúng tôi</Text>
         </View>
         <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
           <TouchableOpacity style={[CSS.buttonText, { width: '100%', height: 40 }, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={this.onPressConfirm}>

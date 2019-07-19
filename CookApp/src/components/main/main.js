@@ -32,12 +32,62 @@ import CollectionList from '../collection-list/collection-list';
 import ComboList from '../combo-list/combo-list';
 import CollectionDetail from '../collection-detail/collection-detail';
 import ComboDetail from '../combo-detail/combo-detail';
+import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
+import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
 import { LANG } from '../../lang/lang';
+import { ROUTES } from '../../utils/routes';
+
+const CollectionListScreen = {
+  screen: CollectionList,
+  navigationOptions: {
+    title: LANG.COLLECTION.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton />,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const RecipeHighlightListScreen = {
+  screen: RecipeHighlightList,
+  navigationOptions: {
+    title: LANG.RECIPE_HIGHLIGHT.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton />,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const ComboListScreen = {
+  screen: ComboList,
+  navigationOptions: {
+    title: LANG.COMBO.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton />,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const CollectionDetailScreen = {
+  screen: CollectionDetail,
+  navigationOptions: {
+    headerLeft: <BackButton opacity={0} oppositeOpacity={1} />,
+    headerTransparent: true
+  }
+};
+
+const ComboDetailScreen = {
+  screen: ComboDetail,
+  navigationOptions: {
+    headerLeft: <BackButton />,
+    headerTransparent: true
+  }
+};
 
 const HomeStack = createStackNavigator({
-  // Defination of Navigaton from home screen
   Home: {
-    title: 'Trang chu',
     screen: PageHome,
     navigationOptions: {
       header: null
@@ -45,40 +95,11 @@ const HomeStack = createStackNavigator({
   },
   Details: { screen: PageDetail },
   Search: { screen: PageSearch },
-  CollectionList: { 
-    screen: CollectionList,
-    navigationOptions: {      
-      title: 'Bộ Sưu Tập',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft: <BackButton />,
-      headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle
-    }
-  },
-  ComboList: { 
-    screen: ComboList,
-    navigationOptions: {      
-      title: 'Combo món',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft:  <BackButton />,
-      headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle 
-    }
-  },
-  CollectionDetail: {
-    screen: CollectionDetail,
-    navigationOptions: {
-      headerLeft: <BackButton opacity={0} oppositeOpacity={1}/>,
-      headerTransparent: true
-    }
-  },
-  ComboDetail: {
-    screen: ComboDetail,
-    navigationOptions: {
-      headerLeft: <BackButton/>,
-      headerTransparent: true
-    }
-  }
+  [ROUTES.collectionList.key]: CollectionListScreen,
+  [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
+  [ROUTES.comboList.key]: ComboListScreen,
+  [ROUTES.collectionDetail.key]: CollectionDetailScreen,
+  [ROUTES.comboDetail.key]: ComboDetailScreen
 });
 
 const StoreStack = createStackNavigator({
@@ -92,19 +113,24 @@ const StoreStack = createStackNavigator({
   Details: { screen: PageDetail },
   Profile: { screen: PageProfile }
 });
+
 const RecipeStack = createStackNavigator({
-  Recipe: { 
+  Recipe: {
     screen: PageRecipe,
+    // screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
     }
-   },
-   Details: { 
-    screen: PageDetail,
+  },
+  PageSearchRecipe: {
+    screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
     }
-   },
+  },
+  [ROUTES.collectionList.key]: CollectionListScreen,
+  [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
+  [ROUTES.comboList.key]: ComboListScreen,
 });
 
 const NotiStack = createStackNavigator({
@@ -135,11 +161,20 @@ const UserStack = createStackNavigator({
     }
   },
   OTP: {
-    title: 'Xác thực',
+    
     screen: PageOTP,
     navigationOptions: {
+      title: 'Xác thực',
       tabBarVisible: false,
-      gesturesEnabled: false
+      gesturesEnabled: false,
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft:  <BackButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle ,
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      }
     }
   },
   ConfirmPassword: {
@@ -155,12 +190,20 @@ const UserStack = createStackNavigator({
     }
   },
   ForgotPassword: {
-    title: 'Quên mật khẩu',
     screen: ForgotPasswordPage,
     navigationOptions: {
+      title: 'Quên mật khẩu',
       tabBarVisible: false,
       gesturesEnabled: false,
-    },
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft:  <BackButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle ,
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      }
+    }
   }
 });
 
@@ -185,6 +228,7 @@ UserStack.navigationOptions = ({ navigation }) => {
     tabBarVisible
   };
 };
+
 RecipeStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
@@ -195,42 +239,44 @@ RecipeStack.navigationOptions = ({ navigation }) => {
     tabBarVisible
   };
 };
+
 const bottomTabNav = createBottomTabNavigator(
   {
-    Home: { 
-      screen: HomeStack, 
-      navigationOptions: 
+    Home: {
+      screen: HomeStack,
+      // screen: RecipeStack, 
+      navigationOptions:
       {
         tabBarLabel: LANG.HOME
-      } 
+      }
     },
-    Store: { 
-      screen: StoreStack ,
-      navigationOptions: 
+    Store: {
+      screen: StoreStack,
+      navigationOptions:
       {
         tabBarLabel: LANG.STORE
-      } 
+      }
     },
-    Recipe: { 
+    Recipe: {
       screen: RecipeStack,
-      navigationOptions: 
+      navigationOptions:
       {
         tabBarLabel: LANG.RECIPE_TAB
-      } 
+      }
     },
-    Notification: { 
+    Notification: {
       screen: NotiStack,
-      navigationOptions: 
+      navigationOptions:
       {
         tabBarLabel: LANG.NOTI
-      } 
+      }
     },
-    User: { 
+    User: {
       screen: UserStack,
       navigationOptions:
       {
         tabBarLabel: LANG.USER
-      } 
+      }
     }
   },
   {
@@ -242,30 +288,30 @@ const bottomTabNav = createBottomTabNavigator(
         let number = 0;
         // eslint-disable-next-line default-case
         switch (routeName) {
-        case 'Home':
-          iconImg = focused ? IMG.homeActive : IMG.home;
-          iconStyle = styles.home;
-          break;
-        case 'Store':
-          iconImg = focused ? IMG.storeActive : IMG.store;
-          iconStyle = styles.store;
-          break;
-        case 'Recipe':
-          iconImg = focused ? IMG.recipeActive : IMG.recipe;
-          iconStyle = styles.recipe;
-          break;
-        case 'Notification':
-          number = 3;
-          iconImg = focused ? IMG.bellActive : IMG.bell;
-          iconStyle = styles.bell;
-          break;
-        case 'User':
-          iconImg = focused ? IMG.individualActive : IMG.individual;
-          iconStyle = styles.individual;
-          break;
+          case 'Home':
+            iconImg = focused ? IMG.homeActive : IMG.home;
+            iconStyle = styles.home;
+            break;
+          case 'Store':
+            iconImg = focused ? IMG.storeActive : IMG.store;
+            iconStyle = styles.store;
+            break;
+          case 'Recipe':
+            iconImg = focused ? IMG.recipeActive : IMG.recipe;
+            iconStyle = styles.recipe;
+            break;
+          case 'Notification':
+            number = 3;
+            iconImg = focused ? IMG.bellActive : IMG.bell;
+            iconStyle = styles.bell;
+            break;
+          case 'User':
+            iconImg = focused ? IMG.individualActive : IMG.individual;
+            iconStyle = styles.individual;
+            break;
         }
 
-        return <IconWithNumber iconImg={iconImg} iconStyle={iconStyle} number={number}/>;
+        return <IconWithNumber iconImg={iconImg} iconStyle={iconStyle} number={number} />;
       }
     }),
     tabBarOptions: {
