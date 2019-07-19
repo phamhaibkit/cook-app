@@ -8,17 +8,6 @@ export default StyleSheet.create({
     backgroundColor: COLOR.backgroundColor,
     paddingBottom: 25
   },
-  advertisement: {
-    marginTop: 30,
-    height: 120,
-    marginHorizontal: CSS.padding15,
-    borderRadius: 10,
-    overflow: 'hidden'
-  },
-  adverImg: {
-    height: 120,
-    width: null
-  },
   wrapContent: {
     paddingLeft: CSS.padding15
   }

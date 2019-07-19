@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flex: 1,
     // backgroundColor: 'trs',
     borderRadius: 5,
-    marginTop: 15
+    // marginTop: 15
     // marginHorizontal: CSS.padding15
   },
   frame: {
@@ -25,10 +25,10 @@ export default StyleSheet.create({
     marginRight: CSS.padding15
   },
   frameVer: {
-    height: height,
-    width: widthVer,
+    height: height + 2 * CSS.padding15,
+    width: widthVer - 2 * CSS.padding15,
     backgroundColor: COLOR.whiteColor,
-    marginTop: CSS.padding15,
+    marginVertical: CSS.padding10,
     borderRadius: 5
   },
   endFrameVer: {
@@ -125,16 +125,14 @@ export default StyleSheet.create({
     marginHorizontal: paddingContent,
     borderRadius: 5,
     overflow: 'hidden',
-    borderColor: 'red',
-    borderWidth: 2
   },
   recipeIMG: {
     width: '100%',
     height: '100%'
   },
   imgVer: {
-    width: widthVer - 30 - 20,
-    height: 140,
+    width: widthVer - 2 * CSS.padding15 - 2 * CSS.padding10,
+    height: 140 + 2 * CSS.padding15,
     marginTop: 18,
     marginHorizontal: paddingContent,
     borderRadius: 5,

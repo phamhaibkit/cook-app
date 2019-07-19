@@ -10,7 +10,7 @@ export default class ViewMoreHome extends Component {
     const marginTopDis = notMarginTop == true ? [styles.containerlabel, styles.marginTop] : styles.containerlabel;
     return (
       <View style={marginTopDis}>
-        <Text style={styles.labelText}>{type && type.name}</Text>
+        <Text style={styles.labelText}>{type && type.name.toUpperCase()}</Text>
         <TouchableOpacity
           style={styles.textButton}
           onPress={() => {

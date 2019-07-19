@@ -12,6 +12,7 @@ import { RECIPES } from '../../models/data';
 import styles from './page-recipe-style';
 import { IMG, COLOR } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 const img = {
   uri:
@@ -25,17 +26,26 @@ export default class PageRecipe extends Component {
   }
 
   viewMore = (type) => {
-    console.log('TYPE', type);
-    if (type === LANG.COLLECTION) { navigationService.navigate('CollectionList'); }
-    if (type === LANG.COMBO) { navigationService.navigate('ComboList');		}
-    if (type === LANG.RECIPE_HIGHLIGHT) { navigationService.navigate('RecipeHighlightList');		}
+    switch (type) {
+    case LANG.COLLECTION:
+      navigationService.navigate(ROUTES.collectionList.key);
+      break;
+    case LANG.COMBO:
+      navigationService.navigate(ROUTES.comboList.key);
+      break;
+    case LANG.RECIPE_HIGHLIGHT:
+      navigationService.navigate(ROUTES.recipeHighlightList.key);
+      break;
+    default:
+      break;
+    }
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.contanerSearch}>
-          <SearchBarHeader onPress={this.onPressSearch}/>
+          <SearchBarHeader onPress={this.onPressSearch} />
         </View>
         <ScrollView>
           <TouchableOpacity style={styles.upRecipeView}>
@@ -51,7 +61,7 @@ export default class PageRecipe extends Component {
           />
           <View style={styles.container}>
             <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} notMarginTop={true} />
-            <RecipeHighlightHome recipes={RECIPES} isHorizontal/>
+            <RecipeHighlightHome recipes={RECIPES} isHorizontal />
             <View style={styles.advertisement}>
               <Image style={styles.adverImg} source={img} resizeMode="cover" />
             </View>
