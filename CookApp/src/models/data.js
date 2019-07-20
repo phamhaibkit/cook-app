@@ -405,9 +405,22 @@ export const RECIPE_CATEGORY = [
 	{ id: 10, title: 'Bún-Mỳ-Phở', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 ];
 
-export const COLLECTION_DETAIL = [
-  {
+export const COLLECTION_DETAIL = {
     id: 1,
+    sliderImages: [
+      {
+        id: 1,
+        sliderImgSrc: require('../../assets/collections/collection-1.png')
+      },
+      {
+        id: 2,
+        sliderImgSrc: require('../../assets/collections/collection-1.png')
+      } ,
+      {
+        id: 3,
+        sliderImgSrc: require('../../assets/collections/collection-1.png')
+      } 
+    ],
     collectionTitle: 'Những món ăn giành cho những ngày đầu mùa mưa',
     collectionDescription: 'Với những ngày mưa bão như thế này, hãy chế biến các món ăn đơn giản, ấm nóng, đậm đà cho cả nhà thưởng thức.',
     saves: 200,
@@ -440,5 +453,55 @@ export const COLLECTION_DETAIL = [
         views: 1500
       }
     ]    
-  }
-]
+}
+
+export const COMBO_DETAIL = {
+  id: 1,
+  sliderImages: [
+    {
+      id: 1,
+      sliderImgSrc: require('../../assets/collections/collection-1.png')
+    },
+    {
+      id: 2,
+      sliderImgSrc: require('../../assets/collections/collection-1.png')
+    } ,
+    {
+      id: 3,
+      sliderImgSrc: require('../../assets/collections/collection-1.png')
+    } 
+  ],
+  comboTitle: 'Những món ăn giành cho những ngày đầu mùa mưa',
+  collectionDescription: 'Với những ngày mưa bão như thế này, hãy chế biến các món ăn đơn giản, ấm nóng, đậm đà cho cả nhà thưởng thức.',
+  saves: 200,
+  numberOfRecipes: 20,
+  recipesDetail: [
+    {
+      id: 1,
+      title: 'Mì udon súp miso và thịt heo cay',
+      duration: 60,
+      price: 150000,
+      numberPeople: 1,
+      chefName: 'Hoàng Thị Kiều Nga',
+      chefRank: '',
+      likes: 498,
+      comments: 200,
+      shares: 200,
+      views: 1500
+    },
+    {
+      id: 2,
+      title: 'Heo quay Lạng Sơn',
+      duration: 60,
+      price: 150000,
+      numberPeople: 1,
+      chefName: 'Hoàng Thị Kiều Nga',
+      chefRank: '',
+      likes: 498,
+      comments: 200,
+      shares: 200,
+      views: 1500
+    }
+  ]    
+}
+

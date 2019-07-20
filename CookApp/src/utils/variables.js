@@ -49,6 +49,8 @@ export const IMG = {
   individualActive: require('../../assets/icons/individual-active.png'),
   upRecipe: require('../../assets/icons/up-recipe.png'),
   recipeSolid: require('../../assets/icons/recipe-solid.png'),
+  substractSign: require('../../assets/icons/substract-sign.png'),
+  plusSign: require('../../assets/icons/plus-sign.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -124,6 +126,9 @@ export const CSS = {
   },
   fontQuiRegular: {
     fontFamily: 'Quicksand-Regular'
+  },
+  fontQuiMedium: {
+    fontFamily: 'Quicksand-Medium',
   },
   fontQuiBook: {
     fontFamily: 'Quicksand_Book'

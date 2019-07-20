@@ -34,6 +34,7 @@ import CollectionDetail from '../collection-detail/collection-detail';
 import ComboDetail from '../combo-detail/combo-detail';
 import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
+import CartHome from '../cart-home/cart-home';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 
@@ -64,7 +65,7 @@ const ComboListScreen = {
   navigationOptions: {
     title: LANG.COMBO.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton />,
+    headerLeft: <BackButton isGreen/>,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
