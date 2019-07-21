@@ -78,8 +78,8 @@ export const LANG_VN = {
   SELECT_INGREDIENT_FOR_MEAL: 'Chọn mua nguyên liệu cho các món',
   SELECT_ALL: 'Chọn tất cả',
   MEAL: 'Khẩu phần',
-  MEAL_LOWERCASE: 'khẩu phần',
   ESTIMATE_PRICE: 'Giá ước lượng',
   ESTIMATE_PRICE_LOWERCASE: 'giá ước lượng',
-  COOKING_INSTRUCTIONS: 'HƯỚNG DẪN NẤU'
+  COOKING_INSTRUCTIONS: 'HƯỚNG DẪN NẤU',
+  OPTIONAL_MEAL: 'Có thể chọn lại khẩu phần khi mua nguyên liệu'
 };

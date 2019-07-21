@@ -51,6 +51,7 @@ export const IMG = {
   recipeSolid: require('../../assets/icons/recipe-solid.png'),
   substractSign: require('../../assets/icons/substract-sign.png'),
   plusSign: require('../../assets/icons/plus-sign.png'),
+  checkedIcon: require('../../assets/icons/checked-icon.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -194,7 +195,16 @@ export const CSS = {
   fontSize11: {
     fontSize: 11,
   },
-  lightBoxShadow: '0px 3px 40px rgba(0, 0, 0, 0.1)',
+  lightBoxShadow: {
+    shadowColor: '#123456',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
   borderRadius5: {
     borderRadius: 5
   },
@@ -226,6 +236,7 @@ export const COLOR = {
   blackColor: '#000000',
   lineColor: '#D3D3D3',
   lineHoriColor: '#E9E9E9',
+  lightGrayColor: '#C8C8C8',
   gradientBlackTopColor: 'rgba(0, 16, 8, 0)',
   gradientBlackBottomColor: 'rgba(0, 16, 8, 0.65)',
   greenSelling: '#7BCC46',

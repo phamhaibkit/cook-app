@@ -471,37 +471,37 @@ export const COMBO_DETAIL = {
       sliderImgSrc: require('../../assets/collections/collection-1.png')
     } 
   ],
-  comboTitle: 'Những món ăn giành cho những ngày đầu mùa mưa',
-  collectionDescription: 'Với những ngày mưa bão như thế này, hãy chế biến các món ăn đơn giản, ấm nóng, đậm đà cho cả nhà thưởng thức.',
-  saves: 200,
-  numberOfRecipes: 20,
-  recipesDetail: [
+  comboTitle: 'Thịt bò xào khoai tây + Mì udon súp miso và thịt heo + Canh rong biển',
+  orders: 498,
+  views: 200,
+  promotions: [
+    'Có hỗ trợ giao hàng nhanh',
+    'Có sản phẩm đang được khuyến mãi'
+  ],
+  ingredients: [
     {
       id: 1,
-      title: 'Mì udon súp miso và thịt heo cay',
-      duration: 60,
-      price: 150000,
-      numberPeople: 1,
-      chefName: 'Hoàng Thị Kiều Nga',
-      chefRank: '',
-      likes: 498,
-      comments: 200,
-      shares: 200,
-      views: 1500
+      ingredientName: 'Thịt bò xào khoai tây',
+      amountOfPeople: 1,
+      price: 150000
     },
     {
       id: 2,
-      title: 'Heo quay Lạng Sơn',
-      duration: 60,
-      price: 150000,
-      numberPeople: 1,
-      chefName: 'Hoàng Thị Kiều Nga',
-      chefRank: '',
-      likes: 498,
-      comments: 200,
-      shares: 200,
-      views: 1500
+      ingredientName: 'Mì udon súp miso và thịt heo',
+      amountOfPeople: 1,
+      price: 135000
+    },
+    {
+      id: 3,
+      ingredientName: 'Canh rong biển',
+      amountOfPeople: 1,
+      price: 170000
     }
-  ]    
+  ],
+  cookingInstructions: [
+    { id: 1, title: 'Thịt bò xào khoai tây', chef: 'Hoang Kieu Nga', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
+    { id: 2, title: 'Mì udon súp miso và thịt heo', chef: 'Binh Tang', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
+    { id: 3, title: 'Canh rong biển', chef: 'Binh Tang', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' }
+  ]
 }
 
