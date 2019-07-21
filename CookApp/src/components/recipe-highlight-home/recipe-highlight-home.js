@@ -13,12 +13,15 @@ import Advertiment from '../advertiment/advertiment';
 import { IMG } from '../../utils/variables';
 import styles from './recipe-highlight-home-style';
 import { LANG } from '../../lang/lang';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 export default class RecipeHighlightHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isModalVisible: false
+      isModalVisible: false,
+      recipe: {}
     };
   }
 
@@ -27,11 +30,18 @@ export default class RecipeHighlightHome extends Component {
     alert('AAAAAAAAAAA');
   };
 
-  openReport = () => {
+  openReport = (item) => {
     this.setState({
-      isModalVisible: true
+      isModalVisible: true,
+      recipe: item
     });
   };
+
+  openReportPage = () => {
+    const { recipe } = this.state;
+    this.closeReport();
+    navigationService.navigate(ROUTES.pageReportRecipe.key, {recipe})
+  }
 
   closeReport = () => {
     this.setState({
@@ -57,7 +67,7 @@ export default class RecipeHighlightHome extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.reportView}
-              onPress={this.openReport}
+              onPress={() => {this.openReport(item)}}
             >
               <Image style={styles.dotImg} source={IMG.reportHome} />
             </TouchableOpacity>
@@ -187,8 +197,8 @@ export default class RecipeHighlightHome extends Component {
             <TouchableOpacity style={styles.barButton} onPress={this.closeReport}>
               <Image source={IMG.modalBar} style={styles.modalImg} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.reportRow}>
-              <Image source={IMG.reportRecipe} style={styles.reportImg} />
+            <TouchableOpacity style={styles.reportRow}  onPress={this.openReportPage}>
+              <Image source={IMG.reportRecipe} style={styles.reportImg}/>
               <Text style={styles.reportText}>{LANG.REPORT_RECIPE}</Text>
             </TouchableOpacity>
             <View style={styles.lineReport} />

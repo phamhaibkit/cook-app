@@ -28,7 +28,7 @@ export default class Trending extends Component {
         : styles.frame;
     return (
       <TouchableWithoutFeedback onPress={this.onPress}>
-        <View style={endStyle}>
+        <View style={index === 0 ? [endStyle, {marginLeft: 15}] : endStyle}>
           <View style={styles.square}>
             <Image
               style={styles.img}
@@ -37,7 +37,7 @@ export default class Trending extends Component {
             />
           </View>
           <View style={styles.containerText}>
-            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text} numberOfLines={2}>{item.name}</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
