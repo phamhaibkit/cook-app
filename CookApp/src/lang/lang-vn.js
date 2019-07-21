@@ -61,7 +61,8 @@ export const LANG_VN = {
   ADD_TO_CART: 'Thêm vào giỏ hàng',
   SAVE: 'lưu lại',
   ORDER_OWNER: 'người đặt',
-  VIEW: 'Xem',
+  VIEW: 'xem',
+  VIEW_CAPITALIZE: 'Xem',
   MINUTE: 'phút',
   COMMENT: 'bình luận',
   SHARE: 'chia sẻ',
@@ -73,4 +74,14 @@ export const LANG_VN = {
   SPACE: ' ',
   REPORT_RECIPE: 'Báo cáo công thức',
   CLOSE: 'Đóng'
+  PROMOTION_INFO: 'THÔNG TIN KHUYẾN MÃI',
+  INGREDIENT: 'NGUYÊN LIỆU',
+  BUY_INGREDIENT: 'Mua nguyên liệu',
+  SELECT_INGREDIENT_FOR_MEAL: 'Chọn mua nguyên liệu cho các món',
+  SELECT_ALL: 'Chọn tất cả',
+  MEAL: 'Khẩu phần',
+  ESTIMATE_PRICE: 'Giá ước lượng',
+  ESTIMATE_PRICE_LOWERCASE: 'giá ước lượng',
+  COOKING_INSTRUCTIONS: 'HƯỚNG DẪN NẤU',
+  OPTIONAL_MEAL: 'Có thể chọn lại khẩu phần khi mua nguyên liệu'
 };

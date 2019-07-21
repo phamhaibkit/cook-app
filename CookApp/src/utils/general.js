@@ -20,11 +20,11 @@ export async function setUserInfo(userInfo, token) {
 }
 
 /**
- * Capitalize and return first character of string
- * @param {string} string : string to get first capitalize character
+ * Capitalize first character of string
+ * @param {string} string: string to capitalize
  */
-export function capitalizeFirst(string) {
-  return string && string.charAt(0).toUpperCase();
+export function capitalize(string) {
+	return string && string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /**
@@ -34,4 +34,12 @@ export function capitalizeFirst(string) {
  */
 export function createBriefName(fisrtname, lastname) {
   return capitalizeFirst(fisrtname) + capitalizeFirst(lastname);
+}
+
+/**
+ * Print a number with dot as thousands separators
+ * @param {Number} number
+ */
+export function formatNumberWithDot(number) {
+  return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 }

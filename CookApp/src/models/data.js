@@ -405,9 +405,22 @@ export const RECIPE_CATEGORY = [
 	{ id: 10, title: 'Bún-Mỳ-Phở', recipes: '25 công thức', saves: '200 lưu lại', link: 'https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/12/coffee-komboucha.jpg' },
 ];
 
-export const COLLECTION_DETAIL = [
-  {
+export const COLLECTION_DETAIL = {
     id: 1,
+    sliderImages: [
+      {
+        id: 1,
+        sliderImgSrc: require('../../assets/collections/collection-1.png')
+      },
+      {
+        id: 2,
+        sliderImgSrc: require('../../assets/collections/collection-1.png')
+      } ,
+      {
+        id: 3,
+        sliderImgSrc: require('../../assets/collections/collection-1.png')
+      } 
+    ],
     collectionTitle: 'Những món ăn giành cho những ngày đầu mùa mưa',
     collectionDescription: 'Với những ngày mưa bão như thế này, hãy chế biến các món ăn đơn giản, ấm nóng, đậm đà cho cả nhà thưởng thức.',
     saves: 200,
@@ -440,5 +453,55 @@ export const COLLECTION_DETAIL = [
         views: 1500
       }
     ]    
-  }
-]
+}
+
+export const COMBO_DETAIL = {
+  id: 1,
+  sliderImages: [
+    {
+      id: 1,
+      sliderImgSrc: require('../../assets/collections/collection-1.png')
+    },
+    {
+      id: 2,
+      sliderImgSrc: require('../../assets/collections/collection-1.png')
+    } ,
+    {
+      id: 3,
+      sliderImgSrc: require('../../assets/collections/collection-1.png')
+    } 
+  ],
+  comboTitle: 'Thịt bò xào khoai tây + Mì udon súp miso và thịt heo + Canh rong biển',
+  orders: 498,
+  views: 200,
+  promotions: [
+    'Có hỗ trợ giao hàng nhanh',
+    'Có sản phẩm đang được khuyến mãi'
+  ],
+  ingredients: [
+    {
+      id: 1,
+      ingredientName: 'Thịt bò xào khoai tây',
+      amountOfPeople: 1,
+      price: 150000
+    },
+    {
+      id: 2,
+      ingredientName: 'Mì udon súp miso và thịt heo',
+      amountOfPeople: 1,
+      price: 135000
+    },
+    {
+      id: 3,
+      ingredientName: 'Canh rong biển',
+      amountOfPeople: 1,
+      price: 170000
+    }
+  ],
+  cookingInstructions: [
+    { id: 1, title: 'Thịt bò xào khoai tây', chef: 'Hoang Kieu Nga', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
+    { id: 2, title: 'Mì udon súp miso và thịt heo', chef: 'Binh Tang', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
+    { id: 3, title: 'Canh rong biển', chef: 'Binh Tang', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' }
+  ]
+}
+
