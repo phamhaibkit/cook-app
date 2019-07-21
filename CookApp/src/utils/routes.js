@@ -35,6 +35,8 @@ export const ROUTES = {
   comboDetail: {
     key: 'comboDetail'
   },
-
+  pageReportRecipe: {
+    key: 'pageReportRecipe'
+  }
 
 };

@@ -72,6 +72,8 @@ export const LANG_VN = {
   CANCEL: 'Hủy',
   BEST_SEARCH: 'Tìm nhiều nhất',
   SPACE: ' ',
+  REPORT_RECIPE: 'Báo cáo công thức',
+  CLOSE: 'Đóng'
   PROMOTION_INFO: 'THÔNG TIN KHUYẾN MÃI',
   INGREDIENT: 'NGUYÊN LIỆU',
   BUY_INGREDIENT: 'Mua nguyên liệu',

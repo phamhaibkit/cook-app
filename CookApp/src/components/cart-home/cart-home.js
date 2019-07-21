@@ -23,10 +23,11 @@ export default class CartHome extends Component {
 						alignItems: 'center',
 						justifyContent: 'center',
 						borderWidth: 2,
-						borderColor: COLOR.whiteColor
+						borderColor: COLOR.whiteColor,
+						borderRadius: 9,
 					}}
 				>
-					<Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>3</Text>
+					<Text style={{ color: COLOR.whiteColor, fontSize: 10, fontWeight: 'bold' }}>3</Text>
 				</View>
 			</TouchableOpacity>
 		);

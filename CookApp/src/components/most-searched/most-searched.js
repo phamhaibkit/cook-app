@@ -14,7 +14,7 @@ export default class MostSearched extends Component {
         marginHorizontal: 15,
         marginVertical: 5,
         borderRadius: 5,
-        shadowColor: '#123456',
+        shadowColor: 'grey',
         shadowOffset: {
           width: 0,
           height: 3,

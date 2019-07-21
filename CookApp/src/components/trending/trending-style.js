@@ -10,7 +10,7 @@ export default StyleSheet.create({
     flex: 1
   },
   containerTrending: {
-    paddingLeft: 6
+    // marginLeft: 6
   },
   frame: {
     height: heightTreding,

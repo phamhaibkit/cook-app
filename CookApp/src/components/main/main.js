@@ -34,6 +34,7 @@ import CollectionDetail from '../collection-detail/collection-detail';
 import ComboDetail from '../combo-detail/combo-detail';
 import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
+import PageReportRecipe from '../page-report-recipe/page-report-recipe';
 import CartHome from '../cart-home/cart-home';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
@@ -87,6 +88,17 @@ const ComboDetailScreen = {
   }
 };
 
+const PageReportRecipeScreen = {
+  screen: PageReportRecipe,
+  navigationOptions: {
+    title: LANG.REPORT_RECIPE,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton />,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
 const HomeStack = createStackNavigator({
   Home: {
     screen: PageHome,
@@ -94,13 +106,13 @@ const HomeStack = createStackNavigator({
       header: null
     }
   },
-  Details: { screen: PageDetail },
   Search: { screen: PageSearch },
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.collectionDetail.key]: CollectionDetailScreen,
-  [ROUTES.comboDetail.key]: ComboDetailScreen
+  [ROUTES.comboDetail.key]: ComboDetailScreen,
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
 });
 
 const StoreStack = createStackNavigator({
@@ -132,6 +144,7 @@ const RecipeStack = createStackNavigator({
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
 });
 
 const NotiStack = createStackNavigator({

@@ -49,6 +49,9 @@ export const IMG = {
   individualActive: require('../../assets/icons/individual-active.png'),
   upRecipe: require('../../assets/icons/up-recipe.png'),
   recipeSolid: require('../../assets/icons/recipe-solid.png'),
+  modalBar: require('../../assets/icons/modalBar.png'),
+  reportRecipe: require('../../assets/icons/report-recipe.png'),
+  closeReport: require('../../assets/icons/close-report.png'),
   substractSign: require('../../assets/icons/substract-sign.png'),
   plusSign: require('../../assets/icons/plus-sign.png'),
   checkedIcon: require('../../assets/icons/checked-icon.png'),
@@ -63,15 +66,6 @@ export default {
   ASYNC_STORAGE,
   CSS,
   COLOR,
-};
-
-export const userDefault = {
-  avatar: require('../../assets/tet.jpg'),
-  recipeAmount: 3,
-  followerAmount: 20,
-  description: 'Ai mà biết được đời sẽ ra sao. Nên là, hãy ăn món tráng miệng trước ',
-  followingAmount: 50,
-  rank: true,
 };
 
 export const CSS = {
@@ -247,7 +241,8 @@ export const COLOR = {
   blackName: '#001D12',
   dateEvent: '#FF8A00',
   appNameIos: '#06AF48',
-  searchBarIos: '#F8F8F8'
+  searchBarIos: '#F8F8F8',
+  blackReport: '#444444'
 };
 
 export const ACTION = {
