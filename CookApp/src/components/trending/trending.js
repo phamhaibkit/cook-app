@@ -14,55 +14,7 @@ import { COLOR } from "../../utils/variables";
 export default class Trending extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.data = [
-      {
-        key: "Sản phẩm khuyến mãi ",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/pickles.jpg"
-      },
-      {
-        key: "Bán chạy",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/rhubarb-cordial_0.jpg"
-      },
-      {
-        key: "Mâm cơm việt",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/poke_0.jpg"
-      },
-      {
-        key: "BST hot",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/gts-together.png"
-      },
-      {
-        key: "Công thức",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/tea.jpg"
-      },
-      {
-        key: "Tốp thành viên",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/foraging-main.jpg"
-      },
-      {
-        key: "Điểm hoạt động",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/impossible.jpg"
-      },
-      {
-        key: "CCC ",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/plant-based-diet-guide-main-image-700-350.jpg"
-      },
-      {
-        key: "DDD ",
-        link:
-          "https://www.bbcgoodfood.com/sites/default/files/editor_files/2018/01/potatoes.jpg"
-      }
-    ];
-    this.label = "Bộ Sưu Tập";
+    // this.state = {trending: this.props.data};
   }
 
   onPress = () => {
@@ -70,8 +22,8 @@ export default class Trending extends Component {
   };
 
   renderFrame = (item, index) => {
-    const endStyle =
-      this.data.length - 1 === index
+    const {data} = this.props;
+    const endStyle = data.length - 1=== index
         ? [styles.frame, styles.endFrame]
         : styles.frame;
     return (
@@ -85,7 +37,7 @@ export default class Trending extends Component {
             />
           </View>
           <View style={styles.containerText}>
-            <Text style={styles.text}>{item.key}</Text>
+            <Text style={styles.text}>{item.name}</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -93,6 +45,7 @@ export default class Trending extends Component {
   };
 
   render() {
+    const {data} = this.props;
     const colorHeader =
       Platform.OS === "ios"
         ? ["white", "white"]
@@ -123,10 +76,11 @@ export default class Trending extends Component {
         {linearIos}
         <View style={styles.containerTrending}>
           <FlatList
-            data={this.data}
+            data={data}
             renderItem={({ item, index }) => this.renderFrame(item, index)}
             horizontal
             showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
           />
         </View>
       </View>

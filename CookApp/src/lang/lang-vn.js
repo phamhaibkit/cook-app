@@ -70,5 +70,7 @@ export const LANG_VN = {
   LIKE: 'thích',
   CANCEL: 'Hủy',
   BEST_SEARCH: 'Tìm nhiều nhất',
-  SPACE: ' '
+  SPACE: ' ',
+  REPORT_RECIPE: 'Báo cáo công thức',
+  CLOSE: 'Đóng'
 };

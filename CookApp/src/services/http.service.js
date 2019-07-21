@@ -5,15 +5,16 @@ import _ from 'lodash';
 
 const CancelToken = axios.CancelToken;
 
+const TEST = true;
+
 export const DEFAULT_TOKEN = 'b1ja8rrbc5uinw55lmrnxaqb4o9sh8k6';
-let TEST = 'cheat';
 const configObj = {
 	baseURL: TEST ? 'http://' : 'https://',
-	headers: {
-		Accept: 'application/json',
-		'Content-Type': 'application/json',
-		Authorization: 'Bearer ' + DEFAULT_TOKEN,
-	},
+	// headers: {
+	// 	Accept: 'application/json',
+	// 	'Content-Type': 'application/json',
+	// 	Authorization: 'Bearer ' + DEFAULT_TOKEN,
+	// },
 };
 
 class HTTPService {

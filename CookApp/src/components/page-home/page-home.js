@@ -16,8 +16,32 @@ import styles from './page-home-style';
 import { RECIPES, RECIPES_LOVED } from '../../models/data';
 import { CSS } from '../../utils/variables';
 import { ROUTES } from '../../utils/routes';
+import homeService from '../../services/home.service';
+import _ from 'lodash';
 
 export default class PageHome extends Component {
+  constructor(props) {
+		super(props);
+		this.state = {
+      ...homeService.homeData
+		};
+
+	}
+  componentDidMount() {
+		// this.showLoading();
+		this.getHome();
+  }
+
+  getHome = () => {
+    homeService.getHome().then(() => {
+      console.log('AAAAAAAAAAAAAAAAAAAAa');
+      const data = _.cloneDeep(homeService.homeData);
+      this.setState({
+        ...data
+      })
+    })
+  }
+  
   viewMore = (type) => {
     switch (type) {
     case LANG.COLLECTION:
@@ -39,15 +63,18 @@ export default class PageHome extends Component {
   }
 
   render() {
+    console.log('Render===', this.state);
+    const { trending, recipeHighlight, likedRecipe } = this.state;
+
     return (
       <ContainerScroll>
         <View style={styles.container}>
-          <Trending />
+          <Trending data={trending}/>
           <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
           <CollectionHome />
           <Advertiment paddingHori={CSS.padding15}/>
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
-          <RecipeHighlightHome recipes={RECIPES} isHorizontal marTop={CSS.padding15}/>
+          <RecipeHighlightHome recipes={recipeHighlight} isHorizontal marTop={CSS.padding15}/>
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
           <ComboHome />
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
@@ -56,7 +83,7 @@ export default class PageHome extends Component {
           <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
           <FollowingHome />
           <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
-          <RecipeHighlightHome recipes={RECIPES_LOVED} isHorizontal marTop={CSS.padding15}/>
+          <RecipeHighlightHome recipes={likedRecipe} isHorizontal marTop={CSS.padding15}/>
           <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
           <NewsEvent newsEvent={RECIPES_LOVED} />
         </View>
