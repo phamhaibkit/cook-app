@@ -73,7 +73,7 @@ export const LANG_VN = {
   BEST_SEARCH: 'Tìm nhiều nhất',
   SPACE: ' ',
   REPORT_RECIPE: 'Báo cáo công thức',
-  CLOSE: 'Đóng'
+  CLOSE: 'Đóng',
   PROMOTION_INFO: 'THÔNG TIN KHUYẾN MÃI',
   INGREDIENT: 'NGUYÊN LIỆU',
   BUY_INGREDIENT: 'Mua nguyên liệu',
