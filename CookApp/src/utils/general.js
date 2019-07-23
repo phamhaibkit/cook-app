@@ -24,7 +24,7 @@ export async function setUserInfo(userInfo, token) {
  * @param {string} string: string to capitalize
  */
 export function capitalize(string) {
-	return string && string.charAt(0).toUpperCase() + string.slice(1);
+  return string && string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /**
@@ -42,4 +42,23 @@ export function createBriefName(fisrtname, lastname) {
  */
 export function formatNumberWithDot(number) {
   return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+}
+
+/**
+ * Get currency string from number
+ * @param {number} inputNumber: number to get currency string
+ */
+export function getCurrencyStr(num) {
+  const array = num.toString().split('');
+  let index = -3;
+  while (array.length + index > 0) {
+    array.splice(index, 0, '.');
+    // Decrement by 4 since we just added another unit to the array.
+    index -= 4;
+  }
+  return array.join('') + ' đ';
+}
+
+export function kFormatter(num) {
+  return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }

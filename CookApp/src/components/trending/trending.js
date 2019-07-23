@@ -32,7 +32,7 @@ export default class Trending extends Component {
           <View style={styles.square}>
             <Image
               style={styles.img}
-              source={{ uri: item.link }}
+              source={{ uri: item.trendingImage }}
               resizeMode="cover"
             />
           </View>
