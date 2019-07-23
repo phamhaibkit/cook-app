@@ -49,6 +49,7 @@ export const IMG = {
   individualActive: require('../../assets/icons/individual-active.png'),
   upRecipe: require('../../assets/icons/up-recipe.png'),
   recipeSolid: require('../../assets/icons/recipe-solid.png'),
+  iconSuccess: require('../../assets/icons/icon-success-modal.png')
 };
 
 export const ASYNC_STORAGE = {
