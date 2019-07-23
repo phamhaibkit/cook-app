@@ -11,35 +11,22 @@ export default class BackButton extends Component {
   };
   
   render() {
-    let { style, opacity, oppositeOpacity } = this.props;
-		if (!opacity || !oppositeOpacity) {
-			opacity = 1;
-			oppositeOpacity = 0;
-		}
+    let { style, isGreen } = this.props;
+
     return (
       <TouchableOpacity onPress={this.onPressBackButton}>        
         <Animated.View
 					style={[
 						style,
 						{
-							position: 'absolute',
+							position: 'relative',
               left: 15,
-							opacity: 1,
 						},
 					]}
 				>
-          <Image source={IMG.greenBackIcon} style={CSS.backIconStyle}/>
-				</Animated.View>
-
-        <Animated.View
-					style={[
-						style,
-						{
-							opacity: 0,
-						},
-					]}
-				>
-					<Image source={IMG.whiteBackIcon} style={CSS.backIconStyle}/>
+           {
+						isGreen ? (<Image source={IMG.greenBackIcon} style={CSS.backIconStyle}/>) : (<Image source={IMG.whiteBackIcon} style={CSS.backIconStyle}/>)
+					}
 				</Animated.View>
       </TouchableOpacity>
     );

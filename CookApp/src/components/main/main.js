@@ -34,52 +34,84 @@ import CollectionDetail from '../collection-detail/collection-detail';
 import ComboDetail from '../combo-detail/combo-detail';
 import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
+import PageReportRecipe from '../page-report-recipe/page-report-recipe';
 import { LANG } from '../../lang/lang';
+import { ROUTES } from '../../utils/routes';
+
+const CollectionListScreen = {
+  screen: CollectionList,
+  navigationOptions: {
+    title: LANG.COLLECTION.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton />,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const RecipeHighlightListScreen = {
+  screen: RecipeHighlightList,
+  navigationOptions: {
+    title: LANG.RECIPE_HIGHLIGHT.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton isGreen/>,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const ComboListScreen = {
+  screen: ComboList,
+  navigationOptions: {
+    title: LANG.COMBO.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton isGreen/>,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const CollectionDetailScreen = {
+  screen: CollectionDetail,
+  navigationOptions: {
+    headerLeft: <BackButton opacity={0} oppositeOpacity={1} />,
+    headerTransparent: true
+  }
+};
+
+const ComboDetailScreen = {
+  screen: ComboDetail,
+  navigationOptions: {
+    headerLeft: <BackButton />,
+    headerTransparent: true
+  }
+};
+
+const PageReportRecipeScreen = {
+  screen: PageReportRecipe,
+  navigationOptions: {
+    title: LANG.REPORT_RECIPE,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton isGreen/>,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
 
 const HomeStack = createStackNavigator({
-  // Defination of Navigaton from home screen
   Home: {
     screen: PageHome,
     navigationOptions: {
       header: null
     }
   },
-  Details: { screen: PageDetail },
   Search: { screen: PageSearch },
-  CollectionList: { 
-    screen: CollectionList,
-    navigationOptions: {      
-      title: 'Bộ Sưu Tập',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft: <BackButton />,
-      headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle
-    }
-  },
-  ComboList: { 
-    screen: ComboList,
-    navigationOptions: {      
-      title: 'Combo món',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft:  <BackButton />,
-      headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle
-    }
-  },
-  CollectionDetail: {
-    screen: CollectionDetail,
-    navigationOptions: {
-      headerLeft: <BackButton opacity={0} oppositeOpacity={1}/>,
-      headerTransparent: true
-    }
-  },
-  ComboDetail: {
-    screen: ComboDetail,
-    navigationOptions: {
-      headerLeft: <BackButton/>,
-      headerTransparent: true
-    }
-  }
+  [ROUTES.collectionList.key]: CollectionListScreen,
+  [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
+  [ROUTES.comboList.key]: ComboListScreen,
+  [ROUTES.collectionDetail.key]: CollectionDetailScreen,
+  [ROUTES.comboDetail.key]: ComboDetailScreen,
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
 });
 
 const StoreStack = createStackNavigator({
@@ -93,50 +125,25 @@ const StoreStack = createStackNavigator({
   Details: { screen: PageDetail },
   Profile: { screen: PageProfile }
 });
+
 const RecipeStack = createStackNavigator({
-  Recipe: { 
+  Recipe: {
     screen: PageRecipe,
     // screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
     }
-   },
-   PageSearchRecipe: { 
+  },
+  PageSearchRecipe: {
     screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
     }
-   },
-   RecipeHighlightList: {
-    screen: RecipeHighlightList,
-    navigationOptions: {      
-      title: 'Cong Thuc Noi Bat',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft: <BackButton />,
-      headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle
-    }
-   },
-   CollectionList: { 
-    screen: CollectionList,
-    navigationOptions: {      
-      title: 'Bộ Sưu Tập',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft: <BackButton />,
-      headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle
-    }
   },
-  ComboList: { 
-    screen: ComboList,
-    navigationOptions: {      
-      title: 'Combo món',
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft:  <BackButton />,
-      headerRight: <SearchButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle
-    }
-  },
+  [ROUTES.collectionList.key]: CollectionListScreen,
+  [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
+  [ROUTES.comboList.key]: ComboListScreen,
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
 });
 
 const NotiStack = createStackNavigator({
@@ -167,7 +174,6 @@ const UserStack = createStackNavigator({
     }
   },
   OTP: {
-    
     screen: PageOTP,
     navigationOptions: {
       title: 'Xác thực',
@@ -224,63 +230,73 @@ const SignInStack = createStackNavigator({
   }
 });
 
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible
+  };
+};
+
 UserStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-
   return {
     tabBarVisible
   };
 };
+
 RecipeStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-
   return {
     tabBarVisible
   };
 };
+
 const bottomTabNav = createBottomTabNavigator(
   {
-    Home: { 
+    Home: {
       screen: HomeStack,
       // screen: RecipeStack, 
-      navigationOptions: 
+      navigationOptions:
       {
         tabBarLabel: LANG.HOME
-      } 
+      }
     },
-    Store: { 
-      screen: StoreStack ,
-      navigationOptions: 
+    Store: {
+      screen: StoreStack,
+      navigationOptions:
       {
         tabBarLabel: LANG.STORE
-      } 
+      }
     },
-    Recipe: { 
+    Recipe: {
       screen: RecipeStack,
-      navigationOptions: 
+      navigationOptions:
       {
         tabBarLabel: LANG.RECIPE_TAB
-      } 
+      }
     },
-    Notification: { 
+    Notification: {
       screen: NotiStack,
-      navigationOptions: 
+      navigationOptions:
       {
         tabBarLabel: LANG.NOTI
-      } 
+      }
     },
-    User: { 
+    User: {
       screen: UserStack,
       navigationOptions:
       {
         tabBarLabel: LANG.USER
-      } 
+      }
     }
   },
   {
@@ -292,30 +308,30 @@ const bottomTabNav = createBottomTabNavigator(
         let number = 0;
         // eslint-disable-next-line default-case
         switch (routeName) {
-        case 'Home':
-          iconImg = focused ? IMG.homeActive : IMG.home;
-          iconStyle = styles.home;
-          break;
-        case 'Store':
-          iconImg = focused ? IMG.storeActive : IMG.store;
-          iconStyle = styles.store;
-          break;
-        case 'Recipe':
-          iconImg = focused ? IMG.recipeActive : IMG.recipe;
-          iconStyle = styles.recipe;
-          break;
-        case 'Notification':
-          number = 3;
-          iconImg = focused ? IMG.bellActive : IMG.bell;
-          iconStyle = styles.bell;
-          break;
-        case 'User':
-          iconImg = focused ? IMG.individualActive : IMG.individual;
-          iconStyle = styles.individual;
-          break;
+          case 'Home':
+            iconImg = focused ? IMG.homeActive : IMG.home;
+            iconStyle = styles.home;
+            break;
+          case 'Store':
+            iconImg = focused ? IMG.storeActive : IMG.store;
+            iconStyle = styles.store;
+            break;
+          case 'Recipe':
+            iconImg = focused ? IMG.recipeActive : IMG.recipe;
+            iconStyle = styles.recipe;
+            break;
+          case 'Notification':
+            number = 3;
+            iconImg = focused ? IMG.bellActive : IMG.bell;
+            iconStyle = styles.bell;
+            break;
+          case 'User':
+            iconImg = focused ? IMG.individualActive : IMG.individual;
+            iconStyle = styles.individual;
+            break;
         }
 
-        return <IconWithNumber iconImg={iconImg} iconStyle={iconStyle} number={number}/>;
+        return <IconWithNumber iconImg={iconImg} iconStyle={iconStyle} number={number} />;
       }
     }),
     tabBarOptions: {

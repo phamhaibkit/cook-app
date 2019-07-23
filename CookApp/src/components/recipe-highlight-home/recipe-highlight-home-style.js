@@ -10,8 +10,8 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: 'trs',
-    borderRadius: 5,
-    marginTop: 15
+    borderRadius: 5
+    // marginTop: 15
     // marginHorizontal: CSS.padding15
   },
   frame: {
@@ -25,15 +25,13 @@ export default StyleSheet.create({
     marginRight: CSS.padding15
   },
   frameVer: {
-    height: height,
-    width: widthVer,
+    height: height + 2 * CSS.padding15,
+    width: widthVer - 2 * CSS.padding15,
     backgroundColor: COLOR.whiteColor,
-    marginTop: CSS.padding15,
+    marginVertical: CSS.padding10,
     borderRadius: 5
   },
-  endFrameVer: {
-
-  },
+  endFrameVer: {},
   containerTitle: {
     // flex: 1,
     flexDirection: 'row',
@@ -124,21 +122,19 @@ export default StyleSheet.create({
     marginTop: 18,
     marginHorizontal: paddingContent,
     borderRadius: 5,
-    overflow: 'hidden',
-    borderColor: 'red',
-    borderWidth: 2
+    overflow: 'hidden'
   },
   recipeIMG: {
     width: '100%',
     height: '100%'
   },
   imgVer: {
-    width: widthVer - 30 - 20,
-    height: 140,
+    width: widthVer - 2 * CSS.padding15 - 2 * CSS.padding10,
+    height: 140 + 2 * CSS.padding15,
     marginTop: 18,
     marginHorizontal: paddingContent,
     borderRadius: 5,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   containerChef: {
     position: 'absolute',
@@ -195,12 +191,57 @@ export default StyleSheet.create({
     marginLeft: 18
   },
   saveView: {
-    position:'absolute',
+    position: 'absolute',
     top: paddingContent,
     right: paddingContent
   },
   saveImg: {
     width: 19,
     height: 20
+  },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0
+  },
+  containerModel: {
+    width: '100%',
+    height: '25%',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
+  },
+  barButton: {
+    paddingVertical: 8,
+    marginLeft: widthVer / 2 - 56 / 2,
+    width: 56
+  },
+  modalImg: {
+    width: 56,
+    height: 4,
+  },
+  reportRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height:'40%',
+    paddingLeft: 20
+  },
+  reportImg: {
+    width: 18,
+    height: 18
+  },
+  closeImg: {
+    width: 18,
+    height: 16
+  },
+  reportText: {
+    fontFamily: CSS.fontText,
+    fontSize: 14,
+    color: COLOR.blackReport,
+    marginLeft: 10
+  },
+  lineReport: {
+    height: 1,
+    backgroundColor: COLOR.lineColor,
+    width: '100%'
   }
 });

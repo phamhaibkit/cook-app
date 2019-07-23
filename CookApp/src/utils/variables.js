@@ -49,7 +49,13 @@ export const IMG = {
   individualActive: require('../../assets/icons/individual-active.png'),
   upRecipe: require('../../assets/icons/up-recipe.png'),
   recipeSolid: require('../../assets/icons/recipe-solid.png'),
-  iconSuccess: require('../../assets/icons/icon-success-modal.png')
+  iconSuccess: require('../../assets/icons/icon-success-modal.png'),
+  modalBar: require('../../assets/icons/modalBar.png'),
+  reportRecipe: require('../../assets/icons/report-recipe.png'),
+  closeReport: require('../../assets/icons/close-report.png'),
+  substractSign: require('../../assets/icons/substract-sign.png'),
+  plusSign: require('../../assets/icons/plus-sign.png'),
+  checkedIcon: require('../../assets/icons/checked-icon.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -61,15 +67,6 @@ export default {
   ASYNC_STORAGE,
   CSS,
   COLOR,
-};
-
-export const userDefault = {
-  avatar: require('../../assets/tet.jpg'),
-  recipeAmount: 3,
-  followerAmount: 20,
-  description: 'Ai mà biết được đời sẽ ra sao. Nên là, hãy ăn món tráng miệng trước ',
-  followingAmount: 50,
-  rank: true,
 };
 
 export const CSS = {
@@ -125,6 +122,9 @@ export const CSS = {
   },
   fontQuiRegular: {
     fontFamily: 'Quicksand-Regular'
+  },
+  fontQuiMedium: {
+    fontFamily: 'Quicksand-Medium',
   },
   fontQuiBook: {
     fontFamily: 'Quicksand_Book'
@@ -190,7 +190,16 @@ export const CSS = {
   fontSize11: {
     fontSize: 11,
   },
-  lightBoxShadow: '0px 3px 40px rgba(0, 0, 0, 0.1)',
+  lightBoxShadow: {
+    shadowColor: '#123456',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
   borderRadius5: {
     borderRadius: 5
   },
@@ -222,6 +231,7 @@ export const COLOR = {
   blackColor: '#000000',
   lineColor: '#D3D3D3',
   lineHoriColor: '#E9E9E9',
+  lightGrayColor: '#C8C8C8',
   gradientBlackTopColor: 'rgba(0, 16, 8, 0)',
   gradientBlackBottomColor: 'rgba(0, 16, 8, 0.65)',
   greenSelling: '#7BCC46',
@@ -232,7 +242,8 @@ export const COLOR = {
   blackName: '#001D12',
   dateEvent: '#FF8A00',
   appNameIos: '#06AF48',
-  searchBarIos: '#F8F8F8'
+  searchBarIos: '#F8F8F8',
+  blackReport: '#444444'
 };
 
 export const ACTION = {
