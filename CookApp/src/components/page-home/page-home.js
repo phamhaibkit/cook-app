@@ -45,7 +45,7 @@ export default class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key);
+        navigationService.navigate(ROUTES.collectionList.key, {data: this.state.recipeCollection});
         break;
       case LANG.COMBO:
         navigationService.navigate(ROUTES.comboList.key);
@@ -64,7 +64,7 @@ export default class PageHome extends Component {
 
   render() {
     console.log('Render===', this.state);
-    const { loading, trending, recipeHighlight, likedRecipe } = this.state;
+    const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo } = this.state;
 
     return loading ? (
       <Spinner />
@@ -73,7 +73,7 @@ export default class PageHome extends Component {
         <View style={styles.container}>
           <Trending data={trending} />
           <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
-          <CollectionHome />
+          <CollectionHome data={recipeCollection}/>
           <Advertiment paddingHori={CSS.padding15} />
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
           <RecipeHighlightHome
@@ -82,7 +82,7 @@ export default class PageHome extends Component {
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
-          <ComboHome />
+          <ComboHome data={recipeCombo} />
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
           <ProductList />
           <Advertiment paddingHori={CSS.padding15} />

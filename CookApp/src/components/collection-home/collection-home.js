@@ -12,17 +12,15 @@ import { COLLECTION_DATA } from '../../models/data';
 export default class CollectionHome extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
-		this.data = COLLECTION_DATA;
-		
+		this.state = {};		
 	}
 
 	render() { 
-		const { gotoDetail } = this.props;   
+		const { data, gotoDetail } = this.props;   
 		return (
 			<View style={styles.container}>
 				<FlatList
-					data={this.data} 
+					data={data} 
 					renderItem={({ item, index }) => {
 						return (
 							<CollectionItem onPress= { gotoDetail} item={item} index={index} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
