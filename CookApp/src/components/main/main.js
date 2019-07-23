@@ -217,7 +217,7 @@ const UserStack = createStackNavigator({
       }
     }
   }
-});
+}, {initialRouteName: 'User'});
 
 const SignInStack = createStackNavigator({
   ForgotPassword: {
@@ -246,7 +246,10 @@ UserStack.navigationOptions = ({ navigation }) => {
     tabBarVisible = false;
   }
   return {
-    tabBarVisible
+    tabBarVisible,
+    tabBarOnPress: ({navigation, defaultHandler }) => {
+      navigation.push('User')
+     }
   };
 };
 
