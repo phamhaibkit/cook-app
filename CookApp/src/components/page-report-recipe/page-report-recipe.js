@@ -3,105 +3,110 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
-  Dimensions,
-  Image
+  TextInput,
+  ScrollView
 } from 'react-native';
-import { COLOR, CSS, IMG } from '../../utils/variables';
+import LinearGradient from 'react-native-linear-gradient';
+import navigationService from "../../services/navigation.service";
+
+import { COLOR, CSS } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
+import styles from './page-report-recipe-style';
 
 const reasonData = [
-  { name: 'Thieu dung dan', id: 1 , select: false},
+  { name: 'Thieu dung dan', id: 1, select: false },
   { name: 'Xau xuc pham nguoi nhin', id: 2, select: false },
   { name: 'Khong thay ngon gi ca', id: 3, select: false },
-  { name: 'Cha ra gi',id: 7, select: false },
-  { name: 'Khong con gi de dien ta', id: 4, select: false },
-  { name: 'Qua chi la tho bao', id: 5, select: false },
-  { name: 'Khac', id: 6, select: false }
+  { name: 'Cha ra gi', id: 4, select: false },
+  { name: 'Khong con gi de dien ta', id: 5, select: false },
+  { name: 'Qua chi la tho bao', id: 6, select: false },
+  { name: 'Khac', id: 7, select: false }
 ];
-const widthItem = Dimensions.get('window').width;
 export default class PageReportRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reason: { name: 'Thieu dung dan', id: 0 },
+      reason: {},
       data: reasonData
     };
   }
 
-  selectReason = reason => {
-    console.log('selectReason==', reason);    
+  selectReason = (reasonRow) => {
+    console.log('selectReason==', reasonRow);
     const { data } = this.state;
-    let tempData = data;
-    this.handllData(tempData, reason);
-  };
-
-  async handllData(tempData, reason){
-    await tempData.map((item, index) => {
-      if(item.id === reason.id){
+    data.map((item, index) => {
+      if (item.id === reasonRow.id) {
         item.select = true;
         return item;
-      }else{
+      } else {
         item.select = false;
         return item;
       }
-    })
-    await this.setState({
-      reason: reason,
-      data: tempData
     });
-    console.log('setState==', reason, tempData);  
+    this.setState({
+      reason: reasonRow,
+      data: data
+    });
+  };
+
+  renderReason = (data) => {
+    return data.map((item, index) => (
+      <View
+        key={index}
+        style={styles.shadowView}
+      >
+        <LinearGradient
+          colors={item.select ? [COLOR.gradientLeft, COLOR.gradientRight] : [COLOR.whiteColor, COLOR.whiteColor]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={{ flex: 1 }}
+        >
+          <TouchableOpacity
+            style={styles.reasonButton}
+            onPress={() => {
+              this.selectReason(item);
+            }}
+          >
+            <Text style={{ fontFamily: CSS.fontText, color: item.select ? COLOR.whiteColor : COLOR.blackColor }}>{item.name}</Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+    ));
   }
 
-  renderItem = (item, index) => {
-    const { data } = this.state;
-    const backColor = item.select ? 'red' : 'lightgreen';
+  bottomButton = () => {
     return (
-      <View
-        style={{
-          width: widthItem - 30,
-          height: 40,
-          marginHorizontal: 15,
-          marginVertical: 5,
-          borderRadius: 5,
-          shadowColor: 'grey',
-          shadowOffset: {
-            width: 0,
-            height: 3
-          },
-          shadowOpacity: 0.29,
-          shadowRadius: 4.65,
-          elevation: 7,
-          backgroundColor: 'white'
-        }}
+      <LinearGradient
+        colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.bottomView}
       >
         <TouchableOpacity
-          style={{
-            padding: 10,
-            flex: 1,
-            justifyContent: 'center',
-            borderRadius: 5,
-            backgroundColor: backColor
-          }}
+          style={[styles.reasonButton, { alignItems: 'center' }]}
           onPress={() => {
-            this.selectReason(item);
+            navigationService.goBack();
           }}
         >
-          <Text>{item.name}</Text>
+          <Text style={styles.textBottom}>{LANG.SEND_REPORT}</Text>
         </TouchableOpacity>
-      </View>
-    );
-  };
+      </LinearGradient>
+    )
+  }
 
   render() {
     const { data } = this.state;
     return (
-      <View style={{ marginTop: 10 }}>
-        <FlatList
-          data={data}
-          renderItem={({ item, index }) => this.renderItem(item, index)}
-          keyExtractor={(item, index) => index.toString()}
-        />
+      <View style={styles.container}>
+        <ScrollView style={{ marginBottom: 50 }}>
+          {this.renderReason(data)}
+          {data[6].select && (
+            <View style={styles.inputView}>
+              <TextInput multiline={true} numberOfLines={4} placeholder={LANG.REQUIRE_REPORT} style={styles.inputText}/>
+            </View>
+          )}
+        </ScrollView>
+        {this.bottomButton()}
       </View>
     );
   }

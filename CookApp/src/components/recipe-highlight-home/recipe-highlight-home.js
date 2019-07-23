@@ -6,7 +6,8 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Share
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Advertiment from '../advertiment/advertiment';
@@ -27,7 +28,28 @@ export default class RecipeHighlightHome extends Component {
 
   onPress = () => {
     // console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-    alert('AAAAAAAAAAA');
+  };
+
+  onShare = () => {
+    Share.share(
+      {
+        title: 'BeChef share',
+        urlonShare: 'https://www.google.vn/',
+        message: 'Nau An Di Cung',
+      },
+      {
+        // android
+        dialogTitle: 'This is BeShef share',
+        // ios
+        excludedActivityTypes: [
+          // 'com.apple.UIKit.activity.PostToFacebook',
+          // 'com.apple.UIKit.activity.PostToTwitter',
+          // 'com.apple.UIKit.activity.Message',
+        ],
+      }
+    ).then((res) => {
+      console.log('DATAATATAATTA', res);
+    });
   };
 
   openReport = (item) => {
@@ -40,7 +62,7 @@ export default class RecipeHighlightHome extends Component {
   openReportPage = () => {
     const { recipe } = this.state;
     this.closeReport();
-    navigationService.navigate(ROUTES.pageReportRecipe.key, {recipe})
+    navigationService.navigate(ROUTES.pageReportRecipe.key, { recipe })
   }
 
   closeReport = () => {
@@ -67,7 +89,7 @@ export default class RecipeHighlightHome extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.reportView}
-              onPress={() => {this.openReport(item)}}
+              onPress={() => { this.openReport(item) }}
             >
               <Image style={styles.dotImg} source={IMG.reportHome} />
             </TouchableOpacity>
@@ -160,7 +182,7 @@ export default class RecipeHighlightHome extends Component {
             <TouchableOpacity>
               <Image style={styles.cmtImg} source={IMG.commentHome} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this.onShare}>
               <Image style={styles.shareImg} source={IMG.shareHome} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.saveView}>
@@ -197,8 +219,8 @@ export default class RecipeHighlightHome extends Component {
             <TouchableOpacity style={styles.barButton} onPress={this.closeReport}>
               <Image source={IMG.modalBar} style={styles.modalImg} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.reportRow}  onPress={this.openReportPage}>
-              <Image source={IMG.reportRecipe} style={styles.reportImg}/>
+            <TouchableOpacity style={styles.reportRow} onPress={this.openReportPage}>
+              <Image source={IMG.reportRecipe} style={styles.reportImg} />
               <Text style={styles.reportText}>{LANG.REPORT_RECIPE}</Text>
             </TouchableOpacity>
             <View style={styles.lineReport} />

@@ -35,7 +35,6 @@ import ComboDetail from '../combo-detail/combo-detail';
 import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
 import PageReportRecipe from '../page-report-recipe/page-report-recipe';
-import CartHome from '../cart-home/cart-home';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 
@@ -55,7 +54,7 @@ const RecipeHighlightListScreen = {
   navigationOptions: {
     title: LANG.RECIPE_HIGHLIGHT.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton />,
+    headerLeft: <BackButton isGreen/>,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
@@ -93,7 +92,7 @@ const PageReportRecipeScreen = {
   navigationOptions: {
     title: LANG.REPORT_RECIPE,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton />,
+    headerLeft: <BackButton isGreen/>,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
@@ -175,7 +174,6 @@ const UserStack = createStackNavigator({
     }
   },
   OTP: {
-    
     screen: PageOTP,
     navigationOptions: {
       title: 'Xác thực',
@@ -232,12 +230,21 @@ const SignInStack = createStackNavigator({
   }
 });
 
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible
+  };
+};
+
 UserStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-
   return {
     tabBarVisible
   };
@@ -248,7 +255,6 @@ RecipeStack.navigationOptions = ({ navigation }) => {
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-
   return {
     tabBarVisible
   };
