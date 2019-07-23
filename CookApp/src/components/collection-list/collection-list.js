@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Dimensions } from 'react-native';
-
-import { CSS } from '../../utils/variables';
 import CollectionItem from '../collection-item/collection-item';
-import { COLLECTION_DATA } from '../../models/data';
 import styles from './collection-list-style';
 
 export default class CollectionList extends Component {
   constructor(props) {
     super(props);
-    this.data = COLLECTION_DATA;
   }
   
   render() {
+    const { navigation } = this.props;
+    const data = navigation.getParam('data', {});
+    
     return (
       <View style={styles.container}>
         <FlatList 
-          data = {this.data}
+          data = {data}
           renderItem = {({item, index}) => {
             return (
               <CollectionItem
