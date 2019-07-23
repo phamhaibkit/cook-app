@@ -7,6 +7,7 @@ import navigationService from '../../services/navigation.service';
 import TextInputRender from '../text-input/text-input';
 import { IMG, CSS, COLOR } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
+import ModalComponent from '../../components/modal/modal'
 
 
 export default class PageConfirmPassword extends Component {
@@ -17,6 +18,10 @@ export default class PageConfirmPassword extends Component {
       rePassword: '',
       password: '',
       params,
+      content: {
+        message: 'Chúc mừng bạn, mật khẩu đã được thiết lập thành công!',
+        title: 'Thiết lập mật khẩu thành công'
+      }
     };
     // const { params } = this.props.navigation.state;
   }
@@ -30,11 +35,16 @@ export default class PageConfirmPassword extends Component {
     });
   };
 
+  handelConfirmPassword = () => {
+    navigationService.navigate('InforUser')
+  }
+
   render() {
-    const { password, rePassword, params } = this.state;
+    const { password, rePassword, params, content } = this.state;
     const pageName = _.get(params, 'params.pageName');
     return (
       <KeyboardAvoidingView style={{ flexGrow: 1 }} behavior="padding" keyboardVerticalOffset={40}>
+      
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
         <View style={[styles.container]}>
           <View style={{
@@ -66,8 +76,9 @@ export default class PageConfirmPassword extends Component {
                 secureTextEntry
               />
           </View>
+          <ModalComponent content={content}></ModalComponent>
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
-              <TouchableOpacity style={[styles.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={() => navigationService.navigate('InforUser')}>
+              <TouchableOpacity style={[styles.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={() => this.handelConfirmPassword()}>
                 <Text style={CSS.textTitleButton}>Tiếp tục</Text>
               </TouchableOpacity>
             </LinearGradient>

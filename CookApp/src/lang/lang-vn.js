@@ -83,5 +83,7 @@ export const LANG_VN = {
   ESTIMATE_PRICE: 'Giá ước lượng',
   ESTIMATE_PRICE_LOWERCASE: 'giá ước lượng',
   COOKING_INSTRUCTIONS: 'HƯỚNG DẪN NẤU',
-  OPTIONAL_MEAL: 'Có thể chọn lại khẩu phần khi mua nguyên liệu'
+  OPTIONAL_MEAL: 'Có thể chọn lại khẩu phần khi mua nguyên liệu',
+  SEND_REPORT: 'Gửi báo cáo',
+  REQUIRE_REPORT: 'Nhập nội dung báo cáo (bắt buộc)'
 };
