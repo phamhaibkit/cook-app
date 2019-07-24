@@ -14,11 +14,9 @@ import Advertiment from '../advertiment/advertiment';
 import Spinner from '../spinner/spinner';
 import { LANG } from '../../lang/lang';
 import styles from './page-home-style';
-import { RECIPES, RECIPES_LOVED } from '../../models/data';
 import { CSS } from '../../utils/variables';
 import { ROUTES } from '../../utils/routes';
 import homeService from '../../services/home.service';
-import _ from 'lodash';
 
 export default class PageHome extends Component {
   constructor(props) {
@@ -28,16 +26,14 @@ export default class PageHome extends Component {
     };
   }
   componentDidMount() {
-    // this.showLoading();
     this.getHome();
   }
 
   getHome = () => {
     homeService.getHome().then(() => {
       console.log('AAAAAAAAAAAAAAAAAAAAa');
-      const data = _.cloneDeep(homeService.homeData);
       this.setState({
-        ...data
+        ...homeService.homeData
       });
     });
   };
@@ -64,7 +60,7 @@ export default class PageHome extends Component {
 
   render() {
     console.log('Render===', this.state);
-    const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo } = this.state;
+    const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo, mostBuy, followedPeople, events, adsBanner } = this.state;
 
     return loading ? (
       <Spinner />
@@ -74,7 +70,7 @@ export default class PageHome extends Component {
           <Trending data={trending} />
           <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
           <CollectionHome data={recipeCollection}/>
-          <Advertiment paddingHori={CSS.padding15} />
+          <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
           <RecipeHighlightHome
             recipes={recipeHighlight}
@@ -84,10 +80,10 @@ export default class PageHome extends Component {
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
           <ComboHome data={recipeCombo} />
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
-          <ProductList />
-          <Advertiment paddingHori={CSS.padding15} />
+          <ProductList data={mostBuy}/>
+          <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>
           <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
-          <FollowingHome />
+          <FollowingHome data={followedPeople}/>
           <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
           <RecipeHighlightHome
             recipes={likedRecipe}
@@ -95,7 +91,7 @@ export default class PageHome extends Component {
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
-          <NewsEvent newsEvent={RECIPES_LOVED} />
+          <NewsEvent data={events} />
         </View>
       </ContainerScroll>
     );
