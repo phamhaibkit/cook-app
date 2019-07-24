@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Dimensions } from 'react-native';
+
 import CollectionItem from '../collection-item/collection-item';
 import styles from './collection-list-style';
+import collectionService from '../../services/collection.service';
 
 export default class CollectionList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ...collectionService.collectionData
+    }
+  }
+
+  componentDidMount() {
+    this.getCollectionList();
+  }
+
+  getCollectionList = () => {
+    collectionService.getCollections().then(() => {
+      console.log('get data frin getcollectionList: '+ collectionService.collectionData);
+      this.setState({
+        ...collectionService.collectionData
+      });
+    });
   }
   
   render() {
-    const { navigation } = this.props;
-    const data = navigation.getParam('data', {});
-    
+    // const { data } = this.state;
+
+    console.log('collection Listsss: ' + this.state);
+
     return (
       <View style={styles.container}>
-        <FlatList 
+        {/* <FlatList 
           data = {data}
           renderItem = {({item, index}) => {
             return (
@@ -28,7 +47,7 @@ export default class CollectionList extends Component {
           }}
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
-        />
+        /> */}
       </View>
     );
   }

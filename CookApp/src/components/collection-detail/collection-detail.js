@@ -129,6 +129,8 @@ export default class CollectionDetail extends Component {
 
   render() {
     let recipes = this.recipes;
+    const { navigation } = this.props;
+    const id = navigation.getParam('id', 1);
     return (    
         <ScrollView>
           <SwiperImage height={300} listItems={ SLIDER_IMAGES}/>

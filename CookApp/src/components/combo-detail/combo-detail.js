@@ -59,6 +59,7 @@ export default class ComboDetail extends Component {
       mealQuantity: 1,
       isSelectAll: true,
       isChecked: true, 
+      ingredients: COMBO_DETAIL.ingredients,
       data: COMBO_DETAIL
     };
   }
@@ -96,7 +97,7 @@ export default class ComboDetail extends Component {
               <View style={styles.estimatePrice}>
                 <View style={{flexDirection: 'row', flex: 1, paddingVertical: 15}}>
                   <View style={styles.w50percentage}>
-                    <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(335000) } {LANG.VIETNAM_DONG}</Text>
+                    <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.estimatePrice) } {LANG.VIETNAM_DONG}</Text>
                     <Text style={styles.textDescription}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
                   </View>
                   <View style={styles.cardSeparator}></View>

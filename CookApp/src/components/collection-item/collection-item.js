@@ -11,11 +11,10 @@ import { LANG } from '../../lang/lang';
 class CollectionItem extends Component {
   render() {
     let { item, imgBgWrap, blockMargin, onPress } = this.props;
-    console.log(item);
  
     return (
-       <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]}>
-        <TouchableWithoutFeedback>
+       <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} onPress={() => alert('Pressed!')} >
+        <TouchableWithoutFeedback style={{flex: 1, zIndex: 10}}>
           <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: item.collectionImage }}>
             <LinearGradient
               colors={[COLOR.gradientBlackTopColor, COLOR.gradientBlackBottomColor]}

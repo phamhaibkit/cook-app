@@ -30,6 +30,7 @@ export default class PageHome extends Component {
   componentDidMount() {
     // this.showLoading();
     this.getHome();
+    console.log('home state: ' + this.state);
   }
 
   getHome = () => {
@@ -45,7 +46,7 @@ export default class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key, {data: this.state.recipeCollection});
+        navigationService.navigate(ROUTES.comboDetail.key);
         break;
       case LANG.COMBO:
         navigationService.navigate(ROUTES.comboList.key);
@@ -59,7 +60,7 @@ export default class PageHome extends Component {
   };
 
   gotoDetail = () => {
-    navigationService.navigate('ComboDetail');
+   alert('alert');
   };
 
   render() {
@@ -82,7 +83,7 @@ export default class PageHome extends Component {
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
-          <ComboHome data={recipeCombo} />
+          <ComboHome />
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
           <ProductList />
           <Advertiment paddingHori={CSS.padding15} />
