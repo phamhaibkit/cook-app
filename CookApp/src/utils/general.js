@@ -49,6 +49,9 @@ export function formatNumberWithDot(number) {
  * @param {number} inputNumber: number to get currency string
  */
 export function getCurrencyStr(num) {
+  if(!num){
+    return;
+  }
   const array = num.toString().split('');
   let index = -3;
   while (array.length + index > 0) {

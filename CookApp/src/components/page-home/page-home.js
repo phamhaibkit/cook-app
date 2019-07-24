@@ -47,7 +47,10 @@ export default class PageHome extends Component {
         navigationService.navigate(ROUTES.comboList.key);
         break;
       case LANG.RECIPE_HIGHLIGHT:
-        navigationService.navigate(ROUTES.recipeHighlightList.key);
+        navigationService.navigate(ROUTES.recipeHighlightList.key, {isHightLight: true});
+        break;
+      case LANG.LIKED_RECIPE:
+        navigationService.navigate(ROUTES.recipeLikedList.key, {isLiked: true});
         break;
       default:
         break;
@@ -75,6 +78,7 @@ export default class PageHome extends Component {
           <RecipeHighlightHome
             recipes={recipeHighlight}
             isHorizontal
+            isHome
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
@@ -88,6 +92,8 @@ export default class PageHome extends Component {
           <RecipeHighlightHome
             recipes={likedRecipe}
             isHorizontal
+            isHome
+            isLove
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
