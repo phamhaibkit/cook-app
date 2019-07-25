@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import CollectionHome from '../collection-home/collection-home';
 import ComboHome from '../combo-home/combo-home';
 import Trending from '../trending/trending';
@@ -17,8 +17,10 @@ import styles from './page-home-style';
 import { CSS } from '../../utils/variables';
 import { ROUTES } from '../../utils/routes';
 import homeService from '../../services/home.service';
+import { connect } from 'react-redux';
+import { getCart} from '../../reducers/cart.reducer';
 
-export default class PageHome extends Component {
+class PageHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +33,7 @@ export default class PageHome extends Component {
 
   getHome = () => {
     homeService.getHome().then(() => {
-      console.log('AAAAAAAAAAAAAAAAAAAAa');
+      this.props.getCart(homeService.homeData.cart);
       this.setState({
         ...homeService.homeData
       });
@@ -62,7 +64,7 @@ export default class PageHome extends Component {
   };
 
   render() {
-    console.log('Render===', this.state);
+    console.log('Render===', this.props);
     const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo, mostBuy, followedPeople, events, adsBanner } = this.state;
 
     return loading ? (
@@ -103,3 +105,11 @@ export default class PageHome extends Component {
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, {getCart})(PageHome);

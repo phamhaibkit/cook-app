@@ -16,13 +16,13 @@ class HomeService {
   };
   
   getHome = () => {
-    console.log( 'getHome' + Date());
+    // console.log( 'getHome' + Date());
     this.resetService();
     const url = API.GET_HOME;
     this.homeData.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {
-        console.log( 'getHome Done' + Date(), data);
+        // console.log( 'getHome Done' + Date(), data);
         this.homeData = _.cloneDeep({
           ...data,
           loading: false,
