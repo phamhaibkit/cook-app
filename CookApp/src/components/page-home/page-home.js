@@ -41,7 +41,7 @@ export default class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key, {data: this.state.recipeCollection});
+        navigationService.navigate(ROUTES.recipeDetail.key, {data: this.state.recipeCollection});
         break;
       case LANG.COMBO:
         navigationService.navigate(ROUTES.comboList.key);

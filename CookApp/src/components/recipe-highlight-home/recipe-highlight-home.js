@@ -132,7 +132,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableWithoutFeedback>
             </View>
             <TouchableOpacity style={styles.containerChef}>
-              <Image style={styles.avataImg} source={{ uri: item.owner.avatar }} />
+              {/* <Image style={styles.avataImg} source={{ uri: item.owner.avatar }} /> */}
               <Text style={styles.nameChef}>{item.owner && item.owner.name}</Text>
               <Image style={styles.rankImg} source={IMG.rankHome} />
             </TouchableOpacity>

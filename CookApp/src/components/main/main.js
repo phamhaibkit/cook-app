@@ -37,6 +37,7 @@ import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list'
 import PageReportRecipe from '../page-report-recipe/page-report-recipe';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
+import RecipeDetail from '../recipe-detail/recipe-detail';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -140,11 +141,26 @@ const RecipeStack = createStackNavigator({
       header: null,
     }
   },
+  [ROUTES.recipeDetail.key]: {
+    screen: RecipeDetail,
+    navigationOptions: {
+      headerLeft: <BackButton />,
+      headerTransparent: true
+    }
+  },
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
 });
+
+const RecipeDetailScreen = {
+  screen: RecipeDetail,
+  navigationOptions: {
+    headerLeft: <BackButton />,
+    headerTransparent: true
+  }
+};
 
 const NotiStack = createStackNavigator({
   Noti: { screen: PageNoti }
@@ -180,7 +196,7 @@ const UserStack = createStackNavigator({
       tabBarVisible: false,
       gesturesEnabled: false,
       headerTitleStyle: styles.headerTitleStyle,
-      headerLeft:  <BackButton />,
+      headerLeft:  <BackButton isGreen/>,
       headerTitleContainerStyle: styles.headerTitleContainerStyle ,
       headerStyle: {
         elevation: 0,
