@@ -118,7 +118,7 @@ export default StyleSheet.create({
   oldPrice: {
     fontSize: 15,
     textDecorationLine: 'line-through',
-    marginBottom: 10,
+    marginBottom: 8,
     lineHeight: 20,
     color: COLOR.oldPrice
   },
