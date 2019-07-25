@@ -30,7 +30,6 @@ export default class PageHome extends Component {
   componentDidMount() {
     // this.showLoading();
     this.getHome();
-    console.log('home state: ' + this.state);
   }
 
   getHome = () => {
@@ -46,7 +45,7 @@ export default class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.comboDetail.key);
+        navigationService.navigate(ROUTES.collectionList.key);
         break;
       case LANG.COMBO:
         navigationService.navigate(ROUTES.comboList.key);
@@ -64,7 +63,7 @@ export default class PageHome extends Component {
   };
 
   render() {
-    console.log('Render===', this.state);
+    console.log('Render===', this.state.loading);
     const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo } = this.state;
 
     return loading ? (

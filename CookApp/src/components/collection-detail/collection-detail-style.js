@@ -214,6 +214,13 @@ export default StyleSheet.create({
   saveImg: {
     width: 19,
     height: 20
+  },
+  saveTime: {
+    fontSize: 13, 
+    color: COLOR.whiteColor, 
+    marginLeft: 10, 
+    lineHeight: 18, 
+    fontFamily: CSS.fontText
   }
 });
 

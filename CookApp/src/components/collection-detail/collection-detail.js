@@ -9,17 +9,38 @@ import {
   ScrollView
 } from 'react-native';
 
-import { IMG, CSS, COLOR } from '../../utils/variables';
-import { RECIPES, SLIDER_IMAGES } from '../../models/data';
+import { IMG, CSS, COLOR, CONST } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
 import styles from './collection-detail-style';
 import SwiperImage from '../swiper-image/swiper-image';
+import collectionService from '../../services/collection.service';
+import { kFormatter } from '../../utils/general';
 
 export default class CollectionDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.recipes = RECIPES;
+    this.state = {
+      ...collectionService.collectionDetail
+    };
+    console.log('state init ' + JSON.stringify(this.state));
+
+    const { navigation } = this.props;
+    const id = navigation.getParam('id', 1);    
+    this.getCollectionDetail(4);
+  }
+
+  getCollectionDetail = (id) => { 
+    console.log('ham work');
+    collectionService.getCollectionDetail(id).then(() => {   
+      console.log('promise resolve')     ;
+      this.setState({
+        ...collectionService.collectionDetail
+      });
+    });
+  }
+
+  componentDidMount () {
+    
   }
 
   renderFrame = (item, index) => {
@@ -34,7 +55,7 @@ export default class CollectionDetail extends Component {
         <View style={styles.containerTitle}>
           <TouchableOpacity style={styles.titleView} onPress={this.onPress}>
             <Text numberOfLines={1} style={styles.titleText}>
-              {item.key}
+              { item.name }
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.reportView}>
@@ -45,7 +66,7 @@ export default class CollectionDetail extends Component {
         <View style={styles.containerTimePrice}>
           <View style={styles.priceView}>
             <Image style={styles.sandImg} source={IMG.sandClokHome} />
-            <Text style={styles.textTime}>{item.duration}</Text>
+            <Text style={styles.textTime}>{ item.timeExecute }</Text>
             <Text style={styles.textTime}>{LANG.MINUTE}</Text>
           </View>
           <View style={styles.lineView}>
@@ -53,7 +74,7 @@ export default class CollectionDetail extends Component {
           </View>
           <View style={styles.dollaView}>
             <Image style={styles.dollaImg} source={IMG.dollaHome} />
-            <Text style={styles.textTime}>{item.price}</Text>
+            <Text style={styles.textTime}>{ item.price }</Text>
             <Text style={styles.textTime}>{LANG.VIETNAM_DONG}</Text>
           </View>
           <View style={styles.lineView}>
@@ -61,7 +82,7 @@ export default class CollectionDetail extends Component {
           </View>
           <View style={styles.dollaView}>
             <Image style={styles.personImg} source={IMG.personHome} />
-            <Text style={styles.textTime}>{item.quantity}</Text>              
+            <Text style={styles.textTime}>{ item.numPeople }</Text>              
             <Text style={styles.textTime}>{LANG.PERSON}</Text>
           </View>
         </View>
@@ -69,40 +90,42 @@ export default class CollectionDetail extends Component {
         <View>
           <View style={styles.recipeView}>
             <TouchableWithoutFeedback onPress={this.onPress}>
-              <Image style={styles.recipeIMG} source={{ uri: item.link }} />
+              <Image style={styles.recipeIMG} source={{ uri: item.recipeImage }} />
             </TouchableWithoutFeedback>
           </View>
           <TouchableOpacity style={styles.containerChef}>
-            <Image style={styles.avataImg} source={IMG.avatarHome} />
-            <Text style={styles.nameChef}>{item.chef}</Text>
-            <Image style={styles.rankImg} source={IMG.rankHome} />
+            <Image style={styles.avataImg} source={{ uri: item.owner.avatar }} />
+            <Text style={styles.nameChef}>{ item.owner.name }</Text>
+            {
+              item.owner.rank > CONST.chefRank && (<Image style={styles.rankImg} source={IMG.rankHome} />)
+            }
           </TouchableOpacity>
         </View>
 
         <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
           <View style={styles.priceView}>
-            <Text style={styles.textTime}>{item.likes}</Text>
+            <Text style={styles.textTime}>{ item.likeTimes }</Text>
             <Text style={[styles.textTime, styles.textLight]}>{LANG.LIKE}</Text>
           </View>
           <View style={styles.lineLikeView}>
             <View style={styles.line} />
           </View>
           <View style={styles.likeView}>
-            <Text style={styles.textTime}>{item.comments}</Text>
+            <Text style={styles.textTime}>{ item.numberEvaluate }</Text>
             <Text style={[styles.textTime, styles.textLight]}>{LANG.COMMENT}</Text>
           </View>
           <View style={styles.lineLikeView}>
             <View style={styles.line} />
           </View>
           <View style={styles.likeView}>
-            <Text style={styles.textTime}>{item.shares}</Text>
+            <Text style={styles.textTime}>{ item.shareTimes }</Text>
             <Text style={[styles.textTime, styles.textLight]}>{LANG.SHARE}</Text>
           </View>
           <View style={styles.lineLikeView}>
             <View style={styles.line} />
           </View>
           <View style={styles.likeView}>
-            <Text style={styles.textTime}>{item.xem}</Text>
+            <Text style={styles.textTime}>{ kFormatter(item.viewTimes) }</Text>
             <Text style={[styles.textTime, styles.textLight]}>{LANG.VIEW}</Text>
           </View>
         </View>
@@ -128,30 +151,40 @@ export default class CollectionDetail extends Component {
   };
 
   render() {
-    let recipes = this.recipes;
-    const { navigation } = this.props;
-    const id = navigation.getParam('id', 1);
+    const { 
+      recipes, 
+      collectionImages, 
+      name, 
+      isSavedByUser, 
+      description, 
+      id, 
+      numberRecipe,
+      savedTimes 
+    } = this.state;
+
+    console.log('this state ' , JSON.stringify(this.state));
     return (    
         <ScrollView>
-          <SwiperImage height={300} listItems={ SLIDER_IMAGES}/>
+          {/* <SwiperImage height={300} listItems={{ collectionImages: collectionImages }}/> */}
           <View style={styles.container}>
             <View style={styles.comboDescriptionWrap}>
-              <Text style={[styles.comboTitle, CSS.fontQuiBold]}>Những món ăn giành cho những n gày đầu mùa mưa</Text>
-              <Text style={[CSS.fontQuiRegular, ]}>Với những ngày mưa bão như thế này, hãy chế biến các món ăn đơn giản, ấm nóng, đậm đà cho cả nhà thưởng thức.</Text>
+              <Text style={[styles.comboTitle, CSS.fontQuiBold]}>{ name }</Text>
+              <Text style={[CSS.fontQuiRegular, ]}>{ description }</Text>
               <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
                 <View style={{flexDirection: 'row'}}>
                   <Image source={IMG.saveHome} style={styles.saveImg} />
-                  <Text style={{fontSize: 13, color: '#000', marginLeft: 10, lineHeight: 18, fontFamily: CSS.fontText}}>200 {LANG.SAVE}</Text>
+                  <Text style={styles.savedTimes}>{ savedTimes } {LANG.SAVE}</Text>
                 </View>
               </View>
             </View>
             <View style={styles.topRecipes}>
-              <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>20 { LANG.RECIPE.toUpperCase() }</Text>
+              <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
               <FlatList
-                data={this.recipes}
+                data={recipes}
                 scrollEnabled={false}
                 renderItem={({ item, index }) => this.renderFrame(item, index)}        
                 showsVerticalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
               />
             </View>
           </View>

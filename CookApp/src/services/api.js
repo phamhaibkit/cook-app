@@ -6,7 +6,7 @@ export const API = {
 
   // collection
   GET_COLLECTION_LIST: HOST + '/recipe-collection/all',
-  GET_COLLECTION_DETAIL: id => HOST + '/recipe-collection/' + id,
+  GET_COLLECTION_DETAIL: id => HOST + '/recipe-collection?id=' + id,
 
   //combo
   GET_COMBO_LIST: HOST + '/recipe-combo/all',

@@ -9,11 +9,12 @@ import { COLOR } from '../../utils/variables';
 export default class SwiperImage extends Component {
   renderSliderItems = () => {
     const { height, listItems } = this.props;
+    console.log('dfasjdfljsdlf dfljasdfl ', this.props);
     return (
       listItems &&
       listItems.map((item, index) => (
         <View key={index}>        
-          <ImageBackground source={item.sliderImgSrc} style={[styles.slideImg, { height: height }]}>
+          <ImageBackground source={{ uri: item }} style={[styles.slideImg, { height: height }]}>
             <LinearGradient
               colors={[COLOR.gradientBlackTopColor, COLOR.gradientBlackBottomColor]}
               start={{ x: 0, y: 0 }}

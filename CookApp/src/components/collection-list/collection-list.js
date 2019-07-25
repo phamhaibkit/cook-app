@@ -4,6 +4,8 @@ import { Text, View, FlatList, Dimensions } from 'react-native';
 import CollectionItem from '../collection-item/collection-item';
 import styles from './collection-list-style';
 import collectionService from '../../services/collection.service';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 export default class CollectionList extends Component {
   constructor(props) {
@@ -18,36 +20,39 @@ export default class CollectionList extends Component {
   }
 
   getCollectionList = () => {
-    collectionService.getCollections().then(() => {
-      console.log('get data frin getcollectionList: '+ collectionService.collectionData);
+    collectionService.getCollections().then(() => {      
+      let data = [...collectionService.collectionData];
       this.setState({
-        ...collectionService.collectionData
+        data: data
       });
     });
   }
-  
-  render() {
-    // const { data } = this.state;
 
-    console.log('collection Listsss: ' + this.state);
+  handlePress = (id) => {    
+    navigationService.navigate(ROUTES.collectionDetail.key, { id: id });
+  }
+
+  render() {
+    const { data }  = this.state;
 
     return (
       <View style={styles.container}>
-        {/* <FlatList 
+        <FlatList 
           data = {data}
           renderItem = {({item, index}) => {
             return (
               <CollectionItem
                 item={item} 
-                index={index} 
+                isCollectionList 
                 imgBgWrap={styles.imgBgWrap}
                 blockMargin={styles.blockMargin}
+                onPress={this.handlePress(item.id)}
               />
             );
           }}
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
-        /> */}
+        />
       </View>
     );
   }

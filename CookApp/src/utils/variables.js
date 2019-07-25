@@ -249,3 +249,7 @@ export const COLOR = {
 export const ACTION = {
   SET_ACCOUNT_INFO: 'SET_ACCOUNT_INFO',
 };
+
+export const CONST = {
+  chefRank: 9
+}
