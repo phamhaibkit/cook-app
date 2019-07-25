@@ -7,7 +7,7 @@ export default class PlusSubsNumber extends Component {
   constructor(props){
     super(props);
     this.state = {
-      number: 5
+      number: 1
     }
   }
   render() {

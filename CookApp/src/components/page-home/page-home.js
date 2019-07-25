@@ -73,7 +73,7 @@ class PageHome extends Component {
       <ContainerScroll>
         <View style={styles.container}>
           <Trending data={trending} />
-          {/* <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
+          <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
           <CollectionHome data={recipeCollection}/>
           <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
@@ -85,7 +85,7 @@ class PageHome extends Component {
           />
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
           <ComboHome data={recipeCombo} />
-          <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} /> */}
+          <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
           <ProductList data={mostBuy}/>
           <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>
           <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
