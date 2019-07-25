@@ -35,6 +35,7 @@ import ComboDetail from '../combo-detail/combo-detail';
 import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
 import PageReportRecipe from '../page-report-recipe/page-report-recipe';
+import RecipeLikedList from '../recipe-liked-list/recipe-liked-list';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
@@ -54,6 +55,17 @@ const RecipeHighlightListScreen = {
   screen: RecipeHighlightList,
   navigationOptions: {
     title: LANG.RECIPE_HIGHLIGHT.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton isGreen/>,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const RecipeLikedListScreen = {
+  screen: RecipeLikedList,
+  navigationOptions: {
+    title: LANG.LIKED_RECIPE.name,
     headerTitleStyle: styles.headerTitleStyle,
     headerLeft: <BackButton isGreen/>,
     headerRight: <SearchButton />,
@@ -112,7 +124,8 @@ const HomeStack = createStackNavigator({
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.collectionDetail.key]: CollectionDetailScreen,
   [ROUTES.comboDetail.key]: ComboDetailScreen,
-  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
+  [ROUTES.recipeLikedList.key]: RecipeLikedListScreen
 });
 
 const StoreStack = createStackNavigator({

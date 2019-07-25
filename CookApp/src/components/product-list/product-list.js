@@ -12,11 +12,21 @@ import {
 import styles from './product-list-style';
 import { LANG_VN } from '../../lang/lang-vn';
 import { getCurrencyStr } from '../../utils/general';
+import PlusSubsNumber from '../plus-subs-number/plus-subs-number';
 
 
 export default class ProductList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showAddCart : true
+    }
+  }
+
+  showAddNum = () => {
+    this.setState({
+      showAddCart: false
+    })
   }
 
   onPress = () => {
@@ -24,6 +34,7 @@ export default class ProductList extends Component {
   };
 
   renderFrame = (item, index) => {
+    const { showAddCart } = this.state;
     const {data} = this.props;
     const endStyle = data.length - 1 === index || (data.length - 1) / 2 === index
         ? [styles.frame, styles.endFrame]
@@ -51,9 +62,11 @@ export default class ProductList extends Component {
                 <Text style={styles.unitText}>/100g</Text>
               </View>
               <Text style={styles.oldPrice}>{getCurrencyStr(item.oldPrice)}</Text>
-              <TouchableOpacity style={styles.addCart}>
-                <Text style={styles.addCartText}>{LANG_VN.ADD_TO_CART}</Text>
-              </TouchableOpacity>
+              { showAddCart ? (
+                <TouchableOpacity style={styles.addCart} onPress={this.showAddNum}>
+                  <Text style={styles.addCartText}>{LANG_VN.ADD_TO_CART}</Text>
+                </TouchableOpacity>
+              ) : <PlusSubsNumber />}
             </View>
             <View style={styles.containerDiscount}>
               <View style={styles.discount}>
