@@ -34,6 +34,7 @@ export const LANG_VN = {
       fieldName: 'Đánh giá sản phẩm'
     }
   ],
+  STEP_ACTION: 'Các bước thực hiện',
   RECIPE: 'Công thức',
   UP_RECIPE: 'Đăng Công Thức',
   FOLLOWER: 'Người theo dõi',
@@ -41,6 +42,7 @@ export const LANG_VN = {
   ORDER_DRAFT: 'Đơn hàng nháp',
   RECIPE_WAITING: 'Công thức chờ duyệt',
   FOLLOWING: 'Bạn đang theo dõi',
+  FOLLOW: 'theo dõi',
   FOLLOWED: 'Người theo dõi bạn',
   SAVED_RECIPE: 'Công thức đã lưu',
   ORER: 'Đơn hàng',

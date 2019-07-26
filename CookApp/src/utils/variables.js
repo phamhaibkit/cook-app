@@ -19,6 +19,7 @@ export const IMG = {
   reportHome: require('../../assets/icons/dot-home.png'),
   avatarHome: require('../../assets/icons/avata-home.png'),
   rankHome: require('../../assets/icons/rank-home.png'),
+  rankChef: require('../../assets/icons/rank-chef.png'),
   loveHome: require('../../assets/icons/love-home.png'),
   loveActiveHome: require('../../assets/icons/love-active.png'),
   commentHome: require('../../assets/icons/comment-home.png'),
@@ -58,6 +59,7 @@ export const IMG = {
   checkedIcon: require('../../assets/icons/checked-icon.png'),
   starYellow: require('../../assets/icons/star-yellow.png'),
   starGrey: require('../../assets/icons/star-grey.png'),
+  borderDot: require('../../assets/icons/border-dot.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -235,6 +237,18 @@ export const CSS = {
   pendingText: {
     fontSize: 12,
     color: '#9C9C9C'
+  },
+  buttonFollow: {
+    paddingVertical: 7,
+    paddingHorizontal: 7,
+    borderColor: '#E0E0E0',
+    borderWidth: 1,
+    borderRadius: 5
+  },
+  textFollow: {
+    color: '#3ABF57',
+    fontSize: 12,
+    fontFamily: 'Quicksand-Bold'
   }
 };
 
