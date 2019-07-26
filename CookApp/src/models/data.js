@@ -378,18 +378,9 @@ export const COLLECTION_DATA = [
 ];
 
 export const SLIDER_IMAGES = [
-  {
-    id: 1,
-    sliderImgSrc: require('../../assets/collections/collection-1.png')
-  },
-  {
-    id: 2,
-    sliderImgSrc: require('../../assets/collections/collection-1.png')
-  },
-  {
-    id: 3,
-    sliderImgSrc: require('../../assets/collections/collection-1.png')
-  }
+   'https://znews-photo.zadn.vn/w1024/Uploaded/mdf_xqkxvu/2018_05_07/sulbing2.jpg',
+    'https://znews-photo.zadn.vn/w1024/Uploaded/mdf_xqkxvu/2018_05_07/sulbing2.jpg',
+ 'https://znews-photo.zadn.vn/w1024/Uploaded/mdf_xqkxvu/2018_05_07/sulbing2.jpg'
 ]
 
 export const RECIPE_CATEGORY = [

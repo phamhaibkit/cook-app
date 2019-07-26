@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import {
   Text,
   View,
@@ -13,38 +14,35 @@ import { IMG, CSS, COLOR, CONST } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
 import styles from './collection-detail-style';
 import SwiperImage from '../swiper-image/swiper-image';
-import collectionService from '../../services/collection.service';
+import CollectionService from '../../services/collection.service';
 import { kFormatter } from '../../utils/general';
 
 export default class CollectionDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...collectionService.collectionDetail
-    };
-    console.log('state init ' + JSON.stringify(this.state));
-
-    const { navigation } = this.props;
-    const id = navigation.getParam('id', 1);    
-    this.getCollectionDetail(4);
+      ...CollectionService.collectionDetail
+    };    
   }
 
   getCollectionDetail = (id) => { 
-    console.log('ham work');
-    collectionService.getCollectionDetail(id).then(() => {   
-      console.log('promise resolve')     ;
+    CollectionService.getCollectionDetail(id).then(() => {   
+      console.log('promise getCollectionDetail resolve');
+      let data =  {...CollectionService.collectionDetail};
       this.setState({
-        ...collectionService.collectionDetail
+        ...data
       });
     });
   }
 
-  componentDidMount () {
-    
+  componentDidMount () { 
+    const { navigation } = this.props;
+    const id = navigation.getParam('id', 1);     
+    this.getCollectionDetail(id);
   }
 
   renderFrame = (item, index) => {
-    const  recipes  = this.recipes;
+    const  { recipes }  = this.state;
     const endStyle =
       recipes.length - 1 === index
         ? [styles.frame, styles.endFrame]
@@ -162,30 +160,32 @@ export default class CollectionDetail extends Component {
       savedTimes 
     } = this.state;
 
-    console.log('this state ' , JSON.stringify(this.state));
     return (    
         <ScrollView>
-          {/* <SwiperImage height={300} listItems={{ collectionImages: collectionImages }}/> */}
+          <SwiperImage height={300} listItems={collectionImages}/>
           <View style={styles.container}>
-            <View style={styles.comboDescriptionWrap}>
-              <Text style={[styles.comboTitle, CSS.fontQuiBold]}>{ name }</Text>
-              <Text style={[CSS.fontQuiRegular, ]}>{ description }</Text>
-              <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-                <View style={{flexDirection: 'row'}}>
-                  <Image source={IMG.saveHome} style={styles.saveImg} />
-                  <Text style={styles.savedTimes}>{ savedTimes } {LANG.SAVE}</Text>
+            <View style={styles.positionView}>
+              <View style={styles.comboDescriptionWrap}>
+                <Text style={[styles.comboTitle, CSS.fontQuiBold]}>{ name }</Text>
+                <Text style={[CSS.fontQuiRegular, ]}>{ description }</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginTop: 10}}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Image source={IMG.saveHome} style={styles.saveImg} />
+                    <Text style={styles.savedTimes}>{ savedTimes } {LANG.SAVE}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.topRecipes}>
-              <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
-              <FlatList
-                data={recipes}
-                scrollEnabled={false}
-                renderItem={({ item, index }) => this.renderFrame(item, index)}        
-                showsVerticalScrollIndicator={false}
-                keyExtractor={(item, index) => index.toString()}
-              />
+              
+              <View style={styles.topRecipes}>
+                <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
+                <FlatList
+                  data={recipes}
+                  scrollEnabled={false}
+                  renderItem={({ item, index }) => this.renderFrame(item, index)}        
+                  showsVerticalScrollIndicator={false}
+                  keyExtractor={(item, index) => index.toString()}
+                />
+              </View>
             </View>
           </View>
         </ScrollView>

@@ -10,7 +10,7 @@ export const API = {
 
   //combo
   GET_COMBO_LIST: HOST + '/recipe-combo/all',
-  GET_COMBO_DETAIL: id => HOST + '/recipe-combo/' + id,  
+  GET_COMBO_DETAIL: id => HOST + '/recipe-combo?id=' + id,  
   
   //recipe highlight
   GET_RECIPE_HIGHLIGHT_LIST: HOST + '/recipe/highlight-recipe/all',

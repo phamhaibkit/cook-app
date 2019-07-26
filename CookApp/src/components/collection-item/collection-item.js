@@ -7,14 +7,20 @@ import { IMG } from '../../utils/variables';
 import styles from './collection-item-style';
 import { COLOR, CSS } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 class CollectionItem extends Component {
+  handlePress = () => {  
+    const { item } = this.props;
+    navigationService.navigate(ROUTES.collectionDetail.key, { id: item.id || item.collectionId});
+  }
   render() {
     let { item, imgBgWrap, blockMargin, onPress, isCollectionList } = this.props;
  
     return (
        <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} >
-        <TouchableWithoutFeedback onPress={ onPress }>
+        <TouchableWithoutFeedback onPress={ this.handlePress }>
           <View>
             <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: isCollectionList ? item.collectionImages[0] : item.collectionImage }}>
               <LinearGradient

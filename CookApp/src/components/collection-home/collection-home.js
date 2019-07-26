@@ -22,14 +22,14 @@ export default class CollectionHome extends Component {
 	}
 
 	render() { 
-		const { data, gotoDetail } = this.props;   
+		const { data, gotoDetail, marTop } = this.props;   
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container, { marginTop: marTop }]}>
 				<FlatList
 					data={data} 
 					renderItem={({ item, index }) => {
 						return (
-							<CollectionItem onPress= { gotoDetail } item={item} index={index} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
+							<CollectionItem item={item} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
 						);
 					}} 
           keyExtractor={(item, index) => index.toString()}
