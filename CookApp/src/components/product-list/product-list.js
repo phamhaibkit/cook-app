@@ -62,6 +62,7 @@ class ProductList extends Component {
     data.map((item, index) => {
       if (item.productId === product.productId) {
         if(item.number == 1){
+          item.showAddCart = true;
           return item;
         }
         item.number--;
