@@ -1,37 +1,27 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
-import { IMG } from '../../utils/variables';
-import InputSpinner from 'react-native-input-spinner';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { IMG, CSS, COLOR } from '../../utils/variables';
 
 export default class PlusSubsNumber extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      number: 1
-    }
   }
+
   render() {
+    const {incrementCart, decrementCart, number} = this.props;
     return (
-      <View >
-        <InputSpinner
-          style={{width: '100%', height: 40, alignItems: 'center', borderRadius: 5, borderColor: '#E0E0E0',borderWidth: 1}}
-          max={1000}
-          min={0}
-          step={1}
-          color={"white"}
-          colorMax={"white"}
-          colorMin={"white"}
-          value={this.state.number}
-          onChange={(num) => { console.log(num) }}
-          buttonTextColor={'green'}
-          colorPress= {'white'}
-          fontSize={15}
-          background= {'white'}
-          buttonFontSize={30}
-          rounded={false}
-          buttonStyle={{width: 40, height: 40, borderRadius: 5, backgroundColor: 'transparent', borderColor: '#E0E0E0',borderWidth: 1}}
-          />
-          
+      <View style={{width: '100%', height: 40, flexDirection: 'row', borderRadius: 5, borderColor: COLOR.borderAddCart, borderWidth: 1, alignItems: 'center'}}>
+        <TouchableOpacity style={{flex: 1, paddingVertical: 17,paddingHorizontal: 5, alignItems: 'center'}} onPress={decrementCart}>
+          <Image source={IMG.substractSign} style={{width: 15, height: 1}}/>
+        </TouchableOpacity>
+        <View style={{width: 1, height: 40, backgroundColor: COLOR.borderAddCart}}/>
+        <View style={{flex: 4, alignItems: 'center'}}>
+          <Text style={{fontSize: 18, fontFamily: CSS.fontText, color: COLOR.blackName}}>{number}</Text>
+        </View>
+        <View style={{width: 1, height: 40, backgroundColor: COLOR.borderAddCart}}/>
+        <TouchableOpacity style={{flex: 1, paddingVertical: 12, paddingHorizontal: 5, alignItems: 'center'}} onPress={incrementCart}>
+          <Image source={IMG.plusSign} style={{width: 15, height: 15}}/>
+        </TouchableOpacity>
       </View>
     );
   }

@@ -65,7 +65,7 @@ class PageHome extends Component {
   };
 
   render() {
-    console.log('Render===', this.state);
+    // console.log('Render===', this.state);
     const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo, mostBuy, followedPeople, events, adsBanner } = this.state;
 
     return loading ? (

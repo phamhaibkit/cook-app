@@ -31,7 +31,6 @@ export default class RecipeHighlightHome extends Component {
 
   componentDidMount() {
     const {isHome, recipes, isHightLight, isLiked} = this.props;
-    console.log('isHightLight==', isHightLight)
     if(isHome) {
       this.setState({
         recipes: recipes

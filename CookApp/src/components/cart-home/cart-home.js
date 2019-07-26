@@ -24,7 +24,6 @@ class CartHome extends Component {
 		const cartImg = Platform.OS === 'ios' ? IMG.cartHomeIos : IMG.cartHome;
     const cartNum = Platform.OS === 'ios' ? COLOR.appNameIos : COLOR.redColor;
     const { count } = this.props;
-    console.log('CART-CART==', this.props, this.state);
 		return (
 			<TouchableOpacity style={{ flex: 1 }}>
 				<View>
@@ -54,7 +53,6 @@ class CartHome extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('REDUX-====', state);
   return {
     count: state.cartInfo.numberProduct
   }

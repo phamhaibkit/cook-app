@@ -13,19 +13,64 @@ import styles from './product-list-style';
 import { LANG_VN } from '../../lang/lang-vn';
 import { getCurrencyStr } from '../../utils/general';
 import PlusSubsNumber from '../plus-subs-number/plus-subs-number';
+import { connect } from 'react-redux';
+import { increment, decrement } from '../../reducers/cart.reducer';
 
-
-export default class ProductList extends Component {
+class ProductList extends Component {
   constructor(props) {
     super(props);
+    const {data} = this.props;
+    data.map((item, index) => {
+      item.showAddCart = true;
+      item.number = 1;
+    });
+
     this.state = {
-      showAddCart : true
+      data: data
     }
   }
 
-  showAddNum = () => {
+  showAddNum = (product, index) => {
+    const { data } = this.state;
+    data.map((item, index) => {
+      if (item.productId === product.productId) {
+        item.showAddCart = false;
+        return item;
+      }
+    });
     this.setState({
-      showAddCart: false
+      data: data
+    })
+  }
+
+  incrementCart = (product) => {
+    const { data } = this.state;
+    data.map((item, index) => {
+      if (item.productId === product.productId) {
+        item.number++;
+        this.props.increment();
+        return item;
+      }
+    });
+    this.setState({
+      data: data
+    })
+  }
+
+  decrementCart= (product) => {
+    const { data } = this.state;
+    data.map((item, index) => {
+      if (item.productId === product.productId) {
+        if(item.number == 1){
+          return item;
+        }
+        item.number--;
+        this.props.decrement();
+        return item;
+      }
+    });
+    this.setState({
+      data: data
     })
   }
 
@@ -34,11 +79,10 @@ export default class ProductList extends Component {
   };
 
   renderFrame = (item, index) => {
-    const { showAddCart } = this.state;
-    const {data} = this.props;
-    const endStyle = data.length - 1 === index || (data.length - 1) / 2 === index
-        ? [styles.frame, styles.endFrame]
-        : styles.frame;
+    const { data } = this.state;
+    const endStyle = data && data.length - 1 === index || (data.length - 1) / 2 === index
+      ? [styles.frame, styles.endFrame]
+      : styles.frame;
     return (
       <View style={endStyle}>
         <TouchableWithoutFeedback onPress={this.onPress} style={{ zIndex: 2 }}>
@@ -62,28 +106,33 @@ export default class ProductList extends Component {
                 <Text style={styles.unitText}>/100g</Text>
               </View>
               <Text style={styles.oldPrice}>{getCurrencyStr(item.oldPrice)}</Text>
-              { showAddCart ? (
-                <TouchableOpacity style={styles.addCart} onPress={this.showAddNum}>
-                  <Text style={styles.addCartText}>{LANG_VN.ADD_TO_CART}</Text>
-                </TouchableOpacity>
-              ) : <PlusSubsNumber />}
-            </View>
-            <View style={styles.containerDiscount}>
-              <View style={styles.discount}>
-                <Text style={styles.discountText}>-{item.discount * 100 + '%'}</Text>
-              </View>
-              <View style={styles.selling}>
-                <Text style={styles.discountText}>bán chạy</Text>
-              </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
+        {item.showAddCart ? (
+          <TouchableOpacity style={styles.addCart} onPress={() =>this.showAddNum(item, index)}>
+            <Text style={styles.addCartText}>{LANG_VN.ADD_TO_CART}</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={{paddingLeft: 10}}>
+            <PlusSubsNumber number={item.number} incrementCart={() => this.incrementCart(item)} decrementCart={() => this.decrementCart(item)}/>
+          </View>
+        )}
+        <View style={styles.containerDiscount}>
+          <View style={styles.discount}>
+            <Text style={styles.discountText}>-{item.discount * 100 + '%'}</Text>
+          </View>
+          <View style={styles.selling}>
+            <Text style={styles.discountText}>bán chạy</Text>
+          </View>
+        </View>
+
       </View>
     );
   };
 
   render() {
-    const { data } = this.props;
+    const { data } = this.state;
     const numCols =
       data && data.length % 2 === 0
         ? data.length / 2
@@ -105,3 +154,10 @@ export default class ProductList extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+  }
+}
+
+export default connect (mapStateToProps, {increment, decrement})(ProductList);

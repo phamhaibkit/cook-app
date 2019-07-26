@@ -11,7 +11,6 @@ import { LANG } from '../../lang/lang';
 class CollectionItem extends Component {
   render() {
     let { item, imgBgWrap, blockMargin, onPress } = this.props;
-    console.log(item);
  
     return (
        <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]}>

@@ -14,8 +14,13 @@ function cartInfo(state = initialState, action) {
     case ACTION.INCREMENT:
       return {
         ...state,
-        numberProduct: state.numberProduct + action.number
-      };
+        numberProduct: state.numberProduct + 1
+			};
+		case ACTION.DECREMENT:
+			return {
+				...state,
+				numberProduct: state.numberProduct - 1
+			};
 		default:
 			return state;
 	}
@@ -29,17 +34,15 @@ export function getCart(data) {
 	};
 }
 
-export function increment(number) {
+export function increment() {
 	return {
 		type: ACTION.INCREMENT,
-		number,
 	};
 }
 
-export function decrement(number) {
+export function decrement() {
 	return {
     type: ACTION.DECREMENT,
-    number,
 	};
 }
 

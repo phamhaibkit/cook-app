@@ -135,7 +135,8 @@ export default StyleSheet.create({
     width: 200,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: COLOR.borderAddCart
+    borderColor: COLOR.borderAddCart,
+    marginLeft: 10
   },
   addCartText: {
     color: COLOR.addCartHome,
