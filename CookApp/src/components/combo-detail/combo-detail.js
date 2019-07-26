@@ -13,6 +13,7 @@ import GradientButton from '../../components/gradient-button/gradient-button';
 import IncreaterButtonWithNumber from '../increater-button-with-number/increater-button-with-number';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
 import { LANG } from '../../lang/lang';
+import { ComboService } from '../../services/combo.service';
 
 function IngredientCard (props)  {
   const { 
@@ -59,7 +60,8 @@ export default class ComboDetail extends Component {
       mealQuantity: 1,
       isSelectAll: true,
       isChecked: true, 
-      data: COMBO_DETAIL
+      ingredients: COMBO_DETAIL.ingredients,
+      data: {}
     };
   }
 
@@ -67,12 +69,30 @@ export default class ComboDetail extends Component {
     alert('Mua nguyen lieu');
   };
 
+  getComboDetail = (id) => {
+    ComboService.getComboDetail(id).then(() => { 
+      alert('da vao');  
+      console.log('promise getCombo resolve! ');
+      let data =  {...ComboService.comboDetail};
+      this.setState({
+        data: data
+      });
+    });
+  }
+
+  componentDidMount () { 
+    const { navigation } = this.props;
+    const id = navigation.getParam('id', 1);     
+    this.getComboDetail(1);
+    console.log('componentDIdmount work! ', );
+  }
+
   render() {
     let recipesDetail = this.state.data;
     
     return (
       <ScrollView>
-        <SwiperImage height={300} listItems={ recipesDetail.sliderImages }/>
+        {/* <SwiperImage height={300} listItems={ recipesDetail.sliderImages }/> */}
         
         <View style={styles.container}>
           
@@ -96,7 +116,7 @@ export default class ComboDetail extends Component {
               <View style={styles.estimatePrice}>
                 <View style={{flexDirection: 'row', flex: 1, paddingVertical: 15}}>
                   <View style={styles.w50percentage}>
-                    <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(335000) } {LANG.VIETNAM_DONG}</Text>
+                    <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.estimatePrice) } {LANG.VIETNAM_DONG}</Text>
                     <Text style={styles.textDescription}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
                   </View>
                   <View style={styles.cardSeparator}></View>

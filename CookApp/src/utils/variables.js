@@ -284,3 +284,7 @@ export const ACTION = {
   DECREMENT: 'DECREMENT',
   GET_CART: 'GET_CART'
 };
+
+export const CONST = {
+  chefRank: 9
+}

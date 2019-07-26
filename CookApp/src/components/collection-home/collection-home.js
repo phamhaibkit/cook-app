@@ -8,6 +8,8 @@ import styles from './collection-home-style';
 import { COLOR, CSS } from '../../utils/variables';
 import CollectionItem from '../collection-item/collection-item';
 import { COLLECTION_DATA } from '../../models/data';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 export default class CollectionHome extends Component {
 	constructor(props) {
@@ -15,15 +17,19 @@ export default class CollectionHome extends Component {
 		this.state = {};		
 	}
 
+	gotoDetail () {
+		navigationService.navigate(ROUTES.collectionDetail.key, { id: index + 1});
+	}
+
 	render() { 
-		const { data, gotoDetail } = this.props;   
+		const { data, gotoDetail, marTop } = this.props;   
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container, { marginTop: marTop }]}>
 				<FlatList
 					data={data} 
 					renderItem={({ item, index }) => {
 						return (
-							<CollectionItem onPress= { gotoDetail} item={item} index={index} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
+							<CollectionItem item={item} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
 						);
 					}} 
           keyExtractor={(item, index) => index.toString()}

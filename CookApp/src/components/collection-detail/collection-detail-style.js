@@ -18,22 +18,27 @@ const frameImgHeight = basedRecipeImgRatio * frameImgWidth;
 
 
 export default StyleSheet.create({
-  container: {
+  container: {    
     flex: 1,
     backgroundColor: COLOR.backgroundColor,
     borderRadius: 5,
     paddingHorizontal: CSS.padding15
   },
+  positionView: {
+    position: 'relative',
+    top: -overflowHeight,
+    left: 0,
+    zIndex: 1000,    
+  },
   comboDescriptionWrap: {
-    position: 'absolute',
-    zIndex: 1000,
-    top: - overflowHeight,
-    left: containerPadding,
+    width: width - containerPadding * 2,
     padding: 15,
     backgroundColor: COLOR.whiteColor,
-    borderRadius: 5
+    borderRadius: 5,
+    marginBottom: 30
   },
   comboTitle: {
+    flex:1,
     color: COLOR.blackColor,
     fontSize: 20,
     lineHeight: 20
@@ -44,7 +49,7 @@ export default StyleSheet.create({
     lineHeight: 1.714
   },
   topRecipes: {
-    marginTop: overflowHeight
+    position: 'relative'
   },
   frame: {
     height: frameHeight,
@@ -213,7 +218,14 @@ export default StyleSheet.create({
   },
   saveImg: {
     width: 19,
-    height: 20
+    height: 20,
+    marginRight: 7, 
+  },
+  saveTime: {
+    fontSize: 13, 
+    color: COLOR.whiteColor,     
+    lineHeight: 18, 
+    fontFamily: CSS.fontText
   }
 });
 

@@ -91,19 +91,19 @@ export default class ComboHome extends Component {
                 {is4 && (
                   <ImageBackground
                     style={styles.img4LeftDown}
-                    source={{ uri: item.comboImage[2] }}
+                    source={{ uri:  item.comboImage[2] }}
                   />
                 )}
               </View>
               <View>
                 <ImageBackground
                   style={imgRightStyle}
-                  source={{ uri: item.comboImage[1] }}
+                  source={{ uri:  item.comboImage[1] }}
                 />
                 {is4 && (
                   <ImageBackground
                     style={[styles.img4LeftDown, { marginLeft: 4 }]}
-                    source={{ uri: item.comboImage[3] }}
+                    source={{ uri:  item.comboImage[3] }}
                   />
                 )}
               </View>
@@ -118,37 +118,37 @@ export default class ComboHome extends Component {
     const imgUpStyle = is5 ? styles.imgUp5 : styles.imgUp3;
     const imgDownStyle = is5 ? styles.imgDown5 : styles.imgDown3;
     return (
-      <View style={{ height: '100%', width: '100%' }}>
+      <View style={styles.containerFluid}>
         {this.renderTitle(item.comboName, item.numberOrder, item.viewNumber)}
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.container2Img}>
             <View style={styles.containerImg}>
               <ImageBackground
                 style={styles.imgLeftView}
-                source={{ uri: item.comboImage[0] }}
+                source={{ uri:  item.comboImage[0] }}
               />
               <View style={styles.imgRightView}>
                 <View style={styles.addImgView}>
                   <ImageBackground
                     style={imgUpStyle}
-                    source={{ uri: item.comboImage[1] }}
+                    source={{ uri:  item.comboImage[1] }}
                   />
                   {is5 && (
                     <ImageBackground
                       style={styles.imgRightUp5}
-                      source={{ uri: item.comboImage[3] }}
+                      source={{ uri:  item.comboImage[3] }}
                     />
                   )}
                 </View>
                 <View style={styles.addImgView}>
                   <ImageBackground
                     style={imgDownStyle}
-                    source={{ uri: item.comboImage[2] }}
+                    source={{ uri:  item.comboImage[2] }}
                   />
                   {is5 && (
                     <ImageBackground
                       style={styles.imgRightDown5}
-                      source={{ uri: item.comboImage[4] }}
+                      source={{ uri:  item.comboImage[4] }}
                     />
                   )}
                 </View>
@@ -161,9 +161,9 @@ export default class ComboHome extends Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, marTop } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {marginTop: marTop}]}>
         <FlatList
           data={data}
           renderItem={({ item, index }) => this.renderFrame(item, index)}

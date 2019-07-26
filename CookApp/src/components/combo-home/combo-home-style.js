@@ -11,6 +11,10 @@ export default StyleSheet.create({
     flex: 1,
     marginTop: 10
   },
+  containerFluid: { 
+    height: '100%', 
+    width: '100%' 
+  },
   frame: {
     height: heightCombo,
     // paddingHorizontal: CSS.padding10,

@@ -43,8 +43,7 @@ class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key, {data: this.state.recipeCollection});
-        // navigationService.navigate(ROUTES.recipeDetail.key, {data: this.state.recipeCollection});
+        navigationService.navigate(ROUTES.collectionList.key);
         break;
       case LANG.COMBO:
         navigationService.navigate(ROUTES.comboList.key);
@@ -61,7 +60,7 @@ class PageHome extends Component {
   };
 
   gotoDetail = () => {
-    navigationService.navigate('ComboDetail');
+   alert('alert');
   };
 
   render() {
@@ -75,8 +74,11 @@ class PageHome extends Component {
         <View style={styles.container}>
           <Trending data={trending} />
           <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
-          <CollectionHome data={recipeCollection}/>
-          <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>
+          <CollectionHome 
+            data={recipeCollection}
+            marTop={CSS.padding15}
+          />
+          <Advertiment paddingHori={CSS.padding15} />
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
           <RecipeHighlightHome
             recipes={recipeHighlight}
@@ -85,7 +87,10 @@ class PageHome extends Component {
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
-          <ComboHome data={recipeCombo} />
+          <ComboHome 
+            data={recipeCombo}
+            marTop={CSS.padding15}
+          />
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
           <ProductList data={mostBuy}/>
           <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>

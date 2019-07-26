@@ -1,17 +1,34 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Dimensions } from 'react-native';
+
 import CollectionItem from '../collection-item/collection-item';
 import styles from './collection-list-style';
+import collectionService from '../../services/collection.service';
 
 export default class CollectionList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ...collectionService.collectionData
+    }
   }
-  
+
+  componentDidMount() {
+    this.getCollectionList();
+  }
+
+  getCollectionList = () => {
+    collectionService.getCollections().then(() => {      
+      let data = [...collectionService.collectionData];
+      this.setState({
+        data: data
+      });
+    });
+  }  
+
   render() {
-    const { navigation } = this.props;
-    const data = navigation.getParam('data', {});
-    
+    const { data }  = this.state;
+
     return (
       <View style={styles.container}>
         <FlatList 
@@ -20,7 +37,7 @@ export default class CollectionList extends Component {
             return (
               <CollectionItem
                 item={item} 
-                index={index} 
+                isCollectionList 
                 imgBgWrap={styles.imgBgWrap}
                 blockMargin={styles.blockMargin}
               />

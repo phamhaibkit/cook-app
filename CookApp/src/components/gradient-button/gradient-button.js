@@ -16,7 +16,6 @@ export default class GradientButton extends Component {
       <LinearGradient start={ start } end={ end } colors={ colors } style={CSS.linearGradientButton}>
         <TouchableHighlight 
           style={[CSS.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} 
-          underlayColor={'transparent'}
           onPress={onPress}
         >
           <Text style={CSS.textTitleButton}>{ buttonLabel }</Text>
