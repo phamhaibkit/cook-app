@@ -35,8 +35,10 @@ import ComboDetail from '../combo-detail/combo-detail';
 import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
 import PageReportRecipe from '../page-report-recipe/page-report-recipe';
+import RecipeLikedList from '../recipe-liked-list/recipe-liked-list';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
+import RecipeDetail from '../recipe-detail/recipe-detail';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -53,6 +55,17 @@ const RecipeHighlightListScreen = {
   screen: RecipeHighlightList,
   navigationOptions: {
     title: LANG.RECIPE_HIGHLIGHT.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton isGreen/>,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+};
+
+const RecipeLikedListScreen = {
+  screen: RecipeLikedList,
+  navigationOptions: {
+    title: LANG.LIKED_RECIPE.name,
     headerTitleStyle: styles.headerTitleStyle,
     headerLeft: <BackButton isGreen/>,
     headerRight: <SearchButton />,
@@ -111,7 +124,8 @@ const HomeStack = createStackNavigator({
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.collectionDetail.key]: CollectionDetailScreen,
   [ROUTES.comboDetail.key]: ComboDetailScreen,
-  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
+  [ROUTES.recipeLikedList.key]: RecipeLikedListScreen
 });
 
 const StoreStack = createStackNavigator({
@@ -140,11 +154,26 @@ const RecipeStack = createStackNavigator({
       header: null,
     }
   },
+  [ROUTES.recipeDetail.key]: {
+    screen: RecipeDetail,
+    navigationOptions: {
+      headerLeft: <BackButton />,
+      headerTransparent: true
+    }
+  },
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
 });
+
+const RecipeDetailScreen = {
+  screen: RecipeDetail,
+  navigationOptions: {
+    headerLeft: <BackButton />,
+    headerTransparent: true
+  }
+};
 
 const NotiStack = createStackNavigator({
   Noti: { screen: PageNoti }
@@ -180,7 +209,7 @@ const UserStack = createStackNavigator({
       tabBarVisible: false,
       gesturesEnabled: false,
       headerTitleStyle: styles.headerTitleStyle,
-      headerLeft:  <BackButton />,
+      headerLeft:  <BackButton isGreen/>,
       headerTitleContainerStyle: styles.headerTitleContainerStyle ,
       headerStyle: {
         elevation: 0,

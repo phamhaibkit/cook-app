@@ -19,6 +19,7 @@ export const IMG = {
   reportHome: require('../../assets/icons/dot-home.png'),
   avatarHome: require('../../assets/icons/avata-home.png'),
   rankHome: require('../../assets/icons/rank-home.png'),
+  rankChef: require('../../assets/icons/rank-chef.png'),
   loveHome: require('../../assets/icons/love-home.png'),
   loveActiveHome: require('../../assets/icons/love-active.png'),
   commentHome: require('../../assets/icons/comment-home.png'),
@@ -56,6 +57,9 @@ export const IMG = {
   substractSign: require('../../assets/icons/substract-sign.png'),
   plusSign: require('../../assets/icons/plus-sign.png'),
   checkedIcon: require('../../assets/icons/checked-icon.png'),
+  starYellow: require('../../assets/icons/star-yellow.png'),
+  starGrey: require('../../assets/icons/star-grey.png'),
+  borderDot: require('../../assets/icons/border-dot.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -169,6 +173,9 @@ export const CSS = {
   fontSize24: {
     fontSize: 24,
   },
+  fontSize20: {
+    fontSize: 20,
+  },
   fontSize18: {
     fontSize: 18,
   },
@@ -218,6 +225,31 @@ export const CSS = {
     width: 26,
     height: 16
   },
+  pendingStatus: {
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    fontSize: 12,
+    borderColor: '#9C9C9C',
+    borderWidth: 1,
+    borderRadius: 100,
+    width: 116,
+  },
+  pendingText: {
+    fontSize: 12,
+    color: '#9C9C9C'
+  },
+  buttonFollow: {
+    paddingVertical: 7,
+    paddingHorizontal: 7,
+    borderColor: '#E0E0E0',
+    borderWidth: 1,
+    borderRadius: 5
+  },
+  textFollow: {
+    color: '#3ABF57',
+    fontSize: 12,
+    fontFamily: 'Quicksand-Bold'
+  }
 };
 
 export const COLOR = {
@@ -248,6 +280,9 @@ export const COLOR = {
 
 export const ACTION = {
   SET_ACCOUNT_INFO: 'SET_ACCOUNT_INFO',
+  INCREMENT: 'INCREMENT',
+  DECREMENT: 'DECREMENT',
+  GET_CART: 'GET_CART'
 };
 
 export const CONST = {

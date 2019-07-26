@@ -33,9 +33,15 @@ export default StyleSheet.create({
     // flex: 2,
     paddingLeft: CSS.padding10,
   },
+  imgView: {
+    width: widthImg,
+    height: heightImg,
+    overflow: 'hidden',
+    borderRadius: 4
+  },
   img: {
     width: widthImg,
-    height: heightImg
+    height: heightImg,
   },
   guarantImg: {
     backgroundColor: 'white',
@@ -96,12 +102,12 @@ export default StyleSheet.create({
   },
   containerDown: {
     // paddingHorizontal: 10,
-    marginTop: 38
+    marginTop: 20
   },
   priceView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 10
+    marginVertical: 5
   },
   newPrice:{
     color: COLOR.redColor,
@@ -112,9 +118,15 @@ export default StyleSheet.create({
   oldPrice: {
     fontSize: 15,
     textDecorationLine: 'line-through',
-    marginLeft: CSS.padding15,
+    marginBottom: 8,
     lineHeight: 20,
     color: COLOR.oldPrice
+  },
+  unitText: {
+    fontSize: 10,
+    fontFamily: CSS.fontText,
+    color: '#767676',
+    marginLeft: 5
   },
   addCart: {
     justifyContent: 'center',
@@ -123,7 +135,8 @@ export default StyleSheet.create({
     width: 200,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: COLOR.borderAddCart
+    borderColor: COLOR.borderAddCart,
+    marginLeft: 10
   },
   addCartText: {
     color: COLOR.addCartHome,

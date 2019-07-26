@@ -34,6 +34,7 @@ export const LANG_VN = {
       fieldName: 'Đánh giá sản phẩm'
     }
   ],
+  STEP_ACTION: 'Các bước thực hiện',
   RECIPE: 'Công thức',
   UP_RECIPE: 'Đăng Công Thức',
   FOLLOWER: 'Người theo dõi',
@@ -41,6 +42,7 @@ export const LANG_VN = {
   ORDER_DRAFT: 'Đơn hàng nháp',
   RECIPE_WAITING: 'Công thức chờ duyệt',
   FOLLOWING: 'Bạn đang theo dõi',
+  FOLLOW: 'theo dõi',
   FOLLOWED: 'Người theo dõi bạn',
   SAVED_RECIPE: 'Công thức đã lưu',
   ORER: 'Đơn hàng',
@@ -85,5 +87,7 @@ export const LANG_VN = {
   COOKING_INSTRUCTIONS: 'HƯỚNG DẪN NẤU',
   OPTIONAL_MEAL: 'Có thể chọn lại khẩu phần khi mua nguyên liệu',
   SEND_REPORT: 'Gửi báo cáo',
-  REQUIRE_REPORT: 'Nhập nội dung báo cáo (bắt buộc)'
+  REQUIRE_REPORT: 'Nhập nội dung báo cáo (bắt buộc)',
+  PENDING: 'Đang kiểm duyệt',
+  RATE:'Đánh giá'
 };

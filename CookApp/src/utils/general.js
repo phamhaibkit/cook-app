@@ -49,6 +49,9 @@ export function formatNumberWithDot(number) {
  * @param {number} inputNumber: number to get currency string
  */
 export function getCurrencyStr(num) {
+  if(!num){
+    return;
+  }
   const array = num.toString().split('');
   let index = -3;
   while (array.length + index > 0) {
@@ -56,7 +59,7 @@ export function getCurrencyStr(num) {
     // Decrement by 4 since we just added another unit to the array.
     index -= 4;
   }
-  return array.join('') + ' đ';
+  return array.join('') + 'đ';
 }
 
 export function kFormatter(num) {

@@ -17,14 +17,42 @@ import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import { getCurrencyStr, kFormatter } from '../../utils/general';
+import recipeService from '../../services/recipe.service';
 
 export default class RecipeHighlightHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isModalVisible: false,
-      recipe: {}
+      recipe: {},
+      recipes: []
     };
+  }
+
+  componentDidMount() {
+    const {isHome, recipes, isHightLight, isLiked} = this.props;
+    if(isHome) {
+      this.setState({
+        recipes: recipes
+      })
+    }else {
+      if(isHightLight){
+        recipeService.getRecipeHightLightList()
+        .then(() => {
+          this.setState({
+            recipes: recipeService.recipeHightLightData.recipes
+          })
+        })
+      }else if(isLiked){
+        recipeService.getRecipeLikedList(1)
+        .then(()=>{
+          this.setState({
+            recipes: recipeService.recipeLikedData.recipes
+          })
+        })
+      }
+    }
+    
   }
 
   onPress = () => {
@@ -73,12 +101,13 @@ export default class RecipeHighlightHome extends Component {
   };
 
   renderFrame = (item, index) => {
-    const { recipes, isHorizontal } = this.props;
+    const { isHorizontal, isLove, isLiked } = this.props;
+    const { recipes } = this.state;
     const horizaltalStyle =
       recipes.length - 1 === index
         ? [styles.frame, styles.endFrame]
         : styles.frame;
-    const iconLove = item.isLove ? IMG.loveActiveHome : IMG.loveHome;
+    const iconLove = (isLove || isLiked ) ? IMG.loveActiveHome : IMG.loveHome;
     const priceFormat = getCurrencyStr(item.price);
     return (
       <View style={{ flex: 1 }}>
@@ -132,7 +161,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableWithoutFeedback>
             </View>
             <TouchableOpacity style={styles.containerChef}>
-              <Image style={styles.avataImg} source={{ uri: item.owner.avatar }} />
+              <Image style={styles.avataImg} source={{ uri: item.owner && item.owner.avatar }} />
               <Text style={styles.nameChef}>{item.owner && item.owner.name}</Text>
               <Image style={styles.rankImg} source={IMG.rankHome} />
             </TouchableOpacity>
@@ -142,7 +171,7 @@ export default class RecipeHighlightHome extends Component {
             <View style={styles.priceView}>
               <Text style={styles.textTime}>
                 {kFormatter(item.likeTimes)}
-                <Text style={styles.textLight}> thích</Text>
+                <Text style={styles.textLight}> {LANG.LIKE}</Text>
               </Text>
             </View>
             <View style={styles.lineLikeView}>
@@ -151,7 +180,7 @@ export default class RecipeHighlightHome extends Component {
             <View style={styles.likeView}>
               <Text style={styles.textTime}>
                 {kFormatter(item.numberEvaluate)}
-                <Text style={styles.textLight}> bình luận</Text>
+                <Text style={styles.textLight}> {LANG.COMMENT}</Text>
               </Text>
             </View>
             <View style={styles.lineLikeView}>
@@ -160,7 +189,7 @@ export default class RecipeHighlightHome extends Component {
             <View style={styles.likeView}>
               <Text style={styles.textTime}>
                 {kFormatter(item.shareTimes)}
-                <Text style={styles.textLight}> chia sẻ</Text>
+                <Text style={styles.textLight}> {LANG.SHARE}</Text>
               </Text>
             </View>
             <View style={styles.lineLikeView}>
@@ -169,7 +198,7 @@ export default class RecipeHighlightHome extends Component {
             <View style={styles.likeView}>
               <Text style={styles.textTime}>
                 {kFormatter(item.viewTimes)}
-                <Text style={styles.textLight}> xem</Text>
+                <Text style={styles.textLight}> {LANG.VIEW}</Text>
               </Text>
             </View>
           </View>
@@ -197,8 +226,8 @@ export default class RecipeHighlightHome extends Component {
   };
 
   render() {
-    const { recipes, isHorizontal, marTop } = this.props;
-    const { isModalVisible } = this.state;
+    const { isHorizontal, marTop } = this.props;
+    const { isModalVisible, recipes } = this.state;
     return (
       <View style={[styles.container, { marginTop: marTop }]}>
         <FlatList

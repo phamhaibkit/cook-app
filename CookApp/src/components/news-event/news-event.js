@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import { IMG } from '../../utils/variables';
 import styles from './news-event-style';
+import { LANG } from '../../lang/lang';
+import { kFormatter } from '../../utils/general';
 
 export default class NewsEvent extends Component {
   constructor(props) {
@@ -23,9 +25,9 @@ export default class NewsEvent extends Component {
   };
 
   renderFrame = (item, index) => {
-    const { newsEvent } = this.props;
+    const { data } = this.props;
     const endStyle =
-      newsEvent.length - 1 === index
+      data.length - 1 === index
         ? [styles.frame, styles.endFrame]
         : styles.frame;
     const iconLove = item.isLove ? IMG.loveActiveHome : IMG.loveHome;
@@ -34,36 +36,48 @@ export default class NewsEvent extends Component {
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View>
             <View style={styles.recipeView}>
-              <Image style={styles.recipeIMG} source={{ uri: item.link }} />
+              <Image style={styles.recipeIMG} source={{ uri: item.eventImage }} />
             </View>
             <View style={styles.dateView}>
               <Image source={IMG.calenderHome} style={styles.dateImg} />
-              <Text style={styles.dateText}> Tu 17/05/2019 den 24/05/2019</Text>
+              <Text style={styles.dateText}> {item.fromDate + ' ' + item.toDate} </Text>
             </View>
             <Text numberOfLines={1} style={styles.titleText}>
-              {item.key}
+              {item.eventName}
             </Text>
             <View style={styles.containerTimePrice}>
               <View style={styles.priceView}>
-                <Text style={styles.textTime}>498 thich</Text>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.likeTimes)}
+                  <Text>{LANG.SPACE + LANG.LIKE}</Text>
+                </Text>
               </View>
               <View style={styles.lineLikeView}>
                 <View style={styles.line} />
               </View>
               <View style={styles.likeView}>
-                <Text style={styles.textTime}>200 binh luan</Text>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.evaluateNumber)}
+                  <Text>{LANG.SPACE + LANG.COMMENT}</Text>
+                </Text>
               </View>
               <View style={styles.lineLikeView}>
                 <View style={styles.line} />
               </View>
               <View style={styles.likeView}>
-                <Text style={styles.textTime}>200 chia se</Text>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.shareTimes)}
+                  <Text>{LANG.SPACE + LANG.SHARE}</Text>
+                </Text>
               </View>
               <View style={styles.lineLikeView}>
                 <View style={styles.line} />
               </View>
               <View style={styles.likeView}>
-                <Text style={styles.textTime}>1k5 xem</Text>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.viewTimes)}
+                  <Text>{LANG.SPACE + LANG.VIEW}</Text>
+                </Text>
               </View>
             </View>
           </View>
@@ -87,14 +101,15 @@ export default class NewsEvent extends Component {
   };
 
   render() {
-    const { newsEvent } = this.props;
+    const { data } = this.props;
     return (
       <View style={styles.container}>
         <FlatList
-          data={newsEvent}
+          data={data}
           renderItem={({ item, index }) => this.renderFrame(item, index)}
           horizontal
           showsHorizontalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     );

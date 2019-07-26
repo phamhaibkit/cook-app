@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import CollectionHome from '../collection-home/collection-home';
 import ComboHome from '../combo-home/combo-home';
 import Trending from '../trending/trending';
@@ -14,13 +14,13 @@ import Advertiment from '../advertiment/advertiment';
 import Spinner from '../spinner/spinner';
 import { LANG } from '../../lang/lang';
 import styles from './page-home-style';
-import { RECIPES, RECIPES_LOVED } from '../../models/data';
 import { CSS } from '../../utils/variables';
 import { ROUTES } from '../../utils/routes';
 import homeService from '../../services/home.service';
-import _ from 'lodash';
+import { connect } from 'react-redux';
+import { getCart} from '../../reducers/cart.reducer';
 
-export default class PageHome extends Component {
+class PageHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,16 +28,14 @@ export default class PageHome extends Component {
     };
   }
   componentDidMount() {
-    // this.showLoading();
     this.getHome();
   }
 
   getHome = () => {
     homeService.getHome().then(() => {
-      console.log('AAAAAAAAAAAAAAAAAAAAa');
-      const data = _.cloneDeep(homeService.homeData);
+      this.props.getCart(homeService.homeData.cart);
       this.setState({
-        ...data
+        ...homeService.homeData
       });
     });
   };
@@ -45,13 +43,17 @@ export default class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key);
+        navigationService.navigate(ROUTES.collectionList.key, {data: this.state.recipeCollection});
+        // navigationService.navigate(ROUTES.recipeDetail.key, {data: this.state.recipeCollection});
         break;
       case LANG.COMBO:
         navigationService.navigate(ROUTES.comboList.key);
         break;
       case LANG.RECIPE_HIGHLIGHT:
-        navigationService.navigate(ROUTES.recipeHighlightList.key);
+        navigationService.navigate(ROUTES.recipeHighlightList.key, {isHightLight: true});
+        break;
+      case LANG.LIKED_RECIPE:
+        navigationService.navigate(ROUTES.recipeLikedList.key, {isLiked: true});
         break;
       default:
         break;
@@ -63,8 +65,8 @@ export default class PageHome extends Component {
   };
 
   render() {
-    console.log('Render===', this.state.loading);
-    const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo } = this.state;
+    // console.log('Render===', this.state);
+    const { loading, trending, recipeHighlight, likedRecipe, recipeCollection, recipeCombo, mostBuy, followedPeople, events, adsBanner } = this.state;
 
     return loading ? (
       <Spinner />
@@ -74,30 +76,41 @@ export default class PageHome extends Component {
           <Trending data={trending} />
           <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
           <CollectionHome data={recipeCollection}/>
-          <Advertiment paddingHori={CSS.padding15} />
+          <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
           <RecipeHighlightHome
             recipes={recipeHighlight}
             isHorizontal
+            isHome
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
           <ComboHome />
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
-          <ProductList />
-          <Advertiment paddingHori={CSS.padding15} />
+          <ProductList data={mostBuy}/>
+          <Advertiment paddingHori={CSS.padding15} data={adsBanner}/>
           <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
-          <FollowingHome />
+          <FollowingHome data={followedPeople}/>
           <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
           <RecipeHighlightHome
             recipes={likedRecipe}
             isHorizontal
+            isHome
+            isLove
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
-          <NewsEvent newsEvent={RECIPES_LOVED} />
+          <NewsEvent data={events} />
         </View>
       </ContainerScroll>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, {getCart})(PageHome);

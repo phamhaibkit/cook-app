@@ -37,6 +37,12 @@ export const ROUTES = {
   },
   pageReportRecipe: {
     key: 'pageReportRecipe'
+  },
+  recipeDetail: {
+    key: 'recipeDetail'
+  },
+  recipeLikedList: {
+    key: 'recipeLikedList'
   }
 
 };
