@@ -1,100 +1,185 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+  TouchableWithoutFeedback
+} from 'react-native';
+
 import styles from './combo-item-style';
-import { COMBO_DATA } from '../../models/data';
-import { COLOR, CSS } from '../../utils/variables';
+import { LANG } from '../../lang/lang';
+import { CSS } from '../../utils/variables';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 export default class ComboItem extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
-		this.data = COMBO_DATA;
-	}
+    this.state = {}; 
+  }
+  
+  handlePress = () => {  
+    const { item } = this.props;
+    navigationService.navigate(ROUTES.comboDetail.key, { id: item.id || item.comboId});
+  }
 
 	renderFrame = (item, index) => {
-		const endStyle = this.data.length - 1 === index ? [styles.frame, styles.endFrame] : styles.frame;
-		let combo;
-		switch (item.combo.length) {
-			case 2:
-				combo = this.render2or4Item(item, false);
-				break;
-			case 3:
-				combo = this.render3or5Item(item, false);
-				break;
-			case 4:
-				combo = this.render2or4Item(item, true);
-				break;
-			case 5:
-				combo = this.render3or5Item(item, true);
-				break;
-			default:
-				break;
-		}
-		return <TouchableOpacity style={[endStyle, CSS.lightBoxShadow, CSS.borderRadius5]}>{combo}</TouchableOpacity>;
-	};
+    const { isVertical } = this.props;
+    const styleFrame = isVertical ? [styles.frame, styles.frameVertical] : styles.frame;
+    const styleEndFrame = isVertical ? [...styleFrame, styles.endFrameVertical] : [styleFrame, styles.endFrame];
+    const endStyle =
+      this.props.dataLength - 1 === index
+        ? styleEndFrame
+        : styleFrame;
+    let combo;
+    switch (item && item.comboImage.length) {
+    case 2:
+      combo = this.render2or4Item(item, false);
+      break;
+    case 3:
+      combo = this.render3or5Item(item, false);
+      break;
+    case 4:
+      combo = this.render2or4Item(item, true);
+      break;
+    case 5:
+      combo = this.render3or5Item(item, true);
+      break;
+    default:
+      break;
+    }
+    return <View style={endStyle}>{combo}</View>;
+  };
 
-	render2or4Item = (item, is4) => {
-		return (
-			<View style={styles.container2Item}>
-				<View style={styles.container2Img}>
-					<ImageBackground style={styles.left2} source={{ uri: item.combo[0].link }} />
-					<ImageBackground style={styles.right2} source={{ uri: item.combo[1].link }} />
-				</View>
-				{is4 && (
-					<View style={styles.container2Img}>
-						<ImageBackground style={styles.left4} source={{ uri: item.combo[2].link }} />
-						<ImageBackground style={styles.right4} source={{ uri: item.combo[3].link }} />
-					</View>
-				)}
-				<Text style={styles.textTitle}>
-					{item.combo[0].name} + {item.combo[1].name} + {is4 && item.combo[2].name} +{' '}
-					{is4 && item.combo[3].name}
-				</Text>
-				<Text>
-					{item.orders} - {item.views}
-				</Text>
-			</View>
-		);
-	};
+  renderTitle = (title, orders, views) => {
+    return (
+      <View style={styles.container2Item}>
+        <View style={[styles.containerWhite, styles.containerFluid]}>
+          <TouchableOpacity onPress={this.handlePress}>
+            <Text style={styles.textTitle} numberOfLines={2}>
+              {title}
+            </Text>
+          </TouchableOpacity>
+          <View style={styles.lineHori} />
+          <View style={styles.containerTimePrice}>
+            <View style={styles.priceView}>
+              <Text style={styles.textTime}>{orders}</Text>
+              <Text style={styles.textTime}>{LANG.ORDER_OWNER}</Text>
+            </View>
+            <View style={styles.lineLikeView}>
+              <View style={styles.line} />
+            </View>
+            <View style={styles.likeView}>
+              <Text style={styles.textTime}>{views}</Text>
+              <Text style={styles.textTime}>{LANG.VIEW}</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
 
-	render3or5Item = (item, is5) => {
-		return (
-			<View style={[styles.container2Item, { backgroundColor: 'white', padding: 10}]}>
-				<View style={styles.container2Img}>
-					<ImageBackground style={styles.left3} source={{ uri: item.combo[0].link }} />
-					<View style={styles.right3}>
-						<View style={styles.container2Img}>
-							<ImageBackground style={styles.up3} source={{ uri: item.combo[1].link }} />
-							{is5 && <ImageBackground style={styles.up5} source={{ uri: item.combo[3].link }} />}
-						</View>
-						<View style={styles.container2Img}>
-							<ImageBackground style={styles.down3} source={{ uri: item.combo[2].link }} />
-							{is5 && <ImageBackground style={styles.down5} source={{ uri: item.combo[4].link }} />}
-						</View>
-					</View>
-				</View>
-				<Text style={styles.textTitle}>
-					{item.combo[0].name} + {item.combo[1].name}+ {is5 && item.combo[3].name} + {item.combo[2].name} +{' '}
-					{is5 && item.combo[4].name}
-				</Text>
-				<Text>
-					{item.orders} - {item.views}
-				</Text>
-			</View>
-		);
-	};
+  render2or4Item = (item, is4) => {
+    // const margin = isHorizontal ? { marginLeft: CSS.padding15 } : { marginTop: CSS.padding15 }
+    const { isVertical } = this.props;
+    const imgLeftStyle = is4 ? (isVertical ? [styles.img4LeftUp, styles.img4LeftUpVertical] : styles.img4LeftUp) : (isVertical ? [styles.img2LeftView, styles.img2LeftViewVertical] : styles.img2LeftView);
+    const imgRightStyle = is4 ? (isVertical ? [styles.img4RightUp, styles.img4RightUpVertical] : styles.img4RightUp) : (isVertical ? [styles.img2RightView, styles.img2RightViewVertical]: styles.img2RightView);
+    const imgLeftDown = isVertical ? [styles.img4LeftDown, styles.img4LeftDownVertical] : styles.img4LeftDown;
+    const imgRightDown = isVertical ? [styles.img4LeftDown, styles.img4LeftDownVertical, styles.img4RightDown] : [styles.img4LeftDown, styles.img4RightDown];
+    const imgContainerWidth = isVertical ? [styles.containerImg, styles.containerImgVertical, CSS.flexRow] : [styles.containerImg, CSS.flexRow];
+    return (
+      <View style={styles.containerFluid}>
+        {this.renderTitle(item.comboName, item.numberOrder, item.viewNumber)}
+        <TouchableWithoutFeedback onPress={this.handlePress}>
+          <View style={styles.container2Img}>
+            <View style={imgContainerWidth}>
+              <View>
+                <ImageBackground
+                  style={imgLeftStyle}
+                  source={{ uri: item.comboImage[0] }}
+                />
+                {is4 && (
+                  <ImageBackground
+                    style={imgLeftDown}
+                    source={{ uri:  item.comboImage[2] }}
+                  />
+                )}
+              </View>
+              <View>
+                <ImageBackground
+                  style={imgRightStyle}
+                  source={{ uri:  item.comboImage[1] }}
+
+                />
+                {is4 && (
+                  <ImageBackground
+                    style={imgRightDown}
+                    source={{ uri:  item.comboImage[3] }}
+                  />
+                )}
+              </View>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    );
+  };
+
+  render3or5Item = (item, is5) => {
+    const imgUpStyle = is5 ? styles.imgUp5 : styles.imgUp3;
+    const imgDownStyle = is5 ? styles.imgDown5 : styles.imgDown3;
+    return (
+      <View style={styles.containerFluid}>
+        {this.renderTitle(item.comboName, item.numberOrder, item.viewNumber)}
+        <TouchableWithoutFeedback onPress={this.onPress}>
+          <View style={styles.container2Img}>
+            <View style={styles.containerImg}>
+              <ImageBackground
+                style={styles.imgLeftView}
+                source={{ uri:  item.comboImage[0] }}
+              />
+              <View style={styles.imgRightView}>
+                <View style={styles.addImgView}>
+                  <ImageBackground
+                    style={imgUpStyle}
+                    source={{ uri:  item.comboImage[1] }}
+                  />
+                  {is5 && (
+                    <ImageBackground
+                      style={styles.imgRightUp5}
+                      source={{ uri:  item.comboImage[3] }}
+                    />
+                  )}
+                </View>
+                <View style={styles.addImgView}>
+                  <ImageBackground
+                    style={imgDownStyle}
+                    source={{ uri:  item.comboImage[2] }}
+                  />
+                  {is5 && (
+                    <ImageBackground
+                      style={styles.imgRightDown5}
+                      source={{ uri:  item.comboImage[4] }}
+                    />
+                  )}
+                </View>
+              </View>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    );
+  };
 
 	render() {
-		return (
-			<View style={styles.container}>
-				<FlatList
-					data={this.data}
-					renderItem={({ item, index }) => this.renderFrame(item, index)}
-					horizontal
-					showsHorizontalScrollIndicator={false}
-					keyExtractor={(item, index) => index.toString()}
-				/>
-			</View>
-		);
+    const { item, index } = this.props;	
+    item.comboImage= [
+      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
+      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
+      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
+      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
+    ]	
+		return this.renderFrame(item, index);		
 	}
 }

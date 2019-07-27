@@ -13,7 +13,7 @@ import GradientButton from '../../components/gradient-button/gradient-button';
 import IncreaterButtonWithNumber from '../increater-button-with-number/increater-button-with-number';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
 import { LANG } from '../../lang/lang';
-import { ComboService } from '../../services/combo.service';
+import  ComboService  from '../../services/combo.service';
 
 function IngredientCard (props)  {
   const { 
@@ -70,9 +70,7 @@ export default class ComboDetail extends Component {
   };
 
   getComboDetail = (id) => {
-    ComboService.getComboDetail(id).then(() => { 
-      alert('da vao');  
-      console.log('promise getCombo resolve! ');
+    ComboService.getComboDetail(id).then(() => {
       let data =  {...ComboService.comboDetail};
       this.setState({
         data: data
@@ -83,16 +81,15 @@ export default class ComboDetail extends Component {
   componentDidMount () { 
     const { navigation } = this.props;
     const id = navigation.getParam('id', 1);     
-    this.getComboDetail(1);
-    console.log('componentDIdmount work! ', );
+    this.getComboDetail(id);
   }
 
   render() {
-    let recipesDetail = this.state.data;
+    let { data } = this.state;
     
     return (
       <ScrollView>
-        {/* <SwiperImage height={300} listItems={ recipesDetail.sliderImages }/> */}
+        <SwiperImage height={300} listItems={ data.comboImage }/>
         
         <View style={styles.container}>
           
@@ -101,15 +98,15 @@ export default class ComboDetail extends Component {
               <Text style={[styles.comboLabel, CSS.fontQuiMedium]}>
                 {LANG.COMBO.name}
               </Text>
-              <Text style={[styles.title, CSS.fontQuiBold]}>{ recipesDetail.comboTitle }</Text>
+              <Text style={[styles.title, CSS.fontQuiBold]}>{ data.name }</Text>
               <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                 <View style={styles.statisticalNumber}>
-                  <Text style={styles.numberStyle}>{ recipesDetail.orders }</Text>
+                  <Text style={styles.numberStyle}>{ data.orderTimes }</Text>
                   <Text style={[styles.numberStyle, styles.textLight]}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
                 </View>
                 <View style={styles.seperator}></View>
                 <View style={styles.statisticalNumber}>
-                  <Text style={styles.numberStyle}> { recipesDetail.views }</Text>
+                  <Text style={styles.numberStyle}> { data.viewTimes }</Text>
                   <Text style={[styles.numberStyle, styles.textLight]}>{LANG.SPACE}{LANG.VIEW}</Text>
                 </View>
               </View>
@@ -135,7 +132,7 @@ export default class ComboDetail extends Component {
             <View style={styles.promotionInfo}>
               <Text style={[styles.sectionTitle, CSS.fontNuExBold]}>{LANG.PROMOTION_INFO}</Text>
              {
-               recipesDetail.promotions && recipesDetail.promotions.map((promotion) => (
+               data.promotion && data.promotion.map((promotion) => (
                   <Text>{promotion}</Text>
                ))
              }
@@ -169,10 +166,10 @@ export default class ComboDetail extends Component {
               />
               <View style={styles.horizontalSeparator}></View>
               {
-                recipesDetail.ingredients && recipesDetail.ingredients.map((ingredient) => (
+                data.recipes && data.recipes.map((ingredient) => (
                   <IngredientCard
-                    ingredientName={ingredient.ingredientName}
-                    amountOfPeople={ingredient.amountOfPeople}
+                    ingredientName={ingredient.name}
+                    amountOfPeople={ingredient.numPeople}
                     price={ingredient.price}
                     isChecked={this.state.isChecked}
                     onClickCheckBox={()=>{this.setState({isChecked: !this.state.isChecked})}}
@@ -182,13 +179,13 @@ export default class ComboDetail extends Component {
             </View>
           </View> 
           
-          <View style={{ backgroundColor: COLOR.whiteColor }}>
+          {/* <View style={{ backgroundColor: COLOR.whiteColor }}>
             <MostSearched 
               label={ LANG.COOKING_INSTRUCTIONS } 
               data={recipesDetail.cookingInstructions} 
               subData={true}
             />               
-          </View>
+          </View> */}
         </View>
       </ScrollView>
     );

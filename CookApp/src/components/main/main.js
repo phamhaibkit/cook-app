@@ -45,7 +45,7 @@ const CollectionListScreen = {
   navigationOptions: {
     title: LANG.COLLECTION.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton />,
+    headerLeft: <BackButton isGreen/>,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }

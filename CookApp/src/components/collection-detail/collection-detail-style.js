@@ -65,7 +65,6 @@ export default StyleSheet.create({
     marginBottom: CSS.padding15
   },
   containerTitle: {
-    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

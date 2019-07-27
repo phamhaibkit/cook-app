@@ -15,8 +15,9 @@ class CollectionItem extends Component {
     const { item } = this.props;
     navigationService.navigate(ROUTES.collectionDetail.key, { id: item.id || item.collectionId});
   }
+  
   render() {
-    let { item, imgBgWrap, blockMargin, onPress, isCollectionList } = this.props;
+    let { item, imgBgWrap, blockMargin, isCollectionList } = this.props;
  
     return (
        <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} >
