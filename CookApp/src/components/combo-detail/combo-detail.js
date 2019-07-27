@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, TouchableHighlight, Image } from 'react-native';
+import _ from 'lodash';
 
 import styles from './combo-detail-style';
 import { IMG, CSS, COLOR } from '../../utils/variables';
@@ -15,41 +16,48 @@ import IncreaterButtonWithoutNumber from '../increater-button-without-number/inc
 import { LANG } from '../../lang/lang';
 import  ComboService  from '../../services/combo.service';
 
-function IngredientCard (props)  {
-  const { 
-    ingredientName, 
-    amountOfPeople, 
-    price, 
-    isChecked,
-    onClickCheckBox 
-  } = props;
-  return (
-    <View style={[{paddingVertical: 20}, styles.cardBorder]}>
-      <CustomCheckbox 
-        style={styles.customCheckBox}
-        isChecked={isChecked}
-        rightText={ingredientName}
-        rightTextStyle={[styles.rightTextCheckbox, CSS.fontQuiBold]}
-        onClick={onClickCheckBox}
-      />
-      <View style={styles.cardWrap}>
-        <View style={{flex: 3, flexDirection: 'row'}}>
-          <View style={{flex: 3}}>
-            <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.MEAL}:</Text>
-            <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.ESTIMATE_PRICE}:</Text>
+class IngredientCard extends Component{
+  constructor(props){
+    super(props);   
+  }
+
+  render(){
+    const { 
+      ingredientName, 
+      amountOfPeople, 
+      price, 
+      isChecked,
+      onClickCheckBox 
+    } = this.props; 
+
+    return (
+      <View style={[{paddingVertical: 20}, styles.cardBorder]}>
+        <CustomCheckbox 
+          style={styles.customCheckBox}
+          isChecked={isChecked}
+          rightText={ingredientName}
+          rightTextStyle={[styles.rightTextCheckbox, CSS.fontQuiBold]}
+          onClick={onClickCheckBox}
+        />
+        <View style={styles.cardWrap}>
+          <View style={{flex: 3, flexDirection: 'row'}}>
+            <View style={{flex: 3}}>
+              <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.MEAL}:</Text>
+              <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.ESTIMATE_PRICE}:</Text>
+            </View>
+            <View style={{flex: 2}}>                            
+              <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{ amountOfPeople }{LANG.SPACE}{LANG.PERSON}</Text>
+              <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{ formatNumberWithDot(price) }{LANG.SPACE}{LANG.VIETNAM_DONG}</Text>
+            </View>
           </View>
-          <View style={{flex: 2}}>                            
-            <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{ amountOfPeople }{LANG.SPACE}{LANG.PERSON}</Text>
-            <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{ formatNumberWithDot(price) }{LANG.SPACE}{LANG.VIETNAM_DONG}</Text>
+          <View style={styles.actionBtnGroup}>
+            <IncreaterButtonWithoutNumber btnStyle={{marginRight: 5}} />
+            <IncreaterButtonWithoutNumber isPlus={true}/>     
           </View>
-        </View>
-        <View style={styles.actionBtnGroup}>
-          <IncreaterButtonWithoutNumber btnStyle={{marginRight: 5}} />
-          <IncreaterButtonWithoutNumber isPlus={true}/>     
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 export default class ComboDetail extends Component {
@@ -57,10 +65,9 @@ export default class ComboDetail extends Component {
     super(props);
     this.state = {
       estimatePrice: 0,
-      mealQuantity: 1,
-      isSelectAll: true,
-      isChecked: true, 
-      ingredients: COMBO_DETAIL.ingredients,
+      mealQuantity: 0,
+      isCheckAll: true,
+      recipes: [],
       data: {}
     };
   }
@@ -75,7 +82,45 @@ export default class ComboDetail extends Component {
       this.setState({
         data: data
       });
+      this.initData();
     });
+  }
+
+  initData = () => {
+    if(typeof this.state.data !== {}) {
+      const { data, numPeople } = this.state;
+      let totalPrice = this.state.estimatePrice;
+      // totalPrice = data.recipes.reduce()
+      data.recipes.map((item) => {
+        item.isChecked = true;        
+      });
+      this.setState({
+        recipes: data.recipes,
+        mealQuantity: numPeople
+      });
+    }
+  }
+
+  handleCheckAll = () => {
+    this.setState({
+      isCheckAll:  !this.state.isCheckAll
+    })
+
+    const { recipes } = this.state.data;
+    recipes.map((item) => {
+      item.isChecked = !this.state.isCheckAll;
+    });
+    this.setState({recipes: recipes});
+  }
+
+  handleRecipeCheck = (recipe) => {
+    const { recipes } = this.state.data;
+
+    _.find(recipes, (item)=> {
+      return item.id === recipe.id;
+    }).isChecked = !recipe.isChecked;
+
+    this.setState({recipes: recipes});
   }
 
   componentDidMount () { 
@@ -156,23 +201,19 @@ export default class ComboDetail extends Component {
             <View style={styles.selectAll}>
               <CustomCheckbox 
                 style={styles.customCheckBox}
-                isChecked={this.state.isChecked}
+                isChecked={this.state.isCheckAll}
                 rightText={LANG.SELECT_ALL}
-                onClick={() => { 
-                  this.setState({
-                    isChecked: !this.state.isChecked
-                  })
-                }}
+                onClick={this.handleCheckAll}
               />
               <View style={styles.horizontalSeparator}></View>
               {
-                data.recipes && data.recipes.map((ingredient) => (
+                data.recipes && data.recipes.map((ingredient, index) => (
                   <IngredientCard
                     ingredientName={ingredient.name}
                     amountOfPeople={ingredient.numPeople}
                     price={ingredient.price}
-                    isChecked={this.state.isChecked}
-                    onClickCheckBox={()=>{this.setState({isChecked: !this.state.isChecked})}}
+                    isChecked={ingredient.isChecked}
+                    onClickCheckBox={() => this.handleRecipeCheck(ingredient)}
                   />
                 ))
               }
