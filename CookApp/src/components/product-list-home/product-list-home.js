@@ -9,32 +9,44 @@ import {
   TouchableWithoutFeedback,
   Image
 } from 'react-native';
-import styles from './product-list-style';
+import styles from './product-list-home-style';
 import { LANG_VN } from '../../lang/lang-vn';
 import { getCurrencyStr } from '../../utils/general';
 import PlusSubsNumber from '../plus-subs-number/plus-subs-number';
 import { connect } from 'react-redux';
 import { increment, decrement } from '../../reducers/cart.reducer';
 
-class ProductList extends Component {
+class ProductListHome extends Component {
   constructor(props) {
     super(props);
     const {data} = this.props;
-    data.map((item, index) => {
-      item.showAddCart = true;
-      item.number = 1;
-    });
-
+    this.numCols;
     this.state = {
       data: data
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    const newData = nextProps.data;
+    newData && newData.map((item, index) => {
+      item.showAddCart = true;
+      item.number = 1;
+    });
+    console.log('NEST-PROPS=', nextProps.data);
+    this.numCols = newData.length % 2 === 0
+        ? newData.length / 2
+        : (newData.length + 1) / 2;
+    this.setState({
+      data : newData
+    })
+  }
+
   showAddNum = (product, index) => {
     const { data } = this.state;
-    data.map((item, index) => {
+    data && data.map((item, index) => {
       if (item.productId === product.productId) {
         item.showAddCart = false;
+        this.props.increment();
         return item;
       }
     });
@@ -45,10 +57,10 @@ class ProductList extends Component {
 
   incrementCart = (product) => {
     const { data } = this.state;
-    data.map((item, index) => {
+    data && data.map((item, index) => {
       if (item.productId === product.productId) {
-        item.number++;
         this.props.increment();
+        item.number++;
         return item;
       }
     });
@@ -59,14 +71,14 @@ class ProductList extends Component {
 
   decrementCart= (product) => {
     const { data } = this.state;
-    data.map((item, index) => {
+    data && data.map((item, index) => {
       if (item.productId === product.productId) {
+        this.props.decrement();
         if(item.number == 1){
           item.showAddCart = true;
           return item;
         }
         item.number--;
-        this.props.decrement();
         return item;
       }
     });
@@ -81,7 +93,7 @@ class ProductList extends Component {
 
   renderFrame = (item, index) => {
     const { data } = this.state;
-    const endStyle = data && data.length - 1 === index || (data.length - 1) / 2 === index
+    const endStyle = data && data.length - 1 === index || (data && data.length - 1) / 2 === index
       ? [styles.frame, styles.endFrame]
       : styles.frame;
     return (
@@ -134,23 +146,21 @@ class ProductList extends Component {
 
   render() {
     const { data } = this.state;
-    const numCols =
-      data && data.length % 2 === 0
-        ? data.length / 2
-        : (data.length + 1) / 2;
     return (
       <View style={styles.container}>
+      {this.numCols &&
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <FlatList
             contentContainerStyle={{
               alignSelf: 'flex-start'
             }}
-            numColumns={numCols}
+            numColumns={this.numCols}
             data={data}
             renderItem={({ item, index }) => this.renderFrame(item, index)}
             keyExtractor={(item, index) => index.toString()}
           />
         </ScrollView>
+      }
       </View>
     );
   }
@@ -161,4 +171,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect (mapStateToProps, {increment, decrement})(ProductList);
+export default connect (mapStateToProps, {increment, decrement})(ProductListHome);

@@ -22,7 +22,7 @@ class ProductService {
     return HTTPService.get(url,null,null)
       .then(data => {
         this.bestSellerProduct = _.cloneDeep({
-          ...data,
+          products: data,
           loading: false,
         });
       })

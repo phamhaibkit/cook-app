@@ -17,8 +17,8 @@ class CartService {
     // this.recipeHightLightData = _.cloneDeep(recipeHightLightData);
   };
   
-  getCartNum = () => {
-    const url = API.GET_NUMBER_CART;
+  getCartNum = (userId) => {
+    const url = API.GET_NUMBER_CART(userId);
     this.cartNumber.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {

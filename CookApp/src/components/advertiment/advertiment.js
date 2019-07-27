@@ -12,7 +12,7 @@ export default class Advertiment extends Component {
         borderRadius: 10,
         overflow: 'hidden'
       }}>
-        <Image style={{ height: 120, width: null }} source={{ uri: data && data.image }} resizeMode="cover" />
+        <Image style={{ height: 120, width: '100%' }} source={{ uri: data && data.image }} resizeMode="stretch" />
       </View>
     );
   }

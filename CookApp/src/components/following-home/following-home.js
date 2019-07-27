@@ -34,7 +34,7 @@ export default class FollowingHome extends Component {
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={{ height: '100%', width: '100%', alignItems: 'center' }}>
             <View style={styles.containerWhite}>
-              <Text numberOfLines={2} style={styles.nameText}>{item.userName}</Text>
+              <Text numberOfLines={2} style={styles.nameText}>{item.firstName + ' ' + item.lastName}</Text>
             </View>
             <View style={styles.container2Img}>
               <ImageBackground

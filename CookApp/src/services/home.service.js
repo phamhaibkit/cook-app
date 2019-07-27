@@ -43,13 +43,13 @@ class HomeService {
       })
   };
 
-  getTrending = () => {
+  getTrendings = () => {
     const url = API.GET_TRENDING;
     this.trendingData.loading = true;
     return HTTPService.get(url)
       .then(data => {
         this.trendingData=_.cloneDeep({
-          ...data,
+          trendings:data,
           loading: false,
         })
       })

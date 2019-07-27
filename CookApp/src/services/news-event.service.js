@@ -17,12 +17,12 @@ class NewsEventService {
   };
   
   getNewsEventData = () => {
-    const url = API.GET_FOLLOWER;
+    const url = API.GET_NEWS_EVENT;
     this.newsEventData.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {
         this.newsEventData = _.cloneDeep({
-          ...data,
+          newsEvents: data,
           loading: false,
         });
       })
