@@ -23,7 +23,7 @@ class CollectionItem extends Component {
        <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} >
         <TouchableWithoutFeedback onPress={ this.handlePress }>
           <View>
-            <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: isCollectionList ? item.collectionImages[0] : item.collectionImage }}>
+            <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: item.collectionImages[0] }}>
               <LinearGradient
                 colors={[COLOR.gradientBlackTopColor, COLOR.gradientBlackBottomColor]}
                 start={{ x: 0, y: 0 }}
