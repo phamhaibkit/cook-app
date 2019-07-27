@@ -174,12 +174,7 @@ export default class ComboItem extends Component {
 
 	render() {
     const { item, index } = this.props;	
-    item.comboImage= [
-      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
-      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
-      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
-      'https://i.ytimg.com/vi/STNYLZFuJm0/maxresdefault.jpg',
-    ]	
+   
 		return this.renderFrame(item, index);		
 	}
 }
