@@ -157,21 +157,38 @@ export default class CollectionDetail extends Component {
       description, 
       id, 
       numberRecipe,
-      savedTimes 
+      savedTimes,
+      likeTimes,
+      viewTimes
     } = this.state;
 
     return (    
         <ScrollView>
           <SwiperImage height={300} listItems={collectionImages}/>
+
           <View style={styles.container}>
             <View style={styles.positionView}>
               <View style={styles.comboDescriptionWrap}>
                 <Text style={[styles.comboTitle, CSS.fontQuiBold]}>{ name }</Text>
                 <Text style={[CSS.fontQuiRegular, ]}>{ description }</Text>
-                <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginTop: 10}}>
-                  <View style={{flexDirection: 'row'}}>
+                <View style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.marginTop15]}>
+                  <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                    <View style={styles.likeView}>
+                      <Text style={styles.textTime}>{ likeTimes }</Text>
+                      <Text style={[styles.textTime, styles.textLight]}>{LANG.LIKE}</Text>
+                    </View>
+                    <View style={styles.lineLikeView}>
+                      <View style={styles.line} />
+                    </View>
+                    <View style={styles.likeView}>
+                      <Text style={styles.textTime}>{ viewTimes }</Text>
+                      <Text style={[styles.textTime, styles.textLight]}>{LANG.VIEW}</Text>
+                    </View>               
+                </View>
+
+                  <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <Image source={IMG.saveHome} style={styles.saveImg} />
-                    <Text style={styles.savedTimes}>{ savedTimes } {LANG.SAVE}</Text>
+                    <Text style={styles.textTime}>{ savedTimes } {LANG.SAVE}</Text>
                   </View>
                 </View>
               </View>

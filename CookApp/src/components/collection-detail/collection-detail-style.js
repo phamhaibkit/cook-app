@@ -30,12 +30,15 @@ export default StyleSheet.create({
     left: 0,
     zIndex: 1000,    
   },
+  marginTop15: {
+    marginTop: 15
+  },
   comboDescriptionWrap: {
     width: width - containerPadding * 2,
     padding: 15,
     backgroundColor: COLOR.whiteColor,
     borderRadius: 5,
-    marginBottom: 30
+    marginBottom: 20
   },
   comboTitle: {
     flex:1,

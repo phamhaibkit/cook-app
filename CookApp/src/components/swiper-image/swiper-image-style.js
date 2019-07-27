@@ -23,7 +23,7 @@ export default styles = StyleSheet.create({
 		borderRadius: dotWidth,
 		opacity: 1,
 	},
-  slideImg: {
+  slideFullWidth: {
     width: '100%'
   }
 })
