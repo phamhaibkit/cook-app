@@ -3,23 +3,23 @@ import { View, FlatList } from 'react-native';
 
 import styles from './combo-list-style';
 import ComboItem from '../combo-item/combo-item';
-import HomeService from '../../services/home.service';
+import ComboService from '../../services/combo.service';
 
 export default class ComboList extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-      ...HomeService.homeData
+      recipeCombo: ComboService.comboData
     };
   }
   componentDidMount() {
-    this.getHome();
+    this.getCombos();
   }
 
-  getHome = () => {
-    HomeService.getHome().then(() => {
+  getCombos = () => {
+    ComboService.getCombo().then(() => {
       this.setState({
-        ...HomeService.homeData
+        recipeCombo: ComboService.comboData
       });
     });
   };
