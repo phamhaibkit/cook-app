@@ -33,7 +33,7 @@ export default class ComboItem extends Component {
         ? styleEndFrame
         : styleFrame;
     let combo;
-    switch (item && item.comboImage.length) {
+    switch (item && item.comboImages.length) {
     case 2:
       combo = this.render2or4Item(item, false);
       break;
@@ -90,32 +90,32 @@ export default class ComboItem extends Component {
     const imgContainerWidth = isVertical ? [styles.containerImg, styles.containerImgVertical, CSS.flexRow] : [styles.containerImg, CSS.flexRow];
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.comboName, item.numberOrder, item.viewNumber)}
+        {this.renderTitle(item.name, item.numberOrder, item.viewTimes)}
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={styles.container2Img}>
             <View style={imgContainerWidth}>
               <View>
                 <ImageBackground
                   style={imgLeftStyle}
-                  source={{ uri: item.comboImage[0] }}
+                  source={{ uri: item.comboImages[0] }}
                 />
                 {is4 && (
                   <ImageBackground
                     style={imgLeftDown}
-                    source={{ uri:  item.comboImage[2] }}
+                    source={{ uri:  item.comboImages[2] }}
                   />
                 )}
               </View>
               <View>
                 <ImageBackground
                   style={imgRightStyle}
-                  source={{ uri:  item.comboImage[1] }}
+                  source={{ uri:  item.comboImages[1] }}
 
                 />
                 {is4 && (
                   <ImageBackground
                     style={imgRightDown}
-                    source={{ uri:  item.comboImage[3] }}
+                    source={{ uri:  item.comboImages[3] }}
                   />
                 )}
               </View>
@@ -131,36 +131,36 @@ export default class ComboItem extends Component {
     const imgDownStyle = is5 ? styles.imgDown5 : styles.imgDown3;
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.comboName, item.numberOrder, item.viewNumber)}
+        {this.renderTitle(item.name, item.numberOrder, item.viewTimes)}
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.container2Img}>
             <View style={styles.containerImg}>
               <ImageBackground
                 style={styles.imgLeftView}
-                source={{ uri:  item.comboImage[0] }}
+                source={{ uri:  item.comboImages[0] }}
               />
               <View style={styles.imgRightView}>
                 <View style={styles.addImgView}>
                   <ImageBackground
                     style={imgUpStyle}
-                    source={{ uri:  item.comboImage[1] }}
+                    source={{ uri:  item.comboImages[1] }}
                   />
                   {is5 && (
                     <ImageBackground
                       style={styles.imgRightUp5}
-                      source={{ uri:  item.comboImage[3] }}
+                      source={{ uri:  item.comboImages[3] }}
                     />
                   )}
                 </View>
                 <View style={styles.addImgView}>
                   <ImageBackground
                     style={imgDownStyle}
-                    source={{ uri:  item.comboImage[2] }}
+                    source={{ uri:  item.comboImages[2] }}
                   />
                   {is5 && (
                     <ImageBackground
                       style={styles.imgRightDown5}
-                      source={{ uri:  item.comboImage[4] }}
+                      source={{ uri:  item.comboImages[4] }}
                     />
                   )}
                 </View>

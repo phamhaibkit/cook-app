@@ -40,10 +40,9 @@ class RecipeService {
       })
   }
 
-  getRecipeLikedList = (id) => {
-    console.log( 'recipeLikedData' + Date());
+  getRecipeLikedList = (userId) => {
     this.resetService();
-    const url = API.GET_RECIPE_LIKED(id);
+    const url = API.GET_RECIPE_LIKED(userId);
     this.recipeLikedData.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {

@@ -17,7 +17,6 @@ import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import { getCurrencyStr, kFormatter } from '../../utils/general';
-import recipeService from '../../services/recipe.service';
 
 export default class RecipeHighlightHome extends Component {
   constructor(props) {
@@ -25,34 +24,7 @@ export default class RecipeHighlightHome extends Component {
     this.state = {
       isModalVisible: false,
       recipe: {},
-      recipes: []
     };
-  }
-
-  componentDidMount() {
-    const {isHome, recipes, isHightLight, isLiked} = this.props;
-    if(isHome) {
-      this.setState({
-        recipes: recipes
-      })
-    }else {
-      if(isHightLight){
-        recipeService.getRecipeHightLightList()
-        .then(() => {
-          this.setState({
-            recipes: recipeService.recipeHightLightData.recipes
-          })
-        })
-      }else if(isLiked){
-        recipeService.getRecipeLikedList(1)
-        .then(()=>{
-          this.setState({
-            recipes: recipeService.recipeLikedData.recipes
-          })
-        })
-      }
-    }
-    
   }
 
   onPress = () => {
@@ -101,8 +73,7 @@ export default class RecipeHighlightHome extends Component {
   };
 
   renderFrame = (item, index) => {
-    const { isHorizontal, isLove, isLiked } = this.props;
-    const { recipes } = this.state;
+    const { isHorizontal, isLove, isLiked, recipes } = this.props;
     const horizaltalStyle =
       recipes.length - 1 === index
         ? [styles.frame, styles.endFrame]
@@ -226,8 +197,8 @@ export default class RecipeHighlightHome extends Component {
   };
 
   render() {
-    const { isHorizontal, marTop } = this.props;
-    const { isModalVisible, recipes } = this.state;
+    const { isHorizontal, marTop, recipes } = this.props;
+    const { isModalVisible } = this.state;
     return (
       <View style={[styles.container, { marginTop: marTop }]}>
         <FlatList

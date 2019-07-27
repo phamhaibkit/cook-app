@@ -16,13 +16,13 @@ class UserService {
     this.followerData = _.cloneDeep(followerData);
   };
   
-  getFollowerData = () => {
-    const url = API.GET_FOLLOWER;
+  getFollowerData = (userId) => {
+    const url = API.GET_FOLLOWER(userId);
     this.followerData.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {
         this.followerData = _.cloneDeep({
-          ...data,
+          followers: data,
           loading: false,
         });
       })
