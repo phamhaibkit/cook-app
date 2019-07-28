@@ -5,6 +5,7 @@ import { COLOR } from '../../utils/variables';
 export default StyleSheet.create({
   container: { 
     flexDirection: 'row', 
+    justifyContent: 'space-between',
     backgroundColor: COLOR.whiteColor, 
     height: 27, 
     width: 93, 
@@ -27,7 +28,7 @@ export default StyleSheet.create({
   },
   countNumber: {
     lineHeight: 27,
-    paddingHorizontal: 12,
+    textAlign: 'center',
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderLeftColor: COLOR.borderAddCart,

@@ -16,7 +16,7 @@ export default class IncreaterButtonWithNumber extends Component {
         >
           <Image source={IMG.substractSign} style={styles.substractSignImg}/>
         </TouchableHighlight>
-        <Text style={[styles.w30, styles.countNumber]}>{currentQuantity}</Text>
+        <Text style={[styles.countNumber]}>{currentQuantity}</Text>
         <TouchableHighlight
           style={styles.w30}
           onPress={onPressIncreaseButton}

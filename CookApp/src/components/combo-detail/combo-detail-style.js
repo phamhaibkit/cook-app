@@ -17,6 +17,7 @@ export default styles = StyleSheet.create({
   dishInfo: {
     position: 'absolute',
     top: - overflowHeight,
+    zIndex: 999,
     left: paddingContainer,
     right: paddingContainer,
     borderRadius: 5,
@@ -29,12 +30,13 @@ export default styles = StyleSheet.create({
   },
   comboLabel:{
     position:'absolute',
+    overflow: 'hidden',
     left: 15,
     top: -11,
     backgroundColor: COLOR.whiteColor,
     paddingHorizontal: 5,
     paddingVertical: 3,
-    borderRadius: 5,
+    borderRadius: 10,
     fontSize: 12,
     color: COLOR.greenColor,
     borderWidth: 0.5,
@@ -117,8 +119,7 @@ export default styles = StyleSheet.create({
   },
   cardBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: '#CECECE', 
-    borderStyle: 'dashed'
+    borderBottomColor: '#CECECE'
   },
   customCheckBox: {
     width: 22, 

@@ -27,7 +27,9 @@ class IngredientCard extends Component{
       amountOfPeople, 
       price, 
       isChecked,
-      onClickCheckBox 
+      onClickCheckBox ,
+      onClickSubstract,
+      onClickPlus
     } = this.props; 
 
     return (
@@ -51,8 +53,8 @@ class IngredientCard extends Component{
             </View>
           </View>
           <View style={styles.actionBtnGroup}>
-            <IncreaterButtonWithoutNumber btnStyle={{marginRight: 5}} />
-            <IncreaterButtonWithoutNumber isPlus={true}/>     
+            <IncreaterButtonWithoutNumber btnStyle={{marginRight: 5}} onPress={onClickSubstract}/>
+            <IncreaterButtonWithoutNumber isPlus={true} onPress={onClickPlus}/>     
           </View>
         </View>
       </View>
@@ -65,6 +67,7 @@ export default class ComboDetail extends Component {
     super(props);
     this.state = {
       estimatePrice: 0,
+      totalPrice: 0,
       mealQuantity: 0,
       isCheckAll: true,
       recipes: [],
@@ -88,15 +91,21 @@ export default class ComboDetail extends Component {
 
   initData = () => {
     if(typeof this.state.data !== {}) {
-      const { data, numPeople } = this.state;
-      let totalPrice = this.state.estimatePrice;
-      // totalPrice = data.recipes.reduce()
-      data.recipes.map((item) => {
-        item.isChecked = true;        
+      const { data } = this.state;
+      let totalPrice = this.state.totalPrice;
+      
+      _.map(data.recipes, (item) => {
+        item.isChecked = true;
+        item.itemPriceUnit = item.price,
+        item.itemNumPeopleUnit = item.numPeople,
+        totalPrice += item.price;
       });
+
       this.setState({
+        totalPrice,
         recipes: data.recipes,
-        mealQuantity: numPeople
+        mealQuantity: data.numPeople,
+        estimatePrice: totalPrice
       });
     }
   }
@@ -123,6 +132,54 @@ export default class ComboDetail extends Component {
     this.setState({recipes: recipes});
   }
 
+  handleDecreaseMeal = () => {
+    let { mealQuantity, estimatePrice, totalPrice, recipes } = this.state;
+
+    if( mealQuantity > 1 ) {
+      mealQuantity--;
+      totalPrice -= estimatePrice;
+      _.map(recipes, (item) => {
+        item.itemPriceUnit && (item.price = item.itemPriceUnit * mealQuantity);
+      })
+    }
+
+    this.setState({
+      mealQuantity,
+      totalPrice,
+
+    });
+  }
+
+  handleIncreaseMeal = () => {
+    let { mealQuantity, estimatePrice, recipes } = this.state;
+
+    mealQuantity++;
+
+    _.map(recipes, (item) => {
+      item.itemPriceUnit && (item.price = item.itemPriceUnit * mealQuantity);
+      item.itemNumPeopleUnit && (item.numPeople = item.itemNumPeopleUnit * mealQuantity);
+    })
+
+    this.setState({
+      mealQuantity,
+      recipes,
+      totalPrice: mealQuantity * estimatePrice
+    });
+  }
+
+  handleIncreateIngre = (ingredient) => {
+    const { recipes } = this.state.data;
+
+    let clickBtn = _.find(recipes, (item)=> {
+      return item.numPeople === ingredient.numPeople;
+    });
+
+    clickBtn.numPeople = ingredient.numPeople + 1;
+    clickBtn.price = ingredient.price + ingredient.price
+
+    this.setState({recipes: recipes});
+  }
+
   componentDidMount () { 
     const { navigation } = this.props;
     const id = navigation.getParam('id', 1);     
@@ -130,7 +187,7 @@ export default class ComboDetail extends Component {
   }
 
   render() {
-    let { data } = this.state;
+    let { data, mealQuantity, recipes } = this.state;
     
     return (
       <ScrollView>
@@ -158,15 +215,15 @@ export default class ComboDetail extends Component {
               <View style={styles.estimatePrice}>
                 <View style={{flexDirection: 'row', flex: 1, paddingVertical: 15}}>
                   <View style={styles.w50percentage}>
-                    <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.estimatePrice) } {LANG.VIETNAM_DONG}</Text>
+                    <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.totalPrice) } {LANG.VIETNAM_DONG}</Text>
                     <Text style={styles.textDescription}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
                   </View>
                   <View style={styles.cardSeparator}></View>
                   <View style={styles.w50percentage}>
                     <IncreaterButtonWithNumber
-                      currentQuantity={1}   
-                      onPressDecreaseButton={()=>{}}
-                      onPressIncreaseButton={()=>{}}                   
+                      currentQuantity={this.state.mealQuantity}   
+                      onPressDecreaseButton={this.handleDecreaseMeal}
+                      onPressIncreaseButton={this.handleIncreaseMeal}                   
                     />
                     <Text style={styles.textDescription}>{ LANG.MEAL }</Text>
                   </View> 
@@ -177,8 +234,8 @@ export default class ComboDetail extends Component {
             <View style={styles.promotionInfo}>
               <Text style={[styles.sectionTitle, CSS.fontNuExBold]}>{LANG.PROMOTION_INFO}</Text>
              {
-               data.promotion && data.promotion.map((promotion) => (
-                  <Text>{promotion}</Text>
+               data.promotion && data.promotion.map((promotion, index) => (
+                  <Text key={index}>{promotion}</Text>
                ))
              }
             </View>
@@ -207,13 +264,17 @@ export default class ComboDetail extends Component {
               />
               <View style={styles.horizontalSeparator}></View>
               {
-                data.recipes && data.recipes.map((ingredient, index) => (
+                recipes && recipes.map((ingredient, index) => (
                   <IngredientCard
+                    key={index}
                     ingredientName={ingredient.name}
                     amountOfPeople={ingredient.numPeople}
                     price={ingredient.price}
                     isChecked={ingredient.isChecked}
                     onClickCheckBox={() => this.handleRecipeCheck(ingredient)}
+                    onClickSubstract={() => this.handleDecreateIngre(ingredient)}
+                    onClickPlus={() => this.handleIncreateIngre(ingredient)}
+
                   />
                 ))
               }
