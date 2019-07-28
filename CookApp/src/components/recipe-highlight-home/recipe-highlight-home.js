@@ -100,7 +100,7 @@ export default class RecipeHighlightHome extends Component {
   }
 
   renderFrame = (recipes) => {
-    const { isHorizontal } = this.props;
+    const { isHorizontal, props } = this.props;
     return recipes.map((item, index) => {
       const horizaltalStyle =
       recipes.length - 1 === index
@@ -219,7 +219,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          {!isHorizontal && (index + 1) % 3 === 0 && <Advertiment />}
+          {!isHorizontal && (index + 1) % 3 === 0 && <Advertiment data={ads} marginTop={30}/>}
         </View>
       )
     });

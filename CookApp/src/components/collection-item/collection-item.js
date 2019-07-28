@@ -9,6 +9,7 @@ import { COLOR, CSS } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
+import Advertiment from '../advertiment/advertiment';
 
 class CollectionItem extends Component {
   handlePress = () => {  
@@ -17,44 +18,52 @@ class CollectionItem extends Component {
   }
   
   render() {
-    let { item, imgBgWrap, blockMargin, isCollectionList } = this.props;
+    let { item, imgBgWrap, blockMargin, ads, isCollectionList} = this.props;
  
     return (
-       <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} >
-        <TouchableWithoutFeedback onPress={ this.handlePress }>
-          <View>
-            <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: item.collectionImages[0] }}>
-              <LinearGradient
-                colors={[COLOR.gradientBlackTopColor, COLOR.gradientBlackBottomColor]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                style={[imgBgWrap, CSS.borderRadius5]}
-              />            
-            </ImageBackground>
-            <View style={[imgBgWrap,{ marginTop: -imgBgWrap.height}]}>
-              <View style={styles.saveCollection}>
-                <Image style={styles.saveIcon} source={IMG.greenBookmarkIcon}/>
-              </View>
-              <View style={styles.blockContentWrap}>
-                <View>
-                  <Text style={[styles.collectionTitle, CSS.fontTitle, CSS.fontQuiBold]}>{item.name}</Text>
+       <View>
+         <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} >
+          <TouchableWithoutFeedback onPress={ this.handlePress }>
+            <View>
+              <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: item.collectionImages[0] }}>
+                <LinearGradient
+                  colors={[COLOR.gradientBlackTopColor, COLOR.gradientBlackBottomColor]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 0, y: 1 }}
+                  style={[imgBgWrap, CSS.borderRadius5]}
+                />            
+              </ImageBackground>
+              <View style={[imgBgWrap,{ marginTop: -imgBgWrap.height}]}>
+                <View style={styles.saveCollection}>
+                  <Image style={styles.saveIcon} source={IMG.greenBookmarkIcon}/>
                 </View>
-                <View style={[styles.statisticalWrap, CSS.alignItemsCenter]}>
-                  <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-                    <Image style={styles.recipeIcon} source={IMG.recipeIcon}/>
-                    <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.numberRecipe} {LANG.RECIPE}</Text>
+                <View style={styles.blockContentWrap}>
+                  <View>
+                    <Text style={[styles.collectionTitle, CSS.fontTitle, CSS.fontQuiBold]}>{item.name}</Text>
                   </View>
-                  <View style={styles.separator} />
-                  <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-                    <Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
-                    <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.savedTimes} {LANG.SAVE}</Text>
+                  <View style={[styles.statisticalWrap, CSS.alignItemsCenter]}>
+                    <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                      <Image style={styles.recipeIcon} source={IMG.recipeIcon}/>
+                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.numberRecipe} {LANG.RECIPE}</Text>
+                    </View>
+                    <View style={styles.separator} />
+                    <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                      <Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
+                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.savedTimes} {LANG.SAVE}</Text>
+                    </View>
                   </View>
                 </View>
               </View>
             </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
+          </TouchableWithoutFeedback>
+        </View>
+        
+        <View>
+          {
+            isCollectionList && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
+          }
+        </View>
+       </View>
     );
   }
 };
