@@ -16,6 +16,7 @@ import styles from './collection-detail-style';
 import SwiperImage from '../swiper-image/swiper-image';
 import CollectionService from '../../services/collection.service';
 import { kFormatter } from '../../utils/general';
+import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
 
 export default class CollectionDetail extends Component {
   constructor(props) {
@@ -195,12 +196,8 @@ export default class CollectionDetail extends Component {
               
               <View style={styles.topRecipes}>
                 <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
-                <FlatList
-                  data={recipes}
-                  scrollEnabled={false}
-                  renderItem={({ item, index }) => this.renderFrame(item, index)}        
-                  showsVerticalScrollIndicator={false}
-                  keyExtractor={(item, index) => index.toString()}
+                <RecipeHighlightHome
+                  recipes={recipes}
                 />
               </View>
             </View>

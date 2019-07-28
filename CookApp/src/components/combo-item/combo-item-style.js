@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window');
 const containerPadding = 15;
 const blockPadding = 10;
 const spaceImg = 4;
-const heightCombo = 235;
+const heightCombo = 'auto';
 const imgHeghtCombo = 140;
 
 // Horizontal
@@ -25,8 +25,7 @@ export default StyleSheet.create({
     height: '100%', 
     width: '100%' 
   },
-  frame: {
-    height: heightCombo,    
+  frame: {   
     fontSize: 18,
     width: widthCombo,
     marginLeft: CSS.padding15,
@@ -163,6 +162,9 @@ export default StyleSheet.create({
     fontFamily: CSS.fontText,
     color: COLOR.blackColor,
     letterSpacing: -0.5
+  },
+  textLight: {
+    color: COLOR.madeIn
   },
   ordersText: {
     fontSize: 13,

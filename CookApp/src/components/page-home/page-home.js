@@ -137,7 +137,7 @@ class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key);
+        navigationService.navigate(ROUTES.collectionList.key, { ads: this.state.ads });
         break;
       case LANG.COMBO:
         navigationService.navigate(ROUTES.comboList.key);
@@ -170,7 +170,7 @@ class PageHome extends Component {
             data={collections}
             marTop={CSS.padding15}
           />
-          <Advertiment paddingHori={CSS.padding15} data={ads}/>
+          <Advertiment paddingHori={CSS.padding15} data={ads} marginTop={30}/>
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
           <RecipeHighlightHome
             recipes={recipeHighLights.recipes}
@@ -185,7 +185,7 @@ class PageHome extends Component {
           />
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
           <ProductListHome data={products.products}/>
-          <Advertiment paddingHori={CSS.padding15} data={ads}/>
+          <Advertiment paddingHori={CSS.padding15} data={ads} marginTop={30}/>
           <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
           <FollowingHome data={followers.followers}/>
           <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />

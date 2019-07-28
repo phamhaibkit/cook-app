@@ -3,10 +3,10 @@ import { View, Image } from 'react-native';
 
 export default class Advertiment extends Component {
   render() {
-    const { data, paddingHori } = this.props;
+    const { data, paddingHori, marginTop } = this.props;
     return (
       <View style={{
-        marginTop: 30,
+        marginTop: marginTop,
         height: 120,
         marginHorizontal: paddingHori,
         borderRadius: 10,

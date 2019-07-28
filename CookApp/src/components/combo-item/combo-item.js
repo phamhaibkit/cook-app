@@ -12,6 +12,7 @@ import { LANG } from '../../lang/lang';
 import { CSS } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
+import { kFormatter } from '../../utils/general';
 
 export default class ComboItem extends Component {
 	constructor(props) {
@@ -64,15 +65,19 @@ export default class ComboItem extends Component {
           <View style={styles.lineHori} />
           <View style={styles.containerTimePrice}>
             <View style={styles.priceView}>
-              <Text style={styles.textTime}>{orders}</Text>
-              <Text style={styles.textTime}>{LANG.ORDER_OWNER}</Text>
+              <Text style={styles.textTime}>
+                {kFormatter(orders)}
+                <Text style={styles.textLight}> {LANG.ORDER_OWNER}</Text>
+              </Text>
             </View>
             <View style={styles.lineLikeView}>
               <View style={styles.line} />
             </View>
             <View style={styles.likeView}>
-              <Text style={styles.textTime}>{views}</Text>
-              <Text style={styles.textTime}>{LANG.VIEW}</Text>
+              <Text style={styles.textTime}>
+                {kFormatter(views)}
+                <Text style={styles.textLight}> {LANG.VIEW}</Text>
+              </Text>
             </View>
           </View>
         </View>

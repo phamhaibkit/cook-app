@@ -28,6 +28,8 @@ export default class CollectionList extends Component {
 
   render() {
     const { data }  = this.state;
+    const { navigation } = this.props;
+    ads = navigation.getParam('ads', []);
 
     return (
       <View style={styles.container}>
@@ -38,6 +40,7 @@ export default class CollectionList extends Component {
               <CollectionItem
                 item={item} 
                 isCollectionList 
+                ads={ads}
                 imgBgWrap={styles.imgBgWrap}
                 blockMargin={styles.blockMargin}
               />
