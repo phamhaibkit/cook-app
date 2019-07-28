@@ -5,9 +5,9 @@ import {
   View,
   Image,
   TouchableOpacity,
-  FlatList,
   TouchableWithoutFeedback,
-  Share
+  Share,
+  ScrollView
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Advertiment from '../advertiment/advertiment';
@@ -24,7 +24,21 @@ export default class RecipeHighlightHome extends Component {
     this.state = {
       isModalVisible: false,
       recipe: {},
+      recipes: []
     };
+  }
+
+  componentWillReceiveProps(nextProps){
+    const newRecipes = nextProps.recipes;
+    const {isLiked} = this.props;
+    if(isLiked){
+      newRecipes.map((item, index) => {
+        item.isLiked = true;
+      })
+    }
+    this.setState({
+      recipes: newRecipes
+    })
   }
 
   onPress = () => {
@@ -72,143 +86,159 @@ export default class RecipeHighlightHome extends Component {
     });
   };
 
-  renderFrame = (item, index) => {
-    const { isHorizontal, isLove, isLiked, recipes } = this.props;
-    const horizaltalStyle =
+  onPressLove = (recipe) => {
+    const { recipes } = this.state;
+    recipes && recipes.map((item, index) => {
+      if (item.id === recipe.id) {
+        item.isLiked = !item.isLiked;
+        return item;
+      }
+    });
+    this.setState({
+      recipes: recipes
+    })
+  }
+
+  renderFrame = (recipes) => {
+    const { isHorizontal } = this.props;
+    return recipes.map((item, index) => {
+      const horizaltalStyle =
       recipes.length - 1 === index
         ? [styles.frame, styles.endFrame]
         : styles.frame;
-    const iconLove = (isLove || isLiked ) ? IMG.loveActiveHome : IMG.loveHome;
-    const priceFormat = getCurrencyStr(item.price);
-    return (
-      <View style={{ flex: 1 }}>
-        <View style={isHorizontal ? horizaltalStyle : styles.frameVer}>
-          <View style={styles.containerTitle}>
-            <TouchableOpacity style={styles.titleView} onPress={this.onPress}>
-              <Text numberOfLines={1} style={styles.titleText}>
-                {item.name}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.reportView}
-              onPress={() => { this.openReport(item)}}
-            >
-              <Image style={styles.dotImg} source={IMG.reportHome} />
-            </TouchableOpacity>
-          </View>
+      const iconLove = item.isLiked ? IMG.loveActiveHome : IMG.loveHome;
+      const priceFormat = getCurrencyStr(item.price);
+      return (
+        <View style={{ flex: 1 }} key={index}>
+          <View style={isHorizontal ? horizaltalStyle : styles.frameVer}>
+            <View style={styles.containerTitle}>
+              <TouchableOpacity style={styles.titleView} onPress={this.onPress}>
+                <Text numberOfLines={1} style={styles.titleText}>
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.reportView}
+                onPress={() => { this.openReport(item)}}
+              >
+                <Image style={styles.dotImg} source={IMG.reportHome} />
+              </TouchableOpacity>
+            </View>
 
-          <View style={styles.containerTimePrice}>
-            <View style={styles.priceView}>
-              <Image style={styles.sandImg} source={IMG.sandClokHome} />
-              <Text style={styles.textTime}>
-                {item.timeExecute}
-              </Text>
+            <View style={styles.containerTimePrice}>
+              <View style={styles.priceView}>
+                <Image style={styles.sandImg} source={IMG.sandClokHome} />
+                <Text style={styles.textTime}>
+                  {item.timeExecute}
+                </Text>
+              </View>
+              <View style={styles.lineView}>
+                <View style={styles.line} />
+              </View>
+              <View style={styles.dollaView}>
+                <Image style={styles.dollaImg} source={IMG.dollaHome} />
+                <Text style={styles.textTime}>
+                  {priceFormat}
+                </Text>
+              </View>
+              <View style={styles.lineView}>
+                <View style={styles.line} />
+              </View>
+              <View style={styles.dollaView}>
+                <Image style={styles.personImg} source={IMG.personHome} />
+                <Text style={styles.textTime}>
+                  {kFormatter(item.numPeople)}
+                  <Text> người</Text>
+                </Text>
+              </View>
             </View>
-            <View style={styles.lineView}>
-              <View style={styles.line} />
+
+            <View>
+              <View style={isHorizontal ? styles.recipeView : styles.imgVer}>
+                <TouchableWithoutFeedback onPress={this.onPress}>
+                  <Image style={styles.recipeIMG} source={{ uri: item.recipeImage }} />
+                </TouchableWithoutFeedback>
+              </View>
+              <TouchableOpacity style={styles.containerChef}>
+                <Image style={styles.avataImg} source={{ uri: item.owner && item.owner.avatar }} />
+                <Text style={styles.nameChef}>{item.owner && item.owner.name}</Text>
+                <Image style={styles.rankImg} source={IMG.rankHome} />
+              </TouchableOpacity>
             </View>
-            <View style={styles.dollaView}>
-              <Image style={styles.dollaImg} source={IMG.dollaHome} />
-              <Text style={styles.textTime}>
-                {priceFormat}
-              </Text>
+
+            <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
+              <View style={styles.priceView}>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.likeTimes)}
+                  <Text style={styles.textLight}> {LANG.LIKE}</Text>
+                </Text>
+              </View>
+              <View style={styles.lineLikeView}>
+                <View style={styles.line} />
+              </View>
+              <View style={styles.likeView}>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.numberEvaluate)}
+                  <Text style={styles.textLight}> {LANG.COMMENT}</Text>
+                </Text>
+              </View>
+              <View style={styles.lineLikeView}>
+                <View style={styles.line} />
+              </View>
+              <View style={styles.likeView}>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.shareTimes)}
+                  <Text style={styles.textLight}> {LANG.SHARE}</Text>
+                </Text>
+              </View>
+              <View style={styles.lineLikeView}>
+                <View style={styles.line} />
+              </View>
+              <View style={styles.likeView}>
+                <Text style={styles.textTime}>
+                  {kFormatter(item.viewTimes)}
+                  <Text style={styles.textLight}> {LANG.VIEW}</Text>
+                </Text>
+              </View>
             </View>
-            <View style={styles.lineView}>
-              <View style={styles.line} />
-            </View>
-            <View style={styles.dollaView}>
-              <Image style={styles.personImg} source={IMG.personHome} />
-              <Text style={styles.textTime}>
-                {kFormatter(item.numPeople)}
-                <Text> người</Text>
-              </Text>
+
+            <View style={styles.lineHori} />
+
+            <View style={styles.containerLoveCmt}>
+              <TouchableOpacity onPress={() => this.onPressLove(item)}>
+                <Image style={styles.loveImg} source={iconLove} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Image style={styles.cmtImg} source={IMG.commentHome} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.onShare}>
+                <Image style={styles.shareImg} source={IMG.shareHome} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.saveView}>
+                <Image style={styles.saveImg} source={IMG.saveHome} />
+              </TouchableOpacity>
             </View>
           </View>
-
-          <View>
-            <View style={isHorizontal ? styles.recipeView : styles.imgVer}>
-              <TouchableWithoutFeedback onPress={this.onPress}>
-                <Image style={styles.recipeIMG} source={{ uri: item.recipeImage }} />
-              </TouchableWithoutFeedback>
-            </View>
-            <TouchableOpacity style={styles.containerChef}>
-              <Image style={styles.avataImg} source={{ uri: item.owner && item.owner.avatar }} />
-              <Text style={styles.nameChef}>{item.owner && item.owner.name}</Text>
-              <Image style={styles.rankImg} source={IMG.rankHome} />
-            </TouchableOpacity>
-          </View>
-
-          <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
-            <View style={styles.priceView}>
-              <Text style={styles.textTime}>
-                {kFormatter(item.likeTimes)}
-                <Text style={styles.textLight}> {LANG.LIKE}</Text>
-              </Text>
-            </View>
-            <View style={styles.lineLikeView}>
-              <View style={styles.line} />
-            </View>
-            <View style={styles.likeView}>
-              <Text style={styles.textTime}>
-                {kFormatter(item.numberEvaluate)}
-                <Text style={styles.textLight}> {LANG.COMMENT}</Text>
-              </Text>
-            </View>
-            <View style={styles.lineLikeView}>
-              <View style={styles.line} />
-            </View>
-            <View style={styles.likeView}>
-              <Text style={styles.textTime}>
-                {kFormatter(item.shareTimes)}
-                <Text style={styles.textLight}> {LANG.SHARE}</Text>
-              </Text>
-            </View>
-            <View style={styles.lineLikeView}>
-              <View style={styles.line} />
-            </View>
-            <View style={styles.likeView}>
-              <Text style={styles.textTime}>
-                {kFormatter(item.viewTimes)}
-                <Text style={styles.textLight}> {LANG.VIEW}</Text>
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.lineHori} />
-
-          <View style={styles.containerLoveCmt}>
-            <TouchableOpacity>
-              <Image style={styles.loveImg} source={iconLove} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image style={styles.cmtImg} source={IMG.commentHome} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.onShare}>
-              <Image style={styles.shareImg} source={IMG.shareHome} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.saveView}>
-              <Image style={styles.saveImg} source={IMG.saveHome} />
-            </TouchableOpacity>
-          </View>
+          {!isHorizontal && (index + 1) % 3 === 0 && <Advertiment />}
         </View>
-        {!isHorizontal && (index + 1) % 3 === 0 && <Advertiment />}
-      </View>
-    );
+      )
+    });
   };
 
   render() {
-    const { isHorizontal, marTop, recipes } = this.props;
-    const { isModalVisible } = this.state;
+    const { isHorizontal, marTop } = this.props;
+    const { isModalVisible, recipes } = this.state;
     return (
       <View style={[styles.container, { marginTop: marTop }]}>
-        <FlatList
-          data={recipes}
-          renderItem={({ item, index }) => this.renderFrame(item, index)}
-          horizontal={isHorizontal}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        {recipes.length > 0 &&
+          <ScrollView 
+            horizontal={isHorizontal}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          >
+            {this.renderFrame(recipes)}
+          </ScrollView>
+        }
         <Modal
           isVisible={isModalVisible}
           onBackdropPress={this.closeReport}

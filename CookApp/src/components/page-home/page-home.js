@@ -159,8 +159,6 @@ class PageHome extends Component {
 
   render() {
     const { trendings, collections, ads, recipeHighLights, combos, products, followers, likeRecipes, newsEvents } = this.state;
-    console.log('Render===', newsEvents);
-
     return trendings.loading ? (
       <Spinner />
     ) : (
@@ -195,7 +193,7 @@ class PageHome extends Component {
             recipes={likeRecipes.recipes}
             isHorizontal
             isHome
-            isLove
+            isLiked
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
