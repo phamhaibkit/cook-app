@@ -18,7 +18,7 @@ class CollectionItem extends Component {
   }
   
   render() {
-    let { item, imgBgWrap, blockMargin, ads, isCollectionList} = this.props;
+    let { item, imgBgWrap, blockMargin, ads, isVertical} = this.props;
  
     return (
        <View>
@@ -49,8 +49,18 @@ class CollectionItem extends Component {
                     <View style={styles.separator} />
                     <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                       <Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
-                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.savedTimes} {LANG.SAVE}</Text>
+                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.savedCount} {LANG.SAVE}</Text>
                     </View>
+                    {
+                      isVertical &&
+                      <View>
+                        <View style={styles.separator} />
+                        <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                          <Image style={styles.smallSaveIcon} source={IMG.eyeIcon}/>
+                          <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.viewCount} {LANG.SAVE}</Text>
+                        </View>
+                      </View>
+                    }
                   </View>
                 </View>
               </View>
@@ -60,7 +70,7 @@ class CollectionItem extends Component {
         
         <View>
           {
-            isCollectionList && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
+            isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
           }
         </View>
        </View>

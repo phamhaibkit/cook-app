@@ -60,6 +60,7 @@ export const IMG = {
   starYellow: require('../../assets/icons/star-yellow.png'),
   starGrey: require('../../assets/icons/star-grey.png'),
   borderDot: require('../../assets/icons/border-dot.png'),
+  eyeIcon: require('../../assets/icons/eye-view.png'),
 };
 
 export const ASYNC_STORAGE = {

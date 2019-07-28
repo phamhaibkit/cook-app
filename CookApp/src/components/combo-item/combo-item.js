@@ -50,7 +50,14 @@ export default class ComboItem extends Component {
     default:
       break;
     }
-    return <View style={endStyle}>{combo}</View>;
+    return (
+      <View>
+        <View style={endStyle}>{combo}</View>
+        {
+          isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
+        }
+      </View>
+    )
   };
 
   renderTitle = (title, orders, views) => {
@@ -94,7 +101,7 @@ export default class ComboItem extends Component {
     const imgContainerWidth = isVertical ? [styles.containerImg, styles.containerImgVertical, CSS.flexRow] : [styles.containerImg, CSS.flexRow];
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.name, item.numberOrder, item.viewTimes)}
+        {this.renderTitle(item.name, item.numberOrder, item.viewCount)}
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={styles.container2Img}>
             <View style={imgContainerWidth}>

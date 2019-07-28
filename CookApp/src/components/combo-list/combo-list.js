@@ -25,7 +25,9 @@ export default class ComboList extends Component {
   };
 
 	render() {
-		const { recipeCombo } = this.state;
+    const { recipeCombo } = this.state;
+    const { navigation } = this.props;
+    const ads = navigation.getParam('ads', []);
 		
     const dataLength = recipeCombo.length || 0;
 
@@ -33,6 +35,7 @@ export default class ComboList extends Component {
       <View style={styles.container}>
         <FlatList
           data={recipeCombo}
+          ads={ads}
           renderItem={({ item, index }) => <ComboItem item={item} index={index} dataLength={dataLength} isVertical/>}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
