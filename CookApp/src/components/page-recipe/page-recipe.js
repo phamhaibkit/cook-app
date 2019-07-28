@@ -59,7 +59,7 @@ export default class PageRecipe extends Component {
             colors={[COLOR.whiteColor, COLOR.searchBarIos, COLOR.backgroundColor]}
             style={styles.gradienView}
           />
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
             <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} notMarginTop={true} />
             <RecipeHighlightHome recipes={RECIPES} isHorizontal />
             <View style={styles.advertisement}>
@@ -69,7 +69,7 @@ export default class PageRecipe extends Component {
             <CollectionHome />
             <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
             <ComboHome />
-          </View>
+          </View> */}
         </ScrollView>
       </View>
     );

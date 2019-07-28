@@ -106,7 +106,6 @@ const PageReportRecipeScreen = {
     title: LANG.REPORT_RECIPE,
     headerTitleStyle: styles.headerTitleStyle,
     headerLeft: <BackButton isGreen/>,
-    headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
 };

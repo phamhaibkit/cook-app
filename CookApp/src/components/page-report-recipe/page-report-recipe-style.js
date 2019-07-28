@@ -15,14 +15,14 @@ export default StyleSheet.create({
     marginHorizontal: CSS.padding15,
     marginVertical: 5,
     borderRadius: 5,
-    shadowColor: 'grey',
+    shadowColor: COLOR.shadowColor,
     shadowOffset: {
       width: 0,
       height: 3
     },
-    shadowOpacity: 0.29,
+    shadowOpacity: 0.1,
     shadowRadius: 4.65,
-    elevation: 7,
+    elevation: 5,
     backgroundColor: 'white',
     overflow: 'hidden'
   },
