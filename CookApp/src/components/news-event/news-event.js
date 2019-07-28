@@ -6,7 +6,8 @@ import {
   Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ScrollView
+  ScrollView,
+  Share
 } from 'react-native';
 import { IMG } from '../../utils/variables';
 import styles from './news-event-style';
@@ -43,6 +44,28 @@ export default class NewsEvent extends Component {
       data: data
     })
   }
+
+  onShare = () => {
+    Share.share(
+      {
+        title: 'BeChef share',
+        urlonShare: 'https://www.google.vn/',
+        message: 'Nau An Di Cung',
+      },
+      {
+        // android
+        dialogTitle: 'This is BeShef share',
+        // ios
+        excludedActivityTypes: [
+          // 'com.apple.UIKit.activity.PostToFacebook',
+          // 'com.apple.UIKit.activity.PostToTwitter',
+          // 'com.apple.UIKit.activity.Message',
+        ],
+      }
+    ).then((res) => {
+      console.log('DATAATATAATTA', res);
+    });
+  };
 
   onPress = () => {
     // console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
@@ -117,7 +140,7 @@ export default class NewsEvent extends Component {
             <TouchableOpacity>
               <Image style={styles.cmtImg} source={IMG.commentHome} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {this.onShare()}}>
               <Image style={styles.shareImg} source={IMG.shareHome} />
             </TouchableOpacity>
           </View>
@@ -128,6 +151,7 @@ export default class NewsEvent extends Component {
 
   render() {
     const { data } = this.state;
+    console.log('EVENTs==', data);
     return (
       <View style={styles.container}>
         <ScrollView

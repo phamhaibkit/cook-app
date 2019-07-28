@@ -115,7 +115,7 @@ class ProductListHome extends Component {
               <Text style={styles.madeIn}>{item.origin}</Text>
               <View style={styles.priceView}>
                 <Text style={styles.newPrice}>{getCurrencyStr(item.newPrice)}</Text>
-                <Text style={styles.unitText}>/100g</Text>
+                <Text style={styles.unitText}>{'/ ' + item.quality}</Text>
               </View>
               <Text style={styles.oldPrice}>{getCurrencyStr(item.oldPrice)}</Text>
             </View>
