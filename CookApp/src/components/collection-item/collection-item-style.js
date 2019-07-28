@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },  
 	collectionTitle: {
 		fontSize: 16,
-		marginBottom: 10,
+		marginBottom: 7,
 		color: 'white',
 		letterSpacing: -0.02
   },
