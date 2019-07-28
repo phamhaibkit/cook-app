@@ -275,7 +275,8 @@ export const COLOR = {
   dateEvent: '#FF8A00',
   appNameIos: '#06AF48',
   searchBarIos: '#F8F8F8',
-  blackReport: '#444444'
+  blackReport: '#444444',
+  shadowColor: 'rgba(0, 0, 0, 0.1)',
 };
 
 export const ACTION = {

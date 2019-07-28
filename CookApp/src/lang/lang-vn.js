@@ -89,5 +89,8 @@ export const LANG_VN = {
   SEND_REPORT: 'Gửi báo cáo',
   REQUIRE_REPORT: 'Nhập nội dung báo cáo (bắt buộc)',
   PENDING: 'Đang kiểm duyệt',
-  RATE:'Đánh giá'
+  RATE:'Đánh giá',
+  HOT_SELLIING: 'Bán chạy',
+  FROM: 'Từ',
+  TO: 'Đến'
 };

@@ -57,7 +57,6 @@ class PageHome extends Component {
 
   getCart = (userId) => {
     cartSerice.getCartNum(userId).then(() => {
-      console.log('CARTCART==', cartSerice.cartNumber);
       this.props.getCart(cartSerice.cartNumber);
     })
   }

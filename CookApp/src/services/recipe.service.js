@@ -23,13 +23,13 @@ class RecipeService {
   };
   
   getRecipeHightLightList = () => {
-    console.log( 'recipeHightLightData' + Date());
+    // console.log( 'recipeHightLightData' + Date());
     this.resetService();
     const url = API.GET_RECIPE_HIGHLIGHT_LIST;
     this.recipeHightLightData.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {
-        console.log( 'recipeHightLightData Done' + Date(), data);
+        // console.log( 'recipeHightLightData Done' + Date(), data);
         this.recipeHightLightData = _.cloneDeep({
           recipes: data,
           loading: false,
@@ -46,7 +46,7 @@ class RecipeService {
     this.recipeLikedData.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {
-        console.log( 'recipeLikedData Done' + Date(), data);
+        // console.log( 'recipeLikedData Done' + Date(), data);
         this.recipeLikedData = _.cloneDeep({
           recipes: data,
           loading: false,

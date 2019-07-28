@@ -10,7 +10,7 @@ import {
   Image
 } from 'react-native';
 import styles from './product-list-home-style';
-import { LANG_VN } from '../../lang/lang-vn';
+import { LANG } from '../../lang/lang';
 import { getCurrencyStr } from '../../utils/general';
 import PlusSubsNumber from '../plus-subs-number/plus-subs-number';
 import { connect } from 'react-redux';
@@ -32,7 +32,6 @@ class ProductListHome extends Component {
       item.showAddCart = true;
       item.number = 1;
     });
-    console.log('NEST-PROPS=', nextProps.data);
     this.numCols = newData.length % 2 === 0
         ? newData.length / 2
         : (newData.length + 1) / 2;
@@ -124,7 +123,7 @@ class ProductListHome extends Component {
         </TouchableWithoutFeedback>
         {item.showAddCart ? (
           <TouchableOpacity style={styles.addCart} onPress={() =>this.showAddNum(item, index)}>
-            <Text style={styles.addCartText}>{LANG_VN.ADD_TO_CART}</Text>
+            <Text style={styles.addCartText}>{LANG.ADD_TO_CART}</Text>
           </TouchableOpacity>
         ) : (
           <View style={{paddingLeft: 10}}>
@@ -136,7 +135,7 @@ class ProductListHome extends Component {
             <Text style={styles.discountText}>-{item.discount * 100 + '%'}</Text>
           </View>
           <View style={styles.selling}>
-            <Text style={styles.discountText}>bán chạy</Text>
+            <Text style={styles.discountText}>{LANG.HOT_SELLIING}</Text>
           </View>
         </View>
 
