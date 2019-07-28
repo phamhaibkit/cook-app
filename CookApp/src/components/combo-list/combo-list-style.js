@@ -30,8 +30,8 @@ const imgRightSideWidth = imgRightSideHeight / imageRightSideRatio;
 export default StyleSheet.create({
 	container: {
 		flex: 1,
-		marginTop: 6,
 		paddingHorizontal: 15,
+		paddingBottom: 15,
 		backgroundColor: COLOR.backgroundColor
 	},
 	frame: {

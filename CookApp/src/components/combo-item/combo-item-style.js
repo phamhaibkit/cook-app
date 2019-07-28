@@ -96,30 +96,48 @@ export default StyleSheet.create({
     width: 162,
     height: 70
   },
+  imgUp3Ver: {
+    width: 162 * widthImgVertical / 290
+  },
   imgUp5: {
     width: 79,
     height: 70
+  },
+  imgUp5Ver: {
+    width: 79 * widthImgVertical / 290
   },
   imgDown3: {
     width: 162,
     height: 70,
     marginTop: 4
   },
+  imgDown3Ver: {
+    width: 162 * widthImgVertical / 290
+  },
   imgDown5: {
     width: 79,
     height: 70,
     marginTop: 4
+  },
+  imgDown5Ver: {
+    width: 79 * widthImgVertical / 290
   },
   imgRightUp5: {
     width: 80,
     height: 70,
     marginLeft: 4
   },
+  imgRightUp5Ver: {
+    width: 80* widthImgVertical / 290
+  },
   imgRightDown5: {
     width: 80,
     height: 70,
     marginLeft: 4,
     marginTop: 4
+  },
+  imgRightDown5Ver: {
+    width: 80* widthImgVertical / 290
   },
   textTitle: {
     fontSize: 14,

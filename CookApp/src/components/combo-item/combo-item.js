@@ -86,7 +86,6 @@ export default class ComboItem extends Component {
   };
 
   render2or4Item = (item, is4) => {
-    // const margin = isHorizontal ? { marginLeft: CSS.padding15 } : { marginTop: CSS.padding15 }
     const { isVertical } = this.props;
     const imgLeftStyle = is4 ? (isVertical ? [styles.img4LeftUp, styles.img4LeftUpVertical] : styles.img4LeftUp) : (isVertical ? [styles.img2LeftView, styles.img2LeftViewVertical] : styles.img2LeftView);
     const imgRightStyle = is4 ? (isVertical ? [styles.img4RightUp, styles.img4RightUpVertical] : styles.img4RightUp) : (isVertical ? [styles.img2RightView, styles.img2RightViewVertical]: styles.img2RightView);
@@ -132,8 +131,9 @@ export default class ComboItem extends Component {
   };
 
   render3or5Item = (item, is5) => {
-    const imgUpStyle = is5 ? styles.imgUp5 : styles.imgUp3;
-    const imgDownStyle = is5 ? styles.imgDown5 : styles.imgDown3;
+    const { isVertical } = this.props;
+    const imgUpStyle = is5 ? (isVertical ? [styles.imgUp5, styles.imgUp5Ver] : styles.imgUp5) : (isVertical ? [styles.imgUp3, styles.imgUp3Ver] : styles.imgUp3);
+    const imgDownStyle = is5 ? (isVertical ? [styles.imgDown5, styles.imgDown5Ver] : styles.imgDown5) : (isVertical ? [styles.imgDown3, styles.imgDown3Ver] : styles.imgDown3);
     return (
       <View style={styles.containerFluid}>
         {this.renderTitle(item.name, item.numberOrder, item.viewTimes)}
@@ -141,7 +141,7 @@ export default class ComboItem extends Component {
           <View style={styles.container2Img}>
             <View style={styles.containerImg}>
               <ImageBackground
-                style={styles.imgLeftView}
+                style={isVertical ? [styles.imgLeftView, styles.imgLeftViewVertical] : styles.imgLeftView}
                 source={{ uri:  item.comboImages[0] }}
               />
               <View style={styles.imgRightView}>
@@ -152,7 +152,7 @@ export default class ComboItem extends Component {
                   />
                   {is5 && (
                     <ImageBackground
-                      style={styles.imgRightUp5}
+                      style={isVertical ? [styles.imgRightUp5, styles.imgRightUp5Ver] : styles.imgRightUp5}
                       source={{ uri:  item.comboImages[3] }}
                     />
                   )}
@@ -164,7 +164,7 @@ export default class ComboItem extends Component {
                   />
                   {is5 && (
                     <ImageBackground
-                      style={styles.imgRightDown5}
+                      style={isVertical ? [styles.imgRightDown5, styles.imgRightDown5Ver] : styles.imgRightDown5}
                       source={{ uri:  item.comboImages[4] }}
                     />
                   )}

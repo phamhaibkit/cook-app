@@ -203,13 +203,18 @@ export default class ComboDetail extends Component {
               <Text style={[styles.title, CSS.fontQuiBold]}>{ data.name }</Text>
               <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                 <View style={styles.statisticalNumber}>
-                  <Text style={styles.numberStyle}>{ data.orderTimes }</Text>
-                  <Text style={[styles.numberStyle, styles.textLight]}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
+                  <Text style={styles.numberStyle}>
+                    { data.orderTimes }
+                    <Text style={styles.textLight}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
+                  </Text>
+                  
                 </View>
                 <View style={styles.seperator}></View>
                 <View style={styles.statisticalNumber}>
-                  <Text style={styles.numberStyle}> { data.viewTimes }</Text>
-                  <Text style={[styles.numberStyle, styles.textLight]}>{LANG.SPACE}{LANG.VIEW}</Text>
+                  <Text style={styles.numberStyle}> 
+                    { data.viewTimes }
+                    <Text style={styles.textLight}>{LANG.SPACE}{LANG.VIEW}</Text>
+                  </Text>              
                 </View>
               </View>
               <View style={styles.estimatePrice}>
