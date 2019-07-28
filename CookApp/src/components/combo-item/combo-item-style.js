@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window');
 const containerPadding = 15;
 const blockPadding = 10;
 const spaceImg = 4;
-const heightCombo = 'auto';
+const heightCombo = 235;
 const imgHeghtCombo = 140;
 
 // Horizontal
@@ -28,6 +28,7 @@ export default StyleSheet.create({
   frame: {   
     fontSize: 18,
     width: widthCombo,
+    height: heightCombo,
     marginLeft: CSS.padding15,
     borderRadius: 5    
   },
@@ -144,12 +145,12 @@ export default StyleSheet.create({
   },
   likeView: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingLeft: 2
   },
   lineLikeView: {
-    marginHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginLeft: 5,
+    justifyContent: 'center'
   },
   line: {
     height: 11,
