@@ -42,12 +42,12 @@ class CollectionItem extends Component {
                 <View style={[styles.statisticalWrap, CSS.alignItemsCenter]}>
                   <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <Image style={styles.recipeIcon} source={IMG.recipeIcon}/>
-                    <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.recipeNumber} {LANG.RECIPE}</Text>
+                    <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.numberRecipe} {LANG.RECIPE}</Text>
                   </View>
                   <View style={styles.separator} />
                   <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
-                    <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.likeNumber} {LANG.SAVE}</Text>
+                    <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.savedTimes} {LANG.SAVE}</Text>
                   </View>
                 </View>
               </View>
