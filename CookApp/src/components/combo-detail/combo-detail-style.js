@@ -165,5 +165,9 @@ export default styles = StyleSheet.create({
     flex: 2, 
     flexDirection: 'row', 
     justifyContent: 'flex-end'
+  },
+  cookIntroductions: {
+    paddingBottom: 30,
+    marginBottom: overflowHeight,
   }
 });

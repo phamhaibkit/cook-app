@@ -73,7 +73,7 @@ export default class ComboDetail extends Component {
     this.state = {
       estimatePrice: 0,
       totalPrice: 0,
-      mealQuantity: 0,
+      mealQuantity: 1,
       isCheckAll: true,
       recipes: [],
       data: {}
@@ -109,7 +109,6 @@ export default class ComboDetail extends Component {
       this.setState({
         totalPrice,
         recipes: data.recipes,
-        mealQuantity: data.numPeople,
         estimatePrice: totalPrice
       });
     }
@@ -171,12 +170,16 @@ export default class ComboDetail extends Component {
 
       totalPrice = mealQuantity * estimatePrice
     } else {
-      mealQuantity > 1 &&
-      mealQuantity--;
-      totalPrice -= estimatePrice;
-      _.map(recipes, (item) => {
-        item.itemPriceUnit && (item.price = item.itemPriceUnit * mealQuantity);
-      })
+      if(mealQuantity > 1) {
+        mealQuantity--;
+        totalPrice -= estimatePrice;
+        _.map(recipes, (item) => {
+          item.itemPriceUnit && (
+            item.price = item.itemPriceUnit * mealQuantity,
+            item.numPeople = item.numPeople - 1
+          );
+        })
+      }
     }
 
     this.setState({
@@ -316,7 +319,7 @@ export default class ComboDetail extends Component {
             </View>
           </View> 
           
-          <View style={[{ backgroundColor: COLOR.whiteColor },  styles.blockContainer]}>
+          <View style={[{ backgroundColor: COLOR.whiteColor },  styles.cookIntroductions]}>
             <MostSearched 
               label={ LANG.COOKING_INSTRUCTIONS } 
               data={this.state.recipes} 
