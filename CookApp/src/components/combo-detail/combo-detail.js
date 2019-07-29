@@ -164,8 +164,8 @@ export default class ComboDetail extends Component {
     if (isPlus) {
       mealQuantity++;
       _.map(recipes, (item) => {
-        item.itemPriceUnit && (item.price = item.itemPriceUnit * mealQuantity);
-        item.itemNumPeopleUnit && (item.numPeople = item.itemNumPeopleUnit * mealQuantity);
+        item.itemPriceUnit && (item.price += item.itemPriceUnit);
+        item.itemNumPeopleUnit && (item.numPeople += item.itemNumPeopleUnit);
       }) 
 
       totalPrice = mealQuantity * estimatePrice
@@ -190,7 +190,7 @@ export default class ComboDetail extends Component {
   }
 
   handleIngredientClick = (ingredient, isPlus) => {
-    const { recipes } = this.state.data;
+    const { recipes } = this.state;
 
     let clickedIngredient = _.find(recipes, (item)=> {
       return item.id === ingredient.id;
@@ -206,7 +206,9 @@ export default class ComboDetail extends Component {
       }
     }    
 
-    this.setState({recipes: recipes});
+    this.setState({
+      recipes
+    });
   }
 
   componentDidMount () { 
