@@ -446,22 +446,10 @@ export const COLLECTION_DETAIL = {
     ]    
 }
 
+
 export const COMBO_DETAIL = {
   id: 1,
-  sliderImages: [
-    {
-      id: 1,
-      sliderImgSrc: require('../../assets/collections/collection-1.png')
-    },
-    {
-      id: 2,
-      sliderImgSrc: require('../../assets/collections/collection-1.png')
-    } ,
-    {
-      id: 3,
-      sliderImgSrc: require('../../assets/collections/collection-1.png')
-    } 
-  ],
+  sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg","https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png","https://i.cachnaumonan.com/wp-content/uploads/2018/07/cach-lam-goi-rau-cang-cua-thit-bo1.jpg","https://navicdn.com/nakk/images_article/2019/03/13/cach-lam-sinh-to-bo-sua-chua-3.jpg"],
   comboTitle: 'Thịt bò xào khoai tây + Mì udon súp miso và thịt heo + Canh rong biển',
   orders: 498,
   views: 200,

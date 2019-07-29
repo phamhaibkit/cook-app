@@ -51,21 +51,23 @@ export default class RecipeDetail extends Component {
     }
   }
 
+  componentDidMount() {
+
+  }
+
   renderStar = (number) => {
     const star = [];
-    const starYellow = <Image style={styles.imageStar} source={IMG.starYellow}></Image>
-    const starGray = <Image style={styles.imageStar} source={IMG.starGrey}></Image>
+
     for (let i = 1; i <= number; i++) {
+      const starYellow = <Image key={i} style={styles.imageStar} source={IMG.starYellow}></Image>
       star.push(starYellow);
     }
     for (let j = number; j < 5; j++) {
+      const starGray = <Image key={j + 1} style={styles.imageStar} source={IMG.starGrey}></Image>
       star.push(starGray);
     }
 
-    console.log(star)
-
     return star.map(item => {
-      console.log(item)
       return (item)
     })
   }
@@ -183,7 +185,6 @@ export default class RecipeDetail extends Component {
         <View style={styles.horizontalFlash}></View>
         {this.renderIngredient()}
         <View style={styles.horizontalFlash}></View>
-        {/* {this.renderStep()} */}
         <View style={[styles.container]}>
           <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
             <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.STEP_ACTION}</Text>
@@ -192,6 +193,19 @@ export default class RecipeDetail extends Component {
               <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#000000', paddingLeft: 4 }]}>
                 {minuteAmount} {LANG_VN.MINUTE}
               </Text>
+            </View>
+          </View>
+          <View style={[styles.stepsSection]}>
+            <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+              <Image style={{ height: 6, width: 6, marginRight: 5 }} source={IMG.greenCircle}></Image>
+              <Text style={[CSS.fontSize14, CSS.fontQuiBold, styles.colorTextDark]}>Bước 1</Text>
+            </View>
+            <View style={styles.stepImages}>
+              {
+                imageHeader.map((item)=> {
+                  return <Image source={{ uri: item }} style={{height: 82, width: 142}}></Image>
+                })
+              }
             </View>
           </View>
         </View>
@@ -206,7 +220,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15
   },
-
+  colorTextDark: {
+    color: '#444444'
+  },
   recipeInfor: {
     width: width - 30,
     borderRadius: 5,
@@ -377,7 +393,6 @@ const styles = StyleSheet.create({
   cardBorder: {
     borderBottomWidth: 1,
     borderBottomColor: '#CECECE',
-    borderStyle: 'dashed'
   },
   customCheckBox: {
     width: 22,
@@ -408,5 +423,9 @@ const styles = StyleSheet.create({
   },
   rowIngredient: {
     paddingVertical: 15,
+  },
+  stepsSection: {
+    flex: 1,
+    marginTop: 22
   }
 });

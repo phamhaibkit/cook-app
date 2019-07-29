@@ -42,7 +42,7 @@ export default class RecipeHighlightHome extends Component {
   }
 
   onPress = () => {
-    // console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+    navigationService.navigate('recipeDetail')
   };
 
   onShare = () => {
