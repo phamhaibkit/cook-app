@@ -13,6 +13,7 @@ import homeService from '../../services/home.service';
 import { LikeCommentShare } from '../like-comment-share/like-comment-share';
 import LinearGradient from 'react-native-linear-gradient';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
+import StepRecipeDetail from './step-recipe-detail';
 
 const recipeDataDetail = {
   "likeTimes": 53,
@@ -34,6 +35,32 @@ const recipeDataDetail = {
   "viewTimes": 100,
   "calo": 3000
 }
+
+const step = [
+  {
+    sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
+      "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",
+      "https://i.cachnaumonan.com/wp-content/uploads/2018/07/cach-lam-goi-rau-cang-cua-thit-bo1.jpg",
+      "https://navicdn.com/nakk/images_article/2019/03/13/cach-lam-sinh-to-bo-sua-chua-3.jpg"],
+      description: 'Trứng gà luộc lòng đào trong vòng 7 phút. Thịt ba chỉ thái lát dài, ướp với 1 muỗng canh nước tương và tương ớt Hàn Quốc. Áp chảo thịt ba chỉ đến khi xém cạnh. '
+  },
+  {
+    sliderImages: [],
+    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
+  },
+  {
+    sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
+      "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",
+      "https://i.cachnaumonan.com/wp-content/uploads/2018/07/cach-lam-goi-rau-cang-cua-thit-bo1.jpg",],
+      description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
+  },
+  {
+    sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
+      "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",],
+      description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
+  }
+]
+
 const { height, width } = Dimensions.get('window');
 export default class RecipeDetail extends Component {
   static propTypes = {
@@ -47,6 +74,7 @@ export default class RecipeDetail extends Component {
       starNum: 4,
       rateAmount: 20,
       minuteAmount: 60,
+      activeImage: 0,
       ...homeService.homeData
     }
   }
@@ -170,9 +198,31 @@ export default class RecipeDetail extends Component {
     )
   }
 
+  renderStep = () => {
+    const { activeImage, minuteAmount } = this.state;
+    return <View style={[styles.container]}>
+      <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
+        <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.STEP_ACTION}</Text>
+        <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
+          <Image style={styles.imageIcon} source={IMG.sandClokHome}></Image>
+          <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#000000', paddingLeft: 4 }]}>
+            {minuteAmount} {LANG_VN.MINUTE}
+          </Text>
+        </View>
+      </View>
+      {step.map((item, index) => {
+        const data = {
+          stepNumber: index + 1,
+          infor: item
+        }
+        return <StepRecipeDetail key={index} data={data}></StepRecipeDetail>
+      })}
+    </View>
+  }
+
   render() {
     // let recipesDetail = this.state.data;
-    const { imageHeader, rateAmount, starNum, minuteAmount } = this.state;
+    const { imageHeader, rateAmount, starNum, minuteAmount, activeImage } = this.state;
 
     console.log(this.state, 'imageHeader');
     return (
@@ -185,30 +235,7 @@ export default class RecipeDetail extends Component {
         <View style={styles.horizontalFlash}></View>
         {this.renderIngredient()}
         <View style={styles.horizontalFlash}></View>
-        <View style={[styles.container]}>
-          <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
-            <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.STEP_ACTION}</Text>
-            <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
-              <Image style={styles.imageIcon} source={IMG.sandClokHome}></Image>
-              <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#000000', paddingLeft: 4 }]}>
-                {minuteAmount} {LANG_VN.MINUTE}
-              </Text>
-            </View>
-          </View>
-          <View style={[styles.stepsSection]}>
-            <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-              <Image style={{ height: 6, width: 6, marginRight: 5 }} source={IMG.greenCircle}></Image>
-              <Text style={[CSS.fontSize14, CSS.fontQuiBold, styles.colorTextDark]}>Bước 1</Text>
-            </View>
-            <View style={styles.stepImages}>
-              {
-                imageHeader.map((item)=> {
-                  return <Image source={{ uri: item }} style={{height: 82, width: 142}}></Image>
-                })
-              }
-            </View>
-          </View>
-        </View>
+        {this.renderStep()}
       </ScrollView>
     )
   }
@@ -424,8 +451,5 @@ const styles = StyleSheet.create({
   rowIngredient: {
     paddingVertical: 15,
   },
-  stepsSection: {
-    flex: 1,
-    marginTop: 22
-  }
+  
 });
