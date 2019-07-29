@@ -12,9 +12,9 @@ export default class PageSearchRecipe extends Component {
       textSearch : '',
     };
     this.data = [
-      { id: 1, title: 'Thit bo chien', chef: 'Hoang Kieu Nga', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
-      { id: 2, title: 'Thit bo xao khoai', chef: 'Binh Tang', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
-      { id: 3, title: 'Thit bo xao xa ot', chef: 'Trung Lu', time: 60, link: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' }
+    { id: 1, name: 'Thit bo chien', owner: {name: 'Hoang Kieu Nga'}, timeExecute: 60, recipeImage: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
+      { id: 2, name: 'Thit bo xao khoai', owner: {name: 'Binh Tang'}, timeExecute: 60, recipeImage: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
+      { id: 3, name: 'Thit bo xao xa ot', owner: {name: 'Trung Lu'}, timeExecute: 60, recipeImage: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' }
     ];
   }
 

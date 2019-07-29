@@ -9,12 +9,17 @@ export default StyleSheet.create({
     backgroundColor: '#fff'
   }, 
   saveCollection: { 
-    position: 'absolute', 
-    bottom: 10, 
+    position: 'absolute',  
     right: 10, 
-    padding: 8, 
+    padding: 7, 
     backgroundColor: '#fff', 
     borderRadius: 10 
+  },
+  saveCollectionHor: {
+    bottom: 10,
+  },
+  saveCollectionVer: {
+    top: 10,
   },
   saveIcon: { 
     height: 17, 
@@ -35,7 +40,8 @@ export default StyleSheet.create({
   },
   statisticalWrap: { 
     flex: 1, 
-    flexDirection: 'row' 
+    flexDirection: 'row',
+    height: 13
   },
   recipeIcon: { 
     width: 13, 
@@ -45,9 +51,13 @@ export default StyleSheet.create({
     width: 9, 
     height: 10 
   }, 
+  eyeIcon: {
+    width: 14,
+    height: 9
+  },
 	separator: {
-		marginHorizontal: 13,
-		width: 1,
+		marginHorizontal: 8,
+		width: 0.5,
 		height: 13,
 		backgroundColor: 'white'
 	},
@@ -55,5 +65,5 @@ export default StyleSheet.create({
     fontSize: 13,
 		marginLeft: 5,
 		color: 'white'
-	}
+  }
 });

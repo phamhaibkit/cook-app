@@ -10,6 +10,7 @@ import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import Advertiment from '../advertiment/advertiment';
+import { kFormatter, capitalize } from '../../utils/general';
 
 class CollectionItem extends Component {
   handlePress = () => {  
@@ -18,7 +19,7 @@ class CollectionItem extends Component {
   }
   
   render() {
-    let { item, imgBgWrap, blockMargin, ads, isCollectionList} = this.props;
+    let { item, imgBgWrap, blockMargin, ads, isVertical} = this.props;
  
     return (
        <View>
@@ -34,7 +35,7 @@ class CollectionItem extends Component {
                 />            
               </ImageBackground>
               <View style={[imgBgWrap,{ marginTop: -imgBgWrap.height}]}>
-                <View style={styles.saveCollection}>
+                <View style={isVertical ? [styles.saveCollection, styles.saveCollectionVer] : [styles.saveCollection, styles.saveCollectionHor]}>
                   <Image style={styles.saveIcon} source={IMG.greenBookmarkIcon}/>
                 </View>
                 <View style={styles.blockContentWrap}>
@@ -42,15 +43,25 @@ class CollectionItem extends Component {
                     <Text style={[styles.collectionTitle, CSS.fontTitle, CSS.fontQuiBold]}>{item.name}</Text>
                   </View>
                   <View style={[styles.statisticalWrap, CSS.alignItemsCenter]}>
-                    <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                    <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
                       <Image style={styles.recipeIcon} source={IMG.recipeIcon}/>
-                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.numberRecipe} {LANG.RECIPE}</Text>
+                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{ kFormatter(item.numberRecipe) } {LANG.RECIPE}</Text>
                     </View>
                     <View style={styles.separator} />
-                    <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                    <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
                       <Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
-                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.savedTimes} {LANG.SAVE}</Text>
+                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{ kFormatter(item.savedCount) } {capitalize(LANG.SAVE)}</Text>
                     </View>
+                    {
+                      isVertical &&
+                      <React.Fragment>
+                        <View style={styles.separator} />
+                        <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
+                          <Image style={styles.eyeIcon} source={IMG.eyeIcon}/>
+                          <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{ kFormatter(item.viewCount) } {LANG.VIEW}</Text>
+                        </View>
+                      </React.Fragment>
+                    }
                   </View>
                 </View>
               </View>
@@ -60,7 +71,7 @@ class CollectionItem extends Component {
         
         <View>
           {
-            isCollectionList && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
+            isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
           }
         </View>
        </View>

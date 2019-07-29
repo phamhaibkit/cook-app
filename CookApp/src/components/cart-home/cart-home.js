@@ -21,9 +21,10 @@ class CartHome extends Component {
   };
 
   render() {
+    const { count,  isTransparentHeader} = this.props;
     const cartImg = Platform.OS === 'ios' ? IMG.cartHomeIos : IMG.cartHome;
-    const cartNum = Platform.OS === 'ios' ? COLOR.appNameIos : COLOR.redColor;
-    const { count } = this.props;
+    const cartNum = (Platform.OS === 'ios' || isTransparentHeader) ? COLOR.appNameIos : COLOR.redColor;
+    
     return (
       <TouchableOpacity style={{ flex: 1 }}>
         <View>

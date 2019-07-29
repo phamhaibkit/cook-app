@@ -29,11 +29,16 @@ class IngredientCard extends Component{
       isChecked,
       onClickCheckBox ,
       onClickSubstract,
-      onClickPlus
+      onClickPlus,
+      index,
+      data
     } = this.props; 
 
+    let isDisable = amountOfPeople === 1 ? true : false;
+    let dataIndex = data.length - 1;
+
     return (
-      <View style={[{paddingVertical: 20}, styles.cardBorder]}>
+      <View style={(dataIndex === index) ? [styles.cardBorder, styles.lastCard] : styles.cardBorder}>
         <CustomCheckbox 
           style={styles.customCheckBox}
           isChecked={isChecked}
@@ -53,7 +58,7 @@ class IngredientCard extends Component{
             </View>
           </View>
           <View style={styles.actionBtnGroup}>
-            <IncreaterButtonWithoutNumber btnStyle={{marginRight: 5}} onPress={onClickSubstract}/>
+            <IncreaterButtonWithoutNumber btnStyle={{marginRight: 5}} onPress={onClickSubstract} isDisable={isDisable}/>
             <IncreaterButtonWithoutNumber isPlus={true} onPress={onClickPlus}/>     
           </View>
         </View>
@@ -111,31 +116,62 @@ export default class ComboDetail extends Component {
   }
 
   handleCheckAll = () => {
+    const { recipes } = this.state.data;
+
     this.setState({
       isCheckAll:  !this.state.isCheckAll
     })
 
-    const { recipes } = this.state.data;
     recipes.map((item) => {
       item.isChecked = !this.state.isCheckAll;
     });
     this.setState({recipes: recipes});
   }
 
+  handleAllIngreUncheck = () => {
+    const { recipes } = this.state;
+
+    let item = _.find(recipes, (item) => {
+      return item.isChecked === true;
+    });
+
+    if (item) return;
+
+    this.setState({
+      isCheckAll: false
+    });
+  }
+
   handleRecipeCheck = (recipe) => {
     const { recipes } = this.state.data;
+    const { isCheckAll } = this.state;
 
     _.find(recipes, (item)=> {
       return item.id === recipe.id;
-    }).isChecked = !recipe.isChecked;
+    }).isChecked = !recipe.isChecked;   
 
     this.setState({recipes: recipes});
+    this.handleAllIngreUncheck();
   }
 
-  handleDecreaseMeal = () => {
-    let { mealQuantity, estimatePrice, totalPrice, recipes } = this.state;
+  handleMealClick = (isPlus) => {
+    let { 
+      mealQuantity, 
+      estimatePrice, 
+      totalPrice, 
+      recipes 
+    } = this.state;
 
-    if( mealQuantity > 1 ) {
+    if (isPlus) {
+      mealQuantity++;
+      _.map(recipes, (item) => {
+        item.itemPriceUnit && (item.price = item.itemPriceUnit * mealQuantity);
+        item.itemNumPeopleUnit && (item.numPeople = item.itemNumPeopleUnit * mealQuantity);
+      }) 
+
+      totalPrice = mealQuantity * estimatePrice
+    } else {
+      mealQuantity > 1 &&
       mealQuantity--;
       totalPrice -= estimatePrice;
       _.map(recipes, (item) => {
@@ -145,37 +181,27 @@ export default class ComboDetail extends Component {
 
     this.setState({
       mealQuantity,
-      totalPrice,
-
-    });
-  }
-
-  handleIncreaseMeal = () => {
-    let { mealQuantity, estimatePrice, recipes } = this.state;
-
-    mealQuantity++;
-
-    _.map(recipes, (item) => {
-      item.itemPriceUnit && (item.price = item.itemPriceUnit * mealQuantity);
-      item.itemNumPeopleUnit && (item.numPeople = item.itemNumPeopleUnit * mealQuantity);
-    })
-
-    this.setState({
-      mealQuantity,
       recipes,
-      totalPrice: mealQuantity * estimatePrice
+      totalPrice
     });
   }
 
-  handleIncreateIngre = (ingredient) => {
+  handleIngredientClick = (ingredient, isPlus) => {
     const { recipes } = this.state.data;
 
-    let clickBtn = _.find(recipes, (item)=> {
-      return item.numPeople === ingredient.numPeople;
+    let clickedIngredient = _.find(recipes, (item)=> {
+      return item.id === ingredient.id;
     });
 
-    clickBtn.numPeople = ingredient.numPeople + 1;
-    clickBtn.price = ingredient.price + ingredient.price
+    if (isPlus) {
+      clickedIngredient.numPeople = ingredient.numPeople + clickedIngredient.itemNumPeopleUnit;
+      clickedIngredient.price = ingredient.price + clickedIngredient.itemPriceUnit;
+    } else {
+      if (clickedIngredient.numPeople > 1) {
+        clickedIngredient.numPeople = ingredient.numPeople - clickedIngredient.itemNumPeopleUnit;
+        clickedIngredient.price = ingredient.price - clickedIngredient.itemPriceUnit;
+      }
+    }    
 
     this.setState({recipes: recipes});
   }
@@ -195,59 +221,61 @@ export default class ComboDetail extends Component {
         
         <View style={styles.container}>
           
-          <View style={styles.blockContainer}>
-            <View style={[styles.dishInfo, CSS.lightBoxShadow]}>
-              <Text style={[styles.comboLabel, CSS.fontQuiMedium]}>
-                {LANG.COMBO.name}
-              </Text>
-              <Text style={[styles.title, CSS.fontQuiBold]}>{ data.name }</Text>
-              <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-                <View style={styles.statisticalNumber}>
-                  <Text style={styles.numberStyle}>
-                    { data.orderTimes }
-                    <Text style={styles.textLight}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
-                  </Text>
-                  
-                </View>
-                <View style={styles.seperator}></View>
-                <View style={styles.statisticalNumber}>
-                  <Text style={styles.numberStyle}> 
-                    { data.viewTimes }
-                    <Text style={styles.textLight}>{LANG.SPACE}{LANG.VIEW}</Text>
-                  </Text>              
-                </View>
-              </View>
-              <View style={styles.estimatePrice}>
-                <View style={{flexDirection: 'row', flex: 1, paddingVertical: 15}}>
-                  <View style={styles.w50percentage}>
-                    <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.totalPrice) } {LANG.VIETNAM_DONG}</Text>
-                    <Text style={styles.textDescription}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
+          <View style={[styles.blockContainer, styles.backgroundWhite]}>
+            <View style={styles.topStyle}>
+              <View style={[styles.dishInfo, CSS.lightBoxShadow]}>
+                <Text style={[styles.comboLabel, CSS.fontQuiMedium]}>
+                  {LANG.COMBO.name}
+                </Text>
+                <Text style={[styles.title, CSS.fontQuiBold]}>{ data.name }</Text>
+                <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                  <View style={styles.statisticalNumber}>
+                    <Text style={styles.numberStyle}>
+                      { data.orderCount }
+                      <Text style={styles.textLight}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
+                    </Text>
+                    
                   </View>
-                  <View style={styles.cardSeparator}></View>
-                  <View style={styles.w50percentage}>
-                    <IncreaterButtonWithNumber
-                      currentQuantity={this.state.mealQuantity}   
-                      onPressDecreaseButton={this.handleDecreaseMeal}
-                      onPressIncreaseButton={this.handleIncreaseMeal}                   
-                    />
-                    <Text style={styles.textDescription}>{ LANG.MEAL }</Text>
-                  </View> 
-                </View>               
-                <Text style={[{ textAlign: 'center', backgroundColor: '#EEEEEE', color:'#767676', height: 24 }, CSS.fontQuiMedium]}>{ LANG.OPTIONAL_MEAL }</Text>
+                  <View style={styles.seperator}></View>
+                  <View style={styles.statisticalNumber}>
+                    <Text style={styles.numberStyle}> 
+                      { data.viewCount }
+                      <Text style={styles.textLight}>{LANG.SPACE}{LANG.VIEW}</Text>
+                    </Text>              
+                  </View>
+                </View>
+                <View style={styles.estimatePrice}>
+                  <View style={[CSS.dFlex, CSS.flexRow, { paddingVertical: 15}]}>
+                    <View style={styles.w50percentage}>
+                      <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.totalPrice) } {LANG.VIETNAM_DONG}</Text>
+                      <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
+                    </View>
+                    <View style={styles.cardSeparator}></View>
+                    <View style={styles.w50percentage}>
+                      <IncreaterButtonWithNumber
+                        currentQuantity={this.state.mealQuantity}   
+                        onPressDecreaseButton={() => this.handleMealClick()}
+                        onPressIncreaseButton={() => this.handleMealClick(true)}                   
+                      />
+                      <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ LANG.MEAL }</Text>
+                    </View> 
+                  </View>               
+                  <Text style={[styles.optional, CSS.fontQuiMedium,  CSS.textAlignCenter]}>{ LANG.OPTIONAL_MEAL }</Text>
+                </View>
               </View>
-            </View>
-            <View style={styles.promotionInfo}>
-              <Text style={[styles.sectionTitle, CSS.fontNuExBold]}>{LANG.PROMOTION_INFO}</Text>
-             {
-               data.promotion && data.promotion.map((promotion, index) => (
-                  <Text key={index}>{promotion}</Text>
-               ))
-             }
+              <View style={styles.promotionInfo}>
+                <Text style={[styles.sectionTitle, CSS.fontNuExBold]}>{LANG.PROMOTION_INFO}</Text>
+              {
+                data.promotion && data.promotion.map((promotion, index) => (
+                    <Text style={[styles.textDescription, CSS.fontQuiRegular]} key={index}>{promotion}</Text>
+                ))
+              }
+              </View>
             </View>
           </View>
 
-          <View style={[styles.ingredients, styles.blockContainer]}>
-            <View style={[{flex:1, flexDirection: 'row'}, CSS.justifySpaceBetween,  CSS.alignItemsCenter]}>              
+          <View style={[styles.ingredients, styles.blockContainer, styles.backgroundWhite]}>
+            <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>              
               <Text style={[{height: 35}, styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
               <GradientButton 
                 start={{ x: 0, y: 0 }}
@@ -272,13 +300,15 @@ export default class ComboDetail extends Component {
                 recipes && recipes.map((ingredient, index) => (
                   <IngredientCard
                     key={index}
+                    index={index}
+                    data={recipes}
                     ingredientName={ingredient.name}
                     amountOfPeople={ingredient.numPeople}
                     price={ingredient.price}
                     isChecked={ingredient.isChecked}
                     onClickCheckBox={() => this.handleRecipeCheck(ingredient)}
-                    onClickSubstract={() => this.handleDecreateIngre(ingredient)}
-                    onClickPlus={() => this.handleIncreateIngre(ingredient)}
+                    onClickSubstract={() => this.handleIngredientClick(ingredient)}
+                    onClickPlus={() => this.handleIngredientClick(ingredient, true)}
 
                   />
                 ))
@@ -286,13 +316,13 @@ export default class ComboDetail extends Component {
             </View>
           </View> 
           
-          {/* <View style={{ backgroundColor: COLOR.whiteColor }}>
+          <View style={[{ backgroundColor: COLOR.whiteColor },  styles.blockContainer]}>
             <MostSearched 
               label={ LANG.COOKING_INSTRUCTIONS } 
-              data={recipesDetail.cookingInstructions} 
+              data={this.state.recipes} 
               subData={true}
             />               
-          </View> */}
+          </View>
         </View>
       </ScrollView>
     );
