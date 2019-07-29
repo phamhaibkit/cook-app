@@ -8,24 +8,29 @@ const overflowHeight = 90;
 const overflowComboLabel = 11;
 
 export default styles = StyleSheet.create({
-  container: {},
-  blockContainer: {
-    backgroundColor: COLOR.whiteColor,
-    paddingHorizontal: 15,
+  container: {
+    backgroundColor: '#f4f4f4',
+    marginBottom: -overflowHeight
+  },
+  backgroundWhite: {
+    backgroundColor: COLOR.whiteColor
+  },  
+  blockContainer: {    
+    paddingHorizontal: paddingContainer,
     marginBottom: marginBottomBlock
   },
+  topStyle: {
+    position: 'relative',
+    marginTop: - overflowHeight,
+    zIndex: 999
+  },
   dishInfo: {
-    position: 'absolute',
-    top: - overflowHeight,
-    zIndex: 999,
-    left: paddingContainer,
-    right: paddingContainer,
     borderRadius: 5,
     padding: paddingContainer,
+    marginBottom: 30,
     backgroundColor: COLOR.whiteColor
   },
   promotionInfo: {
-    paddingTop: overflowHeight + overflowComboLabel + 30,
     paddingBottom: 30
   },
   comboLabel:{
@@ -48,6 +53,11 @@ export default styles = StyleSheet.create({
   },
   statisticalNumber: {
     flexDirection: 'row'
+  },
+  optional: {
+    backgroundColor: '#EEEEEE', 
+    color:'#767676', 
+    paddingVertical: 5 
   },
   seperator: {
     width: 1,
@@ -76,8 +86,7 @@ export default styles = StyleSheet.create({
   textLight: {
     color: COLOR.madeIn
   },
-  textDescription: { 
-    textAlign: 'center', 
+  textDescription: {     
     color: COLOR.oldPrice,
     marginTop: 5 
   },
@@ -103,7 +112,9 @@ export default styles = StyleSheet.create({
   },
   ingredients: {
     paddingTop: 15,
-    paddingBottom: 30
+    paddingBottom: 30,
+    backgroundColor: COLOR.whiteColor,
+    paddingHorizontal: paddingContainer
   },
   cardLabel: {
     color: COLOR.oldPrice,
@@ -118,8 +129,14 @@ export default styles = StyleSheet.create({
     paddingLeft: 15
   },
   cardBorder: {
+    paddingVertical: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#CECECE'
+  },
+  lastCard: {
+    borderBottomWidth: 0,
+    borderBottomColor: COLOR.whiteColor,
+    paddingBottom: 0
   },
   customCheckBox: {
     width: 22, 
@@ -145,8 +162,12 @@ export default styles = StyleSheet.create({
     borderRadius: 5
   },
   actionBtnGroup: {
-    flex: 2, 
+    flex: 1, 
     flexDirection: 'row', 
     justifyContent: 'flex-end'
+  },
+  cookIntroductions: {
+    paddingBottom: 30,
+    marginBottom: overflowHeight,
   }
 });

@@ -27,6 +27,7 @@ export default StyleSheet.create({
     width: 30,
   },
   countNumber: {
+    minWidth: 30,
     lineHeight: 27,
     textAlign: 'center',
     borderLeftWidth: 1,

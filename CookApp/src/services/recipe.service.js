@@ -2,7 +2,7 @@ import HTTPService from './http.service';
 import { API } from './api';
 import _ from 'lodash';
 
-const recipeHightLightData = {
+const recipeHighLightData = {
   loading: true,
   recipes: []
 }
@@ -18,19 +18,19 @@ class RecipeService {
   }
 
   resetService = () => {
-    this.recipeHightLightData = _.cloneDeep(recipeHightLightData);
+    this.recipeHighLightData = _.cloneDeep(recipeHighLightData);
     this.recipeLikedData = _.cloneDeep(recipeLikedData);
   };
   
-  getRecipeHightLightList = () => {
+  getRecipeHighLightList = () => {
     // console.log( 'recipeHightLightData' + Date());
     this.resetService();
     const url = API.GET_RECIPE_HIGHLIGHT_LIST;
-    this.recipeHightLightData.loading = true;
+    this.recipeHighLightData.loading = true;
     return HTTPService.get(url,null,null)
       .then(data => {
         // console.log( 'recipeHightLightData Done' + Date(), data);
-        this.recipeHightLightData = _.cloneDeep({
+        this.recipeHighLightData = _.cloneDeep({
           recipes: data,
           loading: false,
         });

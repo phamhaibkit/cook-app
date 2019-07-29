@@ -34,7 +34,7 @@ class PageHome extends Component {
       trendings: homeService.trendingData,
       collections: collectionSerice.collectionData,
       ads: homeService.adsData,
-      recipeHighLights: recipeService.recipeHightLightData,
+      recipeHighLights: recipeService.recipeHighLightData,
       combos: comboService.comboData,
       products: productService.bestSellerProduct,
       followers: userService.followerData,
@@ -42,7 +42,7 @@ class PageHome extends Component {
       newsEvents: newsEventService.newsEventData
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     this.getTrendings();
     this.getCollections();
     this.getAds();
@@ -86,9 +86,9 @@ class PageHome extends Component {
   }
 
   getRecipeHighLights = () => {
-    recipeService.getRecipeHightLightList().then(() => {
+    recipeService.getRecipeHighLightList().then(() => {
       this.setState({
-        recipeHighLights: recipeService.recipeHightLightData
+        recipeHighLights: recipeService.recipeHighLightData
       })
     })
   }
@@ -139,13 +139,13 @@ class PageHome extends Component {
         navigationService.navigate(ROUTES.collectionList.key, { ads: this.state.ads });
         break;
       case LANG.COMBO:
-        navigationService.navigate(ROUTES.comboList.key);
+        navigationService.navigate(ROUTES.comboList.key, { ads: this.state.ads });
         break;
       case LANG.RECIPE_HIGHLIGHT:
-        navigationService.navigate(ROUTES.recipeHighlightList.key, {isHightLight: true});
+        navigationService.navigate(ROUTES.recipeHighlightList.key);
         break;
       case LANG.LIKED_RECIPE:
-        navigationService.navigate(ROUTES.recipeLikedList.key, {isLiked: true});
+        navigationService.navigate(ROUTES.recipeLikedList.key);
         break;
       default:
         break;
@@ -174,7 +174,6 @@ class PageHome extends Component {
           <RecipeHighlightHome
             recipes={recipeHighLights.recipes}
             isHorizontal
-            isHome
             marTop={CSS.padding15}
           />
           <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
@@ -191,7 +190,6 @@ class PageHome extends Component {
           <RecipeHighlightHome
             recipes={likeRecipes.recipes}
             isHorizontal
-            isHome
             isLiked
             marTop={CSS.padding15}
           />
