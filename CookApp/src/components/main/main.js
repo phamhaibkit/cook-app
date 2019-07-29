@@ -36,6 +36,7 @@ import PageSearchRecipe from '../page-search-recipe/page-search-recipe';
 import RecipeHighlightList from '../recipe-highlight-list/recipe-highlight-list';
 import PageReportRecipe from '../page-report-recipe/page-report-recipe';
 import RecipeLikedList from '../recipe-liked-list/recipe-liked-list';
+import NewsEventList from '../news-event-list/news-event-list';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
@@ -73,6 +74,17 @@ const RecipeLikedListScreen = {
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
 };
+
+const NewsEventListScreen = {
+  screen: NewsEventList,
+  navigationOptions: {
+    title: LANG.INFO_EVENT.name,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton isGreen/>,
+    headerRight: <SearchButton />,
+    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  }
+} 
 
 const ComboListScreen = {
   screen: ComboList,
@@ -139,7 +151,8 @@ const HomeStack = createStackNavigator({
   [ROUTES.comboDetail.key]: ComboDetailScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
   [ROUTES.recipeLikedList.key]: RecipeLikedListScreen,
-  [ROUTES.recipeDetail.key]: RecipeDetailScreen
+  [ROUTES.recipeDetail.key]: RecipeDetailScreen,
+  [ROUTES.newsEventList.key]: NewsEventListScreen
 });
 
 const StoreStack = createStackNavigator({

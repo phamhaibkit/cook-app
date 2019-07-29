@@ -1,8 +1,10 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { CSS, COLOR } from '../../utils/variables';
 
-const width = 310;
-const height = 283;
+const widthHori = 310;
+const heightHori = 283;
+const widthVer = Dimensions.get('window').width;
+const heightVer = Dimensions.get('window').height;
 const paddingContent = 10;
 
 export default StyleSheet.create({
@@ -10,18 +12,27 @@ export default StyleSheet.create({
     flex: 1,
     // backgroundColor: 'trs',
     borderRadius: 5,
-    marginTop: 15
+    // marginTop: 15
+    alignItems: 'center'
     // marginHorizontal: CSS.padding15
   },
   frame: {
-    height: height,
-    width: width,
+    height: heightHori,
+    width: widthHori,
     backgroundColor: 'white',
     marginLeft: CSS.padding15,
     borderRadius: 5
   },
   endFrame: {
     marginRight: CSS.padding15
+  },
+  frameVer: {
+    // height: heightVer / 4,
+    width: widthVer - 2 * CSS.padding15,
+    backgroundColor: 'white',
+    marginTop: CSS.padding15,
+    // paddingBottom: 5,
+    borderRadius: 5
   },
   containerTitle: {
     // flex: 1,
@@ -102,8 +113,15 @@ export default StyleSheet.create({
     color: COLOR.blackColor,
     letterSpacing: -0.5
   },
-  recipeView: {
+  imageView: {
     height: 140,
+    marginTop: 15,
+    marginHorizontal: paddingContent,
+    borderRadius: 5,
+    overflow: 'hidden'
+  },
+  imageVer: {
+    height: 170,
     marginTop: 15,
     marginHorizontal: paddingContent,
     borderRadius: 5,
