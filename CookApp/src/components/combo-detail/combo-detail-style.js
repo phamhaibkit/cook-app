@@ -162,7 +162,7 @@ export default styles = StyleSheet.create({
     borderRadius: 5
   },
   actionBtnGroup: {
-    flex: 2, 
+    flex: 1, 
     flexDirection: 'row', 
     justifyContent: 'flex-end'
   },

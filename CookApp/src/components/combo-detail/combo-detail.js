@@ -48,7 +48,7 @@ class IngredientCard extends Component{
         />
         <View style={styles.cardWrap}>
           <View style={{flex: 3, flexDirection: 'row'}}>
-            <View style={{flex: 3}}>
+            <View style={{flex: 2}}>
               <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.MEAL}:</Text>
               <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.ESTIMATE_PRICE}:</Text>
             </View>
@@ -314,7 +314,6 @@ export default class ComboDetail extends Component {
                     onClickCheckBox={() => this.handleRecipeCheck(ingredient)}
                     onClickSubstract={() => this.handleIngredientClick(ingredient)}
                     onClickPlus={() => this.handleIngredientClick(ingredient, true)}
-
                   />
                 ))
               }
