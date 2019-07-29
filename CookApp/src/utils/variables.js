@@ -25,6 +25,7 @@ export const IMG = {
   commentHome: require('../../assets/icons/comment-home.png'),
   shareHome: require('../../assets/icons/share-home.png'),
   saveHome: require('../../assets/icons/save.png'),
+  saveActiveHome: require('../../assets/icons/save-active.png'),
   userAvatar: require('../../assets/icons/user-avatar.png'),
   camera: require('../../assets/icons/camera.png'),
   male: require('../../assets/icons/male.png'),

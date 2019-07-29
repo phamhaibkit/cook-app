@@ -99,6 +99,19 @@ export default class RecipeHighlightHome extends Component {
     })
   }
 
+  onPressSave = (recipe) => {
+    const { recipes } = this.state;
+    recipes && recipes.map((item, index) => {
+      if (item.id === recipe.id) {
+        item.isSaved = !item.isSaved;
+        return item;
+      }
+    });
+    this.setState({
+      recipes: recipes
+    })
+  }
+
   renderFrame = (recipes) => {
     const { isHorizontal, props } = this.props;
     return recipes.map((item, index) => {
@@ -107,6 +120,7 @@ export default class RecipeHighlightHome extends Component {
         ? [styles.frame, styles.endFrame]
         : styles.frame;
       const iconLove = item.isLiked ? IMG.loveActiveHome : IMG.loveHome;
+      const iconSave = item.isSaved ? IMG.saveActiveHome: IMG.saveHome;
       const priceFormat = getCurrencyStr(item.price);
       return (
         <View style={{ flex: 1 }} key={index}>
@@ -169,7 +183,7 @@ export default class RecipeHighlightHome extends Component {
             <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
               <View style={styles.priceView}>
                 <Text style={styles.textTime}>
-                  {kFormatter(item.likeTimes)}
+                  {kFormatter(item.likeCount)}
                   <Text style={styles.textLight}> {LANG.LIKE}</Text>
                 </Text>
               </View>
@@ -187,7 +201,7 @@ export default class RecipeHighlightHome extends Component {
               </View>
               <View style={styles.likeView}>
                 <Text style={styles.textTime}>
-                  {kFormatter(item.shareTimes)}
+                  {kFormatter(item.shareCount)}
                   <Text style={styles.textLight}> {LANG.SHARE}</Text>
                 </Text>
               </View>
@@ -196,7 +210,7 @@ export default class RecipeHighlightHome extends Component {
               </View>
               <View style={styles.likeView}>
                 <Text style={styles.textTime}>
-                  {kFormatter(item.viewTimes)}
+                  {kFormatter(item.viewCount)}
                   <Text style={styles.textLight}> {LANG.VIEW}</Text>
                 </Text>
               </View>
@@ -214,8 +228,8 @@ export default class RecipeHighlightHome extends Component {
               <TouchableOpacity onPress={this.onShare}>
                 <Image style={styles.shareImg} source={IMG.shareHome} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.saveView}>
-                <Image style={styles.saveImg} source={IMG.saveHome} />
+              <TouchableOpacity style={styles.saveView}  onPress={() => this.onPressSave(item)}>
+                <Image style={styles.saveImg} source={iconSave} />
               </TouchableOpacity>
             </View>
           </View>
@@ -247,9 +261,9 @@ export default class RecipeHighlightHome extends Component {
           style={styles.modal}
         >
           <View style={styles.containerModel}>
-            <TouchableOpacity style={styles.barButton} onPress={this.closeReport}>
+            {/* <TouchableOpacity style={styles.barButton} onPress={this.closeReport}>
               <Image source={IMG.modalBar} style={styles.modalImg} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity style={styles.reportRow} onPress={this.openReportPage}>
               <Image source={IMG.reportRecipe} style={styles.reportImg} />
               <Text style={styles.reportText}>{LANG.REPORT_RECIPE}</Text>
