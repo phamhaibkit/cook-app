@@ -222,22 +222,23 @@ export default StyleSheet.create({
   reportRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    height:'40%',
+    height:'50%',
     paddingLeft: 20
   },
   reportImg: {
-    width: 18,
+    width: 19,
     height: 18
   },
   closeImg: {
-    width: 18,
+    width: 19,
     height: 16
   },
   reportText: {
     fontFamily: CSS.fontText,
     fontSize: 14,
     color: COLOR.blackReport,
-    marginLeft: 10
+    marginLeft: 10,
+    marginBottom: 3
   },
   lineReport: {
     height: 1,
