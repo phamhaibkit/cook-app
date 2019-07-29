@@ -98,7 +98,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.priceView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.likeCount)}
-                    <Text>{LANG.SPACE + LANG.LIKE}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.LIKE}</Text>
                   </Text>
                 </View>
                 <View style={styles.lineLikeView}>
@@ -107,7 +107,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.likeView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.evaluateNumber)}
-                    <Text>{LANG.SPACE + LANG.COMMENT}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.COMMENT}</Text>
                   </Text>
                 </View>
                 <View style={styles.lineLikeView}>
@@ -116,7 +116,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.likeView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.shareCount)}
-                    <Text>{LANG.SPACE + LANG.SHARE}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.SHARE}</Text>
                   </Text>
                 </View>
                 <View style={styles.lineLikeView}>
@@ -125,7 +125,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.likeView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.viewCount)}
-                    <Text>{LANG.SPACE + LANG.VIEW}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.VIEW}</Text>
                   </Text>
                 </View>
               </View>
