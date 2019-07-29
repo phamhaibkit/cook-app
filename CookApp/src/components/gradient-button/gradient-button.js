@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableHighlight } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { CSS } from '../../utils/variables';
+import { CSS, COLOR } from '../../utils/variables';
 
 export default class GradientButton extends Component {
   constructor(props) {
