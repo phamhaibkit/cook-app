@@ -35,8 +35,7 @@ export default class ComboList extends Component {
       <View style={styles.container}>
         <FlatList
           data={recipeCombo}
-          ads={ads}
-          renderItem={({ item, index }) => <ComboItem item={item} index={index} dataLength={dataLength} isVertical/>}
+          renderItem={({ item, index }) => <ComboItem item={item} ads={ads} index={index} dataLength={dataLength} isVertical/>}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
         />

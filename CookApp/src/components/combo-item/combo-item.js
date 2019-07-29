@@ -13,6 +13,7 @@ import { CSS } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import { kFormatter } from '../../utils/general';
+import Advertiment from '../advertiment/advertiment';
 
 export default class ComboItem extends Component {
 	constructor(props) {
@@ -26,7 +27,8 @@ export default class ComboItem extends Component {
   }
 
 	renderFrame = (item, index) => {
-    const { isVertical } = this.props;
+    const { isVertical, ads } = this.props;
+ 
     const styleFrame = isVertical ? [styles.frame, styles.frameVertical] : styles.frame;
     const styleEndFrame = isVertical ? [...styleFrame, styles.endFrameVertical] : [styleFrame, styles.endFrame];
     const endStyle =

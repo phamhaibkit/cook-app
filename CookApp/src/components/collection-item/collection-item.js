@@ -10,6 +10,7 @@ import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import Advertiment from '../advertiment/advertiment';
+import { kFormatter } from '../../utils/general';
 
 class CollectionItem extends Component {
   handlePress = () => {  
@@ -34,7 +35,7 @@ class CollectionItem extends Component {
                 />            
               </ImageBackground>
               <View style={[imgBgWrap,{ marginTop: -imgBgWrap.height}]}>
-                <View style={styles.saveCollection}>
+                <View style={isVertical ? [styles.saveCollection, styles.saveCollectionVer] : [styles.saveCollection, styles.saveCollectionHor]}>
                   <Image style={styles.saveIcon} source={IMG.greenBookmarkIcon}/>
                 </View>
                 <View style={styles.blockContentWrap}>
@@ -44,22 +45,22 @@ class CollectionItem extends Component {
                   <View style={[styles.statisticalWrap, CSS.alignItemsCenter]}>
                     <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                       <Image style={styles.recipeIcon} source={IMG.recipeIcon}/>
-                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.numberRecipe} {LANG.RECIPE}</Text>
+                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{ kFormatter(item.numberRecipe) } {LANG.RECIPE}</Text>
                     </View>
                     <View style={styles.separator} />
                     <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                       <Image style={styles.smallSaveIcon} source={IMG.whiteBookmarkIcon}/>
-                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.savedCount} {LANG.SAVE}</Text>
+                      <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{ kFormatter(item.savedCount) } {LANG.SAVE}</Text>
                     </View>
                     {
                       isVertical &&
-                      <View>
+                      <React.Fragment>
                         <View style={styles.separator} />
                         <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-                          <Image style={styles.smallSaveIcon} source={IMG.eyeIcon}/>
-                          <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{item.viewCount} {LANG.SAVE}</Text>
+                          <Image style={styles.eyeIcon} source={IMG.eyeIcon}/>
+                          <Text style={[styles.statisticalNumber, CSS.fontQuiRegular]}>{ kFormatter(item.viewCount) } {LANG.VIEW}</Text>
                         </View>
-                      </View>
+                      </React.Fragment>
                     }
                   </View>
                 </View>

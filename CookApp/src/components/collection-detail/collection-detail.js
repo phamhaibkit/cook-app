@@ -158,14 +158,16 @@ export default class CollectionDetail extends Component {
       description, 
       id, 
       numberRecipe,
-      savedTimes,
-      likeTimes,
-      viewTimes
+      savedCount,
+      likeCount,
+      viewCount
     } = this.state;
+
+    const ads = {};
 
     return (    
         <ScrollView>
-          <SwiperImage height={300} listItems={collectionImages}/>
+          <SwiperImage height={300} listItems={ collectionImages }/>
 
           <View style={styles.container}>
             <View style={styles.positionView}>
@@ -175,21 +177,21 @@ export default class CollectionDetail extends Component {
                 <View style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.marginTop15]}>
                   <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <View style={styles.likeView}>
-                      <Text style={styles.textTime}>{ likeTimes }</Text>
+                      <Text style={styles.textTime}>{ likeCount }</Text>
                       <Text style={[styles.textTime, styles.textLight]}>{LANG.LIKE}</Text>
                     </View>
                     <View style={styles.lineLikeView}>
                       <View style={styles.line} />
                     </View>
                     <View style={styles.likeView}>
-                      <Text style={styles.textTime}>{ viewTimes }</Text>
+                      <Text style={styles.textTime}>{ viewCount }</Text>
                       <Text style={[styles.textTime, styles.textLight]}>{LANG.VIEW}</Text>
                     </View>               
                 </View>
 
                   <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <Image source={IMG.saveHome} style={styles.saveImg} />
-                    <Text style={styles.textTime}>{ savedTimes } {LANG.SAVE}</Text>
+                    <Text style={styles.textTime}>{ savedCount } {LANG.SAVE}</Text>
                   </View>
                 </View>
               </View>
@@ -198,6 +200,7 @@ export default class CollectionDetail extends Component {
                 <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
                 <RecipeHighlightHome
                   recipes={recipes}
+                  ads={ads}
                 />
               </View>
             </View>
