@@ -115,6 +115,15 @@ const PageReportRecipeScreen = {
   }
 };
 
+const RecipeDetailScreen = {
+  screen: RecipeDetail,
+  navigationOptions: {
+    headerLeft: <BackButton />,
+    headerTransparent: true
+  }
+};
+
+
 const HomeStack = createStackNavigator({
   Home: {
     screen: PageHome,
@@ -129,7 +138,8 @@ const HomeStack = createStackNavigator({
   [ROUTES.collectionDetail.key]: CollectionDetailScreen,
   [ROUTES.comboDetail.key]: ComboDetailScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
-  [ROUTES.recipeLikedList.key]: RecipeLikedListScreen
+  [ROUTES.recipeLikedList.key]: RecipeLikedListScreen,
+  [ROUTES.recipeDetail.key]: RecipeDetailScreen
 });
 
 const StoreStack = createStackNavigator({
@@ -158,26 +168,13 @@ const RecipeStack = createStackNavigator({
       header: null,
     }
   },
-  [ROUTES.recipeDetail.key]: {
-    screen: RecipeDetail,
-    navigationOptions: {
-      headerLeft: <BackButton />,
-      headerTransparent: true
-    }
-  },
+  [ROUTES.recipeDetail.key]: RecipeDetailScreen,
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
 });
 
-const RecipeDetailScreen = {
-  screen: RecipeDetail,
-  navigationOptions: {
-    headerLeft: <BackButton />,
-    headerTransparent: true
-  }
-};
 
 const NotiStack = createStackNavigator({
   Noti: { screen: PageNoti }
