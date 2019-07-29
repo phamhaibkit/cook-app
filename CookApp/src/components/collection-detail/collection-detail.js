@@ -15,7 +15,7 @@ import { LANG } from '../../lang/lang';
 import styles from './collection-detail-style';
 import SwiperImage from '../swiper-image/swiper-image';
 import CollectionService from '../../services/collection.service';
-import { kFormatter } from '../../utils/general';
+import { kFormatter, capitalize } from '../../utils/general';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
 
 export default class CollectionDetail extends Component {
@@ -177,21 +177,21 @@ export default class CollectionDetail extends Component {
                 <View style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.marginTop15]}>
                   <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <View style={styles.likeView}>
-                      <Text style={styles.textTime}>{ likeCount }</Text>
+                      <Text style={styles.textTime}>{ kFormatter(likeCount) }</Text>
                       <Text style={[styles.textTime, styles.textLight]}>{LANG.LIKE}</Text>
                     </View>
                     <View style={styles.lineLikeView}>
                       <View style={styles.line} />
                     </View>
                     <View style={styles.likeView}>
-                      <Text style={styles.textTime}>{ viewCount }</Text>
+                      <Text style={styles.textTime}>{ kFormatter(viewCount) }</Text>
                       <Text style={[styles.textTime, styles.textLight]}>{LANG.VIEW}</Text>
                     </View>               
                 </View>
 
                   <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <Image source={IMG.saveHome} style={styles.saveImg} />
-                    <Text style={styles.textTime}>{ savedCount } {LANG.SAVE}</Text>
+                    <Text style={styles.textTime}>{ kFormatter(savedCount) } {capitalize(LANG.SAVE)}</Text>
                   </View>
                 </View>
               </View>

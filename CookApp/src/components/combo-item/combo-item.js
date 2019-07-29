@@ -145,7 +145,7 @@ export default class ComboItem extends Component {
     const imgDownStyle = is5 ? (isVertical ? [styles.imgDown5, styles.imgDown5Ver] : styles.imgDown5) : (isVertical ? [styles.imgDown3, styles.imgDown3Ver] : styles.imgDown3);
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.name, item.numberOrder, item.viewTimes)}
+        {this.renderTitle(item.name, item.numberOrder, item.viewCount)}
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.container2Img}>
             <View style={styles.containerImg}>

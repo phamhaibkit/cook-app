@@ -40,7 +40,8 @@ export default StyleSheet.create({
   },
   statisticalWrap: { 
     flex: 1, 
-    flexDirection: 'row' 
+    flexDirection: 'row',
+    height: 13
   },
   recipeIcon: { 
     width: 13, 
@@ -55,8 +56,8 @@ export default StyleSheet.create({
     height: 9
   },
 	separator: {
-		marginHorizontal: 13,
-		width: 1,
+		marginHorizontal: 8,
+		width: 0.5,
 		height: 13,
 		backgroundColor: 'white'
 	},
@@ -64,5 +65,5 @@ export default StyleSheet.create({
     fontSize: 13,
 		marginLeft: 5,
 		color: 'white'
-	}
+  }
 });
