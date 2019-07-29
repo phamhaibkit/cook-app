@@ -39,6 +39,7 @@ import RecipeLikedList from '../recipe-liked-list/recipe-liked-list';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
+import CartHome from '../../components/cart-home/cart-home';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -88,7 +89,7 @@ const CollectionDetailScreen = {
   screen: CollectionDetail,
   navigationOptions: {
     headerLeft: <BackButton opacity={0} oppositeOpacity={1} />,
-    headerTransparent: true
+    headerTransparent: true,
   }
 };
 
@@ -96,7 +97,11 @@ const ComboDetailScreen = {
   screen: ComboDetail,
   navigationOptions: {
     headerLeft: <BackButton />,
-    headerTransparent: true
+    headerRight: <CartHome  isTransparentHeader/>,
+    headerTransparent: true,
+    headerStyle: {
+      marginRight: 15
+    }
   }
 };
 

@@ -13,6 +13,7 @@ import { CSS } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import { kFormatter } from '../../utils/general';
+import Advertiment from '../advertiment/advertiment';
 
 export default class ComboItem extends Component {
 	constructor(props) {
@@ -26,7 +27,8 @@ export default class ComboItem extends Component {
   }
 
 	renderFrame = (item, index) => {
-    const { isVertical } = this.props;
+    const { isVertical, ads } = this.props;
+ 
     const styleFrame = isVertical ? [styles.frame, styles.frameVertical] : styles.frame;
     const styleEndFrame = isVertical ? [...styleFrame, styles.endFrameVertical] : [styleFrame, styles.endFrame];
     const endStyle =
@@ -50,7 +52,14 @@ export default class ComboItem extends Component {
     default:
       break;
     }
-    return <View style={endStyle}>{combo}</View>;
+    return (
+      <View>
+        <View style={endStyle}>{combo}</View>
+        {
+          isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
+        }
+      </View>
+    )
   };
 
   renderTitle = (title, orders, views) => {
@@ -94,7 +103,7 @@ export default class ComboItem extends Component {
     const imgContainerWidth = isVertical ? [styles.containerImg, styles.containerImgVertical, CSS.flexRow] : [styles.containerImg, CSS.flexRow];
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.name, item.numberOrder, item.viewTimes)}
+        {this.renderTitle(item.name, item.numberOrder, item.viewCount)}
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={styles.container2Img}>
             <View style={imgContainerWidth}>
@@ -136,7 +145,7 @@ export default class ComboItem extends Component {
     const imgDownStyle = is5 ? (isVertical ? [styles.imgDown5, styles.imgDown5Ver] : styles.imgDown5) : (isVertical ? [styles.imgDown3, styles.imgDown3Ver] : styles.imgDown3);
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.name, item.numberOrder, item.viewTimes)}
+        {this.renderTitle(item.name, item.numberOrder, item.viewCount)}
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.container2Img}>
             <View style={styles.containerImg}>

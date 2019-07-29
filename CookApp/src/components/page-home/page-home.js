@@ -139,7 +139,7 @@ class PageHome extends Component {
         navigationService.navigate(ROUTES.collectionList.key, { ads: this.state.ads });
         break;
       case LANG.COMBO:
-        navigationService.navigate(ROUTES.comboList.key);
+        navigationService.navigate(ROUTES.comboList.key, { ads: this.state.ads });
         break;
       case LANG.RECIPE_HIGHLIGHT:
         navigationService.navigate(ROUTES.recipeHighlightList.key);
