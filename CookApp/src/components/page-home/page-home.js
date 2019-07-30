@@ -147,6 +147,9 @@ class PageHome extends Component {
       case LANG.LIKED_RECIPE:
         navigationService.navigate(ROUTES.recipeLikedList.key);
         break;
+      case LANG.INFO_EVENT:
+        navigationService.navigate(ROUTES.newsEventList.key);
+        break;
       default:
         break;
     }

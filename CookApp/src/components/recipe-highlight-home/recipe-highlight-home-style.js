@@ -97,15 +97,18 @@ export default StyleSheet.create({
   },
   sandImg: {
     width: 9,
-    height: 10
+    height: 10,
+    marginTop: 3
   },
   dollaImg: {
     width: 6,
-    height: 12
+    height: 12,
+    marginTop: 3
   },
   personImg: {
     width: 10,
-    height: 10
+    height: 10,
+    marginTop: 3
   },
   textTime: {
     marginLeft: 3,

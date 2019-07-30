@@ -162,7 +162,7 @@ export default class RecipeHighlightHome extends Component {
                 <Image style={styles.personImg} source={IMG.personHome} />
                 <Text style={styles.textTime}>
                   {kFormatter(item.numPeople)}
-                  <Text> người</Text>
+                  <Text> {LANG.PERSON}</Text>
                 </Text>
               </View>
             </View>

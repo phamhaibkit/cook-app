@@ -73,6 +73,7 @@ export default class NewsEvent extends Component {
   };
 
   renderFrame = (data) => {
+    const { isVertical } = this.props;
     return data && data.map((item, index) => {
       const endStyle =
       data.length - 1 === index
@@ -80,10 +81,10 @@ export default class NewsEvent extends Component {
         : styles.frame;
       const iconLove = item.isLoved ? IMG.loveActiveHome : IMG.loveHome;
       return (
-        <View style={endStyle} key={index} >
+        <View style={isVertical ? styles.frameVer : endStyle} key={index} >
           <TouchableWithoutFeedback onPress={this.onPress}>
             <View>
-              <View style={styles.recipeView}>
+              <View style={isVertical? styles.imageVer : styles.imageView}>
                 <Image style={styles.recipeIMG} source={{ uri: item.eventImage }} />
               </View>
               <View style={styles.dateView}>
@@ -97,7 +98,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.priceView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.likeCount)}
-                    <Text>{LANG.SPACE + LANG.LIKE}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.LIKE}</Text>
                   </Text>
                 </View>
                 <View style={styles.lineLikeView}>
@@ -106,7 +107,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.likeView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.evaluateNumber)}
-                    <Text>{LANG.SPACE + LANG.COMMENT}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.COMMENT}</Text>
                   </Text>
                 </View>
                 <View style={styles.lineLikeView}>
@@ -115,7 +116,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.likeView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.shareCount)}
-                    <Text>{LANG.SPACE + LANG.SHARE}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.SHARE}</Text>
                   </Text>
                 </View>
                 <View style={styles.lineLikeView}>
@@ -124,7 +125,7 @@ export default class NewsEvent extends Component {
                 <View style={styles.likeView}>
                   <Text style={styles.textTime}>
                     {kFormatter(item.viewCount)}
-                    <Text>{LANG.SPACE + LANG.VIEW}</Text>
+                    <Text style={styles.textLight}>{LANG.SPACE + LANG.VIEW}</Text>
                   </Text>
                 </View>
               </View>
@@ -151,12 +152,15 @@ export default class NewsEvent extends Component {
 
   render() {
     const { data } = this.state;
+    const { isVertical } = this.props;
+    const isHorizontal = isVertical ? false : true;
     console.log('EVENTs==', data);
     return (
       <View style={styles.container}>
         <ScrollView
-          horizontal
+          horizontal = {isHorizontal}
           showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
         >
           {this.renderFrame(data)}
         </ScrollView>

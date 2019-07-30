@@ -27,6 +27,7 @@ export default StyleSheet.create({
   positionView: {
     position: 'relative',
     top: -overflowHeight,
+    marginBottom: -overflowHeight + 10,
     left: 0,
     zIndex: 1000,    
   },
@@ -52,7 +53,7 @@ export default StyleSheet.create({
     lineHeight: 1.714
   },
   topRecipes: {
-    position: 'relative'
+    position: 'relative',
   },
   frame: {
     height: frameHeight,

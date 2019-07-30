@@ -43,6 +43,9 @@ export const ROUTES = {
   },
   recipeLikedList: {
     key: 'recipeLikedList'
+  },
+  newsEventList: {
+    key: 'newsEventList'
   }
 
 };
