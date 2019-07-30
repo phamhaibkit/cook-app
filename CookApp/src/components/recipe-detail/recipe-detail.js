@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import * as Progress from 'react-native-progress';
+
+import LinearGradient from 'react-native-linear-gradient';
 import SwiperImage from '../swiper-image/swiper-image';
 import { COMBO_DETAIL } from '../../models/data';
 import { StyleSheet } from 'react-native';
@@ -11,7 +14,6 @@ import { LANG_VN } from '../../lang/lang-vn';
 import { kFormatter, formatNumberWithDot } from '../../utils/general';
 import homeService from '../../services/home.service';
 import { LikeCommentShare } from '../like-comment-share/like-comment-share';
-import LinearGradient from 'react-native-linear-gradient';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
 import StepRecipeDetail from './step-recipe-detail';
 
@@ -42,7 +44,7 @@ const step = [
       "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",
       "https://i.cachnaumonan.com/wp-content/uploads/2018/07/cach-lam-goi-rau-cang-cua-thit-bo1.jpg",
       "https://navicdn.com/nakk/images_article/2019/03/13/cach-lam-sinh-to-bo-sua-chua-3.jpg"],
-      description: 'Trứng gà luộc lòng đào trong vòng 7 phút. Thịt ba chỉ thái lát dài, ướp với 1 muỗng canh nước tương và tương ớt Hàn Quốc. Áp chảo thịt ba chỉ đến khi xém cạnh. '
+    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. Thịt ba chỉ thái lát dài, ướp với 1 muỗng canh nước tương và tương ớt Hàn Quốc. Áp chảo thịt ba chỉ đến khi xém cạnh. '
   },
   {
     sliderImages: [],
@@ -52,12 +54,12 @@ const step = [
     sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
       "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",
       "https://i.cachnaumonan.com/wp-content/uploads/2018/07/cach-lam-goi-rau-cang-cua-thit-bo1.jpg",],
-      description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
+    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
   },
   {
     sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
       "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",],
-      description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
+    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
   }
 ]
 
@@ -164,7 +166,7 @@ export default class RecipeDetail extends Component {
             </TouchableOpacity>
           </LinearGradient>
         </View>
-        <View style={[{ paddingVertical: 20 }, styles.cardBorder]}>
+        <View style={[{ paddingVertical: 20 }]}>
           <View style={styles.cardWrap}>
             <View style={{ flex: 3, flexDirection: 'row' }}>
               <View style={{ flex: 3 }}>
@@ -213,16 +215,51 @@ export default class RecipeDetail extends Component {
       {step.map((item, index) => {
         const data = {
           stepNumber: index + 1,
-          infor: item
+          infor: item,
+          lastChild: step.length - 1 === index,
         }
         return <StepRecipeDetail key={index} data={data}></StepRecipeDetail>
       })}
     </View>
   }
 
+  renderProgress = () => {
+    const progress = []
+    for (let j = 5; j >=1; j--) {
+      const row = <View key={j} style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.rowRate]}>
+        <Text>{j} </Text>
+        <Image style={[styles.imageStar, { marginRight: 5 }]} source={IMG.starYellow}></Image>
+        <Progress.Bar progress={0.3} width={160} color={'#3ABF57'} />
+        <Text> 85%</Text>
+      </View>
+      progress.push(row);
+    }
+    return progress
+  }
+
+  renderRate = () => {
+    return <View style={[styles.container]}>
+    <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
+      <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.RATE}</Text>
+    </View>
+    <View style={[styles.contentRate, CSS.flexRow, CSS.justifySpaceBetween]}>
+      <View style={[styles.boxRate, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
+        <Text style={[CSS.fontSize30, CSS.fontQuiBold, styles.colorTextDark]}>4.7<Text style={[CSS.fontSize18, CSS.fontQuiLight]}>/ 5</Text></Text>
+        <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter, { marginTop: 5, marginBottom: 10 }]}>
+          {this.renderStar(3)}
+        </View>
+        <Text>20 {LANG_VN.RATE}</Text>
+      </View>
+      <View style={[styles.detailRate]}>
+        {this.renderProgress()}
+      </View>
+    </View>
+  </View>
+  }
+
   render() {
     // let recipesDetail = this.state.data;
-    const { imageHeader, rateAmount, starNum, minuteAmount, activeImage } = this.state;
+    const { imageHeader } = this.state;
 
     console.log(this.state, 'imageHeader');
     return (
@@ -236,6 +273,9 @@ export default class RecipeDetail extends Component {
         {this.renderIngredient()}
         <View style={styles.horizontalFlash}></View>
         {this.renderStep()}
+        <View style={styles.horizontalFlash}></View>
+        {this.renderRate()}
+        
       </ScrollView>
     )
   }
@@ -451,5 +491,21 @@ const styles = StyleSheet.create({
   rowIngredient: {
     paddingVertical: 15,
   },
-  
+  contentRate: {
+    marginTop: 15
+  },
+  boxRate: {
+    width: 110,
+    height: 110,
+    borderColor: '#E0E0E0',
+    borderWidth: 2,
+    borderRadius: 15,
+    justifyContent: 'space-around',
+    flexDirection: 'column'
+  },
+  detailRate: {
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    flexDirection: 'column'
+  }
 });

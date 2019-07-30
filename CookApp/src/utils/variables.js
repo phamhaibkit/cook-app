@@ -137,7 +137,7 @@ export const CSS = {
     fontFamily: 'Quicksand_Book'
   },
   fontQuiLight: {
-    fontFamily: 'Quicksand_Light'
+    fontFamily: 'Quicksand-Light'
   },
   fontQuiBookOblique: {
     fontFamily: 'Quicksand_Book_Oblique'
@@ -172,6 +172,9 @@ export const CSS = {
     height: 56,
     width: 43,
     fontFamily: 'Quicksand-Bold'
+  },
+  fontSize30: {
+    fontSize: 30,
   },
   fontSize24: {
     fontSize: 24,
@@ -252,6 +255,10 @@ export const CSS = {
     color: '#3ABF57',
     fontSize: 12,
     fontFamily: 'Quicksand-Bold'
+  },
+  borderBottom: {
+    borderBottomColor: 'rgba(233, 233, 233, 0.7)',
+    borderBottomWidth: 1
   }
 };
 
