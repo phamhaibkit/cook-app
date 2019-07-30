@@ -7,8 +7,7 @@ import CollectionItem from '../collection-item/collection-item';
 
 export default class CollectionHome extends Component {
 	constructor(props) {
-		super(props);
-		this.state = {};		
+		super(props);		
 	}
 
 	render() { 
@@ -17,7 +16,7 @@ export default class CollectionHome extends Component {
 			<View style={[styles.container, { marginTop: marTop }]}>
 				<FlatList
 					data={data} 
-					renderItem={({ item, index }) => {
+					renderItem={({ item }) => {
 						return (
 							<CollectionItem item={item} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
 						);

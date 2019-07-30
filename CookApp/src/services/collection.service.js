@@ -2,8 +2,13 @@ import HTTPService from './http.service';
 import { API } from './api';
 import _ from 'lodash';
 
-const collectionData = [];
-const collectionDetail = {};
+const collectionData = {
+  loading: true,
+  data: []
+};
+const collectionDetail = {
+  loading: true
+};
 
 class CollectionService {
   constructor() {
@@ -18,12 +23,14 @@ class CollectionService {
   getCollections = () => {
     this.resetService();
     const url = API.GET_COLLECTION_LIST;
+    this.collectionData.loading = true;
 
     return HTTPService.get(url,null,null)
       .then(data => {      
-        this.collectionData = _.cloneDeep([
-          ...data
-        ]);
+        this.collectionData = _.cloneDeep({
+          data,
+          loading: false,
+        });
       })
       .catch(err => {
         return Promise.reject(err);
@@ -31,14 +38,15 @@ class CollectionService {
   }
 
   getCollectionDetail = (id) => {
-    // this.resetService();
+    this.resetService();
     const url = API.GET_COLLECTION_DETAIL(id);
-
+    this.collectionDetail.loading = true;
     
     return HTTPService.get(url,null,null)
       .then(data => {           
         this.collectionDetail = _.cloneDeep({
-          ...data
+          ...data,
+          loading: false
         });
       })
       .catch(err => {
