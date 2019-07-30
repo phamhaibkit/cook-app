@@ -19,7 +19,7 @@ export default class StepRecipeDetail extends Component {
     const { data } = this.props
     const { sliderImages, description } = data.infor;
     const { activeImage } = this.state;
-    return <View style={[styles.stepsSection]}>
+    return <View style={[styles.stepsSection, !data.lastChild ? CSS.borderBottom : '']}>
       <View style={[CSS.flexRow, CSS.alignItemsCenter, { marginBottom: 7 }]}>
         <Image style={{ height: 6, width: 6, marginRight: 5 }} source={IMG.greenCircle}></Image>
         <Text style={[CSS.fontSize14, CSS.fontQuiBold, styles.colorTextDark]}>Bước {data.stepNumber}</Text>
@@ -29,13 +29,13 @@ export default class StepRecipeDetail extends Component {
         <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
           {
             sliderImages.map((itemImage, index) => {
-              return <TouchableOpacity style={{ paddingHorizontal: 4 }} onPress={() => {
+              return <TouchableOpacity style={{ paddingHorizontal: 1 }} onPress={() => {
                 this.setState({
                   activeImage: index
                 })
               }} key={index}><View>
-                  <Image source={{ uri: itemImage }} style={{ height: 66, width: 90, borderRadius: 5, tintColor: 'white' }} />
-                  <Image source={{ uri: itemImage }} style={{ height: 66, width: 90, borderRadius: 5, position: 'absolute', opacity: activeImage === index ? 1 : 0.3 }} />
+                  <Image source={{ uri: itemImage }} style={{ height: 66, width: 85, borderRadius: 5, tintColor: 'white' }} />
+                  <Image source={{ uri: itemImage }} style={{ height: 66, width: 85, borderRadius: 5, position: 'absolute', opacity: activeImage === index ? 1 : 0.3 }} />
                 </View>
               </TouchableOpacity>
             })}
@@ -54,6 +54,7 @@ export default class StepRecipeDetail extends Component {
 const styles = StyleSheet.create({
   stepsSection: {
     flex: 1,
-    marginTop: 22
-  }
+    marginTop: 22,
+    paddingBottom: 15,
+  },
 })
