@@ -227,10 +227,10 @@ export default class RecipeDetail extends Component {
     const progress = []
     for (let j = 5; j >=1; j--) {
       const row = <View key={j} style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.rowRate]}>
-        <Text>{j} </Text>
+        <Text style={[CSS.fontQuiMedium, CSS.fontSize13, styles.colorTextDark]}>{j} </Text>
         <Image style={[styles.imageStar, { marginRight: 5 }]} source={IMG.starYellow}></Image>
         <Progress.Bar progress={0.3} width={160} color={'#3ABF57'} />
-        <Text> 85%</Text>
+        <Text style={[CSS.fontQuiRegular, CSS.fontSize13, styles.colorTextDark]}> 85%</Text>
       </View>
       progress.push(row);
     }
@@ -248,7 +248,7 @@ export default class RecipeDetail extends Component {
         <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter, { marginTop: 5, marginBottom: 10 }]}>
           {this.renderStar(3)}
         </View>
-        <Text>20 {LANG_VN.RATE}</Text>
+        <Text style={[CSS.fontQuiRegular, CSS.fontSize12, {color: '#767676'}]}>20 {LANG_VN.RATE}</Text>
       </View>
       <View style={[styles.detailRate]}>
         {this.renderProgress()}
