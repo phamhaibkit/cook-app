@@ -23,7 +23,7 @@ class CollectionItem extends Component {
  
     return (
        <View>
-         <View style={[styles.blockContainer, CSS.lightBoxShadow, CSS.borderRadius5, blockMargin]} >
+         <View style={[styles.blockContainer, CSS.borderRadius5, blockMargin]} >
           <TouchableWithoutFeedback onPress={ this.handlePress }>
             <View>
               <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: item.collectionImages[0] }}>

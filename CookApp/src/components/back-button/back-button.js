@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Image, View, Animated, TouchableOpacity } from 'react-native';
 
 import { IMG, CSS } from '../../utils/variables';
-import Navigation from '../../services/navigation.service'
+import Navigation from '../../services/navigation.service';
+import styles from '../back-button/back-button-style';
 
 export default class BackButton extends Component {
   onPressBackButton = () => {
@@ -18,10 +19,7 @@ export default class BackButton extends Component {
         <Animated.View
 					style={[
 						style,
-						{
-							position: 'relative',
-              left: 15,
-						},
+            styles.defaultStyle
 					]}
 				>
            {
