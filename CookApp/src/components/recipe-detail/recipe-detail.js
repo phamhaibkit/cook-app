@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions, KeyboardAvoidingView, Animated, Keyboard } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as Progress from 'react-native-progress';
@@ -16,14 +16,17 @@ import homeService from '../../services/home.service';
 import { LikeCommentShare } from '../like-comment-share/like-comment-share';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
 import StepRecipeDetail from './step-recipe-detail';
+import ViewMoreHome from '../view-more-home/view-more-home';
+import ImageProfile from '../image-profile/image-profile';
+import TextInputRender from '../text-input/text-input';
 
 const recipeDataDetail = {
   "likeTimes": 53,
   "owner": {
-    "name": "Trần Thị T",
+    "name": "Hoang Thi Kieu Nga",
     "rank": 13,
     "id": 7,
-    "avatar": "https://photo-2-baomoi.zadn.vn/w1000_r1/2019_01_25_329_29473537/097a1d26bc6755390c76.jpg"
+    "avatar": ""
   },
 
   "numberEvaluate": 28,
@@ -61,6 +64,28 @@ const step = [
       "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",],
     description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
   }
+];
+
+const rowCommentRate = [
+  {
+    "name": "Hoang Thi Kieu Nga",
+    "rank": 13,
+    "id": 7,
+    "avatar": "",
+    date: '26/7/2019',
+    star: 3,
+    comment: 'Mẹ mình rất thích món ăn mình nấu dựa trên công thức này. Cám ơn bạn nhiều.'
+  },
+  {
+    "name": "Hoang Thi Kieu Nga",
+    "rank": 13,
+    "id": 7,
+    "avatar": "https://photo-2-baomoi.zadn.vn/w1000_r1/2019_01_25_329_29473537/097a1d26bc6755390c76.jpg",
+    date: '26/7/2019',
+    star: 3,
+    comment: 'Sau 1h lăn lộn, mình đã thành công rồi chủ thớt ơi, món ăn rất ngon và hợp khẩu vị gia đình mình, thanks chủ thớt nhiều.'
+  },
+
 ]
 
 const { height, width } = Dimensions.get('window');
@@ -77,12 +102,24 @@ export default class RecipeDetail extends Component {
       rateAmount: 20,
       minuteAmount: 60,
       activeImage: 0,
-      ...homeService.homeData
+      ...homeService.homeData,
+      comment: '',
+      shift: new Animated.Value(0),
     }
+  }
+
+  componentWillMount() {
+    this.keyboardDidShowSub = Keyboard.addListener('keyboardDidShow', this.handleKeyboardDidShow);
+    this.keyboardDidHideSub = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide);
   }
 
   componentDidMount() {
 
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowSub.remove();
+    this.keyboardDidHideSub.remove();
   }
 
   renderStar = (number) => {
@@ -105,12 +142,13 @@ export default class RecipeDetail extends Component {
   renderOwner = (chef) => {
     return (<View style={[styles.ownerStyles, CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
       <View style={styles.containerChef}>
-        <Image style={styles.avataImg} source={{ uri: chef.owner && chef.owner.avatar }} />
+        <ImageProfile user={chef.owner} widthImage={56} />
+        {/* <Image style={styles.avataImg} source={{ uri: chef.owner && chef.owner.avatar }} /> */}
         <View style={[styles.containerRank, CSS.lightBoxShadow]}>
           <Image source={IMG.rankHome} style={styles.rankImg} />
         </View>
       </View>
-      <View style={[CSS.flexCol]}>
+      <View style={[CSS.flexCol, { justifyContent: 'flex-start', alignItems: 'flex-start' }]}>
         <Text style={[CSS.fontSize15, CSS.fontQuiBold, { lineHeight: 22 }]}>{chef.owner.name}</Text>
         <Text style={[styles.textTime]}>{chef.recipeAmount || 0} <Text style={[styles.textLight]}>{LANG_VN.RECIPE} |
         </Text> {chef.followingAmount || 0} <Text style={[styles.textLight]}>{LANG_VN.FOLLOW}</Text></Text>
@@ -225,11 +263,11 @@ export default class RecipeDetail extends Component {
 
   renderProgress = () => {
     const progress = []
-    for (let j = 5; j >=1; j--) {
+    for (let j = 5; j >= 1; j--) {
       const row = <View key={j} style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.rowRate]}>
         <Text style={[CSS.fontQuiMedium, CSS.fontSize13, styles.colorTextDark]}>{j} </Text>
         <Image style={[styles.imageStar, { marginRight: 5 }]} source={IMG.starYellow}></Image>
-        <Progress.Bar progress={0.3} width={160} color={'#3ABF57'} />
+        <Progress.Bar progress={0.3} borderColor={'white'} unfilledColor={'rgba(58, 191, 87, 0.1)'} width={160} color={'#3ABF57'} />
         <Text style={[CSS.fontQuiRegular, CSS.fontSize13, styles.colorTextDark]}> 85%</Text>
       </View>
       progress.push(row);
@@ -239,44 +277,130 @@ export default class RecipeDetail extends Component {
 
   renderRate = () => {
     return <View style={[styles.container]}>
-    <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
-      <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.RATE}</Text>
-    </View>
-    <View style={[styles.contentRate, CSS.flexRow, CSS.justifySpaceBetween]}>
-      <View style={[styles.boxRate, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
-        <Text style={[CSS.fontSize30, CSS.fontQuiBold, styles.colorTextDark]}>4.7<Text style={[CSS.fontSize18, CSS.fontQuiLight]}>/ 5</Text></Text>
-        <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter, { marginTop: 5, marginBottom: 10 }]}>
-          {this.renderStar(3)}
+      <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
+        <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.RATE}</Text>
+      </View>
+      <View style={[styles.contentRate, CSS.flexRow, CSS.justifySpaceBetween]}>
+        <View style={[styles.boxRate, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
+          <Text style={[CSS.fontSize30, CSS.fontQuiBold, styles.colorTextDark]}>4.7<Text style={[CSS.fontSize18, CSS.fontQuiLight]}>/ 5</Text></Text>
+          <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter, { marginTop: 5, marginBottom: 10 }]}>
+            {this.renderStar(3)}
+          </View>
+          <Text style={[CSS.fontQuiRegular, CSS.fontSize12, { color: '#767676' }]}>20 {LANG_VN.RATE}</Text>
         </View>
-        <Text style={[CSS.fontQuiRegular, CSS.fontSize12, {color: '#767676'}]}>20 {LANG_VN.RATE}</Text>
+        <View style={[styles.detailRate]}>
+          {this.renderProgress()}
+        </View>
       </View>
-      <View style={[styles.detailRate]}>
-        {this.renderProgress()}
+      <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[{ padding: 10, borderRadius: 5, marginTop: 30 }]} colors={['#3BB556', '#72C91C']} >
+        <TouchableOpacity style={[CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={this.onPressSignin}>
+          <Text style={[CSS.fontSize15, CSS.fontQuiBold, { color: '#FFFFFF' }]}>{LANG_VN.WRITE_COMMENT}</Text>
+        </TouchableOpacity>
+      </LinearGradient>
+      <View style={[CSS.borderBottom, { marginTop: 22, marginBottom: -20 }]}></View>
+      <View style={styles.commentRate}>
+        <View style={{ marginRight: -15 }}>
+          <ViewMoreHome type={''} viewMore={() => this.viewMore('')} />
+        </View>
+        {this.renderRowCommentRate()}
       </View>
     </View>
-  </View>
   }
+  renderRowCommentRate = () => {
+    return rowCommentRate.map((item, index) => {
+      return <View key={index} style={[styles.rowCommentRate, index === rowCommentRate.length - 1 ? '' : CSS.borderBottom]}>
+        <View style={[CSS.flexRow, { flex: 1 }]}>
+          <ImageProfile user={item} widthImage={42}></ImageProfile>
+          <View style={[CSS.flexCol, CSS.justifySpaceBetween, { flex: 1, paddingLeft: 10 }, styles.arrowLeft]}>
+            <View style={[CSS.flexRow, CSS.justifySpaceBetween]}>
+              <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>Louis Nguyễn</Text>
+              <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>26/06/2019</Text>
+            </View>
+            <View style={[CSS.flexRow, CSS.alignItemsCenter, { paddingVertical: 8 }]}>
+              {this.renderStar(3)}
+            </View>
+            <Text>Mẹ mình rất thích món ăn mình nấu dựa trên công thức này. Cám ơn bạn nhiều.</Text>
+          </View>
+        </View>
+      </View>
+    })
+  }
+
+  renderRowComment = () => {
+    const { comment } = this.state
+    return <View>
+    {rowCommentRate.map((item, index) => {
+      return <View key={index} style={[styles.rowCommentRate]}>
+        <View style={[CSS.flexRow, { flex: 1 }]}>
+          <ImageProfile user={item} widthImage={42}></ImageProfile>
+          <Image resizeMode="contain" style={{ height: 20, width: 10, marginLeft: 10, marginRight: -2.5, marginTop: 8, zIndex: 1 }} source={IMG.num}></Image>
+          <View style={[CSS.flexCol, CSS.justifySpaceBetween, styles.commentRow]}>
+            <View style={[CSS.flexRow, CSS.justifySpaceBetween]}>
+              <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>Louis Nguyễn</Text>
+              <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>1 minutes</Text>
+            </View>
+            <Text style={{ marginTop: 10 }}>{item.comment}</Text>
+          </View>
+        </View>
+      </View>
+    })}
+    <View style={[CSS.flexRow]}>
+      <ImageProfile user={recipeDataDetail.owner} widthImage={42}></ImageProfile>
+      <View style={{ flex: 1, marginLeft: 15 }}>
+        <TextInputRender
+          onChangeText={(value, err) =>
+            this.onChangeText(value, err, "comment")
+          }
+          placeholder="Nhập bình luận"
+          value={comment} />
+      </View>
+      <TouchableOpacity>
+        <Text style={[CSS.fontQuiBold, CSS.fontSize15, { color: '#3ABF57', marginTop: 15, marginLeft: 5 }]}>Gửi</Text>
+      </TouchableOpacity>
+    </View>
+
+  </View>
+
+  }
+
+
+  onChangeText = (value, err, type) => {
+    this.setState({
+      [type]: {
+        value,
+        err
+      }
+    });
+  };
+
 
   render() {
     // let recipesDetail = this.state.data;
     const { imageHeader } = this.state;
-
     console.log(this.state, 'imageHeader');
     return (
-      <ScrollView>
-        <SwiperImage height={300} listItems={imageHeader} />
-        <View style={[styles.container]}>
-          {this.renderInforRecipe(recipeDataDetail)}
-          {this.renderOwner(recipeDataDetail)}
-        </View>
-        <View style={styles.horizontalFlash}></View>
-        {this.renderIngredient()}
-        <View style={styles.horizontalFlash}></View>
-        {this.renderStep()}
-        <View style={styles.horizontalFlash}></View>
-        {this.renderRate()}
-        
-      </ScrollView>
+      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
+        <ScrollView>
+
+          <SwiperImage height={300} listItems={imageHeader} />
+          <View style={[styles.container]}>
+            {this.renderInforRecipe(recipeDataDetail)}
+            {this.renderOwner(recipeDataDetail)}
+          </View>
+          <View style={styles.horizontalFlash}></View>
+          {this.renderIngredient()}
+          <View style={styles.horizontalFlash}></View>
+          {this.renderStep()}
+          <View style={styles.horizontalFlash}></View>
+          {this.renderRate()}
+          <View style={styles.horizontalFlash}></View>
+          <ViewMoreHome type={LANG.COMMENT_PAGE} viewMore={() => this.viewMore('')} />
+          <View style={styles.container}>
+            {this.renderRowComment()}
+            
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -356,7 +480,6 @@ const styles = StyleSheet.create({
     height: 10
   },
   textTime: {
-    marginLeft: 3,
     fontSize: 13,
     fontFamily: CSS.fontText,
     color: COLOR.blackColor,
@@ -409,6 +532,11 @@ const styles = StyleSheet.create({
     height: 54,
     borderRadius: 27,
     position: 'relative'
+  },
+  avataComment: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
   },
   rankImg: {
     // position: 'absolute',
@@ -507,5 +635,19 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'space-between',
     flexDirection: 'column'
-  }
+  },
+  rowCommentRate: {
+    paddingBottom: 15,
+    paddingTop: 15
+  },
+  commentRow: {
+    flex: 1,
+    paddingLeft: 10,
+    backgroundColor: '#FAFAFA',
+    borderColor: '#E9E9E9',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
 });

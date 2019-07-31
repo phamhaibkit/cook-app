@@ -63,6 +63,7 @@ export const IMG = {
   borderDot: require('../../assets/icons/border-dot.png'),
   eyeIcon: require('../../assets/icons/eye-view.png'),
   greenCircle: require('../../assets/icons/green-circle.png'),
+  num: require('../../assets/icons/num.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -259,6 +260,10 @@ export const CSS = {
   borderBottom: {
     borderBottomColor: 'rgba(233, 233, 233, 0.7)',
     borderBottomWidth: 1
+  },
+  borderTop: {
+    borderTopColor: 'rgba(233, 233, 233, 0.7)',
+    borderTopWidth: 1
   }
 };
 

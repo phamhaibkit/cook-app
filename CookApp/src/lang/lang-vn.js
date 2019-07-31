@@ -13,6 +13,7 @@ export const LANG_VN = {
   FOLLOWING_LIST: { name: 'Người Bạn Đang Theo Dõi', id: 5 },
   LIKED_RECIPE: { name: 'Công Thức Bạn Đã Thích', id: 6 },
   INFO_EVENT: { name: 'Tin Tức Và Sự Kiện', id: 7 },
+  COMMENT_PAGE: { name: 'Bình luận', id: 8 },
   SEARCH: 'Tìm kiếm...',
   VIEW_MORE: 'Xem thêm',
   SIGN_IN_UPTO_CASE: 'Đăng nhập',
@@ -92,5 +93,6 @@ export const LANG_VN = {
   RATE:'Đánh giá',
   HOT_SELLIING: 'Bán chạy',
   FROM: 'Từ',
-  TO: 'Đến'
+  TO: 'Đến',
+  WRITE_COMMENT: 'Viết đánh giá'
 };
