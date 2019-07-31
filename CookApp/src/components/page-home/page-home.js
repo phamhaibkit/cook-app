@@ -42,7 +42,7 @@ class PageHome extends Component {
       newsEvents: newsEventService.newsEventData
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.getTrendings();
     this.getCollections();
     this.getAds();

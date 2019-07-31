@@ -15,7 +15,7 @@ export default class NewsEventList extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     newsEventService.getNewsEventData().then(() => {
       this.setState({
         newsEvents: newsEventService.newsEventData.newsEvents

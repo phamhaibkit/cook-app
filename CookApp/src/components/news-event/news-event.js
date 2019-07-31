@@ -9,16 +9,19 @@ import {
   ScrollView,
   Share
 } from 'react-native';
+import Advertiment from '../advertiment/advertiment';
 import { IMG } from '../../utils/variables';
 import styles from './news-event-style';
 import { LANG } from '../../lang/lang';
 import { kFormatter } from '../../utils/general';
+import homeService from '../../services/home.service';
 
 export default class NewsEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data
+      data: this.props.data,
+      ads: homeService.adsData,      
     };
   }
 
@@ -73,6 +76,7 @@ export default class NewsEvent extends Component {
   };
 
   renderFrame = (data) => {
+    const { ads } = this.state;
     const { isVertical } = this.props;
     return data && data.map((item, index) => {
       const endStyle =
@@ -81,70 +85,73 @@ export default class NewsEvent extends Component {
         : styles.frame;
       const iconLove = item.isLoved ? IMG.loveActiveHome : IMG.loveHome;
       return (
-        <View style={isVertical ? styles.frameVer : endStyle} key={index} >
-          <TouchableWithoutFeedback onPress={this.onPress}>
-            <View>
-              <View style={isVertical? styles.imageVer : styles.imageView}>
-                <Image style={styles.recipeIMG} source={{ uri: item.eventImage }} />
+        <View style={{ flex: 1 }} key={index}>
+          <View style={isVertical ? styles.frameVer : endStyle} >
+            <TouchableWithoutFeedback onPress={this.onPress}>
+              <View>
+                <View style={isVertical? styles.imageVer : styles.imageView}>
+                  <Image style={styles.recipeIMG} source={{ uri: item.eventImage }} />
+                </View>
+                <View style={styles.dateView}>
+                  <Image source={IMG.calenderHome} style={styles.dateImg} />
+                  <Text style={styles.dateText}> {LANG.FROM + ' ' + item.fromDate + ' ' + LANG.TO + ' '+ item.toDate} </Text>
+                </View>
+                <Text numberOfLines={1} style={styles.titleText}>
+                  {item.eventName}
+                </Text>
+                <View style={styles.containerTimePrice}>
+                  <View style={styles.priceView}>
+                    <Text style={styles.textTime}>
+                      {kFormatter(item.likeCount)}
+                      <Text style={styles.textLight}>{LANG.SPACE + LANG.LIKE}</Text>
+                    </Text>
+                  </View>
+                  <View style={styles.lineLikeView}>
+                    <View style={styles.line} />
+                  </View>
+                  <View style={styles.likeView}>
+                    <Text style={styles.textTime}>
+                      {kFormatter(item.evaluateNumber)}
+                      <Text style={styles.textLight}>{LANG.SPACE + LANG.COMMENT}</Text>
+                    </Text>
+                  </View>
+                  <View style={styles.lineLikeView}>
+                    <View style={styles.line} />
+                  </View>
+                  <View style={styles.likeView}>
+                    <Text style={styles.textTime}>
+                      {kFormatter(item.shareCount)}
+                      <Text style={styles.textLight}>{LANG.SPACE + LANG.SHARE}</Text>
+                    </Text>
+                  </View>
+                  <View style={styles.lineLikeView}>
+                    <View style={styles.line} />
+                  </View>
+                  <View style={styles.likeView}>
+                    <Text style={styles.textTime}>
+                      {kFormatter(item.viewCount)}
+                      <Text style={styles.textLight}>{LANG.SPACE + LANG.VIEW}</Text>
+                    </Text>
+                  </View>
+                </View>
               </View>
-              <View style={styles.dateView}>
-                <Image source={IMG.calenderHome} style={styles.dateImg} />
-                <Text style={styles.dateText}> {LANG.FROM + ' ' + item.fromDate + ' ' + LANG.TO + ' '+ item.toDate} </Text>
-              </View>
-              <Text numberOfLines={1} style={styles.titleText}>
-                {item.eventName}
-              </Text>
-              <View style={styles.containerTimePrice}>
-                <View style={styles.priceView}>
-                  <Text style={styles.textTime}>
-                    {kFormatter(item.likeCount)}
-                    <Text style={styles.textLight}>{LANG.SPACE + LANG.LIKE}</Text>
-                  </Text>
-                </View>
-                <View style={styles.lineLikeView}>
-                  <View style={styles.line} />
-                </View>
-                <View style={styles.likeView}>
-                  <Text style={styles.textTime}>
-                    {kFormatter(item.evaluateNumber)}
-                    <Text style={styles.textLight}>{LANG.SPACE + LANG.COMMENT}</Text>
-                  </Text>
-                </View>
-                <View style={styles.lineLikeView}>
-                  <View style={styles.line} />
-                </View>
-                <View style={styles.likeView}>
-                  <Text style={styles.textTime}>
-                    {kFormatter(item.shareCount)}
-                    <Text style={styles.textLight}>{LANG.SPACE + LANG.SHARE}</Text>
-                  </Text>
-                </View>
-                <View style={styles.lineLikeView}>
-                  <View style={styles.line} />
-                </View>
-                <View style={styles.likeView}>
-                  <Text style={styles.textTime}>
-                    {kFormatter(item.viewCount)}
-                    <Text style={styles.textLight}>{LANG.SPACE + LANG.VIEW}</Text>
-                  </Text>
-                </View>
-              </View>
+            </TouchableWithoutFeedback>
+    
+            <View style={styles.lineHori} />
+    
+            <View style={styles.containerLoveCmt}>
+              <TouchableOpacity onPress={() => {this.onLove(item)}}>
+                <Image style={styles.loveImg} source={iconLove} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Image style={styles.cmtImg} source={IMG.commentHome} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {this.onShare()}}>
+                <Image style={styles.shareImg} source={IMG.shareHome} />
+              </TouchableOpacity>
             </View>
-          </TouchableWithoutFeedback>
-  
-          <View style={styles.lineHori} />
-  
-          <View style={styles.containerLoveCmt}>
-            <TouchableOpacity onPress={() => {this.onLove(item)}}>
-              <Image style={styles.loveImg} source={iconLove} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image style={styles.cmtImg} source={IMG.commentHome} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => {this.onShare()}}>
-              <Image style={styles.shareImg} source={IMG.shareHome} />
-            </TouchableOpacity>
           </View>
+          {isVertical && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={20}/>}
         </View>
       )
     })

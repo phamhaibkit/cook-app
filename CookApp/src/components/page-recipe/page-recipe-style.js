@@ -4,9 +4,17 @@ import { COLOR, CSS } from '../../utils/variables';
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLOR.backgroundColor,
+  },
+  containerRecipe: {
+    flex: 1,
     flexDirection: 'column',
     backgroundColor: COLOR.backgroundColor,
-    paddingBottom: 25
+    paddingBottom: 25,
+    marginTop: 30
+  },
+  containerCate: {
+    backgroundColor: COLOR.backgroundColor,
   },
   advertisement: {
     marginTop: 30,
@@ -22,13 +30,7 @@ export default StyleSheet.create({
   wrapContent: {
     paddingLeft: CSS.padding15
   },
-  contanerSearch: {
-    backgroundColor: COLOR.whiteColor,
-    paddingHorizontal: CSS.padding15,
-    paddingBottom: 8,
-    borderBottomColor: COLOR.backgroundColor,
-    borderBottomWidth: 0.5 
-  },
+
   upRecipeView: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -39,7 +41,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderStyle: 'dashed',
-    borderColor: COLOR.greenColor
+    borderColor: COLOR.greenColor,
   },
   upImg: {
     width: 26,
