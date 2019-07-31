@@ -12,6 +12,7 @@ export default StyleSheet.create({
     backgroundColor: '#f6f6f6',		
     flex: 1,
     paddingHorizontal: 15,
+    paddingBottom: 15
   },
   imgBgWrap: {
     width: widthAfterCalculate,

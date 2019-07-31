@@ -17,7 +17,7 @@ export default class GradientButton extends Component {
         <TouchableHighlight 
           style={[CSS.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} 
           onPress={onPress}
-          underlayColor={COLOR.whiteColor}
+          underlayColor={'transparent'}
         >
           <Text style={CSS.textTitleButton}>{ buttonLabel }</Text>
         </TouchableHighlight>
