@@ -151,7 +151,7 @@ export default class NewsEvent extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          {isVertical && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={20}/>}
+          {/* {isVertical && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={20}/>} */}
         </View>
       )
     })

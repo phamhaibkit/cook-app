@@ -55,9 +55,9 @@ export default class ComboItem extends Component {
     return (
       <View>
         <View style={endStyle}>{combo}</View>
-        {
+        {/* {
           isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
-        }
+        } */}
       </View>
     )
   };

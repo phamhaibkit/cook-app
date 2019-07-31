@@ -75,11 +75,11 @@ class CollectionItem extends Component {
           </TouchableWithoutFeedback>
         </View>
         
-        <View>
+        {/* <View>
           {
             isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
           }
-        </View>
+        </View> */}
        </View>
     );
   }

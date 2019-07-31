@@ -236,7 +236,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>}
+          {/* {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>} */}
         </View>
       )
     });

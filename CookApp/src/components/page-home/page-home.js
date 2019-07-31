@@ -136,10 +136,10 @@ class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key, { ads: this.state.ads });
+        navigationService.navigate(ROUTES.collectionList.key);
         break;
       case LANG.COMBO:
-        navigationService.navigate(ROUTES.comboList.key, { ads: this.state.ads });
+        navigationService.navigate(ROUTES.comboList.key);
         break;
       case LANG.RECIPE_HIGHLIGHT:
         navigationService.navigate(ROUTES.recipeHighlightList.key);

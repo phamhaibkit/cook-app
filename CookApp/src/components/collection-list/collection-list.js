@@ -27,8 +27,8 @@ export default class CollectionList extends Component {
 
   render() {
     const { data }  = this.state;
-    const { navigation } = this.props;
-    const ads = navigation.getParam('ads', []);
+    // const { navigation } = this.props;
+    // const ads = navigation.getParam('ads', []);
 
     return  (
       <View style={styles.container}>
@@ -39,7 +39,6 @@ export default class CollectionList extends Component {
               <CollectionItem
                 item={item} 
                 isVertical 
-                ads={ads}
                 imgBgWrap={styles.imgBgWrap}
                 blockMargin={styles.blockMargin}
               />
