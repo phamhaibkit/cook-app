@@ -6,7 +6,7 @@ import ViewMoreHome from '../view-more-home/view-more-home';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
 import Advertiment from '../advertiment/advertiment';
 import CategoryRecipe from '../category-recipe/category-recipe';
-import SearchBarInput from '../search-bar-input/search-bar-input';
+import SearchBarHeader from '../search-bar/search-bar';
 import { LANG } from '../../lang/lang';
 import styles from './page-recipe-style';
 import { IMG, CSS, COLOR } from '../../utils/variables';
@@ -74,7 +74,9 @@ export default class PageRecipe extends Component {
     const { recipeHighLights, ads, collections, combos } = this.state;
     return (
       <View style={styles.container}>
-        <SearchBarInput />
+        <View style={styles.containerSearch}>
+          <SearchBarHeader onPress={this.onPressSearch}/>
+        </View>
         <ScrollView>
           <TouchableOpacity style={styles.upRecipeView}>
             <Image source={IMG.upRecipe} style={styles.upImg}></Image>

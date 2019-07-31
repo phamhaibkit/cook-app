@@ -16,6 +16,12 @@ export default StyleSheet.create({
   containerCate: {
     backgroundColor: COLOR.backgroundColor,
   },
+  containerSearch: {
+    backgroundColor: COLOR.whiteColor,
+    paddingHorizontal: CSS.padding15,
+    paddingVertical: 8,
+    
+  },
   advertisement: {
     marginTop: 30,
     height: 120,

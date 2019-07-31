@@ -64,6 +64,7 @@ export const IMG = {
   eyeIcon: require('../../assets/icons/eye-view.png'),
   greenCircle: require('../../assets/icons/green-circle.png'),
   num: require('../../assets/icons/num.png'),
+  clearInput: require('../../assets/icons/clear-input.png'),
 };
 
 export const ASYNC_STORAGE = {

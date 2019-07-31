@@ -26,7 +26,7 @@ export default class MostSearched extends Component {
       }} >
         <TouchableOpacity style={{ flexDirection: 'row', padding: 10 }}>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <Image source={{ uri: item.recipeImg }} style={{ width: 60, height: 50, borderRadius: 5 }} />
+            <Image source={{ uri: item.recipeImg ||  item.recipeImage || item.collectionImages && item.collectionImages[0]}} style={{ width: 60, height: 50, borderRadius: 5 }} />
           </View>
           <View style={{ marginLeft: 10, justifyContent: 'center' }}>
             <Text style={{ fontFamily: CSS.fontTitle, color: COLOR.blackName, fontSize: 14 }} numberOfLines={1}>{item.name}</Text>
@@ -40,9 +40,9 @@ export default class MostSearched extends Component {
               <Image source={IMG.sandClokHome} style={{ width: 9, height: 10, marginLeft: 5 }} />
               <Text style={{ fontFamily: CSS.fontText, color: COLOR.blackColor, fontSize: 13, marginLeft: 5 }}>
                 {item.timeExecute}
-                <Text>
+                {/* <Text>
                   {LANG.SPACE + LANG.MINUTE.charAt(0).toUpperCase() + LANG.MINUTE.slice(1)}
-                </Text>
+                </Text> */}
               </Text>
             </View>
             }

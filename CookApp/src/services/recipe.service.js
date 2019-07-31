@@ -12,6 +12,7 @@ const recipeLikedData = {
   recipes: []
 }
 
+
 class RecipeService {
   constructor() {
     this.resetService();
@@ -24,7 +25,7 @@ class RecipeService {
   
   getRecipeHighLightList = () => {
     // console.log( 'recipeHightLightData' + Date());
-    this.resetService();
+    // this.resetService();
     const url = API.GET_RECIPE_HIGHLIGHT_LIST;
     this.recipeHighLightData.loading = true;
     return HTTPService.get(url,null,null)
@@ -41,7 +42,7 @@ class RecipeService {
   }
 
   getRecipeLikedList = (userId) => {
-    this.resetService();
+    // this.resetService();
     const url = API.GET_RECIPE_LIKED(userId);
     this.recipeLikedData.loading = true;
     return HTTPService.get(url,null,null)
@@ -56,6 +57,7 @@ class RecipeService {
         return Promise.reject(err);
       })
   }
+
 }
 
 export default new RecipeService();

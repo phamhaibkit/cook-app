@@ -38,4 +38,8 @@ export const API = {
 
   //news-event
   GET_NEWS_EVENT : HOST + '/event/all',
+
+  //search recipe
+  SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text
+
 };

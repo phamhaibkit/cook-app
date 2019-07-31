@@ -4,18 +4,22 @@ import SearchBarInput from '../search-bar-input/search-bar-input';
 import MostSearched from '../most-searched/most-searched';
 import { LANG } from '../../lang/lang';
 import styles from './page-search-recipe-style';
+import searchService from '../../services/search.service';
+import recipeService from '../../services/recipe.service';
+import collectionService from '../../services/collection.service';
 
 export default class PageSearchRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
       textSearch : '',
+      recipes: recipeService.recipeHighLightData.recipes,
+      collections: collectionService.collectionData.data
     };
-    this.data = [
-    { id: 1, name: 'Thit bo chien', owner: {name: 'Hoang Kieu Nga'}, timeExecute: 60, recipeImage: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
-      { id: 2, name: 'Thit bo xao khoai', owner: {name: 'Binh Tang'}, timeExecute: 60, recipeImage: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' },
-      { id: 3, name: 'Thit bo xao xa ot', owner: {name: 'Trung Lu'}, timeExecute: 60, recipeImage: 'https://toinayangi.vn/wp-content/uploads/2014/11/thit-bo-xao-can-toi-tay-2.jpg' }
-    ];
+  }
+
+  componentDidMount= () => {
+    
   }
 
   onCancel=() => {
@@ -25,7 +29,12 @@ export default class PageSearchRecipe extends Component {
   }
 
   onSearch=() => {
-    // alert('Search');
+    searchService.searchRecipe('bo').then(() => {
+      this.setState({
+        recipes: searchService.recipeSearchData.recipes,
+        collections: searchService.recipeSearchData.recipe_collection
+      })
+    })
   }
 
   onChangeText=(textData) => {
@@ -36,14 +45,15 @@ export default class PageSearchRecipe extends Component {
   }
 
   render() {
-    const { textSearch } = this.state;
+    const { recipes, collections} = this.state;
+    console.log('ASDDDDDDDDDDS', recipes, collections)
     return (
       <View style={styles.container}>
-        <SearchBarInput isFocus={true} onChangeText={this.onChangeText} onCancel={this.onCancel} onSearch={this.onSearch} value={textSearch}/>
+        <SearchBarInput onSearch={this.onSearch}/>
         <ScrollView style={styles.bodyView}>
           <Text style={styles.bestSellText}>{LANG.BEST_SEARCH}</Text>
-          <MostSearched label={LANG.RECIPE} data={this.data} subData={true} />
-          <MostSearched label={LANG.COLLECTION.name} data={this.data} />
+          <MostSearched label={LANG.RECIPE} data={recipes} subData={true} />
+          <MostSearched label={LANG.COLLECTION.name} data={collections} />
         </ScrollView>
       </View>
     );
