@@ -5,7 +5,6 @@ import {
   View,
   Image,
   TouchableOpacity,
-  FlatList,
   TouchableWithoutFeedback,
   ScrollView
 } from 'react-native';
@@ -14,24 +13,23 @@ import { IMG, CSS, COLOR, CONST } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
 import styles from './collection-detail-style';
 import SwiperImage from '../swiper-image/swiper-image';
-import CollectionService from '../../services/collection.service';
+import collectionService from '../../services/collection.service';
 import { kFormatter, capitalize } from '../../utils/general';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
+import Spinner from '../spinner/spinner';
 
 export default class CollectionDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...CollectionService.collectionDetail
+      ...collectionService.collectionDetail
     };    
   }
 
   getCollectionDetail = (id) => { 
-    CollectionService.getCollectionDetail(id).then(() => {   
-      console.log('promise getCollectionDetail resolve');
-      let data =  {...CollectionService.collectionDetail};
+    collectionService.getCollectionDetail(id).then(() => {   
       this.setState({
-        ...data
+        ...collectionService.collectionDetail
       });
     });
   }
@@ -165,7 +163,9 @@ export default class CollectionDetail extends Component {
 
     const ads = {};
 
-    return (    
+    return this.state.loading ? (
+          <Spinner />
+        ) : (  
         <ScrollView>
           <SwiperImage height={300} listItems={ collectionImages }/>
 

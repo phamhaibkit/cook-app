@@ -17,6 +17,7 @@ import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import { getCurrencyStr, kFormatter } from '../../utils/general';
+import homeService from '../../services/home.service';
 
 export default class RecipeHighlightHome extends Component {
   constructor(props) {
@@ -24,7 +25,8 @@ export default class RecipeHighlightHome extends Component {
     this.state = {
       isModalVisible: false,
       recipe: {},
-      recipes: []
+      recipes: [],
+      ads: homeService.adsData,
     };
   }
 
@@ -113,6 +115,7 @@ export default class RecipeHighlightHome extends Component {
   }
 
   renderFrame = (recipes) => {
+    const { ads } = this.state;
     const { isHorizontal } = this.props;
     return recipes.map((item, index) => {
       const horizaltalStyle =
@@ -233,7 +236,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          {/* {!isHorizontal && (index + 1) % 3 === 0 && <Advertiment data={ads} marginTop={30}/>} */}
+          {/* {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>} */}
         </View>
       )
     });

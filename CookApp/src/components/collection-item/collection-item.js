@@ -15,11 +15,17 @@ import { kFormatter, capitalize } from '../../utils/general';
 class CollectionItem extends Component {
   handlePress = () => {  
     const { item } = this.props;
-    navigationService.navigate(ROUTES.collectionDetail.key, { id: item.id || item.collectionId});
+    navigationService.navigate(ROUTES.collectionDetail.key, { id: item.id });
   }
   
   render() {
-    let { item, imgBgWrap, blockMargin, ads, isVertical} = this.props;
+    let { 
+      item, 
+      imgBgWrap, 
+      blockMargin, 
+      ads, 
+      isVertical
+    } = this.props;
  
     return (
        <View>
@@ -69,11 +75,11 @@ class CollectionItem extends Component {
           </TouchableWithoutFeedback>
         </View>
         
-        <View>
+        {/* <View>
           {
             isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
           }
-        </View>
+        </View> */}
        </View>
     );
   }

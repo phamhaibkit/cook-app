@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 import { getCart} from '../../reducers/cart.reducer';
 import homeService from '../../services/home.service';
 import cartSerice from '../../services/cart.service';
-import collectionSerice from '../../services/collection.service';
+import collectionService from '../../services/collection.service';
 import comboService from '../../services/combo.service';
 import productService from '../../services/product.service';
 import recipeService from '../../services/recipe.service';
@@ -32,7 +32,7 @@ class PageHome extends Component {
     super(props);
     this.state = {
       trendings: homeService.trendingData,
-      collections: collectionSerice.collectionData,
+      collections: collectionService.collectionData,
       ads: homeService.adsData,
       recipeHighLights: recipeService.recipeHighLightData,
       combos: comboService.comboData,
@@ -42,7 +42,7 @@ class PageHome extends Component {
       newsEvents: newsEventService.newsEventData
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.getTrendings();
     this.getCollections();
     this.getAds();
@@ -70,9 +70,9 @@ class PageHome extends Component {
   }
 
   getCollections = () => {
-    collectionSerice.getCollections().then(() => {
+    collectionService.getCollections().then(() => {
       this.setState({
-        collections: collectionSerice.collectionData
+        collections: collectionService.collectionData.data
       })
     })
   }
@@ -136,10 +136,10 @@ class PageHome extends Component {
   viewMore = type => {
     switch (type) {
       case LANG.COLLECTION:
-        navigationService.navigate(ROUTES.collectionList.key, { ads: this.state.ads });
+        navigationService.navigate(ROUTES.collectionList.key);
         break;
       case LANG.COMBO:
-        navigationService.navigate(ROUTES.comboList.key, { ads: this.state.ads });
+        navigationService.navigate(ROUTES.comboList.key);
         break;
       case LANG.RECIPE_HIGHLIGHT:
         navigationService.navigate(ROUTES.recipeHighlightList.key);

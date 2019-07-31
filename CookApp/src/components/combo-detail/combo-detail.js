@@ -5,7 +5,6 @@ import _ from 'lodash';
 import styles from './combo-detail-style';
 import { IMG, CSS, COLOR } from '../../utils/variables';
 import { formatNumberWithDot, capitalize } from '../../utils/general';
-import { COMBO_DETAIL } from '../../models/data';
 import SwiperImage from '../swiper-image/swiper-image';
 import { ScrollView } from 'react-native-gesture-handler';
 import MostSearched from '../most-searched/most-searched';

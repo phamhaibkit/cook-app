@@ -19,19 +19,18 @@ export default class CollectionList extends Component {
 
   getCollectionList = () => {
     collectionService.getCollections().then(() => {      
-      let data = [...collectionService.collectionData];
       this.setState({
-        data: data
+        ...collectionService.collectionData
       });
     });
   }  
 
   render() {
     const { data }  = this.state;
-    const { navigation } = this.props;
-    const ads = navigation.getParam('ads', []);
+    // const { navigation } = this.props;
+    // const ads = navigation.getParam('ads', []);
 
-    return (
+    return  (
       <View style={styles.container}>
         <FlatList 
           data = {data}
@@ -40,7 +39,6 @@ export default class CollectionList extends Component {
               <CollectionItem
                 item={item} 
                 isVertical 
-                ads={ads}
                 imgBgWrap={styles.imgBgWrap}
                 blockMargin={styles.blockMargin}
               />

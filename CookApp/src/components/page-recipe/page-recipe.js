@@ -1,25 +1,54 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import SearchBarHeader from '../search-bar/search-bar';
+import { Text, View, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
 import CollectionHome from '../collection-home/collection-home';
 import ComboHome from '../combo-home/combo-home';
 import ViewMoreHome from '../view-more-home/view-more-home';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
+import Advertiment from '../advertiment/advertiment';
 import CategoryRecipe from '../category-recipe/category-recipe';
+import SearchBarInput from '../search-bar-input/search-bar-input';
 import { LANG } from '../../lang/lang';
-import { RECIPES } from '../../models/data';
 import styles from './page-recipe-style';
-import { IMG, COLOR } from '../../utils/variables';
+import { IMG, CSS, COLOR } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
+import recipeService from '../../services/recipe.service';
+import homeService from '../../services/home.service';
+import collectionService from '../../services/collection.service';
+import comboService from '../../services/combo.service';
 import { ROUTES } from '../../utils/routes';
 
-const img = {
-  uri:
-    'https://image.shutterstock.com/image-photo/mix-fresh-green-fruits-on-260nw-571146373.jpg'
-};
-
 export default class PageRecipe extends Component {
+  constructor(props){
+    super(props);
+    this.state= {
+      isFocus: false,
+      recipeHighLights: recipeService.recipeHighLightData,
+      ads: homeService.adsData,
+      collections: collectionService.collectionData.data,
+      combos: comboService.comboData
+    }
+  }
+
+  componentDidMount(){
+    this.getRecipeHighLights();
+    // this.getAds();
+  }
+
+  getRecipeHighLights = () => {
+    recipeService.getRecipeHighLightList().then(() => {
+      this.setState({
+        recipeHighLights: recipeService.recipeHighLightData
+      })
+    })
+  }
+
+  getAds = () => {
+    homeService.getAds().then(() => {
+      this.setState({
+        ads: homeService.adsData
+      })
+    })
+  }
 
   onPressSearch = () => {
     navigationService.navigate('PageSearchRecipe');
@@ -42,34 +71,31 @@ export default class PageRecipe extends Component {
   }
 
   render() {
+    const { recipeHighLights, ads, collections, combos } = this.state;
     return (
-      <View style={{ flex: 1 }}>
-        <View style={styles.contanerSearch}>
-          <SearchBarHeader onPress={this.onPressSearch} />
-        </View>
+      <View style={styles.container}>
+        <SearchBarInput />
         <ScrollView>
           <TouchableOpacity style={styles.upRecipeView}>
             <Image source={IMG.upRecipe} style={styles.upImg}></Image>
             <Text style={styles.upText}>{LANG.UP_RECIPE}</Text>
           </TouchableOpacity>
-          <View>
+          <View style={styles.containerCate}>
             <CategoryRecipe />
           </View>
-          <LinearGradient
-            colors={[COLOR.whiteColor, COLOR.searchBarIos, COLOR.backgroundColor]}
-            style={styles.gradienView}
-          />
-          {/* <View style={styles.container}>
+          <View style={styles.containerRecipe}>
             <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} notMarginTop={true} />
-            <RecipeHighlightHome recipes={RECIPES} isHorizontal />
-            <View style={styles.advertisement}>
-              <Image style={styles.adverImg} source={img} resizeMode="cover" />
-            </View>
+            <RecipeHighlightHome 
+              recipes={recipeHighLights.recipes}
+              isHorizontal
+              marTop={CSS.padding15} 
+            />
+            <Advertiment paddingHori={CSS.padding15} data={ads} marginTop={30}/>
             <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
-            <CollectionHome />
+            <CollectionHome data={collections} marTop={CSS.padding15}/>
             <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
-            <ComboHome />
-          </View> */}
+            <ComboHome data={combos} marTop={CSS.padding15}/>
+          </View>
         </ScrollView>
       </View>
     );

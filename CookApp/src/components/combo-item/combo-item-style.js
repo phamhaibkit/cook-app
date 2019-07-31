@@ -57,7 +57,6 @@ export default StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 5,
     overflow: 'hidden'
-    // backgroundColor: 'red'
   },
   containerImgVertical: {
     width: widthImgVertical
@@ -69,23 +68,23 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     position: 'absolute'
-    // top: -10
   },
   imgLeftView: {
     width: 123,
     height: imgHeghtCombo
   },
   imgLeftViewVertical: {
-    width: 123 * widthImgVertical / 290
+    width: 123 * widthImgVertical / 290,
+    height: imgHeghtCombo * widthImgVertical / 290
   },
   imgRightView: {
     marginLeft: 4,
     width: 162,
     height: imgHeghtCombo
-    // overflow: 'hidden'
   },
   imgRightViewVertical: {
-    width: 162 * widthImgVertical / 290
+    width: 162 * widthImgVertical / 290,
+    height: imgHeghtCombo * widthImgVertical / 290
   },
   addImgView: {
     flexDirection: 'row',

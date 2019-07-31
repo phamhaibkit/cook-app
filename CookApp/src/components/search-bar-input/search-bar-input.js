@@ -8,52 +8,49 @@ export default class SearchBarInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value
+      isFocus: false
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  onFocus = () => {
     this.setState({
-      value: nextProps.value
-    });
+      isFocus: true
+    })
+    this.props.onFocus();
+  }
+
+  onBlur = () => {
+    this.setState({
+      isFocus: false
+    })
+    this.props.onBlur();
+  }
+
+  onCancel = () => {
+    this.props.onCancel();  
+  }
+
+  onSearch = () => {
+    this.props.onSearch();  
   }
 
   render() {
-    const { value } = this.state;
-    const { onChangeText, onCancel, onSearch, isFocus} = this.props;
-    console.log('AAAAAAAAAAAAAA', value);
+    const { isFocus } = this.state;
     return (
-      <View style={{
-        flexDirection: 'row', height: 42, width: '100%', alignItems: 'center', paddingLeft: 15, paddingBottom: 8, borderBottomColor: COLOR.greyColor, borderBottomWidth: 0.5, 
-      }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            paddingLeft: 15,
-            paddingRight: 5,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: COLOR.searchBarIos,
-            width: '85%'
-          }}
-        >
-          <TextInput
-            style={{ fontFamily: CSS.fontText, fontSize: 15, height: 40, flex: 1, backgroundColor: COLOR.searchBarIos }} 
-            autoFocus={isFocus}
-            onChangeText={onChangeText}
-            value={value}
-          />
-          <TouchableOpacity style={{ padding: 5, paddingHorizontal: 10 }} onPress={onSearch}>
-            <Image source={IMG.searchGreen} style={{ width: 22, height: 22 }} />
-          </TouchableOpacity>
+      <View style={{backgroundColor: COLOR.whiteColor, paddingHorizontal: CSS.padding15, paddingVertical: 8,flexDirection: 'row'}}>
+          <View style={{ flex: 9,flexDirection: 'row', overflow: 'hidden', backgroundColor: '#F8F8F8', borderRadius: 10, paddingHorizontal: 15}}>
+            <TextInput onFocus={this.onFocus} onBlur={this.onBlur} style={{ flex: 9, height: 40}}/>
+            <TouchableOpacity style={{ flex: 1, height: 40,  justifyContent: 'center', alignItems: 'center'}} onPress={this.onSearch}>
+              <Image source={IMG.searchGreen} style={{ width: 22, height: 22 }} />
+            </TouchableOpacity>
+          </View>
+          {isFocus && (
+            <TouchableOpacity style={{flex: 1, alignItems: 'flex-end',justifyContent: 'center'}} onPress={this.onCancel}>
+              <Text style={{fontFamily: CSS.fontTitle, fontSize: 15, color: COLOR.greenColor}}>{LANG.CANCEL}</Text>
+            </TouchableOpacity>
+          )}
         </View>
-        <View style={{ alignItems: 'center', justifyContent: 'center', width: '15%' }}>
-          <TouchableOpacity style={{ padding: 5 }} onPress={onCancel}>
-            <Text style={{ fontFamily: CSS.fontTitle, fontSize: 15, color: COLOR.greenColor }}>{LANG.CANCEL}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     );
   }
+
 }
