@@ -170,38 +170,7 @@ export default StyleSheet.create({
     color: COLOR.blackColor,
     marginLeft: 5
   },
-  lineHori: {
-    height: 1,
-    backgroundColor: COLOR.lineHoriColor,
-    marginTop: 10
-  },
-  containerLoveCmt: {
-    flexDirection: 'row',
-    padding: paddingContent
-  },
-  loveImg: {
-    width: 23,
-    height: 20
-  },
-  cmtImg: {
-    width: 23,
-    height: 20,
-    marginLeft: 18
-  },
-  shareImg: {
-    width: 24,
-    height: 20,
-    marginLeft: 18
-  },
-  saveView: {
-    position: 'absolute',
-    top: paddingContent,
-    right: paddingContent
-  },
-  saveImg: {
-    width: 19,
-    height: 20
-  },
+
   modal: {
     justifyContent: 'flex-end',
     margin: 0

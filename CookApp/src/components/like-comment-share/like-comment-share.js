@@ -1,25 +1,77 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Share } from 'react-native'
 import { COLOR, CSS, IMG } from '../../utils/variables';
 import { kFormatter } from '../../utils/general';
+import { LANG } from '../../lang/lang';
 
-export class LikeCommentShare extends Component {
+export default class LikeCommentShare extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      item : this.props.item
+    }
+  }
   static propTypes = {
     // prop: PropTypes
   }
 
+  onLove = (item) => {
+    item.isLiked = !item.isLiked;
+    this.setState({
+      item: item
+    })
+    this.props.onLove && this.props.onLove(item);
+  }
+
+  onComment = (item) => {
+    this.props.onComment && this.props.onComment(item);
+  }
+
+  onShare = (item) => {
+    Share.share(
+      {
+        title: 'BeChef share',
+        urlonShare: 'https://www.google.vn/',
+        message: 'Nau An Di Cung',
+      },
+      {
+        // android
+        dialogTitle: 'This is BeShef share',
+        // ios
+        excludedActivityTypes: [
+          // 'com.apple.UIKit.activity.PostToFacebook',
+          // 'com.apple.UIKit.activity.PostToTwitter',
+          // 'com.apple.UIKit.activity.Message',
+        ],
+      }
+    ).then((res) => {
+      console.log('Share result = ', res);
+      this.props.onShare && this.props.onShare(item);
+    });
+  }
+
+  onSave = (item) => {
+    item.isSaved = !item.isSaved;
+    this.setState({
+      item: item
+    })
+    this.props.onSave && this.props.onSave(item);
+  }
+
+
   render() {
-    const {item} = this.props;
-    const iconLove = item.isLove ? IMG.loveActiveHome : IMG.loveHome;
+    const { notSave, notMarginTop} = this.props;
+    const { item } = this.state;
+    const iconLove = item && item.isLiked ? IMG.loveActiveHome : IMG.loveHome;
+    const iconSave = item.isSaved ? IMG.saveActiveHome: IMG.saveHome;
+    const topAmount = notMarginTop ? 0 : 18;
     return (
       <View>
-        <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
+        <View style={[styles.containerTimePrice, { marginTop: topAmount }]}>
           <View style={styles.priceView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.likeTimes)}
-              <Text style={styles.textLight}> thích</Text>
+              {kFormatter(item.likeCount)}
+              <Text style={styles.textLight}> {LANG.LIKE}</Text>
             </Text>
           </View>
           <View style={styles.lineLikeView}>
@@ -27,8 +79,8 @@ export class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.numberEvaluate)}
-              <Text style={styles.textLight}> bình luận</Text>
+              {kFormatter(item.numberEvaluate || item.evaluateNumber)}
+              <Text style={styles.textLight}> {LANG.COMMENT}</Text>
             </Text>
           </View>
           <View style={styles.lineLikeView}>
@@ -36,8 +88,8 @@ export class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.shareTimes)}
-              <Text style={styles.textLight}> chia sẻ</Text>
+              {kFormatter(item.shareCount)}
+              <Text style={styles.textLight}> {LANG.SHARE}</Text>
             </Text>
           </View>
           <View style={styles.lineLikeView}>
@@ -45,8 +97,8 @@ export class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.viewTimes)}
-              <Text style={styles.textLight}> xem</Text>
+              {kFormatter(item.viewCount)}
+              <Text style={styles.textLight}> {LANG.VIEW}</Text>
             </Text>
           </View>
         </View>
@@ -54,18 +106,23 @@ export class LikeCommentShare extends Component {
         <View style={styles.lineHori} />
 
         <View style={styles.containerLoveCmt}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.onLove(item)}>
             <Image style={styles.loveImg} source={iconLove} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.onComment(item)}>
             <Image style={styles.cmtImg} source={IMG.commentHome} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.onShare}>
+          <TouchableOpacity onPress={() => this.onShare(item)}>
             <Image style={styles.shareImg} source={IMG.shareHome} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.saveView}>
-            <Image style={styles.saveImg} source={IMG.saveHome} />
-          </TouchableOpacity>
+          {
+            !notSave && (
+            <TouchableOpacity style={styles.saveView}  onPress={() => this.onSave(item)}>
+              <Image style={styles.saveImg} source={iconSave} />
+            </TouchableOpacity>
+            )
+          }
+          
         </View>
       </View>
     )
@@ -157,5 +214,10 @@ const styles = StyleSheet.create({
   containerLoveCmt: {
     flexDirection: 'row',
     padding: paddingContent
+  },
+  lineHori: {
+    height: 1,
+    backgroundColor: COLOR.lineHoriColor,
+    marginTop: 10
   },
 });

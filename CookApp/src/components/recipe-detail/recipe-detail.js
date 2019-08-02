@@ -13,7 +13,7 @@ import { LANG } from '../../lang/lang';
 import { LANG_VN } from '../../lang/lang-vn';
 import { kFormatter, formatNumberWithDot } from '../../utils/general';
 import homeService from '../../services/home.service';
-import { LikeCommentShare } from '../like-comment-share/like-comment-share';
+import LikeCommentShare from '../like-comment-share/like-comment-share';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
 import StepRecipeDetail from './step-recipe-detail';
 import ViewMoreHome from '../view-more-home/view-more-home';

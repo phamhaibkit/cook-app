@@ -4,16 +4,14 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   ScrollView,
-  Share
 } from 'react-native';
 import Advertiment from '../advertiment/advertiment';
+import LikeCommentShare from '../like-comment-share/like-comment-share';
 import { IMG } from '../../utils/variables';
 import styles from './news-event-style';
 import { LANG } from '../../lang/lang';
-import { kFormatter } from '../../utils/general';
 import homeService from '../../services/home.service';
 
 export default class NewsEvent extends Component {
@@ -21,11 +19,11 @@ export default class NewsEvent extends Component {
     super(props);
     this.state = {
       data: this.props.data,
-      ads: homeService.adsData,      
+      ads: homeService.adsData,
     };
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const newData = nextProps.data;
     newData && newData.map((item, index) => {
       item.isLoved = false;
@@ -35,44 +33,16 @@ export default class NewsEvent extends Component {
     })
   }
 
-  onLove = (event) => {
-    const { data } = this.state;
-    data && data.map((item, index) => {
-      if (item.eventId === event.eventId) {
-        item.isLoved = !item.isLoved;
-        return item;
-      }
-    });
-    this.setState({
-      data: data
-    })
+  onLove = (item) => {
+    console.log('onLove=', item);
   }
 
-  onShare = () => {
-    Share.share(
-      {
-        title: 'BeChef share',
-        urlonShare: 'https://www.google.vn/',
-        message: 'Nau An Di Cung',
-      },
-      {
-        // android
-        dialogTitle: 'This is BeShef share',
-        // ios
-        excludedActivityTypes: [
-          // 'com.apple.UIKit.activity.PostToFacebook',
-          // 'com.apple.UIKit.activity.PostToTwitter',
-          // 'com.apple.UIKit.activity.Message',
-        ],
-      }
-    ).then((res) => {
-      console.log('DATAATATAATTA', res);
-    });
+  onShare = (item) => {
+    console.log('onShare=', item);
   };
 
   onPress = () => {
     // console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-    alert('AAAAAAAAAAA');
   };
 
   renderFrame = (data) => {
@@ -80,76 +50,27 @@ export default class NewsEvent extends Component {
     const { isVertical } = this.props;
     return data && data.map((item, index) => {
       const endStyle =
-      data.length - 1 === index
-        ? [styles.frame, styles.endFrame]
-        : styles.frame;
-      const iconLove = item.isLoved ? IMG.loveActiveHome : IMG.loveHome;
+        data.length - 1 === index
+          ? [styles.frame, styles.endFrame]
+          : styles.frame;
       return (
         <View style={{ flex: 1 }} key={index}>
           <View style={isVertical ? styles.frameVer : endStyle} >
-            <TouchableWithoutFeedback onPress={this.onPress}>
+            <TouchableWithoutFeedback onPress={this.onPress} >
               <View>
-                <View style={isVertical? styles.imageVer : styles.imageView}>
+                <View style={isVertical ? styles.imageVer : styles.imageView}>
                   <Image style={styles.recipeIMG} source={{ uri: item.eventImage }} />
                 </View>
                 <View style={styles.dateView}>
                   <Image source={IMG.calenderHome} style={styles.dateImg} />
-                  <Text style={styles.dateText}> {LANG.FROM + ' ' + item.fromDate + ' ' + LANG.TO + ' '+ item.toDate} </Text>
+                  <Text style={styles.dateText}> {LANG.FROM + ' ' + item.fromDate + ' ' + LANG.TO + ' ' + item.toDate} </Text>
                 </View>
                 <Text numberOfLines={1} style={styles.titleText}>
                   {item.eventName}
                 </Text>
-                <View style={styles.containerTimePrice}>
-                  <View style={styles.priceView}>
-                    <Text style={styles.textTime}>
-                      {kFormatter(item.likeCount)}
-                      <Text style={styles.textLight}>{LANG.SPACE + LANG.LIKE}</Text>
-                    </Text>
-                  </View>
-                  <View style={styles.lineLikeView}>
-                    <View style={styles.line} />
-                  </View>
-                  <View style={styles.likeView}>
-                    <Text style={styles.textTime}>
-                      {kFormatter(item.evaluateNumber)}
-                      <Text style={styles.textLight}>{LANG.SPACE + LANG.COMMENT}</Text>
-                    </Text>
-                  </View>
-                  <View style={styles.lineLikeView}>
-                    <View style={styles.line} />
-                  </View>
-                  <View style={styles.likeView}>
-                    <Text style={styles.textTime}>
-                      {kFormatter(item.shareCount)}
-                      <Text style={styles.textLight}>{LANG.SPACE + LANG.SHARE}</Text>
-                    </Text>
-                  </View>
-                  <View style={styles.lineLikeView}>
-                    <View style={styles.line} />
-                  </View>
-                  <View style={styles.likeView}>
-                    <Text style={styles.textTime}>
-                      {kFormatter(item.viewCount)}
-                      <Text style={styles.textLight}>{LANG.SPACE + LANG.VIEW}</Text>
-                    </Text>
-                  </View>
-                </View>
               </View>
             </TouchableWithoutFeedback>
-    
-            <View style={styles.lineHori} />
-    
-            <View style={styles.containerLoveCmt}>
-              <TouchableOpacity onPress={() => {this.onLove(item)}}>
-                <Image style={styles.loveImg} source={iconLove} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image style={styles.cmtImg} source={IMG.commentHome} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => {this.onShare()}}>
-                <Image style={styles.shareImg} source={IMG.shareHome} />
-              </TouchableOpacity>
-            </View>
+            <LikeCommentShare item={item} notMarginTop notSave />
           </View>
           {/* {isVertical && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={20}/>} */}
         </View>
@@ -161,11 +82,10 @@ export default class NewsEvent extends Component {
     const { data } = this.state;
     const { isVertical } = this.props;
     const isHorizontal = isVertical ? false : true;
-    console.log('EVENTs==', data);
     return (
       <View style={styles.container}>
         <ScrollView
-          horizontal = {isHorizontal}
+          horizontal={isHorizontal}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
         >

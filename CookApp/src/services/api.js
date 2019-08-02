@@ -6,6 +6,7 @@ export const API = {
 
   //cart
   GET_NUMBER_CART: userId => HOST + '/cart/number-of-product?usr=' + userId,
+  ADD_TO_CART : HOST+ '/cart/add',
 
   //trending
   GET_TRENDING: HOST + '/trend/all',
@@ -34,12 +35,19 @@ export const API = {
   GET_FOLLOWER: userId =>  HOST + '/user/follower/all?usr=' + userId,
 
   //liked-recipe
-  GET_LIKED_RECIPE: userId => HOST + 'recipe/favorite-recipe?usr=' + userId,
+  GET_LIKED_RECIPE: userId => HOST + '/recipe/favorite-recipe?usr=' + userId,
 
   //news-event
   GET_NEWS_EVENT : HOST + '/event/all',
 
   //search recipe
-  SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text
+  SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text,
+
+  // home functions
+  LIKE_EVENT : eventId => HOST + '/like/event?id=' + eventId,
+  LIKE_RECIPE : recipeId => HOST + '/like/recipe?id=' + recipeId,
+  COMMENT_EVENT: HOST + 'evaluate/event',
+  SHARE_RECIPE : recipeId => HOST + '/share/recipe?id=' + recipeId,
+  SHARE_EVENT : eventId => HOST + '/share/event?id=' + eventId,
 
 };
