@@ -293,6 +293,7 @@ export const COLOR = {
   searchBarIos: '#F8F8F8',
   blackReport: '#444444',
   shadowColor: 'rgba(0, 0, 0, 0.1)',
+  priceProductColor: '#EE0000'
 };
 
 export const ACTION = {

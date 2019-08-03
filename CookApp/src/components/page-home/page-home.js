@@ -26,6 +26,7 @@ import productService from '../../services/product.service';
 import recipeService from '../../services/recipe.service';
 import userService from '../../services/user.service';
 import newsEventService from '../../services/news-event.service';
+import PageComboBuyIngredients  from '../page-combo-buy-ingredients/page-combo-buy-ingredients';
 
 class PageHome extends Component {
   constructor(props) {
@@ -160,47 +161,10 @@ class PageHome extends Component {
   };
 
   render() {
-    const { trendings, collections, ads, recipeHighLights, combos, products, followers, likeRecipes, newsEvents } = this.state;
-    return trendings.loading ? (
-      <Spinner />
-    ) : (
-      <ContainerScroll>
-        <View style={styles.container}>
-          <Trending data={trendings.trendings} />
-          <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
-          <CollectionHome 
-            data={collections}
-            marTop={CSS.padding15}
-          />
-          <Advertiment paddingHori={CSS.padding15} data={ads} marginTop={30}/>
-          <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
-          <RecipeHighlightHome
-            recipes={recipeHighLights.recipes}
-            isHorizontal
-            marTop={CSS.padding15}
-          />
-          <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
-          <ComboHome 
-            data={combos}
-            marTop={CSS.padding15}
-          />
-          <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
-          <ProductListHome data={products.products}/>
-          <Advertiment paddingHori={CSS.padding15} data={ads} marginTop={30}/>
-          <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
-          <FollowingHome data={followers.followers}/>
-          <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
-          <RecipeHighlightHome
-            recipes={likeRecipes.recipes}
-            isHorizontal
-            isLiked
-            marTop={CSS.padding15}
-          />
-          <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
-          <NewsEvent data={newsEvents.newsEvents} />
-        </View>
-      </ContainerScroll>
-    );
+   
+    
+     return <PageComboBuyIngredients />;
+    
   }
 }
 

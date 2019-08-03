@@ -79,6 +79,7 @@ export const LANG_VN = {
   CLOSE: 'Đóng',
   PROMOTION_INFO: 'THÔNG TIN KHUYẾN MÃI',
   INGREDIENT: 'NGUYÊN LIỆU',
+  SUB_INGREDIENT: 'Phụ liệu',
   BUY_INGREDIENT: 'Mua nguyên liệu',
   SELECT_INGREDIENT_FOR_MEAL: 'Chọn mua nguyên liệu cho các món',
   SELECT_ALL: 'Chọn tất cả',
@@ -94,5 +95,5 @@ export const LANG_VN = {
   HOT_SELLIING: 'Bán chạy',
   FROM: 'Từ',
   TO: 'Đến',
-  WRITE_COMMENT: 'Viết đánh giá'
+  WRITE_COMMENT: 'Viết đánh giá',
 };
