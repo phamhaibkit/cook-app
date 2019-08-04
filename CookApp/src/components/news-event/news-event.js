@@ -33,12 +33,14 @@ export default class NewsEvent extends Component {
     })
   }
 
-  onLove = (item) => {
+  onPressLove = (item) => {
     console.log('onLove=', item);
   }
 
-  onShare = (item) => {
-    console.log('onShare=', item);
+  onShare = (event) => {
+    homeService.shareEvent(event.eventId).then(() => {
+      console.log('Share sucess!!', homeService.shareEventData);
+    })
   };
 
   onPress = () => {
@@ -70,7 +72,7 @@ export default class NewsEvent extends Component {
                 </Text>
               </View>
             </TouchableWithoutFeedback>
-            <LikeCommentShare item={item} notMarginTop notSave />
+            <LikeCommentShare item={item} notMarginTop notSave onShare={this.onShare} onLove={this.onPressLove}/>
           </View>
           {/* {isVertical && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={20}/>} */}
         </View>

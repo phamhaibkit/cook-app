@@ -47,8 +47,10 @@ export default class RecipeHighlightHome extends Component {
     navigationService.navigate('recipeDetail')
   };
 
-  onShare = () => {
-
+  onShare = (recipe) => {
+    homeService.shareRecipe(recipe.id).then(() => {
+      console.log('Share sucess!!', homeService.shareRecipeData)
+    })
   };
 
   openReport = (item) => {

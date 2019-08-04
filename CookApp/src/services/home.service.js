@@ -125,12 +125,11 @@ class HomeService {
   }
 
   shareEvent = (eventId) => {
-    const url = API.shareEvent(eventId);
+    const url = API.SHARE_EVENT(eventId);
     this.shareEventData = true;
     return HTTPService.post(url)
       .then(data => {
         this.shareEventData = _.cloneDeep({
-          ...data,
           loading: false
         })
       })
@@ -140,12 +139,11 @@ class HomeService {
   }
 
   shareRecipe = (recipeId) => {
-    const url = API.shareRecipe(recipeId);
+    const url = API.SHARE_RECIPE(recipeId);
     this.shareRecipeData.loading = true;
     return HTTPService.post(url)
       .then(data => {
         this.shareRecipeData = _.cloneDeep({
-          ...data,
           loading: false
         })
       })

@@ -36,10 +36,15 @@ class CartService {
       })
   }
 
-  addToCart = () => {
+  addToCart = (id, quantity) => {
     const url = API.ADD_TO_CART;
+    const params = {
+      productId: id,
+      quality: quantity
+    };
+    console.log('DATA ADD CART=', params);
     this.addCartdata.loading = true;
-    return HTTPService.get(url,null,null)
+    return HTTPService.post(url,params,null)
       .then(data => {
         this.addCartdata = _.cloneDeep({
           carts: data,

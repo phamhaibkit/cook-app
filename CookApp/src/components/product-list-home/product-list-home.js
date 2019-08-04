@@ -15,6 +15,7 @@ import { getCurrencyStr } from '../../utils/general';
 import PlusSubsNumber from '../plus-subs-number/plus-subs-number';
 import { connect } from 'react-redux';
 import { increment, decrement } from '../../reducers/cart.reducer';
+import cartSerice from '../../services/cart.service';
 
 class ProductListHome extends Component {
   constructor(props) {
@@ -44,8 +45,12 @@ class ProductListHome extends Component {
     const { data } = this.state;
     data && data.map((item, index) => {
       if (item.productId === product.productId) {
+        item.number = 1;
+        cartSerice.addToCart(product.productId, item.number).then(() => {
+          // console.log('ADD_TO_CART RESPONSE = ', cartSerice.addCartdata);
+          this.props.increment();
+        })
         item.showAddCart = false;
-        this.props.increment();
         return item;
       }
     });
@@ -58,8 +63,11 @@ class ProductListHome extends Component {
     const { data } = this.state;
     data && data.map((item, index) => {
       if (item.productId === product.productId) {
-        this.props.increment();
         item.number++;
+        cartSerice.addToCart(product.productId, item.number).then(() => {
+          // console.log('ADD_TO_CART RESPONSE = ', cartSerice.addCartdata);
+          this.props.increment();
+        })
         return item;
       }
     });
@@ -72,12 +80,15 @@ class ProductListHome extends Component {
     const { data } = this.state;
     data && data.map((item, index) => {
       if (item.productId === product.productId) {
-        this.props.decrement();
-        if(item.number == 1){
+        item.number--;
+        cartSerice.addToCart(product.productId, item.number).then(() => {
+          // console.log('ADD_TO_CART RESPONSE = ', cartSerice.addCartdata);
+          this.props.decrement();
+        })
+        if(item.number == 0){
           item.showAddCart = true;
           return item;
         }
-        item.number--;
         return item;
       }
     });
