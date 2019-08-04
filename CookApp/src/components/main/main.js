@@ -41,6 +41,16 @@ import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
 import CartHome from '../../components/cart-home/cart-home';
+import PageComboBuyIngredients from '../../components/page-combo-buy-ingredients/page-combo-buy-ingredients';
+
+const ComboBuyIngredients =  {
+  screen: PageComboBuyIngredients,
+  navigationOptions: {
+    title: LANG.BUY_INGREDIENT,
+    headerTitleStyle: styles.headerTitleStyle,
+    headerLeft: <BackButton isGreen/>
+  }
+}
 
 const CollectionListScreen = {
   screen: CollectionList,

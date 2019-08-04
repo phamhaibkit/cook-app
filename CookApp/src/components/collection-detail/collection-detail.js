@@ -3,11 +3,12 @@ import _ from 'lodash';
 import {
   Text,
   View,
-  Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
   ScrollView
 } from 'react-native';
+
+import { Image } from 'react-native-elements';
 
 import { IMG, CSS, COLOR, CONST } from '../../utils/variables';
 import { LANG } from '../../lang/lang';

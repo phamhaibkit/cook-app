@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Text, View, Image, TouchableWithoutFeedback, ImageBackground } from 'react-native';
+import { Text, View, TouchableWithoutFeedback, ImageBackground } from 'react-native';
+import { Image } from 'react-native-elements';
 import { IMG } from '../../utils/variables';
 import styles from './collection-item-style';
 import { COLOR, CSS } from '../../utils/variables';

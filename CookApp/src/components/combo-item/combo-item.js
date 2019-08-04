@@ -3,9 +3,10 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ImageBackground,
   TouchableWithoutFeedback
 } from 'react-native';
+
+import { Image } from 'react-native-elements';
 
 import styles from './combo-item-style';
 import { LANG } from '../../lang/lang';
@@ -108,25 +109,25 @@ export default class ComboItem extends Component {
           <View style={styles.container2Img}>
             <View style={imgContainerWidth}>
               <View>
-                <ImageBackground
+                <Image
                   style={imgLeftStyle}
                   source={{ uri: item.comboImages[0] }}
                 />
                 {is4 && (
-                  <ImageBackground
+                  <Image
                     style={imgLeftDown}
                     source={{ uri:  item.comboImages[2] }}
                   />
                 )}
               </View>
               <View>
-                <ImageBackground
+                <Image
                   style={imgRightStyle}
                   source={{ uri:  item.comboImages[1] }}
 
                 />
                 {is4 && (
-                  <ImageBackground
+                  <Image
                     style={imgRightDown}
                     source={{ uri:  item.comboImages[3] }}
                   />
@@ -149,30 +150,30 @@ export default class ComboItem extends Component {
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.container2Img}>
             <View style={styles.containerImg}>
-              <ImageBackground
+              <Image
                 style={isVertical ? [styles.imgLeftView, styles.imgLeftViewVertical] : styles.imgLeftView}
                 source={{ uri:  item.comboImages[0] }}
               />
               <View style={styles.imgRightView}>
                 <View style={styles.addImgView}>
-                  <ImageBackground
+                  <Image
                     style={imgUpStyle}
                     source={{ uri:  item.comboImages[1] }}
                   />
                   {is5 && (
-                    <ImageBackground
+                    <Image
                       style={isVertical ? [styles.imgRightUp5, styles.imgRightUp5Ver] : styles.imgRightUp5}
                       source={{ uri:  item.comboImages[3] }}
                     />
                   )}
                 </View>
                 <View style={styles.addImgView}>
-                  <ImageBackground
+                  <Image
                     style={imgDownStyle}
                     source={{ uri:  item.comboImages[2] }}
                   />
                   {is5 && (
-                    <ImageBackground
+                    <Image
                       style={isVertical ? [styles.imgRightDown5, styles.imgRightDown5Ver] : styles.imgRightDown5}
                       source={{ uri:  item.comboImages[4] }}
                     />

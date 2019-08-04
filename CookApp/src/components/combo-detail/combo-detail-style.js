@@ -175,14 +175,16 @@ export default styles = StyleSheet.create({
     marginLeft: 32, 
     marginTop: 10, 
     borderRadius: 5
+  },  
+  cookIntroductions: {
+    paddingBottom: 30,
+    marginBottom: overflowHeight,
   },
   actionBtnGroup: {
     flex: 1, 
     flexDirection: 'row', 
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end', 
+    width: '100%',
+    height: '100%',
   },
-  cookIntroductions: {
-    paddingBottom: 30,
-    marginBottom: overflowHeight,
-  }
 });

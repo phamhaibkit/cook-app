@@ -46,6 +46,8 @@ export const ROUTES = {
   },
   newsEventList: {
     key: 'newsEventList'
+  },
+  comboBuyIngredients: {
+    key: 'comboBuyIngredients'
   }
-
 };

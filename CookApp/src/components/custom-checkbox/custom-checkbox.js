@@ -33,7 +33,7 @@ export default class CustomCheckbox extends Component {
 				<View style={styles.container}>
 					{typeof leftText === 'string' && <Text style={[leftTextStyle, styles.leftTxt]}>{leftText}</Text>}
 
-					<View style={style}>
+					<View style={[styles.customCheckBox, style]}>
 						{
 							isChecked && <Image
 									source={checkedSrc}

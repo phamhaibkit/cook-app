@@ -79,6 +79,7 @@ export const LANG_VN = {
   CLOSE: 'Đóng',
   PROMOTION_INFO: 'THÔNG TIN KHUYẾN MÃI',
   INGREDIENT: 'NGUYÊN LIỆU',
+  SUB_INGREDIENT: 'Phụ liệu',
   BUY_INGREDIENT: 'Mua nguyên liệu',
   SELECT_INGREDIENT_FOR_MEAL: 'Chọn mua nguyên liệu cho các món',
   SELECT_ALL: 'Chọn tất cả',

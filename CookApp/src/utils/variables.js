@@ -65,6 +65,8 @@ export const IMG = {
   greenCircle: require('../../assets/icons/green-circle.png'),
   num: require('../../assets/icons/num.png'),
   clearInput: require('../../assets/icons/clear-input.png'),
+  arrowCollapseUp: require('../../assets/icons/arrow-collapse-up.png'),
+  arrowCollapseDown: require('../../assets/icons/arrow-collapse-down.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -293,6 +295,8 @@ export const COLOR = {
   searchBarIos: '#F8F8F8',
   blackReport: '#444444',
   shadowColor: 'rgba(0, 0, 0, 0.1)',
+  scrollTabViewColor: '#999999',
+  priceProductColor: '#EE0000'
 };
 
 export const ACTION = {
