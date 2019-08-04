@@ -240,7 +240,7 @@ export const CSS = {
     borderColor: '#9C9C9C',
     borderWidth: 1,
     borderRadius: 100,
-    width: 116,
+    width: 122,
   },
   pendingText: {
     fontSize: 12,

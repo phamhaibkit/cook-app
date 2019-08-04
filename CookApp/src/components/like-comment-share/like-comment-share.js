@@ -70,7 +70,7 @@ export default class LikeCommentShare extends Component {
         <View style={[styles.containerTimePrice, { marginTop: topAmount }]}>
           <View style={styles.priceView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.likeCount)}
+              {kFormatter(item.likeTimes || 0)}
               <Text style={styles.textLight}> {LANG.LIKE}</Text>
             </Text>
           </View>
@@ -79,7 +79,7 @@ export default class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.numberEvaluate || item.evaluateNumber)}
+              {kFormatter(item.numberEvaluate || item.evaluateNumber || 0)}
               <Text style={styles.textLight}> {LANG.COMMENT}</Text>
             </Text>
           </View>
@@ -88,7 +88,7 @@ export default class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.shareCount)}
+              {kFormatter(item.shareCount || 0)}
               <Text style={styles.textLight}> {LANG.SHARE}</Text>
             </Text>
           </View>
@@ -97,7 +97,7 @@ export default class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.viewCount)}
+              {kFormatter(item.viewCount || 0)}
               <Text style={styles.textLight}> {LANG.VIEW}</Text>
             </Text>
           </View>
