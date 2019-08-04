@@ -6,15 +6,19 @@ const cartNumber = {
   loading: true
 }
 
+const addCartdata = {
+  loading: false
+}
+
 
 class CartService {
   constructor() {
     this.resetService();
-    this.cartNumber = cartNumber;
   }
 
   resetService = () => {
-    // this.recipeHightLightData = _.cloneDeep(recipeHightLightData);
+    this.cartNumber = _.cloneDeep(cartNumber);
+    this.addCartdata = _.cloneDeep(addCartdata);
   };
   
   getCartNum = (userId) => {
@@ -24,6 +28,21 @@ class CartService {
       .then(data => {
         this.cartNumber = _.cloneDeep({
           ...data,
+          loading: false,
+        });
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
+
+  addToCart = () => {
+    const url = API.ADD_TO_CART;
+    this.addCartdata.loading = true;
+    return HTTPService.get(url,null,null)
+      .then(data => {
+        this.addCartdata = _.cloneDeep({
+          carts: data,
           loading: false,
         });
       })

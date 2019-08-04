@@ -14,6 +14,23 @@ const adsData = {
   loading: true,
 }
 
+const likedEventsData = {
+  loading: true
+}
+
+const likedRecipeData = {
+  loading: true
+}
+
+const shareEventData = {
+  loading: true
+}
+
+const shareRecipeData = {
+  loading: true
+}
+
+
 class HomeService {
   constructor() {
     this.resetService();
@@ -23,6 +40,10 @@ class HomeService {
     this.homeData = _.cloneDeep(homeData);
     this.trendingData = _.cloneDeep(trendingData);
     this.adsData = _.cloneDeep(adsData);
+    this.likedEventsData = _.cloneDeep(likedEventsData);
+    this.likedRecipeData = _.cloneDeep(likedRecipeData);
+    this.shareEventData = _.cloneDeep(shareEventData);
+    this.shareRecipeData = _.cloneDeep(shareRecipeData);
   };
   
   getHome = () => {
@@ -53,6 +74,9 @@ class HomeService {
           loading: false,
         })
       })
+      .catch(err => {
+        return Promise.reject(err);
+      })
   }
 
   getAds = () => {
@@ -64,6 +88,69 @@ class HomeService {
           ...data,
           loading: false,
         })
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
+
+  likeEvent = (eventId) => {
+    const url = API.LIKE_EVENT(eventId);
+    this.likedEventsData.loading = true;
+    return HTTPService.post(url)
+      .then(data => {
+        this.likedEventsData = _.cloneDeep({
+          likedEvents: data,
+          loading: false
+        })
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
+
+  likeRecipe = (recipeId) => {
+    const url = API.LIKE_RECIPE(recipeId);
+    this.likedRecipeData.loading = true;
+    return HTTPService.post(url)
+      .then(data => {
+        this.likedRecipeData = _.cloneDeep({
+          likedRecipes: data,
+          loading: false
+        })
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
+
+  shareEvent = (eventId) => {
+    const url = API.shareEvent(eventId);
+    this.shareEventData = true;
+    return HTTPService.post(url)
+      .then(data => {
+        this.shareEventData = _.cloneDeep({
+          ...data,
+          loading: false
+        })
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
+
+  shareRecipe = (recipeId) => {
+    const url = API.shareRecipe(recipeId);
+    this.shareRecipeData.loading = true;
+    return HTTPService.post(url)
+      .then(data => {
+        this.shareRecipeData = _.cloneDeep({
+          ...data,
+          loading: false
+        })
+      })
+      .catch(err => {
+        return Promise.reject(err);
       })
   }
 

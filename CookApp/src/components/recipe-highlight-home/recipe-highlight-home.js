@@ -6,11 +6,11 @@ import {
   Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Share,
   ScrollView
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Advertiment from '../advertiment/advertiment';
+import LikeCommentShare from '../like-comment-share/like-comment-share';
 import { IMG } from '../../utils/variables';
 import styles from './recipe-highlight-home-style';
 import { LANG } from '../../lang/lang';
@@ -48,25 +48,7 @@ export default class RecipeHighlightHome extends Component {
   };
 
   onShare = () => {
-    Share.share(
-      {
-        title: 'BeChef share',
-        urlonShare: 'https://www.google.vn/',
-        message: 'Nau An Di Cung',
-      },
-      {
-        // android
-        dialogTitle: 'This is BeShef share',
-        // ios
-        excludedActivityTypes: [
-          // 'com.apple.UIKit.activity.PostToFacebook',
-          // 'com.apple.UIKit.activity.PostToTwitter',
-          // 'com.apple.UIKit.activity.Message',
-        ],
-      }
-    ).then((res) => {
-      console.log('DATAATATAATTA', res);
-    });
+
   };
 
   openReport = (item) => {
@@ -90,28 +72,24 @@ export default class RecipeHighlightHome extends Component {
 
   onPressLove = (recipe) => {
     const { recipes } = this.state;
-    recipes && recipes.map((item, index) => {
-      if (item.id === recipe.id) {
-        item.isLiked = !item.isLiked;
-        return item;
-      }
-    });
-    this.setState({
-      recipes: recipes
+    homeService.likeRecipe(recipe.id).then(() => {
+      // recipes && recipes.map( (item, index) => {
+      //   homeService.likedEventsData && homeService.likedRecipeData.likedRecipes.map((indexLiked) => {
+      //     if(item.id === indexLiked){
+      //       item.isLiked = true
+      //     }
+      //   })
+      // })
+      // this.setState({
+      //   recipes: recipes
+      // })
+      console.log('likedDatatatat', recipes);
     })
   }
 
   onPressSave = (recipe) => {
     const { recipes } = this.state;
-    recipes && recipes.map((item, index) => {
-      if (item.id === recipe.id) {
-        item.isSaved = !item.isSaved;
-        return item;
-      }
-    });
-    this.setState({
-      recipes: recipes
-    })
+    console.log('onPressSave==', recipes);
   }
 
   renderFrame = (recipes) => {
@@ -122,8 +100,6 @@ export default class RecipeHighlightHome extends Component {
       recipes.length - 1 === index
         ? [styles.frame, styles.endFrame]
         : styles.frame;
-      const iconLove = item.isLiked ? IMG.loveActiveHome : IMG.loveHome;
-      const iconSave = item.isSaved ? IMG.saveActiveHome: IMG.saveHome;
       const priceFormat = getCurrencyStr(item.price);
       return (
         <View style={{ flex: 1 }} key={index}>
@@ -183,58 +159,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableOpacity>
             </View>
 
-            <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
-              <View style={styles.priceView}>
-                <Text style={styles.textTime}>
-                  {kFormatter(item.likeCount)}
-                  <Text style={styles.textLight}> {LANG.LIKE}</Text>
-                </Text>
-              </View>
-              <View style={styles.lineLikeView}>
-                <View style={styles.line} />
-              </View>
-              <View style={styles.likeView}>
-                <Text style={styles.textTime}>
-                  {kFormatter(item.numberEvaluate)}
-                  <Text style={styles.textLight}> {LANG.COMMENT}</Text>
-                </Text>
-              </View>
-              <View style={styles.lineLikeView}>
-                <View style={styles.line} />
-              </View>
-              <View style={styles.likeView}>
-                <Text style={styles.textTime}>
-                  {kFormatter(item.shareCount)}
-                  <Text style={styles.textLight}> {LANG.SHARE}</Text>
-                </Text>
-              </View>
-              <View style={styles.lineLikeView}>
-                <View style={styles.line} />
-              </View>
-              <View style={styles.likeView}>
-                <Text style={styles.textTime}>
-                  {kFormatter(item.viewCount)}
-                  <Text style={styles.textLight}> {LANG.VIEW}</Text>
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.lineHori} />
-
-            <View style={styles.containerLoveCmt}>
-              <TouchableOpacity onPress={() => this.onPressLove(item)}>
-                <Image style={styles.loveImg} source={iconLove} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image style={styles.cmtImg} source={IMG.commentHome} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.onShare}>
-                <Image style={styles.shareImg} source={IMG.shareHome} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.saveView}  onPress={() => this.onPressSave(item)}>
-                <Image style={styles.saveImg} source={iconSave} />
-              </TouchableOpacity>
-            </View>
+            <LikeCommentShare item={item} onLove={this.onPressLove} onShare={this.onShare} onSave={this.onPressSave}/>
           </View>
           {/* {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>} */}
         </View>

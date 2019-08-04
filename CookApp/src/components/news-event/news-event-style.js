@@ -17,6 +17,7 @@ export default StyleSheet.create({
     // marginHorizontal: CSS.padding15
   },
   frame: {
+    marginTop: 15,
     height: heightHori,
     width: widthHori,
     backgroundColor: 'white',
