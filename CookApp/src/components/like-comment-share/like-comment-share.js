@@ -13,12 +13,13 @@ export class LikeCommentShare extends Component {
   render() {
     const {item} = this.props;
     const iconLove = item.isLove ? IMG.loveActiveHome : IMG.loveHome;
+    const evaluationsCount = item.evaluations ? item.evaluations.length : 0
     return (
       <View>
         <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
           <View style={styles.priceView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.likeTimes)}
+              {kFormatter(item.likeTimes || 0)}
               <Text style={styles.textLight}> thích</Text>
             </Text>
           </View>
@@ -27,7 +28,7 @@ export class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.numberEvaluate)}
+              {kFormatter(evaluationsCount)}
               <Text style={styles.textLight}> bình luận</Text>
             </Text>
           </View>
@@ -36,7 +37,7 @@ export class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.shareTimes)}
+              {kFormatter(item.shareCount || 0)}
               <Text style={styles.textLight}> chia sẻ</Text>
             </Text>
           </View>
@@ -45,7 +46,7 @@ export class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.viewTimes)}
+              {kFormatter(item.viewCount || 0)}
               <Text style={styles.textLight}> xem</Text>
             </Text>
           </View>

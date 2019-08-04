@@ -40,6 +40,8 @@ export const API = {
   GET_NEWS_EVENT : HOST + '/event/all',
 
   //search recipe
-  SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text
+  SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text,
+
+  GET_RECIPE_DETAIL: id => HOST + '/recipe/' + id
 
 };

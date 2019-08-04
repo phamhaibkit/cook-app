@@ -11,8 +11,7 @@ export default class ImageProfile extends Component {
   render() {
     const { user, widthImage } = this.props;
     const detailName = user.name.split(" ");
-    const getLastCharacterName = detailName[detailName.length - 1].substring(0,1)
-    console.log(getLastCharacterName);
+    const getLastCharacterName = detailName[detailName.length - 1].substring(0,1);
     const styleCircle = {
       height: widthImage, width: widthImage, borderRadius: widthImage / 2
     }
