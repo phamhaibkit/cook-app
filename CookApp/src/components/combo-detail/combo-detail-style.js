@@ -12,6 +12,21 @@ export default styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
     marginBottom: -overflowHeight
   },
+  header: {
+    position: 'absolute', 
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    left: 0,
+    right: 0,
+    zIndex: 999,
+    width: '100%',
+    paddingVertical: 10,
+    paddingRight: 15,
+    borderBottomColor: COLOR.borderAddCart
+  },
+
   backgroundWhite: {
     backgroundColor: COLOR.whiteColor
   },  

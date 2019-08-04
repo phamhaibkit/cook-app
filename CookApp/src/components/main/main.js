@@ -105,18 +105,6 @@ const CollectionDetailScreen = {
   }
 };
 
-const ComboDetailScreen = {
-  screen: ComboDetail,
-  navigationOptions: {
-    headerLeft: <BackButton />,
-    headerRight: <CartHome  isTransparentHeader/>,
-    headerTransparent: true,
-    headerStyle: {
-      marginRight: 15
-    }
-  }
-};
-
 const PageReportRecipeScreen = {
   screen: PageReportRecipe,
   navigationOptions: {
@@ -148,7 +136,7 @@ const HomeStack = createStackNavigator({
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.collectionDetail.key]: CollectionDetailScreen,
-  [ROUTES.comboDetail.key]: ComboDetailScreen,
+  [ROUTES.comboDetail.key]: ComboDetail,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
   [ROUTES.recipeLikedList.key]: RecipeLikedListScreen,
   [ROUTES.recipeDetail.key]: RecipeDetailScreen,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TouchableHighlight, Image } from 'react-native';
+import { View, Text, Button, TouchableHighlight, Image, Animated } from 'react-native';
 import _ from 'lodash';
 
 import styles from './combo-detail-style';
@@ -12,8 +12,14 @@ import CustomCheckbox from '../../components/custom-checkbox/custom-checkbox';
 import GradientButton from '../../components/gradient-button/gradient-button';
 import IncreaterButtonWithNumber from '../increater-button-with-number/increater-button-with-number';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
+import BackButton from '../back-button/back-button';
+import CartHome from '../../components/cart-home/cart-home';
 import { LANG } from '../../lang/lang';
 import  ComboService  from '../../services/combo.service';
+
+const HEADER_HEIGHT = 50;
+const SWIPER_HEIGHT = 300;
+const OVERFLOW_HEIGHT = 90;
 
 class IngredientCard extends Component{
   constructor(props){
@@ -67,9 +73,14 @@ class IngredientCard extends Component{
 }
 
 export default class ComboDetail extends Component {
+  static navigationOptions = {
+    header: null    
+  };
+
   constructor(props) {
     super(props);
     this.state = {
+      scrollY: new Animated.Value(0),
       estimatePrice: 0,
       totalPrice: 0,
       mealQuantity: 1,
@@ -217,117 +228,149 @@ export default class ComboDetail extends Component {
   }
 
   render() {
-    let { data, mealQuantity, recipes } = this.state;
+    let { data, mealQuantity, recipes, scrollY } = this.state;
+    const onScroll = Animated.event([{ 
+      nativeEvent: {
+        contentOffset: {
+          y: scrollY
+        }
+      } 
+    }]);
+
+    const backgroundColor = scrollY.interpolate({
+      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
+      outputRange: ["transparent", "white"],
+      extrapolate: 'clamp',
+    });
+
+    const borderBottomWidth = scrollY.interpolate({
+      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    });
+
     
     return (
-      <ScrollView>
-        <SwiperImage height={300} listItems={ data.comboImage }/>
-        
-        <View style={styles.container}>
-          
-          <View style={[styles.blockContainer, styles.backgroundWhite]}>
-            <View style={styles.topStyle}>
-              <View style={[styles.dishInfo, CSS.lightBoxShadow]}>
-                <Text style={[styles.comboLabel, CSS.fontQuiMedium]}>
-                  {LANG.COMBO.name}
-                </Text>
-                <Text style={[styles.title, CSS.fontQuiBold]}>{ data.name }</Text>
-                <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-                  <View style={styles.statisticalNumber}>
-                    <Text style={styles.numberStyle}>
-                      { data.orderCount }
-                      <Text style={styles.textLight}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
-                    </Text>
-                    
-                  </View>
-                  <View style={styles.seperator}></View>
-                  <View style={styles.statisticalNumber}>
-                    <Text style={styles.numberStyle}> 
-                      { data.viewCount }
-                      <Text style={styles.textLight}>{LANG.SPACE}{LANG.VIEW}</Text>
-                    </Text>              
-                  </View>
-                </View>
-                <View style={styles.estimatePrice}>
-                  <View style={[CSS.dFlex, CSS.flexRow, { paddingVertical: 15}]}>
-                    <View style={styles.w50percentage}>
-                      <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.totalPrice) } {LANG.VIETNAM_DONG}</Text>
-                      <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
-                    </View>
-                    <View style={styles.cardSeparator}></View>
-                    <View style={styles.w50percentage}>
-                      <IncreaterButtonWithNumber
-                        currentQuantity={this.state.mealQuantity}   
-                        onPressDecreaseButton={() => this.handleMealClick()}
-                        onPressIncreaseButton={() => this.handleMealClick(true)}                   
-                      />
-                      <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ LANG.MEAL }</Text>
-                    </View> 
-                  </View>               
-                  <Text style={[styles.optional, CSS.fontQuiMedium,  CSS.textAlignCenter]}>{ LANG.OPTIONAL_MEAL }</Text>
-                </View>
-              </View>
-              <View style={styles.promotionInfo}>
-                <Text style={[styles.sectionTitle, CSS.fontNuExBold]}>{LANG.PROMOTION_INFO}</Text>
-              {
-                data.promotion && data.promotion.map((promotion, index) => (
-                    <Text style={[styles.textDescription, CSS.fontQuiRegular]} key={index}>{promotion}</Text>
-                ))
-              }
-              </View>
-            </View>
+     <View>
+        <Animated.View style={[styles.header, { backgroundColor, borderBottomWidth }]}>
+          <BackButton isGreen/>
+          <View >
+            <CartHome isTransparentHeader/>
           </View>
+        </Animated.View>
 
-          <View style={[styles.ingredients, styles.blockContainer, styles.backgroundWhite]}>
-            <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>              
-              <Text style={[{height: 35}, styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
-              <GradientButton 
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={[COLOR.gradientLeft, COLOR.gradientRight]}
-                buttonLabel={ LANG.BUY_INGREDIENT }
-                onPress={ this.handlePressBuy }
-              />
-            </View>
-            
-            <Text>{LANG.SELECT_INGREDIENT_FOR_MEAL}</Text>
-            
-            <View style={styles.selectAll}>
-              <CustomCheckbox 
-                style={styles.customCheckBox}
-                isChecked={this.state.isCheckAll}
-                rightText={LANG.SELECT_ALL}
-                onClick={this.handleCheckAll}
-              />
-              <View style={styles.horizontalSeparator}></View>
-              {
-                recipes && recipes.map((ingredient, index) => (
-                  <IngredientCard
-                    key={index}
-                    index={index}
-                    data={recipes}
-                    ingredientName={ingredient.name}
-                    amountOfPeople={ingredient.numPeople}
-                    price={ingredient.price}
-                    isChecked={ingredient.isChecked}
-                    onClickCheckBox={() => this.handleRecipeCheck(ingredient)}
-                    onClickSubstract={() => this.handleIngredientClick(ingredient)}
-                    onClickPlus={() => this.handleIngredientClick(ingredient, true)}
-                  />
-                ))
-              }
-            </View>
-          </View> 
+        <ScrollView 
+          scrollEventThrottle={16} 
+          { ...{onScroll} }
+        >
+          <SwiperImage height={SWIPER_HEIGHT} listItems={ data.comboImage }/>
           
-          <View style={[{ backgroundColor: COLOR.whiteColor },  styles.cookIntroductions]}>
-            <MostSearched 
-              label={ LANG.COOKING_INSTRUCTIONS } 
-              data={this.state.recipes} 
-              subData={true}
-            />               
+          <View style={styles.container}>
+            
+            <View style={[styles.blockContainer, styles.backgroundWhite]}>
+              <View style={styles.topStyle}>
+                <View style={[styles.dishInfo, CSS.lightBoxShadow]}>
+                  <Text style={[styles.comboLabel, CSS.fontQuiMedium]}>
+                    {LANG.COMBO.name}
+                  </Text>
+                  <Text style={[styles.title, CSS.fontQuiBold]}>{ data.name }</Text>
+                  <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                    <View style={styles.statisticalNumber}>
+                      <Text style={styles.numberStyle}>
+                        { data.orderCount }
+                        <Text style={styles.textLight}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
+                      </Text>
+                      
+                    </View>
+                    <View style={styles.seperator}></View>
+                    <View style={styles.statisticalNumber}>
+                      <Text style={styles.numberStyle}> 
+                        { data.viewCount }
+                        <Text style={styles.textLight}>{LANG.SPACE}{LANG.VIEW}</Text>
+                      </Text>              
+                    </View>
+                  </View>
+                  <View style={styles.estimatePrice}>
+                    <View style={[CSS.dFlex, CSS.flexRow, { paddingVertical: 15}]}>
+                      <View style={styles.w50percentage}>
+                        <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.totalPrice) } {LANG.VIETNAM_DONG}</Text>
+                        <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
+                      </View>
+                      <View style={styles.cardSeparator}></View>
+                      <View style={styles.w50percentage}>
+                        <IncreaterButtonWithNumber
+                          currentQuantity={this.state.mealQuantity}   
+                          onPressDecreaseButton={() => this.handleMealClick()}
+                          onPressIncreaseButton={() => this.handleMealClick(true)}                   
+                        />
+                        <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ LANG.MEAL }</Text>
+                      </View> 
+                    </View>               
+                    <Text style={[styles.optional, CSS.fontQuiMedium,  CSS.textAlignCenter]}>{ LANG.OPTIONAL_MEAL }</Text>
+                  </View>
+                </View>
+                <View style={styles.promotionInfo}>
+                  <Text style={[styles.sectionTitle, CSS.fontNuExBold]}>{LANG.PROMOTION_INFO}</Text>
+                {
+                  data.promotion && data.promotion.map((promotion, index) => (
+                      <Text style={[styles.textDescription, CSS.fontQuiRegular]} key={index}>{promotion}</Text>
+                  ))
+                }
+                </View>
+              </View>
+            </View>
+
+            <View style={[styles.ingredients, styles.blockContainer, styles.backgroundWhite]}>
+              <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>              
+                <Text style={[{height: 35}, styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
+                <GradientButton 
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  colors={[COLOR.gradientLeft, COLOR.gradientRight]}
+                  buttonLabel={ LANG.BUY_INGREDIENT }
+                  onPress={ this.handlePressBuy }
+                />
+              </View>
+              
+              <Text>{LANG.SELECT_INGREDIENT_FOR_MEAL}</Text>
+              
+              <View style={styles.selectAll}>
+                <CustomCheckbox 
+                  style={styles.customCheckBox}
+                  isChecked={this.state.isCheckAll}
+                  rightText={LANG.SELECT_ALL}
+                  onClick={this.handleCheckAll}
+                />
+                <View style={styles.horizontalSeparator}></View>
+                {
+                  recipes && recipes.map((ingredient, index) => (
+                    <IngredientCard
+                      key={index}
+                      index={index}
+                      data={recipes}
+                      ingredientName={ingredient.name}
+                      amountOfPeople={ingredient.numPeople}
+                      price={ingredient.price}
+                      isChecked={ingredient.isChecked}
+                      onClickCheckBox={() => this.handleRecipeCheck(ingredient)}
+                      onClickSubstract={() => this.handleIngredientClick(ingredient)}
+                      onClickPlus={() => this.handleIngredientClick(ingredient, true)}
+                    />
+                  ))
+                }
+              </View>
+            </View> 
+            
+            <View style={[{ backgroundColor: COLOR.whiteColor },  styles.cookIntroductions]}>
+              <MostSearched 
+                label={ LANG.COOKING_INSTRUCTIONS } 
+                data={this.state.recipes} 
+                subData={true}
+              />               
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+     </View>
     );
   }
 }

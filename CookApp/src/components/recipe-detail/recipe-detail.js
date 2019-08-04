@@ -19,6 +19,7 @@ import StepRecipeDetail from './step-recipe-detail';
 import ViewMoreHome from '../view-more-home/view-more-home';
 import ImageProfile from '../image-profile/image-profile';
 import TextInputRender from '../text-input/text-input';
+import recipeService from '../../services/recipe.service';
 
 const recipeDataDetail = {
   "likeTimes": 53,
@@ -114,7 +115,16 @@ export default class RecipeDetail extends Component {
   }
 
   componentDidMount() {
+    const id = 1;
+    recipeService.getRecipeDetail(id).then(() => {
 
+      let recipeDetail = { ...recipeService.recipeDetail };
+      console.log(recipeDetail, 'recipeDetail');
+      this.setState({
+        recipeDetail,
+      });
+      // this.initData(data);
+    });
   }
 
   componentWillUnmount() {
@@ -140,7 +150,8 @@ export default class RecipeDetail extends Component {
   }
 
   renderOwner = (chef) => {
-    return (<View style={[styles.ownerStyles, CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
+    console.log(chef, 'chef');
+    return (chef && chef.owner && <View style={[styles.ownerStyles, CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
       <View style={styles.containerChef}>
         <ImageProfile user={chef.owner} widthImage={56} />
         {/* <Image style={styles.avataImg} source={{ uri: chef.owner && chef.owner.avatar }} /> */}
@@ -161,7 +172,8 @@ export default class RecipeDetail extends Component {
 
   renderInforRecipe = (recipe) => {
     const { rateAmount, starNum, minuteAmount } = this.state;
-    return (<View style={[{ marginTop: -90, alignItems: 'center' }]}>
+
+    return (recipe && <View style={[{ marginTop: -90, alignItems: 'center' }]}>
       <View style={[styles.recipeInfor, CSS.lightBoxShadow]}>
         <View style={[CSS.justifyContentCenter]}>
           <View style={CSS.pendingStatus}>
@@ -169,33 +181,34 @@ export default class RecipeDetail extends Component {
               {LANG_VN.PENDING}
             </Text>
           </View>
-          <Text style={[CSS.fontQuiBold, styles.mgTop10, CSS.fontSize20, { color: '#001D12' }]}>Mì Udon Súp Miso và Thịt Heo</Text>
+          <Text style={[CSS.fontQuiBold, styles.mgTop10, CSS.fontSize20, { color: '#001D12' }]}>{recipe.name}</Text>
           <View style={[CSS.flexRow, styles.mgTop10]}>
             <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-              {this.renderStar(starNum)}
+              {this.renderStar(recipe.starNum || 0)}
               <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#000000', paddingLeft: 8, paddingRight: 11 }]}>
                 {rateAmount} {LANG_VN.RATE}
               </Text>
               <Image style={styles.imageIcon} source={IMG.sandClokHome}></Image>
               <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#000000', paddingLeft: 4 }]}>
-                {minuteAmount} {LANG_VN.MINUTE}
+                {/* {minuteAmount} {LANG_VN.MINUTE} */}
+                {recipe.timeExecute}
               </Text>
             </View>
           </View>
           <Text style={[CSS.fontQuiRegular, styles.mgTop10, CSS.fontSize14, { color: '#001D12' }]}>
-            Món mì udon được nấu cùng nước súp miso đậm đà, thanh nhẹ, cùng với điểm
-            nhấn là thịt ba chỉ cay và hồng sâm Hàn Quốc sẽ khiến bạn bất ngờ vì hương vị độc đáo đấy ạ!
-        </Text>
+            {recipe.description}
+          </Text>
           <LikeCommentShare item={recipe} />
         </View>
       </View>
     </View>)
   }
 
-  renderIngredient = () => {
+  renderIngredient = (recipe) => {
     const price = 1000, amountOfPeople = 1;
+    
     return (
-      <View style={[styles.container]}>
+      recipe && <View style={[styles.container]}>
         <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
           <Text style={[{ color: '#444444' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.INGREDIENT}</Text>
           <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[{ padding: 10, borderRadius: 5 }]} colors={['#3BB556', '#72C91C']} >
@@ -212,8 +225,8 @@ export default class RecipeDetail extends Component {
                 <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.ESTIMATE_PRICE}:</Text>
               </View>
               <View style={{ flex: 2 }}>
-                <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{amountOfPeople}{LANG.SPACE}{LANG.PERSON}</Text>
-                <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{formatNumberWithDot(price)}{LANG.SPACE}{LANG.VIETNAM_DONG}</Text>
+                <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{recipe.numPeople}{LANG.SPACE}{LANG.PERSON}</Text>
+                <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{formatNumberWithDot(recipe.price)}{LANG.SPACE}{LANG.VIETNAM_DONG}</Text>
               </View>
             </View>
             <View style={styles.actionBtnGroup}>
@@ -223,34 +236,33 @@ export default class RecipeDetail extends Component {
           </View>
         </View>
         <View style={[styles.ingrdientList, CSS.flexCol]}>
-          <View style={[styles.rowIngredient, CSS.justifySpaceBetween, CSS.flexRow]}>
-            <Text style={[{ textDecorationLine: 'underline', color: COLOR.greenColor }, CSS.fontSize14, CSS.fontQuiMedium]}>Mì Udon</Text>
-            <Text style={[CSS.fontSize14, CSS.fontQuiRegular, { color: '#001D12' }]}>200gram</Text>
-          </View>
-          <Image style={{ width: '100%', height: 1 }} source={IMG.borderDot}></Image>
-          <View style={[styles.rowIngredient, CSS.justifySpaceBetween, CSS.flexRow]}>
-            <Text style={[{ color: '#001D12' }, CSS.fontSize14, CSS.fontQuiMedium]}>Tuong miso</Text>
-            <Text style={[CSS.fontSize14, CSS.fontQuiRegular, { color: '#001D12' }]}>1/2 muỗng canh</Text>
-          </View>
-          <Image style={{ width: '100%', height: 1 }} source={IMG.borderDot}></Image>
+          {recipe.products && recipe.products.map((item, index) => {
+            return <View key={index}>
+              <View style={[styles.rowIngredient, CSS.justifySpaceBetween, CSS.flexRow]}>
+                <Text style={[{ textDecorationLine: 'underline', color: COLOR.greenColor, textTransform: 'capitalize' }, CSS.fontSize14, CSS.fontQuiMedium]}>{item.name}</Text>
+                <Text style={[CSS.fontSize14, CSS.fontQuiRegular, { color: '#001D12' }]}>{item.unit}</Text>
+              </View>
+              <Image style={{ width: '100%', height: 1 }} source={IMG.borderDot}></Image>
+            </View>
+          })}
         </View>
       </View>
     )
   }
 
-  renderStep = () => {
+  renderStep = (recipe) => {
     const { activeImage, minuteAmount } = this.state;
-    return <View style={[styles.container]}>
+    return (recipe && recipe.steps && <View style={[styles.container]}>
       <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
         <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.STEP_ACTION}</Text>
         <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
           <Image style={styles.imageIcon} source={IMG.sandClokHome}></Image>
           <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#000000', paddingLeft: 4 }]}>
-            {minuteAmount} {LANG_VN.MINUTE}
+            {recipe.timeExecute}
           </Text>
         </View>
       </View>
-      {step.map((item, index) => {
+      {recipe.steps.map((item, index) => {
         const data = {
           stepNumber: index + 1,
           infor: item,
@@ -258,7 +270,7 @@ export default class RecipeDetail extends Component {
         }
         return <StepRecipeDetail key={index} data={data}></StepRecipeDetail>
       })}
-    </View>
+    </View>)
   }
 
   renderProgress = () => {
@@ -329,37 +341,37 @@ export default class RecipeDetail extends Component {
   renderRowComment = () => {
     const { comment } = this.state
     return <View>
-    {rowCommentRate.map((item, index) => {
-      return <View key={index} style={[styles.rowCommentRate]}>
-        <View style={[CSS.flexRow, { flex: 1 }]}>
-          <ImageProfile user={item} widthImage={42}></ImageProfile>
-          <Image resizeMode="contain" style={{ height: 20, width: 10, marginLeft: 10, marginRight: -2.5, marginTop: 8, zIndex: 1 }} source={IMG.num}></Image>
-          <View style={[CSS.flexCol, CSS.justifySpaceBetween, styles.commentRow]}>
-            <View style={[CSS.flexRow, CSS.justifySpaceBetween]}>
-              <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>Louis Nguyễn</Text>
-              <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>1 minutes</Text>
+      {rowCommentRate.map((item, index) => {
+        return <View key={index} style={[styles.rowCommentRate]}>
+          <View style={[CSS.flexRow, { flex: 1 }]}>
+            <ImageProfile user={item} widthImage={42}></ImageProfile>
+            <Image resizeMode="contain" style={{ height: 20, width: 10, marginLeft: 10, marginRight: -2.5, marginTop: 8, zIndex: 1 }} source={IMG.num}></Image>
+            <View style={[CSS.flexCol, CSS.justifySpaceBetween, styles.commentRow]}>
+              <View style={[CSS.flexRow, CSS.justifySpaceBetween]}>
+                <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>Louis Nguyễn</Text>
+                <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>1 minutes</Text>
+              </View>
+              <Text style={{ marginTop: 10 }}>{item.comment}</Text>
             </View>
-            <Text style={{ marginTop: 10 }}>{item.comment}</Text>
           </View>
         </View>
+      })}
+      <View style={[CSS.flexRow]}>
+        <ImageProfile user={recipeDataDetail.owner} widthImage={42}></ImageProfile>
+        <View style={{ flex: 1, marginLeft: 15 }}>
+          <TextInputRender
+            onChangeText={(value, err) =>
+              this.onChangeText(value, err, "comment")
+            }
+            placeholder="Nhập bình luận"
+            value={comment} />
+        </View>
+        <TouchableOpacity>
+          <Text style={[CSS.fontQuiBold, CSS.fontSize15, { color: '#3ABF57', marginTop: 15, marginLeft: 5 }]}>Gửi</Text>
+        </TouchableOpacity>
       </View>
-    })}
-    <View style={[CSS.flexRow]}>
-      <ImageProfile user={recipeDataDetail.owner} widthImage={42}></ImageProfile>
-      <View style={{ flex: 1, marginLeft: 15 }}>
-        <TextInputRender
-          onChangeText={(value, err) =>
-            this.onChangeText(value, err, "comment")
-          }
-          placeholder="Nhập bình luận"
-          value={comment} />
-      </View>
-      <TouchableOpacity>
-        <Text style={[CSS.fontQuiBold, CSS.fontSize15, { color: '#3ABF57', marginTop: 15, marginLeft: 5 }]}>Gửi</Text>
-      </TouchableOpacity>
-    </View>
 
-  </View>
+    </View>
 
   }
 
@@ -376,7 +388,7 @@ export default class RecipeDetail extends Component {
 
   render() {
     // let recipesDetail = this.state.data;
-    const { imageHeader } = this.state;
+    const { imageHeader, recipeDetail } = this.state;
     console.log(this.state, 'imageHeader');
     return (
       <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
@@ -384,20 +396,20 @@ export default class RecipeDetail extends Component {
 
           <SwiperImage height={300} listItems={imageHeader} />
           <View style={[styles.container]}>
-            {this.renderInforRecipe(recipeDataDetail)}
-            {this.renderOwner(recipeDataDetail)}
+            {this.renderInforRecipe(recipeDetail)}
+            {this.renderOwner(recipeDetail)}
           </View>
           <View style={styles.horizontalFlash}></View>
-          {this.renderIngredient()}
+          {this.renderIngredient(recipeDetail)}
           <View style={styles.horizontalFlash}></View>
-          {this.renderStep()}
+          {this.renderStep(recipeDetail)}
           <View style={styles.horizontalFlash}></View>
           {this.renderRate()}
           <View style={styles.horizontalFlash}></View>
           <ViewMoreHome type={LANG.COMMENT_PAGE} viewMore={() => this.viewMore('')} />
           <View style={styles.container}>
             {this.renderRowComment()}
-            
+
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

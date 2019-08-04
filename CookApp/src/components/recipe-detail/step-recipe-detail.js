@@ -17,14 +17,14 @@ export default class StepRecipeDetail extends Component {
 
   render() {
     const { data } = this.props
-    const { sliderImages, description } = data.infor;
+    const { sliderImages, stepDetail } = data.infor;
     const { activeImage } = this.state;
     return <View style={[styles.stepsSection, !data.lastChild ? CSS.borderBottom : '']}>
       <View style={[CSS.flexRow, CSS.alignItemsCenter, { marginBottom: 7 }]}>
         <Image style={{ height: 6, width: 6, marginRight: 5 }} source={IMG.greenCircle}></Image>
         <Text style={[CSS.fontSize14, CSS.fontQuiBold, styles.colorTextDark]}>Bước {data.stepNumber}</Text>
       </View>
-      {sliderImages.length !== 0 && <View style={[styles.stepImages]}>
+      {sliderImages && sliderImages.length !== 0 && <View style={[styles.stepImages]}>
         <Image style={[{ height: 214, width: '100%', borderRadius: 5, marginBottom: 5 }]} source={{ uri: sliderImages[activeImage] }}></Image>
         <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
           {
@@ -44,7 +44,7 @@ export default class StepRecipeDetail extends Component {
       
       <View style={[{ marginTop: 7 }]}>
         <Text style={[CSS.fontSize14, CSS.fontQuiRegular, { lineHeight: 24 }]}>
-          {description}
+          {stepDetail}
           </Text>
       </View>
     </View>
