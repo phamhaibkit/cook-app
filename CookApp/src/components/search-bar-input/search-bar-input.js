@@ -10,7 +10,7 @@ export default class SearchBarInput extends Component {
     super(props);
     this.state = {
       // isFocus: true,
-      text: null
+      text: ''
     }
   }
 
@@ -27,7 +27,7 @@ export default class SearchBarInput extends Component {
   // }
   onClear = () => {
     this.setState({
-      text: null,
+      text: '',
     })
   }
 
@@ -62,7 +62,7 @@ export default class SearchBarInput extends Component {
             onChangeText={(text) => this.onChangeText(text)}
             value={this.state.text}
           />
-          {text && (
+          {!!text && (
             <TouchableOpacity style={{ flex: 1, height: 40, justifyContent: 'center', alignItems: 'center' }} onPress={this.onClear}>
               <Image source={IMG.clearInput} style={{ width: 14, height: 14 }} />
             </TouchableOpacity>

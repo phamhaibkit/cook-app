@@ -46,6 +46,9 @@ export const ROUTES = {
   },
   newsEventList: {
     key: 'newsEventList'
+  },
+  postRecipe: {
+    key: 'postRecipe'
   }
 
 };

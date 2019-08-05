@@ -40,6 +40,7 @@ import NewsEventList from '../news-event-list/news-event-list';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
+import PostRecipe from '../post-recipe/post-recipe';
 import CartHome from '../../components/cart-home/cart-home';
 
 const CollectionListScreen = {
@@ -123,7 +124,6 @@ const RecipeDetailScreen = {
   }
 };
 
-
 const HomeStack = createStackNavigator({
   Home: {
     screen: PageHome,
@@ -157,11 +157,11 @@ const StoreStack = createStackNavigator({
 
 const RecipeStack = createStackNavigator({
   Recipe: {
-    screen: PageRecipe,
-    // screen: PageSearchRecipe,
-    navigationOptions: {
-      header: null,
-    }
+    // screen: PageRecipe,
+    screen: PostRecipe,
+    // navigationOptions: {
+    //   header: null,
+    // }
   },
   PageSearchRecipe: {
     screen: PageSearchRecipe,
@@ -173,7 +173,9 @@ const RecipeStack = createStackNavigator({
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
-  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
+  [ROUTES.postRecipe.key]: PostRecipe
+
 });
 
 
@@ -280,7 +282,7 @@ UserStack.navigationOptions = ({ navigation }) => {
     tabBarVisible,
     tabBarOnPress: ({navigation, defaultHandler }) => {
       navigation.push('User')
-     }
+    }
   };
 };
 
@@ -297,8 +299,8 @@ RecipeStack.navigationOptions = ({ navigation }) => {
 const bottomTabNav = createBottomTabNavigator(
   {
     Home: {
-      screen: HomeStack,
-      // screen: RecipeStack, 
+      // screen: HomeStack,
+      screen: RecipeStack, 
       navigationOptions:
       {
         tabBarLabel: LANG.HOME

@@ -50,6 +50,10 @@ export default class PageRecipe extends Component {
     })
   }
 
+  upRecipe = () => {
+    navigationService.navigate(ROUTES.postRecipe.key);
+  }
+
   onPressSearch = () => {
     navigationService.navigate('PageSearchRecipe');
   }
@@ -78,7 +82,7 @@ export default class PageRecipe extends Component {
           <SearchBarHeader onPress={this.onPressSearch}/>
         </View>
         <ScrollView>
-          <TouchableOpacity style={styles.upRecipeView}>
+          <TouchableOpacity style={styles.upRecipeView} onPress={this.upRecipe}>
             <Image source={IMG.upRecipe} style={styles.upImg}></Image>
             <Text style={styles.upText}>{LANG.UP_RECIPE}</Text>
           </TouchableOpacity>
