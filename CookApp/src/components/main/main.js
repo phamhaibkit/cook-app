@@ -13,7 +13,7 @@ import BackButton from '../back-button/back-button';
 import SearchButton from '../search-button/search-button';
 import PageHome from '../page-home/page-home';
 import PageDetail from '../page-detail/page-detail';
-import PageProfile from '../page-profile/page-profile';
+import PageUserProfile from '../page-user-profile/page-user-profile';
 import PageSearch from '../page-search/page-search';
 import PageStore from '../page-store/page-store';
 import { ASYNC_STORAGE, IMG, CSS } from '../../utils/variables';
@@ -152,7 +152,7 @@ const StoreStack = createStackNavigator({
     }
   },
   Details: { screen: PageDetail },
-  Profile: { screen: PageProfile }
+  Profile: { screen: PageUserProfile }
 });
 
 const RecipeStack = createStackNavigator({

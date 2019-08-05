@@ -45,6 +45,7 @@ export const LANG_VN = {
   FOLLOWING: 'Bạn đang theo dõi',
   FOLLOW: 'theo dõi',
   FOLLOWED: 'Người theo dõi bạn',
+  IS_FOLLOWING: 'Đang theo dõi',
   SAVED_RECIPE: 'Công thức đã lưu',
   ORER: 'Đơn hàng',
   DISCOUNT_CODE: 'Mẫ giảm giá',
