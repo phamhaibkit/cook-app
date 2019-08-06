@@ -38,6 +38,7 @@ export const LANG_VN = {
   STEP_ACTION: 'Các bước thực hiện',
   RECIPE: 'Công thức',
   UP_RECIPE: 'Đăng Công Thức',
+  POSTED_RECIPE: 'Công Thức Đã Đăng',
   FOLLOWER: 'Người theo dõi',
   RECIPE_DRAFT: 'Công thức nháp',
   ORDER_DRAFT: 'Đơn hàng nháp',
@@ -99,5 +100,6 @@ export const LANG_VN = {
   SAVE_DRAFT: 'Lưu nháp',
   INFO: 'Thông tin',
   INGREDIENT_1: 'Nguyên Liệu',
-  PERFORM: 'Thực hiện'
+  PERFORM: 'Thực hiện',
+  SAVED_DAY: 'Lưu ngày'
 };

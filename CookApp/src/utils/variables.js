@@ -65,6 +65,7 @@ export const IMG = {
   greenCircle: require('../../assets/icons/green-circle.png'),
   num: require('../../assets/icons/num.png'),
   clearInput: require('../../assets/icons/clear-input.png'),
+  grayCalendar: require('../../assets/icons/calendar-gray.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -152,6 +153,9 @@ export const CSS = {
   },
   alignItemsCenter: {
     alignItems: 'center'
+  },
+  textUpperCase: {
+    textTransform: 'uppercase'
   },
   textAlignCenter: {
     textAlign: 'center'

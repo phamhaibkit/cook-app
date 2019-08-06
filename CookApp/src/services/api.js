@@ -51,4 +51,6 @@ export const API = {
   SHARE_RECIPE : recipeId => HOST + '/share/recipe?id=' + recipeId,
   SHARE_EVENT : eventId => HOST + '/share/event?id=' + eventId,
 
+  // user
+  USER_DRAFT_RECIPE: userId => HOST + '/recipe/draft?usr=' + userId, 
 };
