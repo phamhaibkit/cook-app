@@ -46,16 +46,16 @@ export default StyleSheet.create({
   dotView: {
     flex: 2,
     flexDirection: 'row',
-    marginTop: 7
+    marginTop: 10
   },
-  dot: {
+  dotActive: {
     width: 5,
     height: 5,
-    backgroundColor: '#F3F5F5',
+    backgroundColor: COLOR.greenColor,
     borderRadius: 2.5,
-    // marginLeft: 10
+    marginLeft: 10
   },
-  dotNext: {
+  dot: {
     width: 5,
     height: 5,
     backgroundColor: '#F3F5F5',
@@ -72,6 +72,11 @@ export default StyleSheet.create({
     fontFamily: CSS.fontTitle,
     color: '#444444'
   },
+  stepTxtGreen: {
+    fontSize: 12,
+    fontFamily: CSS.fontTitle,
+    color: COLOR.greenColor
+  },
   step2View: {
     alignItems: 'center',
     // justifyContent: 'center',
@@ -79,7 +84,8 @@ export default StyleSheet.create({
   },
   numberStep: {
     fontSize: 15,
-    fontFamily: CSS.fontTitle
+    fontFamily: CSS.fontTitle,
+    color: '#C0C1C1'
   },
   numberStepActive: {
     fontSize: 15,
@@ -93,4 +99,57 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  checkedImg: {
+    width: 12,
+    height: 9
+  },
+  spaceBorder: {
+    height: 10,
+    backgroundColor: COLOR.backgroundColor,
+    marginTop: 10
+  },
+  containerInput: {
+    paddingHorizontal: 15
+  },  
+  addImg: {
+    width: 38,
+    height: 36
+  },
+  addImgBtn: {
+    marginTop: 20,
+    height: 150,
+    // width: '100%',
+    borderWidth: 1,
+    borderColor: '#AFB1B0',
+    borderRadius: 5,
+    borderStyle: 'dashed',
+    backgroundColor: 'rgba(221,221,221, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  addImgTxt: {
+    fontFamily: CSS.fontTitle,
+    fontSize: 14,
+    color: '#969696',
+    marginTop: 13
+  },
+  addImgLimit: {
+    fontSize: 12,
+    fontFamily: CSS.fontText,
+    color: '#919191'
+  },
+  titleTxt: {
+    fontFamily: CSS.fontTitle,
+    fontSize: 14,
+    color: '#444444',
+    marginTop: 20
+  },
+  textInput: {
+    borderColor: '#E0E0E0',
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    paddingHorizontal: 15,
+    marginTop: 6
+  }
 });

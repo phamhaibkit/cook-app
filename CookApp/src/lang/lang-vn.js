@@ -99,5 +99,16 @@ export const LANG_VN = {
   SAVE_DRAFT: 'Lưu nháp',
   INFO: 'Thông tin',
   INGREDIENT_1: 'Nguyên Liệu',
-  PERFORM: 'Thực hiện'
+  PERFORM: 'Thực hiện',
+  ADD_IMAGE_FOOD: 'Thêm ảnh đại diện cho món ăn',
+  LIMIT_IMAGE: '(tối đa 4 ảnh)',
+  NAME_FOOD: 'Tên món',
+  DESCRIPTION: 'Mô tả',
+  TIME_COOK: 'Thời gian nấu',
+  CATEGORY: 'Danh mục',
+  OTHER_CATEGORY: 'Danh mục khác',
+  NOTE: 'Chú thích: Bạn có thể tự nhập danh mục khác vào ô dưới và cách nhau bởi dấu phẩy',
+  INPUT_NAME_FOOD: 'Nhập tên món',
+  INPUT_DESCRIPTION: 'Nhập mô tả cho món ăn',
+  CHOOSE_TIME_COOK: 'Chọn thời gian nấu'
 };

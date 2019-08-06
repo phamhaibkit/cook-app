@@ -157,11 +157,11 @@ const StoreStack = createStackNavigator({
 
 const RecipeStack = createStackNavigator({
   Recipe: {
-    // screen: PageRecipe,
-    screen: PostRecipe,
-    // navigationOptions: {
-    //   header: null,
-    // }
+    // screen: PostRecipe,
+    screen: PageRecipe,
+    navigationOptions: {
+      header: null,
+    }
   },
   PageSearchRecipe: {
     screen: PageSearchRecipe,
@@ -299,8 +299,8 @@ RecipeStack.navigationOptions = ({ navigation }) => {
 const bottomTabNav = createBottomTabNavigator(
   {
     Home: {
-      // screen: HomeStack,
-      screen: RecipeStack, 
+      screen: HomeStack,
+      // screen: RecipeStack, 
       navigationOptions:
       {
         tabBarLabel: LANG.HOME

@@ -65,6 +65,8 @@ export const IMG = {
   greenCircle: require('../../assets/icons/green-circle.png'),
   num: require('../../assets/icons/num.png'),
   clearInput: require('../../assets/icons/clear-input.png'),
+  checkedWhite: require('../../assets/icons/checked-white.png'),
+  addImage: require('../../assets/icons/post-image.png'),
 };
 
 export const ASYNC_STORAGE = {
