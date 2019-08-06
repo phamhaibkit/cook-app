@@ -13,7 +13,7 @@ import BackButton from '../back-button/back-button';
 import SearchButton from '../search-button/search-button';
 import PageHome from '../page-home/page-home';
 import PageDetail from '../page-detail/page-detail';
-import PageUserProfile from '../page-user-profile/page-user-profile';
+import UserProfile from '../user-profile/user-profile';
 import PageSearch from '../page-search/page-search';
 import PageStore from '../page-store/page-store';
 import { ASYNC_STORAGE, IMG, CSS } from '../../utils/variables';
@@ -41,7 +41,7 @@ import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
 import PostRecipe from '../post-recipe/post-recipe';
-import CartHome from '../../components/cart-home/cart-home';
+import UserDraftRecipe from '../user-draft-recipe/user-draft-recipe';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -152,7 +152,7 @@ const StoreStack = createStackNavigator({
     }
   },
   Details: { screen: PageDetail },
-  Profile: { screen: PageUserProfile }
+  Profile: { screen: UserProfile }
 });
 
 const RecipeStack = createStackNavigator({
@@ -248,6 +248,13 @@ const UserStack = createStackNavigator({
         shadowOpacity: 0,
         borderBottomWidth: 0,
       }
+    }
+  },
+  UserDraftRecipe: {
+    screen: UserDraftRecipe, 
+    navigationOptions: {
+      title: 'Công thức nháp',
+      headerLeft: <BackButton />,
     }
   }
 }, {initialRouteName: 'User'});

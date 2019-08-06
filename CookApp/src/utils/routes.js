@@ -49,6 +49,8 @@ export const ROUTES = {
   },
   postRecipe: {
     key: 'postRecipe'
+  },
+  userDraftRecipe: {
+    key: 'userDraftRecipe'
   }
-
 };

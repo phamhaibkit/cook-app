@@ -38,6 +38,7 @@ export const LANG_VN = {
   STEP_ACTION: 'Các bước thực hiện',
   RECIPE: 'Công thức',
   UP_RECIPE: 'Đăng Công Thức',
+  POSTED_RECIPE: 'Công Thức Đã Đăng',
   FOLLOWER: 'Người theo dõi',
   RECIPE_DRAFT: 'Công thức nháp',
   ORDER_DRAFT: 'Đơn hàng nháp',
@@ -110,5 +111,6 @@ export const LANG_VN = {
   NOTE: 'Chú thích: Bạn có thể tự nhập danh mục khác vào ô dưới và cách nhau bởi dấu phẩy',
   INPUT_NAME_FOOD: 'Nhập tên món',
   INPUT_DESCRIPTION: 'Nhập mô tả cho món ăn',
-  CHOOSE_TIME_COOK: 'Chọn thời gian nấu'
+  CHOOSE_TIME_COOK: 'Chọn thời gian nấu',
+  SAVED_DAY: 'Lưu ngày'
 };
