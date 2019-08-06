@@ -52,4 +52,7 @@ export const API = {
   SHARE_EVENT : eventId => HOST + '/share/event?id=' + eventId,
   // TOKEN_EMAIL : (daa) => HOST + '/login?user=' + username +  '&&password=' + password
   SEND_RATING_COMMENT: HOST + '/evaluate/recipe',
+
+  // user
+  USER_DRAFT_RECIPE: userId => HOST + '/recipe/draft?usr=' + userId, 
 };

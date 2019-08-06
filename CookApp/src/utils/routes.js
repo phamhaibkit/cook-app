@@ -49,6 +49,11 @@ export const ROUTES = {
   },
   recipeRating: {
     key: 'recipeRating'
+  },
+  postRecipe: {
+    key: 'postRecipe'
+  },
+  userDraftRecipe: {
+    key: 'userDraftRecipe'
   }
-
 };

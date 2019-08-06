@@ -13,7 +13,7 @@ import BackButton from '../back-button/back-button';
 import SearchButton from '../search-button/search-button';
 import PageHome from '../page-home/page-home';
 import PageDetail from '../page-detail/page-detail';
-import PageProfile from '../page-profile/page-profile';
+import UserProfile from '../user-profile/user-profile';
 import PageSearch from '../page-search/page-search';
 import PageStore from '../page-store/page-store';
 import { ASYNC_STORAGE, IMG, CSS } from '../../utils/variables';
@@ -42,6 +42,8 @@ import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
 import CartHome from '../../components/cart-home/cart-home';
 import RatingPage from '../page-rating/page-rating';
+import PostRecipe from '../post-recipe/post-recipe';
+import UserDraftRecipe from '../user-draft-recipe/user-draft-recipe';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -126,7 +128,6 @@ const PageRaingScreen = {
   }
  }
 
-
 const HomeStack = createStackNavigator({
   Home: {
     screen: PageHome,
@@ -156,15 +157,15 @@ const StoreStack = createStackNavigator({
     }
   },
   Details: { screen: PageDetail },
-  Profile: { screen: PageProfile }
+  Profile: { screen: UserProfile }
 });
 
 
 
 const RecipeStack = createStackNavigator({
   Recipe: {
+    // screen: PostRecipe,
     screen: PageRecipe,
-    // screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
     }
@@ -181,6 +182,8 @@ const RecipeStack = createStackNavigator({
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
   [ROUTES.recipeRating.key]: PageRaingScreen,
+  [ROUTES.postRecipe.key]: PostRecipe
+
 });
 
 
@@ -253,6 +256,13 @@ const UserStack = createStackNavigator({
         shadowOpacity: 0,
         borderBottomWidth: 0,
       }
+    }
+  },
+  UserDraftRecipe: {
+    screen: UserDraftRecipe, 
+    navigationOptions: {
+      title: 'Công thức nháp',
+      headerLeft: <BackButton />,
     }
   }
 }, { initialRouteName: 'User' });
