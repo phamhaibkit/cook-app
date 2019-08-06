@@ -43,8 +43,9 @@ export default class RecipeHighlightHome extends Component {
     })
   }
 
-  onPress = () => {
-    navigationService.navigate('recipeDetail')
+  onPress = (item) => {
+    console.log(item, 'item')
+    navigationService.navigate(ROUTES.recipeDetail.key, { id: item.id});
   };
 
   onShare = (recipe) => {
@@ -107,7 +108,7 @@ export default class RecipeHighlightHome extends Component {
         <View style={{ flex: 1 }} key={index}>
           <View style={isHorizontal ? horizaltalStyle : styles.frameVer}>
             <View style={styles.containerTitle}>
-              <TouchableOpacity style={styles.titleView} onPress={this.onPress}>
+              <TouchableOpacity style={styles.titleView} onPress={()=>this.onPress(item)}>
                 <Text numberOfLines={1} style={styles.titleText}>
                   {item.name}
                 </Text>

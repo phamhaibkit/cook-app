@@ -17,18 +17,18 @@ export default class StepRecipeDetail extends Component {
 
   render() {
     const { data } = this.props
-    const { sliderImages, stepDetail } = data.infor;
+    const { stepImages, stepDetail } = data.infor;
     const { activeImage } = this.state;
     return <View style={[styles.stepsSection, !data.lastChild ? CSS.borderBottom : '']}>
       <View style={[CSS.flexRow, CSS.alignItemsCenter, { marginBottom: 7 }]}>
         <Image style={{ height: 6, width: 6, marginRight: 5 }} source={IMG.greenCircle}></Image>
         <Text style={[CSS.fontSize14, CSS.fontQuiBold, styles.colorTextDark]}>Bước {data.stepNumber}</Text>
       </View>
-      {sliderImages && sliderImages.length !== 0 && <View style={[styles.stepImages]}>
-        <Image style={[{ height: 214, width: '100%', borderRadius: 5, marginBottom: 5 }]} source={{ uri: sliderImages[activeImage] }}></Image>
+      {stepImages && stepImages.length !== 0 && <View style={[styles.stepImages]}>
+        <Image style={[{ height: 214, width: '100%', borderRadius: 5, marginBottom: 5 }]} source={{ uri: stepImages[activeImage] }}></Image>
         <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
           {
-            sliderImages.map((itemImage, index) => {
+            stepImages.map((itemImage, index) => {
               return <TouchableOpacity style={{ paddingHorizontal: 1 }} onPress={() => {
                 this.setState({
                   activeImage: index

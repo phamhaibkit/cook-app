@@ -94,5 +94,6 @@ export const LANG_VN = {
   HOT_SELLIING: 'Bán chạy',
   FROM: 'Từ',
   TO: 'Đến',
-  WRITE_COMMENT: 'Viết đánh giá'
+  WRITE_COMMENT: 'Viết đánh giá',
+  SEND_RATING_COMMENT: 'Gửi đánh giá'
 };

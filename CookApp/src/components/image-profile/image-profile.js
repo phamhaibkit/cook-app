@@ -5,13 +5,17 @@ import { CSS } from '../../utils/variables';
 
 export default class ImageProfile extends Component {
   static propTypes = {
-    user: PropTypes.Object
+    // user: PropTypes.Object
   }
 
   render() {
     const { user, widthImage } = this.props;
-    const detailName = user.name.split(" ");
-    const getLastCharacterName = detailName[detailName.length - 1].substring(0,1);
+    let getLastCharacterName = ''
+    if(!user.avatar) {
+      const detailName = user.name ? user.name.split(" ") : '';
+      getLastCharacterName = detailName ? detailName[detailName.length - 1].substring(0,1) : 'A';
+    }
+    
     const styleCircle = {
       height: widthImage, width: widthImage, borderRadius: widthImage / 2
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions, KeyboardAvoidingView, Animated, Keyboard } from 'react-native'
+import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions, KeyboardAvoidingView, Animated, Keyboard, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as Progress from 'react-native-progress';
@@ -20,6 +20,10 @@ import ViewMoreHome from '../view-more-home/view-more-home';
 import ImageProfile from '../image-profile/image-profile';
 import TextInputRender from '../text-input/text-input';
 import recipeService from '../../services/recipe.service';
+import _ from 'lodash';
+import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
+import { ROUTES } from '../../utils/routes';
+import navigationService from '../../services/navigation.service';
 
 const recipeDataDetail = {
   "likeTimes": 53,
@@ -91,6 +95,9 @@ const rowCommentRate = [
 
 const { height, width } = Dimensions.get('window');
 export default class RecipeDetail extends Component {
+  static navigationOptions = {
+    header: null
+  };
   static propTypes = {
     // prop: PropTypes
   }
@@ -115,9 +122,10 @@ export default class RecipeDetail extends Component {
   }
 
   componentDidMount() {
-    const id = 1;
+    const { navigation } = this.props;
+    console.log(navigation, 'navigation');
+    const id = navigation.getParam('id', 1);
     recipeService.getRecipeDetail(id).then(() => {
-
       let recipeDetail = { ...recipeService.recipeDetail };
       console.log(recipeDetail, 'recipeDetail');
       this.setState({
@@ -131,6 +139,23 @@ export default class RecipeDetail extends Component {
     this.keyboardDidShowSub.remove();
     this.keyboardDidHideSub.remove();
   }
+
+
+  onPressWritingRate = () => {
+    const {recipeId, recipeDetail} = this.state;
+    navigationService.navigate(ROUTES.recipeRating.key, { recipe: recipeDetail })
+  }
+
+
+  onChangeText = (value, err, type) => {
+    this.setState({
+      [type]: {
+        value,
+        err
+      }
+    });
+  };
+
 
   renderStar = (number) => {
     const star = [];
@@ -150,7 +175,6 @@ export default class RecipeDetail extends Component {
   }
 
   renderOwner = (chef) => {
-    console.log(chef, 'chef');
     return (chef && chef.owner && <View style={[styles.ownerStyles, CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
       <View style={styles.containerChef}>
         <ImageProfile user={chef.owner} widthImage={56} />
@@ -161,8 +185,8 @@ export default class RecipeDetail extends Component {
       </View>
       <View style={[CSS.flexCol, { justifyContent: 'flex-start', alignItems: 'flex-start' }]}>
         <Text style={[CSS.fontSize15, CSS.fontQuiBold, { lineHeight: 22 }]}>{chef.owner.name}</Text>
-        <Text style={[styles.textTime]}>{chef.recipeAmount || 0} <Text style={[styles.textLight]}>{LANG_VN.RECIPE} |
-        </Text> {chef.followingAmount || 0} <Text style={[styles.textLight]}>{LANG_VN.FOLLOW}</Text></Text>
+        <Text style={[styles.textTime]}>{chef.owner.numberRecipes || 0} <Text style={[styles.textLight]}>{LANG_VN.RECIPE} |
+        </Text> {chef.owner.follower || 0} <Text style={[styles.textLight]}>{LANG_VN.FOLLOW}</Text></Text>
       </View>
       <TouchableOpacity style={CSS.buttonFollow}>
         <Text style={CSS.textFollow}>{LANG_VN.FOLLOW}</Text>
@@ -206,7 +230,7 @@ export default class RecipeDetail extends Component {
 
   renderIngredient = (recipe) => {
     const price = 1000, amountOfPeople = 1;
-    
+
     return (
       recipe && <View style={[styles.container]}>
         <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
@@ -273,22 +297,25 @@ export default class RecipeDetail extends Component {
     </View>)
   }
 
-  renderProgress = () => {
+  renderProgress = (starDetail) => {
     const progress = []
-    for (let j = 5; j >= 1; j--) {
+    for (let j = 0; j <= 4; j++) {
       const row = <View key={j} style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.rowRate]}>
-        <Text style={[CSS.fontQuiMedium, CSS.fontSize13, styles.colorTextDark]}>{j} </Text>
+        <Text style={[CSS.fontQuiMedium, CSS.fontSize13, styles.colorTextDark]}>{5 - j} </Text>
         <Image style={[styles.imageStar, { marginRight: 5 }]} source={IMG.starYellow}></Image>
-        <Progress.Bar progress={0.3} borderColor={'white'} unfilledColor={'rgba(58, 191, 87, 0.1)'} width={160} color={'#3ABF57'} />
-        <Text style={[CSS.fontQuiRegular, CSS.fontSize13, styles.colorTextDark]}> 85%</Text>
+        <Progress.Bar progress={starDetail[j] / 100} borderColor={'white'} unfilledColor={'rgba(58, 191, 87, 0.1)'} width={160} color={'#3ABF57'} />
+        <Text style={[CSS.fontQuiRegular, CSS.fontSize13, styles.colorTextDark]}> {starDetail[j]}%</Text>
       </View>
       progress.push(row);
     }
     return progress
   }
 
-  renderRate = () => {
-    return <View style={[styles.container]}>
+  renderRate = (recipe) => {
+    const arrayOfComment = _.get(recipe, 'evaluations.evaluationDetail', []);
+    const starPercentArray = _.get(recipe, 'evaluations.starDetail', []);
+    const commentNumber = _.get(recipe, 'evaluations.total', 0)
+    return recipe && <View style={[styles.container]}>
       <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
         <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.RATE}</Text>
       </View>
@@ -298,14 +325,14 @@ export default class RecipeDetail extends Component {
           <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter, { marginTop: 5, marginBottom: 10 }]}>
             {this.renderStar(3)}
           </View>
-          <Text style={[CSS.fontQuiRegular, CSS.fontSize12, { color: '#767676' }]}>20 {LANG_VN.RATE}</Text>
+          <Text style={[CSS.fontQuiRegular, CSS.fontSize12, { color: '#767676' }]}>{commentNumber} {LANG_VN.RATE}</Text>
         </View>
         <View style={[styles.detailRate]}>
-          {this.renderProgress()}
+          {recipe && starPercentArray && this.renderProgress(starPercentArray)}
         </View>
       </View>
       <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[{ padding: 10, borderRadius: 5, marginTop: 30 }]} colors={['#3BB556', '#72C91C']} >
-        <TouchableOpacity style={[CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={this.onPressSignin}>
+        <TouchableOpacity style={[CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={this.onPressWritingRate}>
           <Text style={[CSS.fontSize15, CSS.fontQuiBold, { color: '#FFFFFF' }]}>{LANG_VN.WRITE_COMMENT}</Text>
         </TouchableOpacity>
       </LinearGradient>
@@ -314,42 +341,43 @@ export default class RecipeDetail extends Component {
         <View style={{ marginRight: -15 }}>
           <ViewMoreHome type={''} viewMore={() => this.viewMore('')} />
         </View>
-        {this.renderRowCommentRate()}
+        {recipe.evaluations && this.renderRowCommentRate(arrayOfComment)}
       </View>
     </View>
   }
-  renderRowCommentRate = () => {
-    return rowCommentRate.map((item, index) => {
-      return <View key={index} style={[styles.rowCommentRate, index === rowCommentRate.length - 1 ? '' : CSS.borderBottom]}>
+  renderRowCommentRate = (evaluationDetail) => {
+    return evaluationDetail.map((item, index) => {
+      return <View key={index} style={[styles.rowCommentRate, index !== evaluationDetail.length - 1 ? CSS.borderBottom : {}]}>
         <View style={[CSS.flexRow, { flex: 1 }]}>
           <ImageProfile user={item} widthImage={42}></ImageProfile>
           <View style={[CSS.flexCol, CSS.justifySpaceBetween, { flex: 1, paddingLeft: 10 }, styles.arrowLeft]}>
             <View style={[CSS.flexRow, CSS.justifySpaceBetween]}>
-              <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>Louis Nguyễn</Text>
-              <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>26/06/2019</Text>
+              <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>{item.evaluator}</Text>
+              <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>{item.time}</Text>
             </View>
             <View style={[CSS.flexRow, CSS.alignItemsCenter, { paddingVertical: 8 }]}>
-              {this.renderStar(3)}
+              {this.renderStar(item.star)}
             </View>
-            <Text>Mẹ mình rất thích món ăn mình nấu dựa trên công thức này. Cám ơn bạn nhiều.</Text>
+            <Text>{item.comment}</Text>
           </View>
         </View>
       </View>
     })
   }
 
-  renderRowComment = () => {
+  renderRowComment = (recipe) => {
     const { comment } = this.state
+    const comments = _.get(recipe, 'comments', [])
     return <View>
-      {rowCommentRate.map((item, index) => {
+      {comments.map((item, index) => {
         return <View key={index} style={[styles.rowCommentRate]}>
           <View style={[CSS.flexRow, { flex: 1 }]}>
-            <ImageProfile user={item} widthImage={42}></ImageProfile>
+            {item && <ImageProfile user={item} widthImage={42}></ImageProfile>}
             <Image resizeMode="contain" style={{ height: 20, width: 10, marginLeft: 10, marginRight: -2.5, marginTop: 8, zIndex: 1 }} source={IMG.num}></Image>
             <View style={[CSS.flexCol, CSS.justifySpaceBetween, styles.commentRow]}>
               <View style={[CSS.flexRow, CSS.justifySpaceBetween]}>
-                <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>Louis Nguyễn</Text>
-                <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>1 minutes</Text>
+                <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: '#000' }]}>{item.commentator}</Text>
+                <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#767676' }]}>{item.time}</Text>
               </View>
               <Text style={{ marginTop: 10 }}>{item.comment}</Text>
             </View>
@@ -375,26 +403,18 @@ export default class RecipeDetail extends Component {
 
   }
 
-
-  onChangeText = (value, err, type) => {
-    this.setState({
-      [type]: {
-        value,
-        err
-      }
-    });
-  };
-
-
   render() {
     // let recipesDetail = this.state.data;
     const { imageHeader, recipeDetail } = this.state;
-    console.log(this.state, 'imageHeader');
+    let padding = 0;
+    if (Platform.OS !== 'ios') {
+      padding = -500
+    }
+    const recipeImg = _.get(recipeDetail, 'recipeImg', [])
     return (
-      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
-        <ScrollView>
-
-          <SwiperImage height={300} listItems={imageHeader} />
+      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={padding}>
+        <HeaderScroll haveCart>
+          <SwiperImage height={300} listItems={recipeImg} />
           <View style={[styles.container]}>
             {this.renderInforRecipe(recipeDetail)}
             {this.renderOwner(recipeDetail)}
@@ -404,14 +424,14 @@ export default class RecipeDetail extends Component {
           <View style={styles.horizontalFlash}></View>
           {this.renderStep(recipeDetail)}
           <View style={styles.horizontalFlash}></View>
-          {this.renderRate()}
+          {this.renderRate(recipeDetail)}
           <View style={styles.horizontalFlash}></View>
           <ViewMoreHome type={LANG.COMMENT_PAGE} viewMore={() => this.viewMore('')} />
           <View style={styles.container}>
-            {this.renderRowComment()}
+            {this.renderRowComment(recipeDetail)}
 
           </View>
-        </ScrollView>
+        </HeaderScroll>
       </KeyboardAvoidingView>
     )
   }

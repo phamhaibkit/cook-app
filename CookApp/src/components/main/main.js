@@ -41,13 +41,14 @@ import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
 import CartHome from '../../components/cart-home/cart-home';
+import RatingPage from '../page-rating/page-rating';
 
 const CollectionListScreen = {
   screen: CollectionList,
   navigationOptions: {
     title: LANG.COLLECTION.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton isGreen/>,
+    headerLeft: <BackButton isGreen />,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
@@ -58,7 +59,7 @@ const RecipeHighlightListScreen = {
   navigationOptions: {
     title: LANG.RECIPE_HIGHLIGHT.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton isGreen/>,
+    headerLeft: <BackButton isGreen />,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
@@ -69,7 +70,7 @@ const RecipeLikedListScreen = {
   navigationOptions: {
     title: LANG.LIKED_RECIPE.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton isGreen/>,
+    headerLeft: <BackButton isGreen />,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
@@ -80,18 +81,18 @@ const NewsEventListScreen = {
   navigationOptions: {
     title: LANG.INFO_EVENT.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton isGreen/>,
+    headerLeft: <BackButton isGreen />,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
-} 
+}
 
 const ComboListScreen = {
   screen: ComboList,
   navigationOptions: {
     title: LANG.COMBO.name,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton isGreen/>,
+    headerLeft: <BackButton isGreen />,
     headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
@@ -110,18 +111,20 @@ const PageReportRecipeScreen = {
   navigationOptions: {
     title: LANG.REPORT_RECIPE,
     headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton isGreen/>,
+    headerLeft: <BackButton isGreen />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
 };
 
 const RecipeDetailScreen = {
   screen: RecipeDetail,
-  navigationOptions: {
-    headerLeft: <BackButton />,
-    headerTransparent: true
-  }
 };
+const PageRaingScreen = { 
+  screen: RatingPage,
+  navigationOptions: {
+    header: null
+  }
+ }
 
 
 const HomeStack = createStackNavigator({
@@ -140,7 +143,8 @@ const HomeStack = createStackNavigator({
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
   [ROUTES.recipeLikedList.key]: RecipeLikedListScreen,
   [ROUTES.recipeDetail.key]: RecipeDetailScreen,
-  [ROUTES.newsEventList.key]: NewsEventListScreen
+  [ROUTES.newsEventList.key]: NewsEventListScreen,
+  [ROUTES.recipeRating.key]: PageRaingScreen,
 });
 
 const StoreStack = createStackNavigator({
@@ -154,6 +158,8 @@ const StoreStack = createStackNavigator({
   Details: { screen: PageDetail },
   Profile: { screen: PageProfile }
 });
+
+
 
 const RecipeStack = createStackNavigator({
   Recipe: {
@@ -173,7 +179,8 @@ const RecipeStack = createStackNavigator({
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
-  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen
+  [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
+  [ROUTES.recipeRating.key]: PageRaingScreen,
 });
 
 
@@ -211,8 +218,8 @@ const UserStack = createStackNavigator({
       tabBarVisible: false,
       gesturesEnabled: false,
       headerTitleStyle: styles.headerTitleStyle,
-      headerLeft:  <BackButton isGreen/>,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle ,
+      headerLeft: <BackButton isGreen />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle,
       headerStyle: {
         elevation: 0,
         shadowOpacity: 0,
@@ -239,8 +246,8 @@ const UserStack = createStackNavigator({
       tabBarVisible: false,
       gesturesEnabled: false,
       headerTitleStyle: styles.headerTitleStyle,
-      headerLeft:  <BackButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle ,
+      headerLeft: <BackButton />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle,
       headerStyle: {
         elevation: 0,
         shadowOpacity: 0,
@@ -248,7 +255,7 @@ const UserStack = createStackNavigator({
       }
     }
   }
-}, {initialRouteName: 'User'});
+}, { initialRouteName: 'User' });
 
 const SignInStack = createStackNavigator({
   ForgotPassword: {
@@ -278,9 +285,6 @@ UserStack.navigationOptions = ({ navigation }) => {
   }
   return {
     tabBarVisible,
-    tabBarOnPress: ({navigation, defaultHandler }) => {
-      navigation.push('User')
-     }
   };
 };
 

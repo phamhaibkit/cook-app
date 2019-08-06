@@ -1,16 +1,17 @@
 import Joi from 'joi';
-import { configs, fetchObject } from '../../../utils';
+// import { configs, fetchObject } from '../../../utils';
+import _ from 'lodash';
 
-const createResetPasswordSchema = Joi.object().keys({
+const createUserPasswordSchema = Joi.object().keys({
 	passwordConfirm: Joi.string().required().valid(Joi.ref('password')).error(getErrorConfirmFormat),
 	password: Joi.string().required().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/).error(getErrorFormat),
 });
 
 
 
-export function getResetPasswordObjectToValidate(object) {
+export function getUserPasswordObjectToValidate(object) {
 	const {
-		password, passwordConfirm
+		user, password
 	} = object;
 	return {
 		password, passwordConfirm
@@ -55,8 +56,8 @@ function getErrorConfirmFormat(error) {
 }
 
 export function validateResetPassword(object) {
-	const toBeValidated = getResetPasswordObjectToValidate(object);
-	return Joi.validate(toBeValidated, createResetPasswordSchema, {
+	const toBeValidated = getUserPasswordObjectToValidate(object);
+	return Joi.validate(toBeValidated, createUserPasswordSchema, {
 		abortEarly: false
 	});
 }

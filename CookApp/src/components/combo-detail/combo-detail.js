@@ -15,36 +15,37 @@ import IncreaterButtonWithoutNumber from '../increater-button-without-number/inc
 import BackButton from '../back-button/back-button';
 import CartHome from '../../components/cart-home/cart-home';
 import { LANG } from '../../lang/lang';
-import  ComboService  from '../../services/combo.service';
+import ComboService from '../../services/combo.service';
+import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
 
 const HEADER_HEIGHT = 50;
 const SWIPER_HEIGHT = 300;
 const OVERFLOW_HEIGHT = 90;
 
-class IngredientCard extends Component{
-  constructor(props){
-    super(props);   
+class IngredientCard extends Component {
+  constructor(props) {
+    super(props);
   }
 
-  render(){
-    const { 
-      ingredientName, 
-      amountOfPeople, 
-      price, 
+  render() {
+    const {
+      ingredientName,
+      amountOfPeople,
+      price,
       isChecked,
-      onClickCheckBox ,
+      onClickCheckBox,
       onClickSubstract,
       onClickPlus,
       index,
       data
-    } = this.props; 
+    } = this.props;
 
     let isDisable = amountOfPeople === 1 ? true : false;
     let dataIndex = data.length - 1;
 
     return (
       <View style={(dataIndex === index) ? [styles.cardBorder, styles.lastCard] : styles.cardBorder}>
-        <CustomCheckbox 
+        <CustomCheckbox
           style={styles.customCheckBox}
           isChecked={isChecked}
           rightText={ingredientName}
@@ -52,19 +53,19 @@ class IngredientCard extends Component{
           onClick={onClickCheckBox}
         />
         <View style={styles.cardWrap}>
-          <View style={{flex: 3, flexDirection: 'row'}}>
-            <View style={{flex: 2}}>
+          <View style={{ flex: 3, flexDirection: 'row' }}>
+            <View style={{ flex: 2 }}>
               <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.MEAL}:</Text>
               <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.ESTIMATE_PRICE}:</Text>
             </View>
-            <View style={{flex: 2}}>                            
-              <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{ amountOfPeople }{LANG.SPACE}{LANG.PERSON}</Text>
-              <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{ formatNumberWithDot(price) }{LANG.SPACE}{LANG.VIETNAM_DONG}</Text>
+            <View style={{ flex: 2 }}>
+              <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{amountOfPeople}{LANG.SPACE}{LANG.PERSON}</Text>
+              <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{formatNumberWithDot(price)}{LANG.SPACE}{LANG.VIETNAM_DONG}</Text>
             </View>
           </View>
           <View style={styles.actionBtnGroup}>
-            <IncreaterButtonWithoutNumber btnStyle={{marginRight: 5}} onPress={onClickSubstract} isDisable={isDisable}/>
-            <IncreaterButtonWithoutNumber isPlus={true} onPress={onClickPlus}/>     
+            <IncreaterButtonWithoutNumber btnStyle={{ marginRight: 5 }} onPress={onClickSubstract} isDisable={isDisable} />
+            <IncreaterButtonWithoutNumber isPlus={true} onPress={onClickPlus} />
           </View>
         </View>
       </View>
@@ -74,7 +75,7 @@ class IngredientCard extends Component{
 
 export default class ComboDetail extends Component {
   static navigationOptions = {
-    header: null    
+    header: null
   };
 
   constructor(props) {
@@ -96,7 +97,7 @@ export default class ComboDetail extends Component {
 
   getComboDetail = (id) => {
     ComboService.getComboDetail(id).then(() => {
-      let data =  {...ComboService.comboDetail};
+      let data = { ...ComboService.comboDetail };
       this.setState({
         data: data
       });
@@ -105,15 +106,15 @@ export default class ComboDetail extends Component {
   }
 
   initData = () => {
-    if(typeof this.state.data !== {}) {
+    if (typeof this.state.data !== {}) {
       const { data } = this.state;
       let totalPrice = this.state.totalPrice;
-      
+
       _.map(data.recipes, (item) => {
         item.isChecked = true;
         item.itemPriceUnit = item.price,
-        item.itemNumPeopleUnit = item.numPeople,
-        totalPrice += item.price;
+          item.itemNumPeopleUnit = item.numPeople,
+          totalPrice += item.price;
       });
 
       this.setState({
@@ -128,13 +129,13 @@ export default class ComboDetail extends Component {
     const { recipes } = this.state.data;
 
     this.setState({
-      isCheckAll:  !this.state.isCheckAll
+      isCheckAll: !this.state.isCheckAll
     })
 
     recipes.map((item) => {
       item.isChecked = !this.state.isCheckAll;
     });
-    this.setState({recipes: recipes});
+    this.setState({ recipes: recipes });
   }
 
   handleAllIngreUncheck = () => {
@@ -155,20 +156,20 @@ export default class ComboDetail extends Component {
     const { recipes } = this.state.data;
     const { isCheckAll } = this.state;
 
-    _.find(recipes, (item)=> {
+    _.find(recipes, (item) => {
       return item.id === recipe.id;
-    }).isChecked = !recipe.isChecked;   
+    }).isChecked = !recipe.isChecked;
 
-    this.setState({recipes: recipes});
+    this.setState({ recipes: recipes });
     this.handleAllIngreUncheck();
   }
 
   handleMealClick = (isPlus) => {
-    let { 
-      mealQuantity, 
-      estimatePrice, 
-      totalPrice, 
-      recipes 
+    let {
+      mealQuantity,
+      estimatePrice,
+      totalPrice,
+      recipes
     } = this.state;
 
     if (isPlus) {
@@ -176,11 +177,11 @@ export default class ComboDetail extends Component {
       _.map(recipes, (item) => {
         item.itemPriceUnit && (item.price += item.itemPriceUnit);
         item.itemNumPeopleUnit && (item.numPeople += item.itemNumPeopleUnit);
-      }) 
+      })
 
       totalPrice = mealQuantity * estimatePrice
     } else {
-      if(mealQuantity > 1) {
+      if (mealQuantity > 1) {
         mealQuantity--;
         totalPrice -= estimatePrice;
         _.map(recipes, (item) => {
@@ -202,7 +203,7 @@ export default class ComboDetail extends Component {
   handleIngredientClick = (ingredient, isPlus) => {
     const { recipes } = this.state;
 
-    let clickedIngredient = _.find(recipes, (item)=> {
+    let clickedIngredient = _.find(recipes, (item) => {
       return item.id === ingredient.id;
     });
 
@@ -214,27 +215,27 @@ export default class ComboDetail extends Component {
         clickedIngredient.numPeople = ingredient.numPeople - clickedIngredient.itemNumPeopleUnit;
         clickedIngredient.price = ingredient.price - clickedIngredient.itemPriceUnit;
       }
-    }    
+    }
 
     this.setState({
       recipes
     });
   }
 
-  componentDidMount () { 
+  componentDidMount() {
     const { navigation } = this.props;
-    const id = navigation.getParam('id', 1);     
+    const id = navigation.getParam('id', 1);
     this.getComboDetail(id);
   }
 
   render() {
     let { data, mealQuantity, recipes, scrollY } = this.state;
-    const onScroll = Animated.event([{ 
+    const onScroll = Animated.event([{
       nativeEvent: {
         contentOffset: {
           y: scrollY
         }
-      } 
+      }
     }]);
 
     const backgroundColor = scrollY.interpolate({
@@ -249,93 +250,83 @@ export default class ComboDetail extends Component {
       extrapolate: 'clamp',
     });
 
-    
-    return (
-     <View>
-        <Animated.View style={[styles.header, { backgroundColor, borderBottomWidth }]}>
-          <BackButton isGreen/>
-          <View >
-            <CartHome isTransparentHeader/>
-          </View>
-        </Animated.View>
 
-        <ScrollView 
-          scrollEventThrottle={16} 
-          { ...{onScroll} }
-        >
-          <SwiperImage height={SWIPER_HEIGHT} listItems={ data.comboImage }/>
-          
+    return (
+      <View>
+        <HeaderScroll haveCart>
+          <SwiperImage height={SWIPER_HEIGHT} listItems={data.comboImage} />
+
           <View style={styles.container}>
-            
+
             <View style={[styles.blockContainer, styles.backgroundWhite]}>
               <View style={styles.topStyle}>
                 <View style={[styles.dishInfo, CSS.lightBoxShadow]}>
                   <Text style={[styles.comboLabel, CSS.fontQuiMedium]}>
                     {LANG.COMBO.name}
                   </Text>
-                  <Text style={[styles.title, CSS.fontQuiBold]}>{ data.name }</Text>
+                  <Text style={[styles.title, CSS.fontQuiBold]}>{data.name}</Text>
                   <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                     <View style={styles.statisticalNumber}>
                       <Text style={styles.numberStyle}>
-                        { data.orderCount }
+                        {data.orderCount}
                         <Text style={styles.textLight}>{LANG.SPACE}{LANG.ORDER_OWNER}</Text>
                       </Text>
-                      
+
                     </View>
                     <View style={styles.seperator}></View>
                     <View style={styles.statisticalNumber}>
-                      <Text style={styles.numberStyle}> 
-                        { data.viewCount }
+                      <Text style={styles.numberStyle}>
+                        {data.viewCount}
                         <Text style={styles.textLight}>{LANG.SPACE}{LANG.VIEW}</Text>
-                      </Text>              
+                      </Text>
                     </View>
                   </View>
                   <View style={styles.estimatePrice}>
-                    <View style={[CSS.dFlex, CSS.flexRow, { paddingVertical: 15}]}>
+                    <View style={[CSS.dFlex, CSS.flexRow, { paddingVertical: 15 }]}>
                       <View style={styles.w50percentage}>
-                        <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> { formatNumberWithDot(this.state.totalPrice) } {LANG.VIETNAM_DONG}</Text>
-                        <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ capitalize(LANG.ESTIMATE_PRICE_LOWERCASE) }</Text>
+                        <Text style={[styles.estHighlightText, CSS.fontQuiBold]}> {formatNumberWithDot(this.state.totalPrice)} {LANG.VIETNAM_DONG}</Text>
+                        <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{capitalize(LANG.ESTIMATE_PRICE_LOWERCASE)}</Text>
                       </View>
                       <View style={styles.cardSeparator}></View>
                       <View style={styles.w50percentage}>
                         <IncreaterButtonWithNumber
-                          currentQuantity={this.state.mealQuantity}   
+                          currentQuantity={this.state.mealQuantity}
                           onPressDecreaseButton={() => this.handleMealClick()}
-                          onPressIncreaseButton={() => this.handleMealClick(true)}                   
+                          onPressIncreaseButton={() => this.handleMealClick(true)}
                         />
-                        <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{ LANG.MEAL }</Text>
-                      </View> 
-                    </View>               
-                    <Text style={[styles.optional, CSS.fontQuiMedium,  CSS.textAlignCenter]}>{ LANG.OPTIONAL_MEAL }</Text>
+                        <Text style={[styles.textDescription, CSS.fontQuiRegular, CSS.textAlignCenter]}>{LANG.MEAL}</Text>
+                      </View>
+                    </View>
+                    <Text style={[styles.optional, CSS.fontQuiMedium, CSS.textAlignCenter]}>{LANG.OPTIONAL_MEAL}</Text>
                   </View>
                 </View>
                 <View style={styles.promotionInfo}>
                   <Text style={[styles.sectionTitle, CSS.fontNuExBold]}>{LANG.PROMOTION_INFO}</Text>
-                {
-                  data.promotion && data.promotion.map((promotion, index) => (
+                  {
+                    data.promotion && data.promotion.map((promotion, index) => (
                       <Text style={[styles.textDescription, CSS.fontQuiRegular]} key={index}>{promotion}</Text>
-                  ))
-                }
+                    ))
+                  }
                 </View>
               </View>
             </View>
 
             <View style={[styles.ingredients, styles.blockContainer, styles.backgroundWhite]}>
-              <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>              
-                <Text style={[{height: 35}, styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
-                <GradientButton 
+              <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
+                <Text style={[{ height: 35 }, styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
+                <GradientButton
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   colors={[COLOR.gradientLeft, COLOR.gradientRight]}
-                  buttonLabel={ LANG.BUY_INGREDIENT }
-                  onPress={ this.handlePressBuy }
+                  buttonLabel={LANG.BUY_INGREDIENT}
+                  onPress={this.handlePressBuy}
                 />
               </View>
-              
+
               <Text>{LANG.SELECT_INGREDIENT_FOR_MEAL}</Text>
-              
+
               <View style={styles.selectAll}>
-                <CustomCheckbox 
+                <CustomCheckbox
                   style={styles.customCheckBox}
                   isChecked={this.state.isCheckAll}
                   rightText={LANG.SELECT_ALL}
@@ -359,18 +350,18 @@ export default class ComboDetail extends Component {
                   ))
                 }
               </View>
-            </View> 
-            
-            <View style={[{ backgroundColor: COLOR.whiteColor },  styles.cookIntroductions]}>
-              <MostSearched 
-                label={ LANG.COOKING_INSTRUCTIONS } 
-                data={this.state.recipes} 
+            </View>
+
+            <View style={[{ backgroundColor: COLOR.whiteColor }, styles.cookIntroductions]}>
+              <MostSearched
+                label={LANG.COOKING_INSTRUCTIONS}
+                data={this.state.recipes}
                 subData={true}
-              />               
+              />
             </View>
           </View>
-        </ScrollView>
-     </View>
+        </HeaderScroll>
+      </View>
     );
   }
 }

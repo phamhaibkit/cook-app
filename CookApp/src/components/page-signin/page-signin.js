@@ -11,6 +11,8 @@ import navigationService from '../../services/navigation.service';
 import SigninByFacebook from '../signin-by-facebook/signin-by-facebook';
 import TextInputRender from '../text-input/text-input';
 import { IMG, CSS } from '../../utils/variables';
+import authService from '../../services/auth.service';
+import ErrorModalComponent from '../modal/errorModal';
 
 const TYPE_MODAL = {
   EMAIL: 'email',
@@ -21,25 +23,17 @@ class PageSignin extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      [TYPE_MODAL.EMAIL]: {
-        value: '',
-        err: '',
-      },
-      [TYPE_MODAL.PASSWORD]: {
-        value: '',
-        err: '',
-      },
+      [TYPE_MODAL.EMAIL]: '',
+      [TYPE_MODAL.PASSWORD]: '',
       showModalLoading: false,
       notMatch: false,
+      showErrorMessage: false
     };
   }
 
   onChangeText = (value, err, type) => {
     this.setState({
-      [type]: {
-        value,
-        err,
-      },
+      [type]: value
     });
   };
 
@@ -47,10 +41,42 @@ class PageSignin extends Component {
     this.onPressSignin();
   };
 
+  onPressSignin = () => {
+    const { email, password } = this.state;
+    let errorMessage = ''
+
+    if (!password) {
+      errorMessage = 'Please input password'
+    }
+    if (!email) {
+      errorMessage = 'Please input user'
+    }
+
+    if (errorMessage === '') {
+      authService.manualLogin(this.state);
+    } else {
+      const content = {
+        message: errorMessage,
+        title: 'Error'
+      }
+      this.setState({
+        errorMessage: content,
+        showErrorMessage: true,
+      })
+    }
+  }
+
+  closeErrorModal = () => {
+    this.setState({
+      showErrorMessage: false
+    })
+  }
+
   render() {
-    let { email, password, showModalLoading, notMatch } = this.state;
+    let { email, password, showModalLoading, notMatch, errorMessage, showErrorMessage } = this.state;
     // return <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
     return <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      {showErrorMessage && <ErrorModalComponent onBackdropPress={this.closeErrorModal} content={errorMessage}></ErrorModalComponent>}
       <View style={[styles.container]}>
         <View style={styles.loginPage}>
           <View style={styles.headerLayoutLogin}>

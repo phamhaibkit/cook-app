@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import HTTPService from './http.service';
-import { API } from '../utils/variables';
+import { API } from './api';
 
 // import { ASYNC_STORAGE } from '../utils/variables';
 import { setUserInfo } from '../utils/general';
@@ -21,6 +21,11 @@ class AuthService {
     this.token = null;
     this.registerData = _.cloneDeep(defaultRegisterData);
   };
+
+  manualLogin = (data) => {
+    console.log(data, 'data');
+    this.getToken(data.email, data.password)
+  }
 
   loginFacebook = (email, firstName, lastName, facebookId) => {
     // const url = API.LOGIN_FACEBOOK;rr
@@ -52,7 +57,7 @@ class AuthService {
   };
 
   getToken = (username, password) => {
-    const url = API.TOKEN_EMAIL;
+    const url = API.TOKEN_EMAIL({username, password});
     const params = {
       username,
       password,

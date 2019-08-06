@@ -178,6 +178,9 @@ export const CSS = {
   fontSize30: {
     fontSize: 30,
   },
+  fontSize26: {
+    fontSize: 26,
+  },
   fontSize24: {
     fontSize: 24,
   },
