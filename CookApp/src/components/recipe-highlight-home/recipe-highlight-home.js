@@ -11,7 +11,7 @@ import {
 import Modal from 'react-native-modal';
 import Advertiment from '../advertiment/advertiment';
 import LikeCommentShare from '../like-comment-share/like-comment-share';
-import { IMG } from '../../utils/variables';
+import { IMG, CSS } from '../../utils/variables';
 import styles from './recipe-highlight-home-style';
 import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
@@ -105,7 +105,7 @@ export default class RecipeHighlightHome extends Component {
         : styles.frame;
       const priceFormat = getCurrencyStr(item.price);
       return (
-        <View style={{ flex: 1 }} key={index}>
+        <View style={[{ flex: 1, paddingVertical: 5 }, CSS.lightBoxShadow]} key={index}>
           <View style={isHorizontal ? horizaltalStyle : styles.frameVer}>
             <View style={styles.containerTitle}>
               <TouchableOpacity style={styles.titleView} onPress={()=>this.onPress(item)}>

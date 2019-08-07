@@ -13,6 +13,16 @@ const recipeLikedData = {
   recipes: []
 }
 
+const recipeSuggestData = {
+  loading: true,
+  recipes: []
+}
+
+const recipeOtherData = {
+  loading: true,
+  recipes: []
+}
+
 const recipeDetail = {
 }
 
@@ -26,6 +36,8 @@ class RecipeService {
     this.recipeHighLightData = _.cloneDeep(recipeHighLightData);
     this.recipeLikedData = _.cloneDeep(recipeLikedData);
     this.recipeDetail = _.cloneDeep(recipeDetail);
+    this.recipeSuggestData = _.cloneDeep(recipeSuggestData);
+    this.recipeOtherData = _.cloneDeep(recipeOtherData);
   };
 
   getRecipeHighLightList = () => {
@@ -37,6 +49,42 @@ class RecipeService {
       .then(data => {
         // console.log( 'recipeHightLightData Done' + Date(), data);
         this.recipeHighLightData = _.cloneDeep({
+          recipes: data,
+          loading: false,
+        });
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
+
+  getRecipeSuggestList = (userId) => {
+    // console.log( 'recipeHightLightData' + Date());
+    // this.resetService();
+    const url = API.GET_RECIPE_SUGGEST_LIST(userId);
+    this.recipeSuggestData.loading = true;
+    return HTTPService.get(url, null, null)
+      .then(data => {
+        // console.log( 'recipeHightLightData Done' + Date(), data);
+        this.recipeSuggestData = _.cloneDeep({
+          recipes: data,
+          loading: false,
+        });
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
+
+  getRecipeOtherList = (userId) => {
+    // console.log( 'recipeHightLightData' + Date());
+    // this.resetService();
+    const url = API.GET_RECIPE_OTHER_LIST;
+    this.recipeOtherData.loading = true;
+    return HTTPService.get(url, null, null)
+      .then(data => {
+        // console.log( 'recipeHightLightData Done' + Date(), data);
+        this.recipeOtherData = _.cloneDeep({
           recipes: data,
           loading: false,
         });

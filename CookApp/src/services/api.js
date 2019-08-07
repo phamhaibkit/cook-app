@@ -22,6 +22,9 @@ export const API = {
   GET_COMBO_LIST: HOST + '/recipe-combo/all',
   GET_COMBO_DETAIL: id => HOST + '/recipe-combo?id=' + id,  
   
+  //recipe
+  GET_RECIPE_SUGGEST_LIST: id=> HOST + '/recipe/suggestion-recipe?usr=' + id,
+  GET_RECIPE_OTHER_LIST: HOST + '/recipe/other-recipe?recipe=10',
   //recipe highlight
   GET_RECIPE_HIGHLIGHT_LIST: HOST + '/recipe/highlight-recipe/all',
 
