@@ -6,6 +6,9 @@ import styles from './post-recipe-style';
 import LinearGradient from 'react-native-linear-gradient';
 import { IMG } from '../../utils/variables';
 import { Dropdown } from 'react-native-material-dropdown';
+import TagInput from 'react-native-tag-input';
+import GradientButton from '../gradient-button/gradient-button';
+import CategoryRecipe from '../category-recipe/category-recipe';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 const STEPS = {
@@ -24,6 +27,14 @@ const dataDropdown = [{
   value: '2 giờ 00 phút',
 }];
 
+const inputProps = {
+  keyboardType: 'default',
+  placeholder: '',
+  style: {
+    fontSize: 14,
+    marginVertical: Platform.OS == 'ios' ? 10 : -2,
+  },
+};
 export default class PostRecipe extends Component {
   static navigationOptions = {
     title: LANG.UP_RECIPE,
@@ -38,8 +49,31 @@ export default class PostRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeStep: STEPS.INFO
+      activeStep: STEPS.INFO,
+      tags: [],
+      text: "",
     }
+  }
+
+  onChangeText = (text) => {
+    const arrList = text.split(',');
+    const { tags } = this.state;
+    console.log('KKKKKKKKKKKK', text, arrList, tags.length);
+    this.setState({
+      tags: arrList,
+      text: text,
+    })
+  }
+
+  onChangeTag = (tags) => {
+    console.log('1111111111111', tags);
+    this.setState({
+      text: tags.join(),
+      tags: tags
+    })
+  }
+  continue = () => {
+    console.log('22222222222222222222')
   }
 
   renderDot = (isGreen) => {
@@ -149,6 +183,28 @@ export default class PostRecipe extends Component {
               pickerStyle={{borderWidth: 1, borderColor: '#E0E0E0'}}
             />
             <Text style={styles.titleTxt}>{LANG.CATEGORY}</Text>
+            <CategoryRecipe />
+            <Text style={styles.titleTxt}>{LANG.OTHER_CATEGORY}</Text>
+            <Text>{LANG.NOTE}</Text>
+            <View style={styles.textInput}>
+              <TagInput
+                value={this.state.tags}
+                onChange={(tags) => this.onChangeTag(tags)}
+                labelExtractor={(tag) => tag}
+                text={this.state.text}
+                onChangeText={(text) => this.onChangeText(text)}
+                tagTextColor='#000000'
+                inputColor='#000000'
+                tagContainerStyle={{backgroundColor: '#EBEBEB', borderRadius: 15}}
+                inputProps={inputProps}
+              />
+            </View>
+            <View style={styles.bottomBtn}>
+              <GradientButton 
+                label={LANG.CONTINUE}
+                onPress={this.continue}
+                inActive/>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

@@ -113,5 +113,6 @@ export const LANG_VN = {
   INPUT_NAME_FOOD: 'Nhập tên món',
   INPUT_DESCRIPTION: 'Nhập mô tả cho món ăn',
   CHOOSE_TIME_COOK: 'Chọn thời gian nấu',
-  SAVED_DAY: 'Lưu ngày'
+  SAVED_DAY: 'Lưu ngày',
+  CONTINUE: 'Tiếp tục'
 };

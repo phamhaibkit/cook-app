@@ -4,7 +4,7 @@ import { COLOR, CSS } from '../../utils/variables';
 export default StyleSheet.create({
   container: {
     // flex: 1,
-    backgroundColor: COLOR.backgroundColor,
+    // backgroundColor: COLOR.backgroundColor,
     // marginHorizontal: CSS.padding15,
     borderRadius: 10,
     // paddingBottom: 20,

@@ -151,5 +151,16 @@ export default StyleSheet.create({
     height: 40,
     paddingHorizontal: 15,
     marginTop: 6
+  },
+  tagView: {
+    height: 40,
+    borderColor: '#E0E0E0',
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'red'
+  },
+  bottomBtn: {
+    marginTop: 31,
+    marginBottom: 22
   }
 });

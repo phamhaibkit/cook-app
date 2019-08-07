@@ -315,10 +315,7 @@ export default class ComboDetail extends Component {
               <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
                 <Text style={[{ height: 35 }, styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
                 <GradientButton
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  colors={[COLOR.gradientLeft, COLOR.gradientRight]}
-                  buttonLabel={LANG.BUY_INGREDIENT}
+                  label={LANG.BUY_INGREDIENT}
                   onPress={this.handlePressBuy}
                 />
               </View>
