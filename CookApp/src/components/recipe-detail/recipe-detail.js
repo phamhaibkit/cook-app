@@ -24,7 +24,7 @@ import _ from 'lodash';
 import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
 import { ROUTES } from '../../utils/routes';
 import navigationService from '../../services/navigation.service';
-
+import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
 const recipeDataDetail = {
   "likeTimes": 53,
   "owner": {
@@ -45,54 +45,6 @@ const recipeDataDetail = {
   "viewTimes": 100,
   "calo": 3000
 }
-
-const step = [
-  {
-    sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
-      "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",
-      "https://i.cachnaumonan.com/wp-content/uploads/2018/07/cach-lam-goi-rau-cang-cua-thit-bo1.jpg",
-      "https://navicdn.com/nakk/images_article/2019/03/13/cach-lam-sinh-to-bo-sua-chua-3.jpg"],
-    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. Thịt ba chỉ thái lát dài, ướp với 1 muỗng canh nước tương và tương ớt Hàn Quốc. Áp chảo thịt ba chỉ đến khi xém cạnh. '
-  },
-  {
-    sliderImages: [],
-    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
-  },
-  {
-    sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
-      "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",
-      "https://i.cachnaumonan.com/wp-content/uploads/2018/07/cach-lam-goi-rau-cang-cua-thit-bo1.jpg",],
-    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
-  },
-  {
-    sliderImages: ["https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg",
-      "https://monngonmoingay.com/wp-content/uploads/2015/08/Ca-ro-kho-to-2.png",],
-    description: 'Trứng gà luộc lòng đào trong vòng 7 phút. '
-  }
-];
-
-const rowCommentRate = [
-  {
-    "name": "Hoang Thi Kieu Nga",
-    "rank": 13,
-    "id": 7,
-    "avatar": "",
-    date: '26/7/2019',
-    star: 3,
-    comment: 'Mẹ mình rất thích món ăn mình nấu dựa trên công thức này. Cám ơn bạn nhiều.'
-  },
-  {
-    "name": "Hoang Thi Kieu Nga",
-    "rank": 13,
-    "id": 7,
-    "avatar": "https://photo-2-baomoi.zadn.vn/w1000_r1/2019_01_25_329_29473537/097a1d26bc6755390c76.jpg",
-    date: '26/7/2019',
-    star: 3,
-    comment: 'Sau 1h lăn lộn, mình đã thành công rồi chủ thớt ơi, món ăn rất ngon và hợp khẩu vị gia đình mình, thanks chủ thớt nhiều.'
-  },
-
-]
-
 const { height, width } = Dimensions.get('window');
 export default class RecipeDetail extends Component {
   static navigationOptions = {
@@ -106,6 +58,8 @@ export default class RecipeDetail extends Component {
     super(props);
     this.state = {
       imageHeader: COMBO_DETAIL.sliderImages,
+      recipeSuggest: recipeService.recipeSuggestData,
+      recipeOther: recipeService.recipeOtherData,
       starNum: 4,
       rateAmount: 20,
       minuteAmount: 60,
@@ -133,6 +87,8 @@ export default class RecipeDetail extends Component {
       });
       // this.initData(data);
     });
+    this.getSuggestRecipes(1);
+    this.getOtherRecipes();
   }
 
   componentWillUnmount() {
@@ -140,9 +96,26 @@ export default class RecipeDetail extends Component {
     this.keyboardDidHideSub.remove();
   }
 
+  getSuggestRecipes = (userId) => {
+    recipeService.getRecipeSuggestList(userId).then(() => {
+      this.setState({
+        recipeSuggest: recipeService.recipeSuggestData
+      })
+    })
+  }
+
+  getOtherRecipes = (userId) => {
+    recipeService.getRecipeOtherList().then(() => {
+      this.setState({
+        recipeOther: recipeService.recipeOtherData
+      })
+    })
+  }
+
+
 
   onPressWritingRate = () => {
-    const {recipeId, recipeDetail} = this.state;
+    const { recipeId, recipeDetail } = this.state;
     navigationService.navigate(ROUTES.recipeRating.key, { recipe: recipeDetail })
   }
 
@@ -290,7 +263,7 @@ export default class RecipeDetail extends Component {
         const data = {
           stepNumber: index + 1,
           infor: item,
-          lastChild: step.length - 1 === index,
+          lastChild: recipe.steps.length - 1 === index,
         }
         return <StepRecipeDetail key={index} data={data}></StepRecipeDetail>
       })}
@@ -339,7 +312,7 @@ export default class RecipeDetail extends Component {
       <View style={[CSS.borderBottom, { marginTop: 22, marginBottom: -20 }]}></View>
       <View style={styles.commentRate}>
         <View style={{ marginRight: -15 }}>
-          <ViewMoreHome type={''} viewMore={() => this.viewMore('')} />
+          <ViewMoreHome type={''} viewMore={() => this.viewMore('viewRating')} />
         </View>
         {recipe.evaluations && this.renderRowCommentRate(arrayOfComment)}
       </View>
@@ -403,9 +376,24 @@ export default class RecipeDetail extends Component {
 
   }
 
+  viewMore = type => {
+    switch (type) {
+      case LANG.OTHER_RECIPE:
+        navigationService.navigate(ROUTES.recipeHighlightList.key);
+        break;
+      case LANG.RECIPE_MAYBE_LIKE:
+        navigationService.navigate(ROUTES.recipeHighlightList.key);
+        break;
+      case 'viewRating':
+        navigationService.navigate(ROUTES.viewRating.key);
+      default:
+        break;
+    }
+  };
+
   render() {
     // let recipesDetail = this.state.data;
-    const { imageHeader, recipeDetail } = this.state;
+    const { imageHeader, recipeDetail, recipeSuggest, recipeOther } = this.state;
     let padding = 0;
     if (Platform.OS !== 'ios') {
       padding = -500
@@ -413,7 +401,7 @@ export default class RecipeDetail extends Component {
     const recipeImg = _.get(recipeDetail, 'recipeImg', [])
     return (
       <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={padding}>
-        <HeaderScroll haveCart>
+        <HeaderScroll haveMore haveCart recipe={recipeDetail}>
           <SwiperImage height={300} listItems={recipeImg} />
           <View style={[styles.container]}>
             {this.renderInforRecipe(recipeDetail)}
@@ -429,8 +417,19 @@ export default class RecipeDetail extends Component {
           <ViewMoreHome type={LANG.COMMENT_PAGE} viewMore={() => this.viewMore('')} />
           <View style={styles.container}>
             {this.renderRowComment(recipeDetail)}
-
           </View>
+          <ViewMoreHome type={LANG.OTHER_RECIPE} viewMore={this.viewMore} />
+          <RecipeHighlightHome
+            recipes={recipeSuggest.recipes}
+            isHorizontal
+            marTop={CSS.padding15}
+          />
+          <ViewMoreHome type={LANG.RECIPE_MAYBE_LIKE} viewMore={this.viewMore} />
+          <RecipeHighlightHome
+            recipes={recipeOther.recipes}
+            isHorizontal
+            marTop={CSS.padding15}
+          />
         </HeaderScroll>
       </KeyboardAvoidingView>
     )

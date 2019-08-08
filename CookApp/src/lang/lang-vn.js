@@ -14,6 +14,8 @@ export const LANG_VN = {
   LIKED_RECIPE: { name: 'Công Thức Bạn Đã Thích', id: 6 },
   INFO_EVENT: { name: 'Tin Tức Và Sự Kiện', id: 7 },
   COMMENT_PAGE: { name: 'Bình luận', id: 8 },
+  RECIPE_MAYBE_LIKE: { name: 'Có thể bạn thích', id: 9 },
+  OTHER_RECIPE: { name: 'Công thức khác', id: 10 },
   SEARCH: 'Tìm kiếm...',
   VIEW_MORE: 'Xem thêm',
   SIGN_IN_UPTO_CASE: 'Đăng nhập',
@@ -118,5 +120,6 @@ export const LANG_VN = {
   INPUT_NAME_FOOD: 'Nhập tên món',
   INPUT_DESCRIPTION: 'Nhập mô tả cho món ăn',
   CHOOSE_TIME_COOK: 'Chọn thời gian nấu',
-  SAVED_DAY: 'Lưu ngày'
+  SAVED_DAY: 'Lưu ngày',
+  CONTINUE: 'Tiếp tục'
 };

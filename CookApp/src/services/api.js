@@ -22,6 +22,10 @@ export const API = {
   GET_COMBO_LIST: HOST + '/recipe-combo/all',
   GET_COMBO_DETAIL: id => HOST + '/recipe-combo?id=' + id,  
   
+  //recipe
+  GET_RECIPE_SUGGEST_LIST: id=> HOST + '/recipe/suggestion-recipe?usr=' + id,
+  GET_RECIPE_OTHER_LIST: HOST + '/recipe/other-recipe?recipe=10',
+  GET_CATEGORY: HOST + '/recipe-catalog/all',
   //recipe highlight
   GET_RECIPE_HIGHLIGHT_LIST: HOST + '/recipe/highlight-recipe/all',
 
@@ -50,7 +54,7 @@ export const API = {
   COMMENT_EVENT: HOST + 'evaluate/event',
   SHARE_RECIPE : recipeId => HOST + '/share/recipe?id=' + recipeId,
   SHARE_EVENT : eventId => HOST + '/share/event?id=' + eventId,
-  // TOKEN_EMAIL : (daa) => HOST + '/login?user=' + username +  '&&password=' + password
+  TOKEN_EMAIL : data => HOST + '/login?user=' + data.username +  '&&password=' + data.password,
   SEND_RATING_COMMENT: HOST + '/evaluate/recipe',
 
   // user

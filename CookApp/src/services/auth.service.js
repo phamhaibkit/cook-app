@@ -62,7 +62,7 @@ class AuthService {
       username,
       password,
     };
-    return HTTPService.post(url, params)
+    return HTTPService.get(url)
       .then((data) => {
         return (this.token = data);
       })

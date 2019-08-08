@@ -25,12 +25,14 @@ export default class PageRecipe extends Component {
       recipeHighLights: recipeService.recipeHighLightData,
       ads: homeService.adsData,
       collections: collectionService.collectionData.data,
-      combos: comboService.comboData
+      combos: comboService.comboData,
+      category: recipeService.categoryData.category
     }
   }
 
   componentDidMount(){
     this.getRecipeHighLights();
+    this.getCategory();
     // this.getAds();
   }
 
@@ -46,6 +48,14 @@ export default class PageRecipe extends Component {
     homeService.getAds().then(() => {
       this.setState({
         ads: homeService.adsData
+      })
+    })
+  }
+
+  getCategory= () => {
+    recipeService.getCategory().then(() => {
+      this.setState({
+        category: recipeService.categoryData.category
       })
     })
   }
@@ -75,7 +85,7 @@ export default class PageRecipe extends Component {
   }
 
   render() {
-    const { recipeHighLights, ads, collections, combos } = this.state;
+    const { recipeHighLights, ads, collections, combos, category } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.containerSearch}>
@@ -87,7 +97,7 @@ export default class PageRecipe extends Component {
             <Text style={styles.upText}>{LANG.UP_RECIPE}</Text>
           </TouchableOpacity>
           <View style={styles.containerCate}>
-            <CategoryRecipe />
+            <CategoryRecipe category={category} />
           </View>
           <View style={styles.containerRecipe}>
             <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} notMarginTop={true} />
