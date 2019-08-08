@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { CSS, COLOR } from '../../utils/variables';
@@ -10,18 +10,30 @@ export default class GradientButton extends Component {
   }
 
   render() {
-    const { start, end, colors, buttonLabel, onPress } = this.props;
-    
+    const { label, onPress, inActive } = this.props;
     return (
-      <LinearGradient start={ start } end={ end } colors={ colors } style={CSS.linearGradientButton}>
-        <TouchableHighlight 
-          style={[CSS.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} 
-          onPress={onPress}
+      <LinearGradient 
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        colors={inActive ? ['#DDDDDD','#DDDDDD'] : [COLOR.gradientLeft, COLOR.gradientRight]}
+        style={{
+          borderRadius: 5,
+          height: 40
+        }}>
+
+        <TouchableOpacity
+          style={{
+            height: 40, width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => onPress && onPress()}
           underlayColor={'transparent'}
+          disabled={inActive}
         >
-          <Text style={CSS.textTitleButton}>{ buttonLabel }</Text>
-        </TouchableHighlight>
-      </LinearGradient> 
+          <Text style={CSS.textTitleButton}>{label}</Text>
+        </TouchableOpacity>
+      </LinearGradient>
     );
   }
 }

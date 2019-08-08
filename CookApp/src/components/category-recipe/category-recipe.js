@@ -10,31 +10,70 @@ import {
   Image
 } from 'react-native';
 import styles from './category-recipe-style';
-import { RECIPE_CATEGORY } from '../../models/data';
 import { LANG_VN } from '../../lang/lang-vn';
+import { IMG } from '../../utils/variables';
 
 export default class CategoryRecipe extends Component {
   constructor(props) {
     super(props);
-    this.listData = RECIPE_CATEGORY;
+    const { category } = this.props;
+    this.state = {
+      category: category
+    }
+    this.numCols;
   }
 
-  onPress = () => {
-    alert('9999999999999');
+  componentWillReceiveProps(nextProps){
+    const {canChoise} = this.props;
+    const newCate = nextProps.category;
+    this.numCols = newCate.length % 2 === 0
+        ? newCate.length / 2
+        : (newCate.length + 1) / 2;
+    if(canChoise) {
+      newCate && newCate.map((item, index) => {
+        item.checked = false;
+      });
+    }
+    this.setState({
+      category: newCate
+    })
+  }
+
+  onPress = (cateChoise) => {
+    const {canChoise} = this.props;
+    if(canChoise){
+      const { category } = this.state;
+      category && category.map((item, index) => {
+        if (item.id === cateChoise.id) {
+          item.checked = !item.checked;
+          return item;
+        }
+      });
+      this.setState({
+        category: category
+      })
+    }else{
+      alert('9999999999999');
+    }
+    
   };
 
   renderFrame = (item, index) => {
+    const { category } = this.state;
     const endStyle =
-      this.listData.length - 1 === index ||
-      (this.listData.length - 1) / 2 === index
+      category.length - 1 === index ||
+      (category.length - 1) / 2 === index
         ? [styles.frame, styles.endFrame]
         : styles.frame;
     return (
       <View style={endStyle}>
-        <TouchableWithoutFeedback onPress={this.onPress} style={{ zIndex: 2 }}>
+        <TouchableWithoutFeedback onPress={() => this.onPress(item)} style={{ zIndex: 2 }}>
           <View style={styles.containerTouch}>
-            <Image style={styles.imgCate} source={{ uri: item.link }}></Image>
-            <Text style={styles.cateText}>{item.title}</Text>
+            <Image style={styles.imgCate} source={{ uri: item.catalogImage }}></Image>
+            {item.checked &&
+              <Image source={IMG.categoryChecked} style={styles.categoryChecked}/>
+            }
+            <Text style={styles.cateText}>{item.name}</Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -42,23 +81,22 @@ export default class CategoryRecipe extends Component {
   };
 
   render() {
-    const numCols =
-      this.listData.length % 2 === 0
-        ? this.listData.length / 2
-        : (this.listData.length + 1) / 2;
+    const { category } = this.state;
     return (
       <View style={styles.container}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <FlatList
-            contentContainerStyle={{
-              alignSelf: 'flex-start'
-            }}
-            numColumns={numCols}
-            data={this.listData}
-            renderItem={({ item, index }) => this.renderFrame(item, index)}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </ScrollView>
+        {!!this.numCols && 
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <FlatList
+              contentContainerStyle={{
+                alignSelf: 'flex-start'
+              }}
+              numColumns={this.numCols}
+              data={category}
+              renderItem={({ item, index }) => this.renderFrame(item, index)}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </ScrollView>
+        }
       </View>
     );
   }
