@@ -5,9 +5,8 @@ import { CSS, COLOR } from '../../utils/variables';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLOR.backgroundColor,
-    paddingVertical: 20,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    backgroundColor: 'red'
   },
   block: {
     backgroundColor: COLOR.whiteColor,

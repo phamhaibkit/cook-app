@@ -6,7 +6,11 @@ const followerData = {
   loading: true
 }
 
-const userDraftRecipe = {
+const userDraftRecipes = {
+  loading: true
+}
+
+const userDraftOrders = {
   loading: true
 }
 class UserService {
@@ -16,7 +20,8 @@ class UserService {
 
   resetService = () => {
     this.followerData = _.cloneDeep(followerData);
-    this.userDraftRecipe = _.cloneDeep(userDraftRecipe);
+    this.userDraftRecipes = _.cloneDeep(userDraftRecipes);
+    this.userDraftOrders = _.cloneDeep(userDraftOrders);
   };
   
   getFollowerData = (userId) => {
@@ -36,12 +41,12 @@ class UserService {
 
   getUserDraftRecipe = (userId) => {
     const url = API.USER_DRAFT_RECIPE(userId);
-    this.getUserDraftRecipe.loading = true;
+    this.userDraftRecipes.loading = true;
 
     return HTTPService.get(url,null,null)
       .then(data => {
-        this.userDraftRecipe = _.cloneDeep({
-          draftRecipe: data,
+        this.userDraftRecipes = _.cloneDeep({
+          draftRecipes: data,
           loading: false,
         });
       })
@@ -50,6 +55,21 @@ class UserService {
       })
   }
 
+  getUserDraftOrders = (userId) => {
+    const url = API.USER_DRAFT_ORDERS(userId);
+    this.userDraftOrders.loading = true;
+
+    return HTTPService.get(url,null,null)
+      .then(data => {
+        this.userDraftOrders = _.cloneDeep({
+          draftOrders: data,
+          loading: false,
+        });
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
+  }
 }
 
 export default new UserService();
