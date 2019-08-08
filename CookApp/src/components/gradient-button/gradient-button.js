@@ -29,6 +29,7 @@ export default class GradientButton extends Component {
           }}
           onPress={() => onPress && onPress()}
           underlayColor={'transparent'}
+          disabled={inActive}
         >
           <Text style={CSS.textTitleButton}>{label}</Text>
         </TouchableOpacity>

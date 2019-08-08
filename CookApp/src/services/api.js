@@ -25,6 +25,7 @@ export const API = {
   //recipe
   GET_RECIPE_SUGGEST_LIST: id=> HOST + '/recipe/suggestion-recipe?usr=' + id,
   GET_RECIPE_OTHER_LIST: HOST + '/recipe/other-recipe?recipe=10',
+  GET_CATEGORY: HOST + '/recipe-catalog/all',
   //recipe highlight
   GET_RECIPE_HIGHLIGHT_LIST: HOST + '/recipe/highlight-recipe/all',
 

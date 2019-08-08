@@ -26,6 +26,11 @@ const recipeOtherData = {
 const recipeDetail = {
 }
 
+const categoryData = {
+  loading: true,
+  category: []
+}
+
 
 class RecipeService {
   constructor() {
@@ -38,6 +43,7 @@ class RecipeService {
     this.recipeDetail = _.cloneDeep(recipeDetail);
     this.recipeSuggestData = _.cloneDeep(recipeSuggestData);
     this.recipeOtherData = _.cloneDeep(recipeOtherData);
+    this.categoryData = _.cloneDeep(categoryData);
   };
 
   getRecipeHighLightList = () => {
@@ -115,7 +121,6 @@ class RecipeService {
     this.resetService();
     const url = API.GET_RECIPE_DETAIL(id);
 
-
     return HTTPService.get(url, null, null)
       .then(data => {
         console.log(data);
@@ -151,6 +156,22 @@ class RecipeService {
       .catch((err) => {
         return Promise.reject(err);
       });
+  }
+
+  getCategory = () => {
+    const url = API.GET_CATEGORY;
+    this.categoryData.loading = true;
+    return HTTPService.get(url, null, null)
+      .then(data => {
+        // console.log( 'recipeHightLightData Done' + Date(), data);
+        this.categoryData = _.cloneDeep({
+          category: data,
+          loading: false,
+        });
+      })
+      .catch(err => {
+        return Promise.reject(err);
+      })
   }
 
 }

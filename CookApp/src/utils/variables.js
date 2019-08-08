@@ -68,6 +68,7 @@ export const IMG = {
   checkedWhite: require('../../assets/icons/checked-white.png'),
   addImage: require('../../assets/icons/post-image.png'),
   grayCalendar: require('../../assets/icons/calendar-gray.png'),
+  categoryChecked: require('../../assets/icons/category-checked.png')
 };
 
 export const ASYNC_STORAGE = {
@@ -313,4 +314,10 @@ export const ACTION = {
 
 export const CONST = {
   chefRank: 9
+}
+
+export const STEPS = {
+  INFO: 'info',
+  INGREDIENT: 'ingredient',
+  PERFORM: 'perform'
 }
