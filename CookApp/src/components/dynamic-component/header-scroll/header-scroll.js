@@ -31,18 +31,22 @@ export class HeaderScroll extends Component {
 
   closeReport = (action) => {
     const { recipe } = this.props;
-    console.log(action)
+    console.log(action);
+    
     this.setState({
       isModalVisible: false
     })
-    navigationService.navigate(ROUTES.pageReportRecipe.key, { recipe })
+    if(action === 'report') {
+      navigationService.navigate(ROUTES.pageReportRecipe.key, { recipe })
+    }
+    
   }
 
 
 
   render() {
     const { scrollY, isModalVisible } = this.state;
-    const { children, pageName, haveCart, colorDefault, borderWidthDefault, haveMore, isWhite } = this.props;
+    const { children, pageName, haveCart, colorDefault, borderWidthDefault, haveMore, isWhite, colorPageName } = this.props;
     const onScroll = Animated.event([{
       nativeEvent: {
         contentOffset: {
@@ -71,11 +75,11 @@ export class HeaderScroll extends Component {
       <View>
         <BottomActionModal isModalVisible={isModalVisible} closeReport={(action) => this.closeReport(action)}></BottomActionModal>
         <Animated.View style={[styles.header, { backgroundColor, borderBottomWidth }, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
-          <BackButton isGreen={isWhite ? false: true}  />
-          {pageName && <Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: '#fff', marginLeft: -15 }]}>{pageName}</Text>}
+          <BackButton isGreen={isWhite ? false : true} />
+          {pageName && <Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: colorPageName ? colorPageName : '#fff' }]}>{pageName}</Text>}
           <View style={[{ minWidth: 26, height: 26 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
             {haveCart ? <View><CartHome isTransparentHeader /></View> : <View />}
-            {haveMore ? <TouchableOpacity onPress={() => this.openReportBar()}><Animated.Text style={[{ color }, { fontSize: 26, paddingLeft: 10 ,marginTop: -8 }, CSS.fontNuExBold]}>...</Animated.Text></TouchableOpacity> : <View />}
+            {haveMore ? <TouchableOpacity onPress={() => this.openReportBar()}><Animated.Text style={[{ color }, { fontSize: 26, paddingLeft: 10, marginTop: -8 }, CSS.fontNuExBold]}>...</Animated.Text></TouchableOpacity> : <View />}
           </View>
         </Animated.View>
         <ScrollView

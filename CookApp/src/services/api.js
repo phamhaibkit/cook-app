@@ -53,7 +53,7 @@ export const API = {
   COMMENT_EVENT: HOST + 'evaluate/event',
   SHARE_RECIPE : recipeId => HOST + '/share/recipe?id=' + recipeId,
   SHARE_EVENT : eventId => HOST + '/share/event?id=' + eventId,
-  // TOKEN_EMAIL : (daa) => HOST + '/login?user=' + username +  '&&password=' + password
+  TOKEN_EMAIL : data => HOST + '/login?user=' + data.username +  '&&password=' + data.password,
   SEND_RATING_COMMENT: HOST + '/evaluate/recipe',
 
   // user

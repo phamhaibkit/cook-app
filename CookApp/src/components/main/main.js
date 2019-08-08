@@ -44,6 +44,7 @@ import CartHome from '../../components/cart-home/cart-home';
 import RatingPage from '../page-rating/page-rating';
 import PostRecipe from '../post-recipe/post-recipe';
 import UserDraftRecipe from '../user-draft-recipe/user-draft-recipe';
+import PageViewRating from '../page-rating/page-view-rating';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -118,6 +119,13 @@ const PageReportRecipeScreen = {
   }
 };
 
+const PageViewRatingScreen = {
+  screen: PageViewRating,
+  navigationOptions: {
+    header: null
+  }
+}
+
 const RecipeDetailScreen = {
   screen: RecipeDetail,
 };
@@ -146,6 +154,7 @@ const HomeStack = createStackNavigator({
   [ROUTES.recipeDetail.key]: RecipeDetailScreen,
   [ROUTES.newsEventList.key]: NewsEventListScreen,
   [ROUTES.recipeRating.key]: PageRaingScreen,
+  [ROUTES.viewRating.key]: PageViewRatingScreen,
 });
 
 const StoreStack = createStackNavigator({

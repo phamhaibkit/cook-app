@@ -115,7 +115,7 @@ export default class RecipeDetail extends Component {
 
 
   onPressWritingRate = () => {
-    const {recipeId, recipeDetail} = this.state;
+    const { recipeId, recipeDetail } = this.state;
     navigationService.navigate(ROUTES.recipeRating.key, { recipe: recipeDetail })
   }
 
@@ -312,7 +312,7 @@ export default class RecipeDetail extends Component {
       <View style={[CSS.borderBottom, { marginTop: 22, marginBottom: -20 }]}></View>
       <View style={styles.commentRate}>
         <View style={{ marginRight: -15 }}>
-          <ViewMoreHome type={''} viewMore={() => this.viewMore('')} />
+          <ViewMoreHome type={''} viewMore={() => this.viewMore('viewRating')} />
         </View>
         {recipe.evaluations && this.renderRowCommentRate(arrayOfComment)}
       </View>
@@ -384,6 +384,8 @@ export default class RecipeDetail extends Component {
       case LANG.RECIPE_MAYBE_LIKE:
         navigationService.navigate(ROUTES.recipeHighlightList.key);
         break;
+      case 'viewRating':
+        navigationService.navigate(ROUTES.viewRating.key);
       default:
         break;
     }

@@ -9,7 +9,13 @@ import Avatar from '../avatar/avatar';
 import { IMG, CSS } from '../../utils/variables';
 import { setAccountInfo } from '../../reducers/page-account-info.reducer';
 import navigationService from '../../services/navigation.service';
-
+import ImageProfile from '../image-profile/image-profile';
+const user =  {
+  "name": "Hoang Thi Kieu Nga",
+  "rank": 13,
+  "id": 7,
+  "avatar": ""
+}
 export class PageUser extends Component {
   constructor(props) {
     super(props);
@@ -39,26 +45,6 @@ export class PageUser extends Component {
       console.log(error, 'error');
     }
   };
-
-  renderUserInfor = (user) => {
-    return <View style={[styles.topPageContainer, CSS.padding20]}>
-      <View>
-        <Avatar style={styles.avatar} user={user} size={80} />
-      </View>
-      <View style={styles.inforUser}>
-        <View>
-          <Text style={styles.userName}>{user.firstname}</Text>
-        </View>
-        <View style={styles.aboutUser}>
-          <Text>{`3 ${LANG.RECIPE} `}</Text>
-          <Text>{`20 ${LANG.FOLLOWER}`}</Text>
-        </View>
-      </View>
-      <View style={CSS.iconImage}>
-        <Image source={IMG.arrowRight} style={styles.arrowRightImg} resizeMode="contain" />
-      </View>
-    </View>;
-  }
 
   renderScreenLogin = () => {
     return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -166,17 +152,10 @@ export class PageUser extends Component {
 
   render() {
     const { accountInfo } = this.props;
-    const { user } = this.state;
-    let userInfor = ''
-    if (user) {
-      userInfor = this.renderUserInfor(user);
-    }
-    if (!!accountInfo.token) {
-      userInfor = this.renderUserInfor(accountInfo);
-    }
+    let userInfor = '';
     return (
       <ScrollView style={styles.container}>
-        {accountInfo.token !== null || user ? userInfor : this.renderScreenLogin()}
+        <ImageProfile user={user} widthImage={42}></ImageProfile>
         <View style={styles.viewBorderWidth} />
         <View style={styles.draftUser}>
           {this.renderManageDraft()}
@@ -219,11 +198,9 @@ export default connect(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
   },
   topPageContainer: {
     paddingVertical: 20,
-    backgroundColor: '#f0f0f0',
     flexDirection: 'row',
     // justifyContent:'space-around'
   },

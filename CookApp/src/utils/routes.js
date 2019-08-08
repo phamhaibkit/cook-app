@@ -50,6 +50,9 @@ export const ROUTES = {
   recipeRating: {
     key: 'recipeRating'
   },
+  viewRating: {
+    key: 'viewRating'
+  },
   postRecipe: {
     key: 'postRecipe'
   },
