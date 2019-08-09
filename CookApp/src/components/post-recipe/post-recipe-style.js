@@ -99,5 +99,19 @@ export default StyleSheet.create({
     marginTop: 31,
     marginBottom: 22,
     marginHorizontal: 15
+  },
+  dropView: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  arrowDownGreen: {
+    width: 10,
+    height: 6
   }
 });

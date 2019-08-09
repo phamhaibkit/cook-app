@@ -57,7 +57,9 @@ export default StyleSheet.create({
     fontSize: 15,
     color: COLOR.greenColor,
     fontFamily: CSS.fontTitle,
-    marginLeft: 7
+    marginLeft: 7,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   gradienView: {
     height: 35

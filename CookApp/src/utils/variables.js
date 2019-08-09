@@ -69,6 +69,7 @@ export const IMG = {
   addImage: require('../../assets/icons/post-image.png'),
   grayCalendar: require('../../assets/icons/calendar-gray.png'),
   categoryChecked: require('../../assets/icons/category-checked.png'),
+  arrowDownGreen: require('../../assets/icons/arrow-down-green.png'),
 };
 
 export const ASYNC_STORAGE = {
