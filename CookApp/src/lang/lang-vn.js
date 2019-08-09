@@ -43,7 +43,11 @@ export const LANG_VN = {
   POSTED_RECIPE: 'Công Thức Đã Đăng',
   FOLLOWER: 'Người theo dõi',
   RECIPE_DRAFT: 'Công thức nháp',
+  DELETE_RECIPE_DRAFT: 'Xóa công thức nháp',
+  DELETE_RECIPE_DRAFT_CONFIRM: 'Bạn muốn chắc chắn muốn xoá công thức nháp này không?',
   ORDER_DRAFT: 'Đơn hàng nháp',
+  DELETE_ORDER_DRAFT: 'Xóa đơn hàng nháp',
+  DELETE_ORDER_DRAFT_CONFIRM: 'Bạn muốn chắc chắn muốn đơn hàng nháp này không?',
   RECIPE_WAITING: 'Công thức chờ duyệt',
   FOLLOWING: 'Bạn đang theo dõi',
   FOLLOW: 'theo dõi',
@@ -77,6 +81,7 @@ export const LANG_VN = {
   VIETNAM_DONG: 'đ',
   LIKE: 'thích',
   CANCEL: 'Hủy',
+  DELETE: 'Xóa',
   BEST_SEARCH: 'Tìm nhiều nhất',
   SPACE: ' ',
   REPORT_RECIPE: 'Báo cáo công thức',
@@ -120,5 +125,8 @@ export const LANG_VN = {
   ADD_INGREDIENT : 'Thêm Nguyên Liệu',
   QUANTITY: 'Số Lượng',
   ADD_STEP: 'Thêm bước',
-  STEP: 'Bước'
+  STEP: 'Bước',
+  DISH: 'Món ăn',
+  PRODUCT: 'Sản phẩm',
+  PROVISIONAL_SUMS: 'Tạm tính'
 };

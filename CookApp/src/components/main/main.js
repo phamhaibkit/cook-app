@@ -44,6 +44,7 @@ import CartHome from '../../components/cart-home/cart-home';
 import RatingPage from '../page-rating/page-rating';
 import PostRecipe from '../post-recipe/post-recipe';
 import UserDraftRecipe from '../user-draft-recipe/user-draft-recipe';
+import UserDraftOrders from '../user-draft-orders/user-draft-orders';
 import PageViewRating from '../page-rating/page-view-rating';
 
 const CollectionListScreen = {
@@ -138,6 +139,7 @@ const PageRaingScreen = {
 
 const HomeStack = createStackNavigator({
   Home: {
+    // screen: UserDraftOrders,
     screen: PageHome,
     navigationOptions: {
       header: null
@@ -270,8 +272,15 @@ const UserStack = createStackNavigator({
   UserDraftRecipe: {
     screen: UserDraftRecipe, 
     navigationOptions: {
-      title: 'Công thức nháp',
-      headerLeft: <BackButton />,
+      title: `${LANG.RECIPE_DRAFT}`,
+      headerLeft: <BackButton isGreen/>,
+    }
+  },
+  UserDraftOrders: {
+    screen: UserDraftOrders, 
+    navigationOptions: {
+      title: `${LANG.ORDER_DRAFT}`,
+      headerLeft: <BackButton isGreen/>,
     }
   }
 }, { initialRouteName: 'User' });
