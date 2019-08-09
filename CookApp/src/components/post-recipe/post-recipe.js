@@ -4,24 +4,24 @@ import BackButton from '../back-button/back-button';
 import { LANG } from '../../lang/lang';
 import styles from './post-recipe-style';
 import { IMG, STEPS } from '../../utils/variables';
-import { Dropdown } from 'react-native-material-dropdown';
 import TagInput from 'react-native-tag-input';
 import GradientButton from '../gradient-button/gradient-button';
 import CategoryRecipe from '../category-recipe/category-recipe';
 import StepsUpRecipe from '../steps-up-recipe/steps-up-recipe';
 import recipeService from '../../services/recipe.service';
 import UpRecipeStep2 from '../up-recipe-step2/up-recipe-step2';
+import PopupSelectOptionRadio from '../popup-select-option-radio/popup-select-option-radio';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
 const dataDropdown = [{
-  value: '0 giờ 00 phút',
+  value: '0 giờ 00 phút', index: 0
 }, {
-  value: '0 giờ 30 phút',
+  value: '0 giờ 30 phút', index: 1
 }, {
-  value: '1 giờ 00 phút',
+  value: '1 giờ 00 phút', index: 2
 }, {
-  value: '2 giờ 00 phút',
+  value: '2 giờ 00 phút', index: 3
 }];
 
 const inputProps = {
@@ -50,7 +50,10 @@ export default class PostRecipe extends Component {
       activeStep: STEPS.INFO,
       tags: [],
       text: "",
-      category: []
+      category: [],
+      isChoiseTime: false,
+      times : dataDropdown,
+      choosedTime: dataDropdown[0]
     }
   }
 
@@ -92,14 +95,14 @@ export default class PostRecipe extends Component {
 
   continue = () => {
     const { activeStep } = this.state;
-    switch(activeStep){
-      case STEPS.INFO : 
+    switch (activeStep) {
+      case STEPS.INFO:
         this.setActiveStep(STEPS.INGREDIENT);
         break;
-      case STEPS.INGREDIENT : 
+      case STEPS.INGREDIENT:
         this.setActiveStep(STEPS.PERFORM);
         break;
-      case STEPS.PERFORM : 
+      case STEPS.PERFORM:
         alert('69696969');
         break;
       default:
@@ -121,8 +124,27 @@ export default class PostRecipe extends Component {
     })
   }
 
+  onSelectItem = (value, index, type) => {
+    console.log('777777777', value, index, type);
+    this.setState({
+      choosedTime: value
+    })
+  };
+
+  showChooseTime = () => {
+    this.setState({
+      isChoiseTime: true
+    })
+  }
+
+  closeChoiseTime = () => {
+    this.setState({
+      isChoiseTime: false
+    })
+  }
+
   renderStep1 = () => {
-    const { category } = this.state;
+    const { category, isChoiseTime, times, choosedTime } = this.state;
     return (
       <View>
         <View style={styles.containerInput}>
@@ -140,18 +162,17 @@ export default class PostRecipe extends Component {
             <TextInput placeholder={LANG.INPUT_DESCRIPTION} editable={true} multiline={true} numberOfLines={4} />
           </View>
           <Text style={styles.titleTxt}>{LANG.TIME_COOK}</Text>
-          <Dropdown
-            data={dataDropdown}
-            containerStyle={styles.textInput}
-            baseColor='#3BB556'
-            placeholder={LANG.CHOOSE_TIME_COOK}
-            labelHeight={5}
-            labelPadding={0}
-            fontSize={14}
-            disabledItemColor='white'
-            // itemTextStyle ={{fontSize: 14, color: 'red'}}
-            inputContainerStyle={{ borderBottomColor: 'transparent' }}
-            pickerStyle={{ borderWidth: 1, borderColor: '#E0E0E0' }}
+          <TouchableOpacity onPress={this.showChooseTime} style={styles.dropView}>
+            <Text >{choosedTime.value}</Text>
+            <Image source={IMG.arrowDownGreen} style={styles.arrowDownGreen}></Image>
+          </TouchableOpacity>
+          <PopupSelectOptionRadio
+            isShow={isChoiseTime}
+            data={times}
+            labelLeft={LANG.TIME_COOK}
+            onSelectItem={(value, index) => this.onSelectItem(value, index, 'type')}
+            selectedIndex={choosedTime.index}
+            onCloseModal={this.closeChoiseTime}
           />
           <Text style={styles.titleTxt}>{LANG.CATEGORY}</Text>
           <CategoryRecipe category={category} canChoise />
