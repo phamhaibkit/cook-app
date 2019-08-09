@@ -68,7 +68,7 @@ export const IMG = {
   checkedWhite: require('../../assets/icons/checked-white.png'),
   addImage: require('../../assets/icons/post-image.png'),
   grayCalendar: require('../../assets/icons/calendar-gray.png'),
-  categoryChecked: require('../../assets/icons/category-checked.png')
+  categoryChecked: require('../../assets/icons/category-checked.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -275,6 +275,9 @@ export const CSS = {
   borderTop: {
     borderTopColor: 'rgba(233, 233, 233, 0.7)',
     borderTopWidth: 1
+  },
+  w100: {
+    width: '100%',
   }
 };
 
