@@ -70,6 +70,7 @@ export const IMG = {
   grayCalendar: require('../../assets/icons/calendar-gray.png'),
   categoryChecked: require('../../assets/icons/category-checked.png'),
   arrowDownGreen: require('../../assets/icons/arrow-down-green.png'),
+  addIngredient: require('../../assets/icons/add-ingredient.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -304,6 +305,7 @@ export const COLOR = {
   searchBarIos: '#F8F8F8',
   blackReport: '#444444',
   shadowColor: 'rgba(0, 0, 0, 0.1)',
+  borderColor: '#E0E0E0',
 };
 
 export const ACTION = {

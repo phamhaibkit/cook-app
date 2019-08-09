@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
 import { LANG } from '../../lang/lang';
 import { IMG } from '../../utils/variables';
-import styles from './up-recipe-step2-style';
-import DropDown from '../dropdown/dropdown';
+import styles from './up-recipe-step3-style';
 
 let data = [
   {id: 1},
@@ -12,20 +11,12 @@ let data = [
   {id: 4}
 ]
 
-const units = [{
-  value: 'gram', index: 0
-}, {
-  value: 'muỗng', index: 1
-}, {
-  value: 'ml', index: 2
-}, {
-  value: 'quả', index: 3
-}]
-export default class UpRecipeStep2 extends Component {
+export default class UpRecipeStep3 extends Component {
   constructor(props){
     super(props);
     this.state= {
-      data : data
+      data : data,
+      images: [ {}, {}, {}, {}]
     }
   }
 
@@ -59,29 +50,31 @@ export default class UpRecipeStep2 extends Component {
     })
   }
 
-  renderIngredient = () => {
+  renderImage = () => {
+    const { images } = this.state;
+    return images.map((item, index) => {
+      return (
+        <View key={index}>
+          <TouchableOpacity style={styles.imgBtn}>
+            <Image source={IMG.addImage} style={styles.postImg}></Image>
+          </TouchableOpacity>  
+        </View>
+      )
+    });
+  }
+
+  renderStep = () => {
     const { data } = this.state;
     return data.map((item, index) => {
       return (
-        <View key={index} style={styles.containerFrame}>
-          <View style={styles.leftFrame}>
-            <View style={[styles.upIngre, styles.borderBottom]}>
-              <TextInput style={styles.textInput} maxLength={40} placeholder='Ten nguyen lieu'/>
-            </View>
-            <View style={styles.upIngre}>
-              <View style={[styles.leftIngre, styles.borderRight]}>
-                <TextInput style={styles.textInput} maxLength={40} placeholder='So luong'/>
-              </View>
-              <View style={styles.leftIngre}>
-                <DropDown 
-                  label={LANG.MEAL}
-                  data={units}
-                  slectedItem={this.slectedMeal}
-                />
-              </View>
+        <View key={index}>
+          <View style={styles.containerFrame}>
+            <Text style={styles.stepTxt}>{LANG.STEP + (index + 1)}</Text>
+            <View style={styles.imagesView}>
+              {this.renderImage()}
             </View>
           </View>
-          <View style={styles.rightFrame}>
+          <View style={styles.deleteView}>
             <TouchableOpacity onPress={() => this.deleteRow(item)}>
               <Image source={IMG.clearInput} style={styles.deleteImg}/>
             </TouchableOpacity>
@@ -92,22 +85,12 @@ export default class UpRecipeStep2 extends Component {
   }
   
   render() {
-    const { dataMeal } = this.props;
     return (
       <View style={styles.container}>      
-        <Text style={styles.titleTxt}>{LANG.MEAL}</Text>
-        <View style={styles.dropView}>
-          <DropDown 
-            label={LANG.MEAL}
-            data={dataMeal}
-            slectedItem={this.slectedMeal}
-          />
-        </View>
-        <Text style={styles.titleTxt}>{LANG.INGREDIENT_1}</Text>
-        {this.renderIngredient()}
+        {this.renderStep()}
         <TouchableOpacity style={styles.upRecipeView} onPress={this.addNewRow}>
             <Image source={IMG.addIngredient} style={styles.upImg}></Image>
-            <Text style={styles.upText}>{LANG.ADD_INGREDIENT}</Text>
+            <Text style={styles.upText}>{LANG.ADD_STEP}</Text>
         </TouchableOpacity>
       </View>
     );

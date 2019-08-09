@@ -10,7 +10,8 @@ import CategoryRecipe from '../category-recipe/category-recipe';
 import StepsUpRecipe from '../steps-up-recipe/steps-up-recipe';
 import recipeService from '../../services/recipe.service';
 import UpRecipeStep2 from '../up-recipe-step2/up-recipe-step2';
-import PopupSelectOptionRadio from '../popup-select-option-radio/popup-select-option-radio';
+import UpRecipeStep3 from '../up-recipe-step3/up-recipe-step3';
+import DropDown from '../dropdown/dropdown';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
@@ -143,6 +144,14 @@ export default class PostRecipe extends Component {
     })
   }
 
+  slectedTime = (time) => {
+    console.log('444444444444444444', time);
+  } 
+
+  slectedMeal = (meal) => {
+    console.log('9999999999999999', meal);
+  }
+
   renderStep1 = () => {
     const { category, isChoiseTime, times, choosedTime } = this.state;
     return (
@@ -162,18 +171,13 @@ export default class PostRecipe extends Component {
             <TextInput placeholder={LANG.INPUT_DESCRIPTION} editable={true} multiline={true} numberOfLines={4} />
           </View>
           <Text style={styles.titleTxt}>{LANG.TIME_COOK}</Text>
-          <TouchableOpacity onPress={this.showChooseTime} style={styles.dropView}>
-            <Text >{choosedTime.value}</Text>
-            <Image source={IMG.arrowDownGreen} style={styles.arrowDownGreen}></Image>
-          </TouchableOpacity>
-          <PopupSelectOptionRadio
-            isShow={isChoiseTime}
-            data={times}
-            labelLeft={LANG.TIME_COOK}
-            onSelectItem={(value, index) => this.onSelectItem(value, index, 'type')}
-            selectedIndex={choosedTime.index}
-            onCloseModal={this.closeChoiseTime}
-          />
+          <View style={styles.dropView}>
+            <DropDown 
+              label={LANG.CHOOSE_TIME_COOK}
+              data={dataDropdown}
+              slectedItem={this.slectedTime}
+            />
+          </View>
           <Text style={styles.titleTxt}>{LANG.CATEGORY}</Text>
           <CategoryRecipe category={category} canChoise />
           <Text style={styles.titleTxt}>{LANG.OTHER_CATEGORY}</Text>
@@ -204,8 +208,8 @@ export default class PostRecipe extends Component {
           <StepsUpRecipe activeStep={activeStep} />
           <View style={styles.spaceBorder}></View>
           {activeStep === STEPS.INFO && this.renderStep1()}
-          {activeStep === STEPS.INGREDIENT && <UpRecipeStep2 />}
-          {activeStep === STEPS.PERFORM && <Text>AAA</Text>}
+          {activeStep === STEPS.INGREDIENT && <UpRecipeStep2 dataMeal={dataDropdown} slectedMeal={this.slectedMeal}/>}
+          {activeStep === STEPS.PERFORM && <UpRecipeStep3 />}
           <View style={styles.bottomBtn}>
             <GradientButton
               label={LANG.CONTINUE}
