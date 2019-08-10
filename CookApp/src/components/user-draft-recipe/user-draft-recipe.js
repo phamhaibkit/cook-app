@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { Image } from 'react-native-elements';
+import _ from 'lodash';
 
-import styles from './user-draft-recipe-style';
 import { CSS, COLOR, IMG } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
 import userService from '../../services/user.service';
@@ -14,6 +14,7 @@ export default class UserDraftRecipe extends Component {
     this.state = {
       ...userService.userDraftRecipes,
       modalVisible: false,
+      currentConfirmId: 0,
     }
   }
 
@@ -29,41 +30,50 @@ export default class UserDraftRecipe extends Component {
     });
   }  
 
-  // setModalVisible(visible) {
-  //   this.setState({modalVisible: visible});
-  // }
-
-  handleDeleteDraft = id => {
-    this.setState({modalVisible: true});
+  showConfirmModal = id => {
+    this.setState({
+      modalVisible: true,
+      currentConfirmId: id
+    });
   }
 
-  handle = () => {
+  handleDeleteConfirm = () => {
+    const { draftRecipes, currentConfirmId } = this.state;
+    const filtered = _.filter(draftRecipes, (e) => {
+      return e.id !== currentConfirmId;
+    });
 
+    this.setState({
+      draftRecipes: filtered,
+      modalVisible: false
+    });
   }
 
-  renderDraftRecipe = (draftRecipes) => {
+  renderDraftRecipe = (draftRecipe, index) => {
+    const { draftRecipes } = this.state;
+    const blockStyles = (draftRecipes.length - 1) === index ? [CSS.block, {marginBottom: 15}] : CSS.block;
+
     return (
-      draftRecipes.map((item, index) => {
-        return (
-          <View style={styles.block} key={index}>
-            <TouchableOpacity 
-              underlayColor="transparent"
-              style={{width: 22, height: 22, position: 'absolute', zIndex: 999, right: -10, top: -10}}
-              onPress={() => this.handleDeleteDraft(item.id)}
-            >
-              <Image source={IMG.clearInput} style={{width: 22, height: 22}}/>
-            </TouchableOpacity>          
-            <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: COLOR.oldPrice, marginBottom: 6}]}>{ item.name }</Text>       
-            <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-              <Image source={IMG.grayCalendar} style={{width: 15, height: 15, marginRight: 10}}/>
-              <Text>
-                {LANG.SAVED_DAY}
-                <Text>{ item.createTime }</Text>
-              </Text>
-            </View>
+      <View style={CSS.frameWrap} key={draftRecipe.id}>
+        <View style={[blockStyles, CSS.lightBoxShadow]}>                      
+          <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: COLOR.oldPrice, marginBottom: 6}]}>{ draftRecipe.name }</Text>       
+          <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+            <Image source={IMG.grayCalendar} style={CSS.calendarIcon}/>
+            <Text>
+              {LANG.SAVED_DAY}
+              <Text>{ draftRecipe.createTime }</Text>
+            </Text>
           </View>
-       );
-      })
+        </View>
+
+        <TouchableOpacity 
+          underlayColor="transparent"
+          style={CSS.closeBtn}
+          onPress={() => this.showConfirmModal(draftRecipe.id)}
+        >
+          <Image source={IMG.clearInput} style={[CSS.w100, CSS.h100]}/>
+        </TouchableOpacity>  
+      </View>
     );
   }
 
@@ -72,16 +82,22 @@ export default class UserDraftRecipe extends Component {
     console.log('draftRecipes ', draftRecipes);
 
     return (
-      <View style={styles.container}>
+      <View style={CSS.draftContainer}>
         <ConfirmModal
           modalVisible={modalVisible}
-          onDeletePress={this.handle}
+          onPressDelete={this.handleDeleteConfirm}
           content={{
-            title: `${LANG.DELETE_ORDER_DRAFT}`,
-            message: `${LANG.DELETE_ORDER_DRAFT_CONFIRM}`
+            title: `${LANG.DELETE_RECIPE_DRAFT}`,
+            message: `${LANG.DELETE_RECIPE_DRAFT_CONFIRM}`
           }}           
         />
-        { draftRecipes && this.renderDraftRecipe(draftRecipes) }
+
+        <FlatList 
+          data = {draftRecipes}
+          renderItem = {({item, index}) => this.renderDraftRecipe(item, index)}          
+          keyExtractor={(item) => item.id.toString()}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
     );
   }

@@ -27,13 +27,13 @@ export default class ConfirmModal extends Component {
   }
 
   render() {
-    const { content, onBackdropPress } = this.props;
+    const { content, onPressDelete } = this.props;
     const title = _.get(content, 'title', '');
     const message = _.get(content, 'message', '');
-    console.log('children render');
     return (
       <View>
-        <Modal 
+        <Modal
+          animationInTiming={600}
           isVisible={this.state.isVisible} 
           style={[CSS.justifyContentCenter, CSS.alignItemsCenter, { zIndex: 1 }]}
           onBackdropPress={this.hideModal}>
@@ -57,6 +57,7 @@ export default class ConfirmModal extends Component {
                 titleStyle={[styles.buttonTitleStyle, {color: COLOR.whiteColor}]}
                 containerStyle={[styles.buttonContainerStyle]}
                 type="outline"
+                onPress={onPressDelete}
                 ViewComponent={LinearGradient} 
                 linearGradientProps={{
                    start: { x: 0, y: 0 },

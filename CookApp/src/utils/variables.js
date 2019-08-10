@@ -218,14 +218,14 @@ export const CSS = {
     fontSize: 11,
   },
   lightBoxShadow: {
-    shadowColor: '#123456',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,    
+    elevation: 5,
   },
   borderRadius5: {
     borderRadius: 5
@@ -278,8 +278,39 @@ export const CSS = {
     borderTopColor: 'rgba(233, 233, 233, 0.7)',
     borderTopWidth: 1
   },
+  h100: {
+    height: '100%'
+  },
   w100: {
     width: '100%',
+  },
+
+  // user draft
+  draftContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  frameWrap: { 
+    marginHorizontal: 15, 
+    marginTop: 15
+  },
+  block: {    
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 5,
+  },
+  closeBtn: {
+    position: 'absolute', 
+    right: -10, 
+    top: -10,
+    width: 22, 
+    height: 22,
+    elevation: 6     
+  },
+  calendarIcon: {
+    width: 15, 
+    height: 15, 
+    marginRight: 10
   }
 };
 
