@@ -69,9 +69,12 @@ export default class UpRecipeStep3 extends Component {
       return (
         <View key={index}>
           <View style={styles.containerFrame}>
-            <Text style={styles.stepTxt}>{LANG.STEP + (index + 1)}</Text>
+            <Text style={styles.stepTxt}>{LANG.STEP + ' ' +(index + 1)}</Text>
             <View style={styles.imagesView}>
               {this.renderImage()}
+            </View>
+            <View style={styles.textInput}>
+              <TextInput placeholder={LANG.INPUT_DESCRIPTION_1} editable={true} multiline={true} numberOfLines={4} />
             </View>
           </View>
           <View style={styles.deleteView}>

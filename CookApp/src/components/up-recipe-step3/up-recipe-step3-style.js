@@ -76,4 +76,13 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
+  textInput: {
+    borderColor: '#E0E0E0',
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 100,
+    paddingHorizontal: 10,
+    marginHorizontal: 10,
+    marginTop: 20
+  },
 });

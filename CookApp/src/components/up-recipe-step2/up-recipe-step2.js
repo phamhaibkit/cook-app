@@ -6,10 +6,10 @@ import styles from './up-recipe-step2-style';
 import DropDown from '../dropdown/dropdown';
 
 let data = [
-  {id: 1},
-  {id: 2},
-  {id: 3},
-  {id: 4}
+  {id: 1, name:''},
+  {id: 2, name:''},
+  {id: 3, name:''},
+  {id: 4, name:''}
 ]
 
 const units = [{
@@ -36,19 +36,23 @@ export default class UpRecipeStep2 extends Component {
 
   deleteRow = (row) => {
     const { data } = this.state;
-    const newData = data.filter((item, index) => {
-      return item.id !== row.id;
-    })
-    console.log('ROW-DELETE=', row, newData);
+    const indexDelete = data.indexOf(row);
+    // const newData = data.filter((item, index) => {
+    //   return item.id !== row.id;
+    // })
+    if( indexDelete !== -1){
+      data.splice(indexDelete, 1);
+      console.log('ROW-DELETE=', row, data);
+    }
     this.setState({
-      data: newData
+      data: data
     })
   }
 
   addNewRow = () => {
     const { data } = this.state;
     const lastArrData = data[data.length - 1];
-    console.log('ADD-ROW', lastArrData)
+    console.log('ADD-ROW', lastArrData + 1)
     if(lastArrData){
       data.push({id: lastArrData.id + 1});
     }else{
@@ -59,14 +63,34 @@ export default class UpRecipeStep2 extends Component {
     })
   }
 
+  onChangeText = (row, text) => {
+    const { data } = this.state;
+    console.log('onChangeText=', row, text);
+    data.map((item, index) => {
+      if(item.id === row.id){
+        item.name = text;
+      }
+    })
+    this.setState({
+      data: data
+    })
+  }
+
   renderIngredient = () => {
     const { data } = this.state;
+    console.log('WHAT THE DATA', data);
     return data.map((item, index) => {
       return (
-        <View key={index} style={styles.containerFrame}>
+        <View key={index + 1} style={styles.containerFrame}>
           <View style={styles.leftFrame}>
             <View style={[styles.upIngre, styles.borderBottom]}>
-              <TextInput style={styles.textInput} maxLength={40} placeholder='Ten nguyen lieu'/>
+              <TextInput 
+                style={styles.textInput}
+                maxLength={40}
+                placeholder='Ten nguyen lieu'
+                value={data.name}
+                onChangeText={text => {this.onChangeText(item, text)}}
+                />
             </View>
             <View style={styles.upIngre}>
               <View style={[styles.leftIngre, styles.borderRight]}>
