@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { Text, View, Image, TouchableWithoutFeedback, ImageBackground } from 'react-native';
@@ -12,7 +12,7 @@ import { ROUTES } from '../../utils/routes';
 import Advertiment from '../advertiment/advertiment';
 import { kFormatter, capitalize } from '../../utils/general';
 
-class CollectionItem extends Component {
+class CollectionItem extends PureComponent {
   handlePress = () => {  
     const { item } = this.props;
     navigationService.navigate(ROUTES.collectionDetail.key, { id: item.id });

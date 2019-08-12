@@ -25,6 +25,8 @@ export default class CollectionList extends Component {
     });
   }  
 
+  renderItem = ({ item }) => (<CollectionItem item={item} isVertical imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>);
+
   render() {
     const { data }  = this.state;
     // const { navigation } = this.props;
@@ -32,21 +34,16 @@ export default class CollectionList extends Component {
 
     return  (
       <View style={styles.container}>
-        <FlatList 
+       {
+         data &&
+         <FlatList 
           data = {data}
-          renderItem = {({item, index}) => {
-            return (
-              <CollectionItem
-                item={item} 
-                isVertical 
-                imgBgWrap={styles.imgBgWrap}
-                blockMargin={styles.blockMargin}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => index.toString()}
+          renderItem = {this.renderItem}
+          keyExtractor={(item) => item.id.toString()}
           showsVerticalScrollIndicator={false}
+          removeClippedSubviews 
         />
+       }
       </View>
     );
   }

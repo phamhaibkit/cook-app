@@ -30,6 +30,7 @@ export default class ConfirmModal extends Component {
     const { content, onPressDelete } = this.props;
     const title = _.get(content, 'title', '');
     const message = _.get(content, 'message', '');
+
     return (
       <View>
         <Modal
@@ -39,7 +40,7 @@ export default class ConfirmModal extends Component {
           onBackdropPress={this.hideModal}>
           <View style={{backgroundColor: COLOR.whiteColor, borderRadius: 3, overflow: 'hidden'}}>
             <View style={[{padding: 20}]}>
-              <Text style={[CSS.fontNuExBold, CSS.fontSize20, { color: '#333'}]}>{title}</Text>
+              <Text style={[CSS.fontNuExBold, CSS.fontSize20, CSS.textCapitalize, { color: '#333'}]}>{title}</Text>
               <Text style={[CSS.fontQuiRegular, CSS.fontSize15, { marginTop: 15 }]}>{message}</Text>
             </View>
             <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween, {marginTop: 20}]}>
@@ -48,15 +49,15 @@ export default class ConfirmModal extends Component {
                 containerStyle={[styles.buttonContainerStyle]}
                 buttonStyle={[styles.buttonStyles]}
                 titleStyle={styles.buttonTitleStyle}
-                type="outline"
+                type="clear"
                 onPress={this.hideModal}
               />
               <Button
                 title={LANG.DELETE}
-                buttonStyle={[styles.buttonStyles, { borderWidth: 0 }]}
+                buttonStyle={[styles.buttonStyles]}
                 titleStyle={[styles.buttonTitleStyle, {color: COLOR.whiteColor}]}
                 containerStyle={[styles.buttonContainerStyle]}
-                type="outline"
+                type="clear"
                 onPress={onPressDelete}
                 ViewComponent={LinearGradient} 
                 linearGradientProps={{
@@ -79,9 +80,10 @@ const styles = StyleSheet.create({
   },
   buttonStyles: {
     width: '100%',
+    borderRadius: 0,
     paddingHorizontal: 25,
-    borderWidth: 0.8,
-    borderColor: '#f2f2f2'
+    borderTopWidth: 0.8,
+    borderTopColor: '#f2f2f2'
   },
   buttonTitleStyle: {
     fontFamily: 'Quicksand-Bold',

@@ -15,7 +15,7 @@ import IncreaterButtonWithoutNumber from '../increater-button-without-number/inc
 import BackButton from '../back-button/back-button';
 import CartHome from '../../components/cart-home/cart-home';
 import { LANG } from '../../lang/lang';
-import ComboService from '../../services/combo.service';
+import comboService from '../../services/combo.service';
 import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
 
 const HEADER_HEIGHT = 50;
@@ -96,8 +96,8 @@ export default class ComboDetail extends Component {
   };
 
   getComboDetail = (id) => {
-    ComboService.getComboDetail(id).then(() => {
-      let data = { ...ComboService.comboDetail };
+    comboService.getComboDetail(id).then(() => {
+      let data = { ...comboService.comboDetailData };
       this.setState({
         data: data
       });

@@ -163,6 +163,9 @@ export const CSS = {
   textUpperCase: {
     textTransform: 'uppercase'
   },
+  textCapitalize: {
+    textTransform: 'capitalize'
+  },
   textAlignCenter: {
     textAlign: 'center'
   },
