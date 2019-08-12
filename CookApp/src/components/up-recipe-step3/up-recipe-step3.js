@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import { LANG } from '../../lang/lang';
-import { IMG } from '../../utils/variables';
+import { IMG, STEPS } from '../../utils/variables';
 import styles from './up-recipe-step3-style';
+import BackButton from '../back-button/back-button';
+import StepsUpRecipe from '../steps-up-recipe/steps-up-recipe';
+import GradientButton from '../gradient-button/gradient-button';
+import ConfirmModal from '../../components/modal/confirm-modal';
+import navigationService from '../../services/navigation.service';
+import ModalComponent from '../../components/modal/modal'
 
 let data = [
   {id: 1, show: true},
@@ -12,12 +18,35 @@ let data = [
 ]
 
 export default class UpRecipeStep3 extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: LANG.UP_RECIPE,
+      headerLeft: <BackButton isGreen />,
+      headerTitleStyle: styles.headerTitleStyle,
+      headerRight: <TouchableOpacity style={styles.saveDraftBtn} onPress={navigation.getParam('showModalDraft')}>
+        <Text style={styles.saveDraftTxt}>{LANG.SAVE_DRAFT}</Text>
+      </TouchableOpacity>,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    };
+  };
+
   constructor(props){
     super(props);
     this.state= {
       data : data,
-      images: [ {}, {}, {}, {}]
+      images: [ {}, {}, {}, {}],
+      modalDraft: false,
+      modalFinish: false,
+      modalSuccess: false
     }
+    this.content = {
+      title: LANG.UP_SUCCESS,
+      message: LANG.ADMIN_APPROVE
+    }
+  }
+
+  componentDidMount(){
+    this.props.navigation.setParams({showModalDraft: this.showModalDraft});
   }
 
   slectedMeal = (value) => {
@@ -50,6 +79,32 @@ export default class UpRecipeStep3 extends Component {
     this.setState({
       data: data
     })
+  }
+
+  showModalDraft=() => {
+    this.setState({
+      modalFinish: false,
+      modalDraft: true,
+    })
+  }
+
+  continue = () => {
+    this.setState({
+      modalDraft: false,
+      modalFinish: true
+    })
+  }
+
+  onAcceptFinish = () => {
+    this.setState({
+      modalDraft: false,
+      modalFinish: false,
+      modalSuccess: true
+    })
+  }
+
+  onSuccess = () => {
+    navigationService.navigate("Recipe");
   }
 
   renderImage = () => {
@@ -96,14 +151,46 @@ export default class UpRecipeStep3 extends Component {
   }
   
   render() {
+    const { modalDraft, modalFinish, modalSuccess } = this.state;
     return (
-      <View style={styles.container}>      
-        {this.renderStep()}
-        <TouchableOpacity style={styles.upRecipeView} onPress={this.addNewRow}>
-            <Image source={IMG.addIngredient} style={styles.upImg}></Image>
-            <Text style={styles.upText}>{LANG.ADD_STEP}</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <StepsUpRecipe activeStep={STEPS.PERFORM}/>
+          <View style={styles.spaceBorder}></View>
+          <View style={{paddingHorizontal: 15}}>
+            {this.renderStep()}
+            <TouchableOpacity style={styles.upRecipeView} onPress={this.addNewRow}>
+                <Image source={IMG.addIngredient} style={styles.upImg}></Image>
+                <Text style={styles.upText}>{LANG.ADD_STEP}</Text>
+            </TouchableOpacity>
+            <View style={styles.bottomBtn}>
+              <GradientButton
+                label={LANG.CONTINUE}
+                onPress={this.continue}
+              />
+            </View>
+          </View>
+        </View>
+        <ConfirmModal
+            modalVisible={modalDraft}
+            onPressDelete={this.onAcceptSave}
+            buttonAction={LANG.SAVE1}
+            content={{
+              title: `${LANG.SAVE_DRAFT_RECIPE}`,
+              message: `${LANG.QUESTION_SAVE_DRAFT}`
+            }}           
+        />
+        <ConfirmModal
+          modalVisible={modalFinish}
+          onPressDelete={this.onAcceptFinish}
+          buttonAction={LANG.ACCEPT}
+          content={{
+            title: `${LANG.FINISH}`,
+            message: `${LANG.FINISH_RECIPE}`
+          }}           
+        />
+        <ModalComponent content={this.content} modalVisible={modalSuccess} closeModal={this.onSuccess}></ModalComponent>
+      </ScrollView>
     );
   }
 }

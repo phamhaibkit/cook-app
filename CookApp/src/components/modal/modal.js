@@ -13,8 +13,20 @@ export default class ModalComponent extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        isVisible: true
+        isVisible: false
       }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({isVisible: nextProps.modalVisible})
+  }
+
+  onCloseModal = () => {
+    const { closeModal } = this.props;
+    this.setState({ 
+      isVisible: false 
+    });
+    closeModal && closeModal();
   }
 
   render() {
@@ -24,7 +36,7 @@ export default class ModalComponent extends Component {
     return (
       <View>
         <Modal isVisible={this.state.isVisible} style={[CSS.justifyContentCenter, CSS.alignItemsCenter, { zIndex: 1}]}
-        onBackdropPress={() => this.setState({ isVisible: false })}>
+        onBackdropPress={this.onCloseModal}>
         <View style={[{backgroundColor: 'transparent', width: 280, height: 200}, CSS.justifyContentCenter, CSS.alignItemsCenter]}>
             <Image resizeMode="contain" style={{width: 118, height: 100, position: 'absolute', top: -24, zIndex: 2}} source={IMG.iconSuccess} />
           <View style={[{ zIndex: 99, backgroundColor: 'white', width: 280, height: 150, borderRadius: 3, paddingHorizontal: 24, zIndex: 1}, CSS.justifyContentCenter, CSS.alignItemsCenter]}>

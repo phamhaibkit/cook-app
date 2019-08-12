@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, TextInput, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
+import { Text, View, TouchableOpacity, Image, TextInput, KeyboardAvoidingView, ScrollView, Platform, Button } from 'react-native';
 import BackButton from '../back-button/back-button';
 import { LANG } from '../../lang/lang';
 import styles from './post-recipe-style';
@@ -9,9 +9,10 @@ import GradientButton from '../gradient-button/gradient-button';
 import CategoryRecipe from '../category-recipe/category-recipe';
 import StepsUpRecipe from '../steps-up-recipe/steps-up-recipe';
 import recipeService from '../../services/recipe.service';
-import UpRecipeStep2 from '../up-recipe-step2/up-recipe-step2';
-import UpRecipeStep3 from '../up-recipe-step3/up-recipe-step3';
 import DropDown from '../dropdown/dropdown';
+import ConfirmModal from '../../components/modal/confirm-modal';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
@@ -35,18 +36,21 @@ const inputProps = {
   },
 };
 export default class PostRecipe extends Component {
-  static navigationOptions = {
-    title: LANG.UP_RECIPE,
-    headerLeft: <BackButton isGreen />,
-    headerTitleStyle: styles.headerTitleStyle,
-    headerRight: <TouchableOpacity style={styles.saveDraftBtn}>
-      <Text style={styles.saveDraftTxt}>{LANG.SAVE_DRAFT}</Text>
-    </TouchableOpacity>,
-    headerTitleContainerStyle: styles.headerTitleContainerStyle
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: LANG.UP_RECIPE,
+      headerLeft: <BackButton isGreen />,
+      headerTitleStyle: styles.headerTitleStyle,
+      headerRight: <TouchableOpacity style={styles.saveDraftBtn} onPress={navigation.getParam('showModalDraft')}>
+        <Text style={styles.saveDraftTxt}>{LANG.SAVE_DRAFT}</Text>
+      </TouchableOpacity>,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    };
   };
 
   constructor(props) {
     super(props);
+    this.props.navigation.setParams({onSaveFraft: this._onSaveFraft});
     this.state = {
       activeStep: STEPS.INFO,
       tags: [],
@@ -54,13 +58,16 @@ export default class PostRecipe extends Component {
       category: [],
       isChoiseTime: false,
       times : dataDropdown,
-      choosedTime: dataDropdown[0]
+      choosedTime: dataDropdown[0],
+      modalDraft: false,
     }
   }
 
   componentDidMount() {
+    this.props.navigation.setParams({showModalDraft: this.showModalDraft});
     this.getCategory();
   }
+
 
   onChangeText = (text) => {
     const { tags } = this.state;
@@ -95,26 +102,7 @@ export default class PostRecipe extends Component {
   }
 
   continue = () => {
-    const { activeStep } = this.state;
-    switch (activeStep) {
-      case STEPS.INFO:
-        this.setActiveStep(STEPS.INGREDIENT);
-        break;
-      case STEPS.INGREDIENT:
-        this.setActiveStep(STEPS.PERFORM);
-        break;
-      case STEPS.PERFORM:
-        alert('69696969');
-        break;
-      default:
-        break;
-    }
-  }
-
-  setActiveStep = (step) => {
-    this.setState({
-      activeStep: step
-    })
+    navigationService.navigate(ROUTES.upRecipeStep2.key);;
   }
 
   getCategory = () => {
@@ -151,6 +139,13 @@ export default class PostRecipe extends Component {
   slectedMeal = (meal) => {
     console.log('9999999999999999', meal);
   }
+
+  showModalDraft=() => {
+    this.setState({
+      modalDraft: true
+    })
+  }
+
 
   renderStep1 = () => {
     const { category, isChoiseTime, times, choosedTime } = this.state;
@@ -201,23 +196,29 @@ export default class PostRecipe extends Component {
   }
 
   render() {
-    const { activeStep } = this.state;
+    const { modalDraft } = this.state;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="position" enabled keyboardVerticalOffset={keyboardVerticalOffset}>
         <ScrollView>
-          <StepsUpRecipe activeStep={activeStep} />
+          <StepsUpRecipe activeStep={STEPS.INFO}/>
           <View style={styles.spaceBorder}></View>
-          {activeStep === STEPS.INFO && this.renderStep1()}
-          {activeStep === STEPS.INGREDIENT && <UpRecipeStep2 dataMeal={dataDropdown} slectedMeal={this.slectedMeal}/>}
-          {activeStep === STEPS.PERFORM && <UpRecipeStep3 />}
+          {this.renderStep1()}
           <View style={styles.bottomBtn}>
             <GradientButton
               label={LANG.CONTINUE}
               onPress={this.continue}
-            // inActive 
             />
           </View>
         </ScrollView>
+        <ConfirmModal
+          modalVisible={modalDraft}
+          onPressDelete={this.onAcceptSave}
+          buttonAction={LANG.SAVE1}
+          content={{
+            title: `${LANG.SAVE_DRAFT_RECIPE}`,
+            message: `${LANG.QUESTION_SAVE_DRAFT}`
+          }}           
+        />
       </KeyboardAvoidingView>
     );
   }
