@@ -54,7 +54,7 @@ export const LANG_VN = {
   FOLLOWED: 'Người theo dõi bạn',
   IS_FOLLOWING: 'Đang theo dõi',
   SAVED_RECIPE: 'Công thức đã lưu',
-  ORER: 'Đơn hàng',
+  ORDER: 'Đơn hàng',
   DISCOUNT_CODE: 'Mẫ giảm giá',
   DELIVERY_ADDRESS: 'Địa chỉ giao hàng',
   LOGIN_TITLE: 'Đăng nhập',
@@ -137,5 +137,8 @@ export const LANG_VN = {
   FINISH_RECIPE: 'Bạn đã hoàn thành công thức của mình? bài viết sẽ được gửi đến ban quản trị để duyệt',
   UP_SUCCESS: 'ĐĂNG THÀNH CÔNG',
   ADMIN_APPROVE: 'Bài viết của bạn sẽ được ban quản trị duyệt trong thời gian sớm nhất',
-  ACCEPT: 'Đồng Ý'
+  ACCEPT: 'Đồng Ý',
+  CODE_REDUCE_PRICE: 'Mã giảm giá',
+  YOUR_RECIPE: 'Công Thức Của Bạn',
+  WAITING_ACCEPT_RECIPE: 'Công Thức Chờ Duyệt'
 };

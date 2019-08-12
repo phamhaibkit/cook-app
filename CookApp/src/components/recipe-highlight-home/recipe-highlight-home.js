@@ -105,7 +105,7 @@ export default class RecipeHighlightHome extends Component {
         : styles.frame;
       const priceFormat = getCurrencyStr(item.price);
       return (
-        <View style={[{ flex: 1, paddingVertical: 5 }, CSS.lightBoxShadow]} key={index}>
+        <View style={[{ flex: 1, paddingVertical: 5 }, CSS.lightBoxShadowItem]} key={index}>
           <View style={isHorizontal ? horizaltalStyle : styles.frameVer}>
             <View style={styles.containerTitle}>
               <TouchableOpacity style={styles.titleView} onPress={()=>this.onPress(item)}>

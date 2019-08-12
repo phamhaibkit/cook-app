@@ -1,32 +1,39 @@
 
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView, AsyncStorage, Image } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView, AsyncStorage, Image, Dimensions } from 'react-native';
 // import styles from './page-user-style';
 // import { Avatar } from 'react-native-elements';
+
+import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { LANG } from '../../lang/lang';
 import Avatar from '../avatar/avatar';
-import { IMG, CSS } from '../../utils/variables';
+import { IMG, CSS, ASYNC_STORAGE } from '../../utils/variables';
 import { setAccountInfo } from '../../reducers/page-account-info.reducer';
 import navigationService from '../../services/navigation.service';
 import ImageProfile from '../image-profile/image-profile';
-const user =  {
-  "name": "Hoang Thi Kieu Nga",
-  "rank": 13,
-  "id": 7,
-  "avatar": ""
-}
+
+const user = {
+  name: 'Hoang Thi Kieu Nga',
+  rank: 13,
+  id: 7,
+  avatar: ''
+};
+
+const { width } = Dimensions.get('window');
+
 export class PageUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      // user: null,
     };
   }
 
   componentWillMount() {
+    console.log(JSON.stringify(user));
+    console.log('asdasdasd');
     this.retrieveData();
-    this.logOut();
   }
 
   logOut = () => {
@@ -37,9 +44,7 @@ export class PageUser extends Component {
     try {
       await AsyncStorage.getItem('userInfo').then((value) => {
         const user = JSON.parse(value);
-        this.setState({
-          user,
-        });
+        console.log(user, 'user');
       });
     } catch (error) {
       console.log(error, 'error');
@@ -57,32 +62,32 @@ export class PageUser extends Component {
   }
 
   renderItemManage = (arrayRender) => {
-    return <View style={[styles.manageItems, CSS.padding20]}>
-      {arrayRender.map((item, key) => {
-        const { action } = item;
-        return <View key={key} style={styles.contentItems} onPress={() => action()}>
-          <View>
-            {/* <Avatar style={styles.avatar} user={user} size={80} /> */}
+    return <View style={[CSS.flexCol, styles.content]}>
+      {arrayRender.map((item, index) => {
+        const { action, name } = item;
+        return <View key={index}>
+          <View style={[{ paddingBottom: 10 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
+            <Text style={[CSS.fontQuiMedium, CSS.fontSize15]}>{name}</Text>
+            <Image source={IMG.arrowRightGreen} style={{ width: 24, height: 13 }} />
           </View>
-          <View style={styles.items}>
-            <Text>{item.name}</Text>
-          </View>
-          <View style={CSS.iconImage}>
-            <Image source={IMG.arrowRight} style={styles.arrowRightImgSmall} resizeMode="contain" />
-          </View>
+          {index !== arrayRender.length - 1 && <Image style={{ width: '100%', height: 1, marginBottom: 10 }} source={IMG.borderDot} />}
         </View>;
       })}
     </View>;
   }
 
-  renderManageDraft = () => {
-    const arrayItemDraft = [
+  renderOrderManage = () => {
+    const arrayOrderManage = [
       {
-        name: 'Đăng nhập',
-        action: () => navigationService.navigate('SignIn')
+        name: LANG.ORDER,
+        action: ''
       },
       {
-        name: LANG.RECIPE_DRAFT,
+        name: LANG.CODE_REDUCE_PRICE,
+        action: ''
+      },
+      {
+        name: LANG.DELIVERY_ADDRESS,
         action: ''
       },
       {
@@ -90,13 +95,25 @@ export class PageUser extends Component {
         action: ''
       }
     ];
-    return this.renderItemManage(arrayItemDraft);
+    return this.renderItemManage(arrayOrderManage);
   }
 
-  renderRecipeWatingAccept = () => {
+  renderRecipeManage = () => {
     const arrayItem = [
       {
-        name: LANG.RECIPE_WAITING,
+        name: LANG.YOUR_RECIPE,
+        action: ''
+      },
+      {
+        name: LANG.WAITING_ACCEPT_RECIPE,
+        action: ''
+      },
+      {
+        name: LANG.RECIPE_DRAFT,
+        action: ''
+      },
+      {
+        name: LANG.SAVED_RECIPE,
         action: ''
       },
     ];
@@ -113,70 +130,63 @@ export class PageUser extends Component {
         name: LANG.FOLLOWED,
         action: ''
       },
-      {
-        name: LANG.SAVED_RECIPE,
-        action: ''
-      },
     ];
     return this.renderItemManage(arrayItem);
   }
 
-  renderOrderManage = () => {
+  renderSettingManage = () => {
     const arrayItem = [
       {
-        name: LANG.ORER,
-        action: ''
-      },
-      {
-        name: LANG.DISCOUNT_CODE,
-        action: ''
-      },
-      {
-        name: LANG.DELIVERY_ADDRESS,
+        name: LANG.SETTINGS,
         action: ''
       },
     ];
     return this.renderItemManage(arrayItem);
   }
-
-  renderSetupManage = () => {
-    const arrayItem = [
-      {
-        name: LANG.SETUP,
-        action: ''
-      },
-    ];
-    return this.renderItemManage(arrayItem);
-  }
-
 
   render() {
     const { accountInfo } = this.props;
-    let userInfor = '';
     return (
       <ScrollView style={styles.container}>
-        <ImageProfile user={user} widthImage={42}></ImageProfile>
-        <View style={styles.viewBorderWidth} />
-        <View style={styles.draftUser}>
-          {this.renderManageDraft()}
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          colors={['#3BB556', '#72C91C']}
+          style={[
+            styles.button,
+            {
+              borderRadius: 0,
+              paddingTop: 45,
+              paddingBottom: 97,
+            },
+            CSS.justifySpaceBetween
+
+          ]}
+        >
+          <View style={[CSS.flexRow, CSS.justifySpaceBetween, { paddingHorizontal: 15 }]}>
+            <View style={[CSS.flexCol, { justifyContent: 'space-around' }]}>
+              <Text style={[CSS.fontNuBlack, CSS.fontSize20, { color: '#fff' }]}>{user.name}</Text>
+              <TouchableOpacity style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#fff' }]}>Xem thông tin </Text>
+                <Image source={IMG.arrowWhite} style={{ width: 12, height: 7 }} /></TouchableOpacity>
+            </View>
+            <ImageProfile user={user} widthImage={60} />
+          </View>
+        </LinearGradient>
+        <View style={[styles.container, CSS.alignItemsCenter]}>
+          <View style={[styles.containerList, CSS.justifyContentCenter]}>
+            {this.renderOrderManage()}
+            {this.renderRecipeManage()}
+            {this.renderCookerManage()}
+            {this.renderSettingManage()}
+            <TouchableOpacity style={{ marginTop: 10 }}>
+              <Text style={[CSS.textAlignCenter, CSS.fontQuiBold, CSS.fontSize15, { color: '#FF0000', marginBottom: 30 }]}>Logout</Text>
+            </TouchableOpacity>
+
+          </View>
         </View>
-        <View style={styles.viewBorderWidth} />
-        <View style={styles.draftUser}>
-          {this.renderRecipeWatingAccept()}
-        </View>
-        <View style={styles.viewBorderWidth} />
-        <View style={styles.draftUser}>
-          {this.renderCookerManage()}
-        </View>
-        <View style={styles.viewBorderWidth} />
-        <View style={styles.draftUser}>
-          {this.renderOrderManage()}
-        </View>
-        <View style={styles.viewBorderWidth} />
-        <View style={styles.draftUser}>
-          {this.renderSetupManage()}
-        </View>
-      </ScrollView>
+
+      </ScrollView >
     );
   }
 }
@@ -199,6 +209,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  containerList: {
+    flex: 1,
+    marginTop: -60,
+  },
+
+  content: {
+    paddingTop: 20,
+    paddingBottom: 10,
+    paddingHorizontal: 15,
+    backgroundColor: '#fff',
+    width: width - 30,
+    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+    marginBottom: 15
+  },
+
   topPageContainer: {
     paddingVertical: 20,
     flexDirection: 'row',
