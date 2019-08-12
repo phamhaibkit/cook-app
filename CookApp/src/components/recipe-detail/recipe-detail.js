@@ -144,13 +144,11 @@ export default class RecipeDetail extends Component {
   }
 
   renderOwner = (chef) => {
+    console.log(chef, 'chef')
     return (chef && chef.owner && <View style={[styles.ownerStyles, CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
       <View style={styles.containerChef}>
         <ImageProfile user={chef.owner} widthImage={56} />
         {/* <Image style={styles.avataImg} source={{ uri: chef.owner && chef.owner.avatar }} /> */}
-        <View style={[styles.containerRank, CSS.lightBoxShadow]}>
-          <Image source={IMG.rankHome} style={styles.rankImg} />
-        </View>
       </View>
       <View style={[CSS.flexCol, { justifyContent: 'flex-start', alignItems: 'flex-start' }]}>
         <Text style={[CSS.fontSize15, CSS.fontQuiBold, { lineHeight: 22 }]}>{chef.owner.name}</Text>
@@ -167,7 +165,7 @@ export default class RecipeDetail extends Component {
     const { rateAmount } = this.state;
 
     return (recipe && <View style={[{ marginTop: -90, alignItems: 'center' }]}>
-      <View style={[styles.recipeInfor, CSS.lightBoxShadow]}>
+      <View style={[styles.recipeInfor, CSS.lightBoxShadowItem]}>
         <View style={[CSS.justifyContentCenter]}>
           <View style={CSS.pendingStatus}>
             <Text style={[CSS.pendingText, CSS.fontQuiMedium]}>
@@ -563,11 +561,9 @@ const styles = StyleSheet.create({
     borderRadius: 21,
   },
   rankImg: {
-    // position: 'absolute',
-    width: 23,
-    height: 23,
-    bottom: 10,
-    right: 10,
+    position: 'absolute',
+    width: 17,
+    height: 17,
   },
   nameChef: {
     fontFamily: CSS.fontTitle,

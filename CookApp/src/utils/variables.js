@@ -71,6 +71,7 @@ export const IMG = {
   categoryChecked: require('../../assets/icons/category-checked.png'),
   arrowDownGreen: require('../../assets/icons/arrow-down-green.png'),
   addIngredient: require('../../assets/icons/add-ingredient.png'),
+  arrowWhite: require('../../assets/icons/arrow-white.png'),
 };
 
 export const ASYNC_STORAGE = {
@@ -217,6 +218,16 @@ export const CSS = {
   fontSize11: {
     fontSize: 11,
   },
+  lightBoxShadowItem: {
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
   lightBoxShadow: {
     shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowOffset: {
@@ -224,7 +235,6 @@ export const CSS = {
       height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84,    
     elevation: 5,
   },
   borderRadius5: {
@@ -290,26 +300,26 @@ export const CSS = {
     flex: 1,
     backgroundColor: '#fff',
   },
-  frameWrap: { 
-    marginHorizontal: 15, 
+  frameWrap: {
+    marginHorizontal: 15,
     marginTop: 15
   },
-  block: {    
+  block: {
     backgroundColor: '#fff',
     padding: 15,
     borderRadius: 5,
   },
   closeBtn: {
-    position: 'absolute', 
-    right: -10, 
+    position: 'absolute',
+    right: -10,
     top: -10,
-    width: 22, 
+    width: 22,
     height: 22,
-    elevation: 6     
+    elevation: 6
   },
   calendarIcon: {
-    width: 15, 
-    height: 15, 
+    width: 15,
+    height: 15,
     marginRight: 10
   }
 };
