@@ -58,5 +58,11 @@ export const ROUTES = {
   },
   userDraftRecipe: {
     key: 'userDraftRecipe'
-  }
+  },
+  upRecipeStep2: {
+    key: 'upRecipeStep2'
+  },
+  upRecipeStep3: {
+    key: 'upRecipeStep3'
+  },
 };

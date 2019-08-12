@@ -25,35 +25,35 @@ export default class StepsUpRecipe extends Component {
     return (
       <View style={styles.containerSteps}>
         <View style={styles.spaceView}></View>
-        <View style={styles.stepView}>
+        <View style={styles.stepView} onPress={()=> this.onPressStep(STEPS.INFO)}>
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             colors={["#3BB556", "#72C91C"]}
             style={styles.activeStep}
           >
-            <TouchableOpacity>
+            <View>
               {
                 activeStep === STEPS.INFO ? <Text style={styles.numberStepActive}>1</Text> : <Image source={IMG.checkedWhite} style={styles.checkedImg}></Image>
               }
-            </TouchableOpacity>
+            </View>
           </LinearGradient>
           <Text style={activeStep === STEPS.INFO ? styles.stepTxtActive : styles.stepTxtGreen}>{LANG.INFO}</Text>
         </View>
         <View style={styles.stepViewCenter}>
           {activeStep === STEPS.INFO ? this.renderDot(false) : this.renderDot(true)}
-          <View style={styles.step2View}>
+          <View style={styles.step2View} onPress={()=> this.onPressStep(STEPS.INGREDIENT)}>
             <LinearGradient
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               colors={(activeStep === STEPS.INGREDIENT || activeStep === STEPS.PERFORM) ? ["#3BB556", "#72C91C"] : ['#F3F5F5', '#F3F5F5']}
               style={styles.activeStep}
             >
-              <TouchableOpacity>
+              <View>
                 {activeStep === STEPS.INFO && <Text style={styles.numberStep}>2</Text>}
                 {activeStep === STEPS.INGREDIENT && <Text style={styles.numberStepActive}>2</Text>}
                 {activeStep === STEPS.PERFORM && <Image source={IMG.checkedWhite} style={styles.checkedImg}></Image>}
-              </TouchableOpacity>
+              </View>
             </LinearGradient>
             {activeStep === STEPS.INFO && <Text style={styles.stepTxt}>{LANG.INGREDIENT_1}</Text>}
             {activeStep === STEPS.INGREDIENT && <Text style={styles.stepTxtActive}>{LANG.INGREDIENT_1}</Text>}
@@ -61,16 +61,16 @@ export default class StepsUpRecipe extends Component {
           </View>
           {activeStep === STEPS.PERFORM ? this.renderDot(true) : this.renderDot(false)}
         </View>
-        <View style={styles.stepView}>
+        <View style={styles.stepView} onPress={()=> this.onPressStep(STEPS.PERFORM)}>
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             colors={activeStep === STEPS.PERFORM ? ["#3BB556", "#72C91C"] : ['#F3F5F5', '#F3F5F5']}
             style={styles.activeStep}
           >
-            <TouchableOpacity>
+            <View>
               <Text style={activeStep === STEPS.PERFORM ? styles.numberStepActive : styles.numberStep}>3</Text>
-            </TouchableOpacity>
+            </View>
           </LinearGradient>
           <Text style={activeStep === STEPS.PERFORM ? styles.stepTxtActive : styles.stepTxt}>{LANG.PERFORM}</Text>
         </View>

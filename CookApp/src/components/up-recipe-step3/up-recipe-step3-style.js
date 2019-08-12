@@ -6,9 +6,35 @@ const width = Dimensions.get('window').width;
 const marginTop = 24; 
 const heighImg = 22; 
 export default StyleSheet.create({
+  headerTitleStyle: {
+    fontSize: 16,
+    fontFamily: CSS.fontBold,
+    color: "#001D12"
+  },
+  headerTitleContainerStyle: {
+    flex: 1,
+    justifyContent: "center",
+    shadowRadius: 0,
+    shadowOffset: {
+      height: 0
+    }
+  },
+  saveDraftBtn: {
+    paddingRight: 15,
+    paddingVertical: 5
+  },
+  saveDraftTxt: {
+    fontSize: 15,
+    fontFamily: CSS.fontTitle,
+    color: COLOR.greenColor
+  },
   container: {
     flex: 1, 
-    paddingHorizontal: 15
+  },
+  spaceBorder: {
+    height: 10,
+    backgroundColor: COLOR.backgroundColor,
+    marginTop: 10
   },
   containerFrame: {
     height: 240,
@@ -84,5 +110,10 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 10,
     marginTop: 20
+  },
+  bottomBtn: {
+    marginTop: 31,
+    marginBottom: 22,
+    // marginHorizontal: 15
   },
 });

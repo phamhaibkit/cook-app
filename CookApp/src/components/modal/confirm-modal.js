@@ -21,15 +21,16 @@ export default class ConfirmModal extends Component {
   }
 
   hideModal = () => {
-   this.setState({
-     isVisible: false
-   });
+    this.setState({
+      isVisible: false
+    });
   }
 
   render() {
-    const { content, onPressDelete } = this.props;
+    const { content, onPressDelete, buttonAction } = this.props;
     const title = _.get(content, 'title', '');
     const message = _.get(content, 'message', '');
+    const buttonTitle = !!buttonAction ? buttonAction : LANG.DELETE;
     return (
       <View>
         <Modal
@@ -52,7 +53,7 @@ export default class ConfirmModal extends Component {
                 onPress={this.hideModal}
               />
               <Button
-                title={LANG.DELETE}
+                title={buttonTitle}
                 buttonStyle={[styles.buttonStyles, { borderWidth: 0 }]}
                 titleStyle={[styles.buttonTitleStyle, {color: COLOR.whiteColor}]}
                 containerStyle={[styles.buttonContainerStyle]}
@@ -60,9 +61,9 @@ export default class ConfirmModal extends Component {
                 onPress={onPressDelete}
                 ViewComponent={LinearGradient} 
                 linearGradientProps={{
-                   start: { x: 0, y: 0 },
-                   end: { x: 1, y: 1 } ,
-                   colors: ['#3BB556', '#72C91C']
+                  start: { x: 0, y: 0 },
+                  end: { x: 1, y: 1 } ,
+                  colors: ['#3BB556', '#72C91C']
                 }}
               />
             </View>

@@ -2,9 +2,36 @@ import { StyleSheet } from 'react-native';
 import { CSS, COLOR } from '../../utils/variables';
 
 export default StyleSheet.create({
+  headerTitleStyle: {
+    fontSize: 16,
+    fontFamily: CSS.fontBold,
+    color: "#001D12"
+  },
+  headerTitleContainerStyle: {
+    flex: 1,
+    justifyContent: "center",
+    shadowRadius: 0,
+    shadowOffset: {
+      height: 0
+    }
+  },
+  saveDraftBtn: {
+    paddingRight: 15,
+    paddingVertical: 5
+  },
+  saveDraftTxt: {
+    fontSize: 15,
+    fontFamily: CSS.fontTitle,
+    color: COLOR.greenColor
+  },
   container: {
     flex: 1, 
-    paddingHorizontal: 15
+    // paddingHorizontal: 15
+  },
+  spaceBorder: {
+    height: 10,
+    backgroundColor: COLOR.backgroundColor,
+    marginTop: 10
   },
   titleTxt: {
     fontFamily: CSS.fontTitle,
@@ -84,5 +111,10 @@ export default StyleSheet.create({
     marginLeft: 7,
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  bottomBtn: {
+    marginTop: 31,
+    marginBottom: 22,
+    // marginHorizontal: 15
   },
 });

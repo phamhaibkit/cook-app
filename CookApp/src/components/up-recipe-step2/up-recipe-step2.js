@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import { LANG } from '../../lang/lang';
-import { IMG } from '../../utils/variables';
+import { IMG, STEPS } from '../../utils/variables';
 import styles from './up-recipe-step2-style';
 import DropDown from '../dropdown/dropdown';
+import StepsUpRecipe from '../steps-up-recipe/steps-up-recipe';
+import BackButton from '../back-button/back-button';
+import GradientButton from '../gradient-button/gradient-button';
+import { ROUTES } from '../../utils/routes';
+import navigationService from '../../services/navigation.service';
+import ConfirmModal from '../../components/modal/confirm-modal';
 
 let data = [
-  {id: 1, name:'', show: true},
-  {id: 2, name:'', show: true},
-  {id: 3, name:'', show: true},
-  {id: 4, name:'', show: true}
+  { id: 1, name: '', show: true },
+  { id: 2, name: '', show: true },
+  { id: 3, name: '', show: true },
+  { id: 4, name: '', show: true }
 ]
 
 const units = [{
@@ -22,11 +28,28 @@ const units = [{
   value: 'quả', index: 3
 }]
 export default class UpRecipeStep2 extends Component {
-  constructor(props){
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: LANG.UP_RECIPE,
+      headerLeft: <BackButton isGreen />,
+      headerTitleStyle: styles.headerTitleStyle,
+      headerRight: <TouchableOpacity style={styles.saveDraftBtn} onPress={navigation.getParam('showModalDraft')}>
+        <Text style={styles.saveDraftTxt}>{LANG.SAVE_DRAFT}</Text>
+      </TouchableOpacity>,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    };
+  };
+
+  constructor(props) {
     super(props);
-    this.state= {
-      data : data
+    this.state = {
+      data: data,
+      modalDraft: false
     }
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ showModalDraft: this.showModalDraft });
   }
 
   slectedMeal = (value) => {
@@ -37,7 +60,7 @@ export default class UpRecipeStep2 extends Component {
   deleteRow = (row) => {
     const { data } = this.state;
     data.map((item, index) => {
-      if(item.id === row.id){
+      if (item.id === row.id) {
         item.show = false
       }
     })
@@ -49,7 +72,7 @@ export default class UpRecipeStep2 extends Component {
   addNewRow = () => {
     const { data } = this.state;
     const lastArrData = data[data.length - 1];
-    data.push({id: lastArrData.id + 1,name:'', show: true});
+    data.push({ id: lastArrData.id + 1, name: '', show: true });
     this.setState({
       data: data
     })
@@ -59,7 +82,7 @@ export default class UpRecipeStep2 extends Component {
     const { data } = this.state;
     console.log('onChangeText=', row, text);
     data.map((item, index) => {
-      if(item.id === row.id){
+      if (item.id === row.id) {
         item.name = text;
       }
     })
@@ -68,30 +91,40 @@ export default class UpRecipeStep2 extends Component {
     })
   }
 
+  showModalDraft = () => {
+    this.setState({
+      modalDraft: true
+    })
+  }
+
+  continue = () => {
+    navigationService.navigate(ROUTES.upRecipeStep3.key);;
+  }
+
   renderIngredient = () => {
     const { data } = this.state;
     console.log('WHAT THE DATA', data);
     return data.map((item, index) => {
       return (
         <View key={index} >
-          {item.show && 
+          {item.show &&
             <View style={styles.containerFrame}>
               <View style={styles.leftFrame}>
                 <View style={[styles.upIngre, styles.borderBottom]}>
-                  <TextInput 
+                  <TextInput
                     style={styles.textInput}
                     maxLength={40}
                     placeholder='Ten nguyen lieu'
                     value={data.name}
-                    onChangeText={text => {this.onChangeText(item, text)}}
-                    />
+                    onChangeText={text => { this.onChangeText(item, text) }}
+                  />
                 </View>
                 <View style={styles.upIngre}>
                   <View style={[styles.leftIngre, styles.borderRight]}>
-                    <TextInput style={styles.textInput} maxLength={40} placeholder='So luong'/>
+                    <TextInput style={styles.textInput} maxLength={40} placeholder='So luong' />
                   </View>
                   <View style={styles.leftIngre}>
-                    <DropDown 
+                    <DropDown
                       label={LANG.MEAL}
                       data={units}
                       slectedItem={this.slectedMeal}
@@ -101,7 +134,7 @@ export default class UpRecipeStep2 extends Component {
               </View>
               <View style={styles.rightFrame}>
                 <TouchableOpacity onPress={() => this.deleteRow(item)}>
-                  <Image source={IMG.clearInput} style={styles.deleteImg}/>
+                  <Image source={IMG.clearInput} style={styles.deleteImg} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -110,25 +143,47 @@ export default class UpRecipeStep2 extends Component {
       )
     });
   }
-  
+
   render() {
     const { dataMeal } = this.props;
+    const { modalDraft } = this.state;
     return (
-      <View style={styles.container}>      
-        <Text style={styles.titleTxt}>{LANG.MEAL}</Text>
-        <View style={styles.dropView}>
-          <DropDown 
-            label={LANG.MEAL}
-            data={dataMeal}
-            slectedItem={this.slectedMeal}
+      <View style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <StepsUpRecipe activeStep={STEPS.INGREDIENT} />
+          <View style={styles.spaceBorder}></View>
+          <View style={{ paddingHorizontal: 15 }}>
+            <Text style={styles.titleTxt}>{LANG.MEAL}</Text>
+            <View style={styles.dropView}>
+              <DropDown
+                label={LANG.MEAL}
+                data={dataMeal}
+                slectedItem={this.slectedMeal}
+              />
+            </View>
+            <Text style={styles.titleTxt}>{LANG.INGREDIENT_1}</Text>
+            {this.renderIngredient()}
+            <TouchableOpacity style={styles.upRecipeView} onPress={this.addNewRow}>
+              <Image source={IMG.addIngredient} style={styles.upImg}></Image>
+              <Text style={styles.upText}>{LANG.ADD_INGREDIENT}</Text>
+            </TouchableOpacity>
+            <View style={styles.bottomBtn}>
+              <GradientButton
+                label={LANG.CONTINUE}
+                onPress={this.continue}
+              />
+            </View>
+          </View>
+          <ConfirmModal
+            modalVisible={modalDraft}
+            onPressDelete={this.onAcceptSave}
+            buttonAction={LANG.SAVE1}
+            content={{
+              title: `${LANG.SAVE_DRAFT_RECIPE}`,
+              message: `${LANG.QUESTION_SAVE_DRAFT}`
+            }}
           />
-        </View>
-        <Text style={styles.titleTxt}>{LANG.INGREDIENT_1}</Text>
-        {this.renderIngredient()}
-        <TouchableOpacity style={styles.upRecipeView} onPress={this.addNewRow}>
-            <Image source={IMG.addIngredient} style={styles.upImg}></Image>
-            <Text style={styles.upText}>{LANG.ADD_INGREDIENT}</Text>
-        </TouchableOpacity>
+        </ScrollView>
       </View>
     );
   }

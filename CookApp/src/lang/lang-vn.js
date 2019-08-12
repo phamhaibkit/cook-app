@@ -136,5 +136,6 @@ export const LANG_VN = {
   FINISH : 'Hoàn Tất',
   FINISH_RECIPE: 'Bạn đã hoàn thành công thức của mình? bài viết sẽ được gửi đến ban quản trị để duyệt',
   UP_SUCCESS: 'ĐĂNG THÀNH CÔNG',
-  ADMIN_APPROVE: 'Bài viết của bạn sẽ được ban quản trị duyệt trong thời gian sớm nhất'
+  ADMIN_APPROVE: 'Bài viết của bạn sẽ được ban quản trị duyệt trong thời gian sớm nhất',
+  ACCEPT: 'Đồng Ý'
 };
