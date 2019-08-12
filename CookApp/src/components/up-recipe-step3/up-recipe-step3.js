@@ -5,10 +5,10 @@ import { IMG } from '../../utils/variables';
 import styles from './up-recipe-step3-style';
 
 let data = [
-  {id: 1},
-  {id: 2},
-  {id: 3},
-  {id: 4}
+  {id: 1, show: true},
+  {id: 2, show: true},
+  {id: 3, show: true},
+  {id: 4, show: true}
 ]
 
 export default class UpRecipeStep3 extends Component {
@@ -27,12 +27,14 @@ export default class UpRecipeStep3 extends Component {
 
   deleteRow = (row) => {
     const { data } = this.state;
-    const newData = data.filter((item, index) => {
-      return item.id !== row.id;
+    data.map((item, index) => {
+      if(item.id === row.id){
+        item.show = false
+      }
     })
-    console.log('ROW-DELETE=', row, newData);
+    console.log('ROW-DELETE=', row, data);
     this.setState({
-      data: newData
+      data: data
     })
   }
 
@@ -41,7 +43,7 @@ export default class UpRecipeStep3 extends Component {
     const lastArrData = data[data.length - 1];
     console.log('ADD-ROW', lastArrData)
     if(lastArrData){
-      data.push({id: lastArrData.id + 1});
+      data.push({id: lastArrData.id + 1, show: true});
     }else{
       data.push({id: 1});
     }
@@ -65,23 +67,29 @@ export default class UpRecipeStep3 extends Component {
 
   renderStep = () => {
     const { data } = this.state;
+    let num = 0;
     return data.map((item, index) => {
+      item.show ? num++ : num; 
       return (
         <View key={index}>
-          <View style={styles.containerFrame}>
-            <Text style={styles.stepTxt}>{LANG.STEP + ' ' +(index + 1)}</Text>
-            <View style={styles.imagesView}>
-              {this.renderImage()}
+          {item.show &&
+            <View >
+              <View style={styles.containerFrame}>
+                <Text style={styles.stepTxt}>{LANG.STEP + ' ' + num}</Text>
+                <View style={styles.imagesView}>
+                  {this.renderImage()}
+                </View>
+                <View style={styles.textInput}>
+                  <TextInput placeholder={LANG.INPUT_DESCRIPTION_1} editable={true} multiline={true} numberOfLines={4} />
+                </View>
+              </View>
+              <View style={styles.deleteView}>
+                <TouchableOpacity onPress={() => this.deleteRow(item)}>
+                  <Image source={IMG.clearInput} style={styles.deleteImg}/>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.textInput}>
-              <TextInput placeholder={LANG.INPUT_DESCRIPTION_1} editable={true} multiline={true} numberOfLines={4} />
-            </View>
-          </View>
-          <View style={styles.deleteView}>
-            <TouchableOpacity onPress={() => this.deleteRow(item)}>
-              <Image source={IMG.clearInput} style={styles.deleteImg}/>
-            </TouchableOpacity>
-          </View>
+          }
         </View>
       )
     });

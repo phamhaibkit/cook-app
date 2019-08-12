@@ -6,10 +6,10 @@ import styles from './up-recipe-step2-style';
 import DropDown from '../dropdown/dropdown';
 
 let data = [
-  {id: 1, name:''},
-  {id: 2, name:''},
-  {id: 3, name:''},
-  {id: 4, name:''}
+  {id: 1, name:'', show: true},
+  {id: 2, name:'', show: true},
+  {id: 3, name:'', show: true},
+  {id: 4, name:'', show: true}
 ]
 
 const units = [{
@@ -36,14 +36,11 @@ export default class UpRecipeStep2 extends Component {
 
   deleteRow = (row) => {
     const { data } = this.state;
-    const indexDelete = data.indexOf(row);
-    // const newData = data.filter((item, index) => {
-    //   return item.id !== row.id;
-    // })
-    if( indexDelete !== -1){
-      data.splice(indexDelete, 1);
-      console.log('ROW-DELETE=', row, data);
-    }
+    data.map((item, index) => {
+      if(item.id === row.id){
+        item.show = false
+      }
+    })
     this.setState({
       data: data
     })
@@ -52,12 +49,7 @@ export default class UpRecipeStep2 extends Component {
   addNewRow = () => {
     const { data } = this.state;
     const lastArrData = data[data.length - 1];
-    console.log('ADD-ROW', lastArrData + 1)
-    if(lastArrData){
-      data.push({id: lastArrData.id + 1});
-    }else{
-      data.push({id: 1});
-    }
+    data.push({id: lastArrData.id + 1,name:'', show: true});
     this.setState({
       data: data
     })
@@ -81,35 +73,39 @@ export default class UpRecipeStep2 extends Component {
     console.log('WHAT THE DATA', data);
     return data.map((item, index) => {
       return (
-        <View key={index + 1} style={styles.containerFrame}>
-          <View style={styles.leftFrame}>
-            <View style={[styles.upIngre, styles.borderBottom]}>
-              <TextInput 
-                style={styles.textInput}
-                maxLength={40}
-                placeholder='Ten nguyen lieu'
-                value={data.name}
-                onChangeText={text => {this.onChangeText(item, text)}}
-                />
-            </View>
-            <View style={styles.upIngre}>
-              <View style={[styles.leftIngre, styles.borderRight]}>
-                <TextInput style={styles.textInput} maxLength={40} placeholder='So luong'/>
+        <View key={index} >
+          {item.show && 
+            <View style={styles.containerFrame}>
+              <View style={styles.leftFrame}>
+                <View style={[styles.upIngre, styles.borderBottom]}>
+                  <TextInput 
+                    style={styles.textInput}
+                    maxLength={40}
+                    placeholder='Ten nguyen lieu'
+                    value={data.name}
+                    onChangeText={text => {this.onChangeText(item, text)}}
+                    />
+                </View>
+                <View style={styles.upIngre}>
+                  <View style={[styles.leftIngre, styles.borderRight]}>
+                    <TextInput style={styles.textInput} maxLength={40} placeholder='So luong'/>
+                  </View>
+                  <View style={styles.leftIngre}>
+                    <DropDown 
+                      label={LANG.MEAL}
+                      data={units}
+                      slectedItem={this.slectedMeal}
+                    />
+                  </View>
+                </View>
               </View>
-              <View style={styles.leftIngre}>
-                <DropDown 
-                  label={LANG.MEAL}
-                  data={units}
-                  slectedItem={this.slectedMeal}
-                />
+              <View style={styles.rightFrame}>
+                <TouchableOpacity onPress={() => this.deleteRow(item)}>
+                  <Image source={IMG.clearInput} style={styles.deleteImg}/>
+                </TouchableOpacity>
               </View>
             </View>
-          </View>
-          <View style={styles.rightFrame}>
-            <TouchableOpacity onPress={() => this.deleteRow(item)}>
-              <Image source={IMG.clearInput} style={styles.deleteImg}/>
-            </TouchableOpacity>
-          </View>
+          }
         </View>
       )
     });
