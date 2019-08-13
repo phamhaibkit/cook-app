@@ -10,21 +10,23 @@ export default class CollectionHome extends Component {
 		super(props);		
 	}
 
+	renderItem = ({ item }) => (<CollectionItem item={item} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>);
+
 	render() { 
 		const { data, marTop } = this.props;   
 		return (
 			<View style={[styles.container, { marginTop: marTop }]}>
-				<FlatList
-					data={data} 
-					renderItem={({ item }) => {
-						return (
-							<CollectionItem item={item} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>
-						);
-					}} 
-          keyExtractor={(item, index) => index.toString()}
-					horizontal
-					showsHorizontalScrollIndicator={false}
-				/>
+				{
+					data && 
+					<FlatList
+						data={data} 
+						renderItem={this.renderItem}
+						keyExtractor={(item) => item.id.toString()}
+						horizontal
+						showsHorizontalScrollIndicator={false}
+						removeClippedSubviews 
+					/>
+				}
 			</View>
 		);
 	}

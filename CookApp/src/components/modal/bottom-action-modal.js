@@ -14,11 +14,11 @@ export class BottomActionModal extends Component {
   }
 
   openReportPage = () => {
-    this.props.closeReport('report')
+    this.props.closeReport && this.props.closeReport('report')
   }
 
   closeReport = () => {
-    this.props.closeReport()
+    this.props.closeReport && this.props.closeReport()
   };
 
   render() {

@@ -62,4 +62,10 @@ export const ROUTES = {
   viewComment: {
     key: 'viewComment'
   },
+  upRecipeStep2: {
+    key: 'upRecipeStep2'
+  },
+  upRecipeStep3: {
+    key: 'upRecipeStep3'
+  },
 };

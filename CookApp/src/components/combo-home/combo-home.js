@@ -10,19 +10,24 @@ export default class ComboHome extends Component {
     this.state = {};
   }
 
+  renderItem = ({ item, index }) => (<ComboItem item={item} index={index} dataLength={this.props.data.length || 0} />);
+
   render() {
-    const { data, marTop } = this.props;
-    const dataLength = data.length || 0;
+    const { data, marTop } = this.props;    
 
     return (
       <View style={[styles.container, {marginTop: marTop}]}>
-        <FlatList
-          data={data}
-          renderItem={({ item, index }) => <ComboItem item={item} index={index} dataLength={dataLength} />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        {
+          data && 
+          <FlatList
+            data={data}
+            renderItem={this.renderItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id.toString()}
+            removeClippedSubviews
+          />
+        }
       </View>
     );
   }

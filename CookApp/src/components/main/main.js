@@ -47,6 +47,9 @@ import UserDraftRecipe from '../user-draft-recipe/user-draft-recipe';
 import UserDraftOrders from '../user-draft-orders/user-draft-orders';
 import PageViewRating from '../page-rating/page-view-rating';
 import PageViewComment from '../page-view-comment/page-view-comment';
+import UpRecipeStep2 from '../up-recipe-step2/up-recipe-step2';
+import UpRecipeStep3 from '../up-recipe-step3/up-recipe-step3';
+
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -200,10 +203,15 @@ const RecipeStack = createStackNavigator({
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
   [ROUTES.recipeRating.key]: PageRaingScreen,
-  [ROUTES.postRecipe.key]: PostRecipe
+  [ROUTES.postRecipe.key]: PostRecipe,
+  [ROUTES.upRecipeStep2.key]: {
+    screen: UpRecipeStep2
+  },
+  [ROUTES.upRecipeStep3.key]: {
+    screen: UpRecipeStep3
+  }
 
 });
-
 
 const NotiStack = createStackNavigator({
   Noti: { screen: PageNoti }
@@ -337,7 +345,7 @@ const bottomTabNav = createBottomTabNavigator(
   {
     Home: {
       screen: HomeStack,
-      // screen: RecipeStack, 
+      // screen: RecipeStack,
       navigationOptions:
       {
         tabBarLabel: LANG.HOME

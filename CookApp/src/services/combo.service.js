@@ -3,7 +3,7 @@ import { API } from './api';
 import _ from 'lodash';
 
 const comboData = [];
-const comboDetail = {};
+const comboDetailData = {};
 
 class ComboService {
   constructor() {
@@ -12,7 +12,7 @@ class ComboService {
 
   resetService = () => {
     this.comboData = _.cloneDeep(comboData);
-    this.comboDetail = _.cloneDeep(comboDetail);
+    this.comboDetailData = _.cloneDeep(comboDetailData);
   };
 
   getCombo = () => {
@@ -20,8 +20,7 @@ class ComboService {
     const url = API.GET_COMBO_LIST;
 
     return HTTPService.get(url,null,null)
-      .then(data => {           
-        console.log( 'get comboList Done' +  JSON.stringify(data));    
+      .then(data => {              
         this.comboData = _.cloneDeep([
           ...data
         ]);
@@ -34,16 +33,12 @@ class ComboService {
   getComboDetail = (id) => {
     this.resetService();
     const url = API.GET_COMBO_DETAIL(id);
-    console.log('?id= ', url);
 
-    
     return HTTPService.get(url,null,null)
       .then(data => {            
-        this.comboDetail = _.cloneDeep({
+        this.comboDetailData = _.cloneDeep({
           ...data
-        });
-
-        console.log( 'get this.comboDetail Done ' + JSON.stringify(this.comboDetail)); 
+        });       
       })
       .catch(err => {
         return Promise.reject(err);

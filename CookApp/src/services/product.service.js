@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 const bestSellerProduct = {
   loading: true
-}
+};
 
 
 class ProductService {
@@ -15,20 +15,20 @@ class ProductService {
   resetService = () => {
     this.bestSellerProduct = _.cloneDeep(bestSellerProduct);
   };
-  
+
   getBestSellerProduct = () => {
     const url = API.GET_BEST_SELLER_PRODUCT;
     this.bestSellerProduct.loading = true;
-    return HTTPService.get(url,null,null)
-      .then(data => {
+    return HTTPService.get(url, null, null)
+      .then((data) => {
         this.bestSellerProduct = _.cloneDeep({
-          products: data,
           loading: false,
+          products: data,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err);
-      })
+      });
   }
 
 }
