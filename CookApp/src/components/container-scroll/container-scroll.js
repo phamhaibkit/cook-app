@@ -23,6 +23,7 @@ export default class ContainerScroll extends Component {
   }
 
   render() {
+    const { enableScroll } = this.props;
     const { scrollY } = this.state;
     const headerHeight = scrollY.interpolate({
       inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
@@ -64,6 +65,7 @@ export default class ContainerScroll extends Component {
           scrollEventThrottle={16}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }])}
           showsVerticalScrollIndicator={false}
+          scrollEnabled={enableScroll}
         >
           <LinearGradient
             colors={colorHeader}
