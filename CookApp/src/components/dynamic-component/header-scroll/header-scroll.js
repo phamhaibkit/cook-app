@@ -78,7 +78,7 @@ export class HeaderScroll extends Component {
           {pageName && <Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: colorPageName || '#fff' }]}>{pageName}</Text>}
           <View style={[{ minWidth: 26, height: 26 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
             {haveCart ? <View><CartHome isTransparentHeader /></View> : <View />}
-            {haveMore ? <TouchableOpacity onPress={() => this.openReportBar()}><Animated.Text style={[{ color }, { fontSize: 26, paddingLeft: 10, marginTop: -8 }, CSS.fontNuExBold]}>...</Animated.Text></TouchableOpacity> : <View />}
+            {haveMore && <TouchableOpacity onPress={() => this.openReportBar()}><Animated.Text style={[{ color }, { fontSize: 26, paddingLeft: 10, marginTop: -8 }, CSS.fontNuExBold]}>...</Animated.Text></TouchableOpacity>}
           </View>
         </Animated.View>
         <ScrollView

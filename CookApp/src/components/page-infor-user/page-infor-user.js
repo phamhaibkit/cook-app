@@ -21,6 +21,7 @@ import RadioSelect from "../radio-select/radio-select";
 import DatePickerCustom from "../date-picker-custom/date-picker-custom";
 import Avatar from "../avatar/avatar";
 import navigationService from "../../services/navigation.service";
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class PageInforUser extends Component {
   static propTypes = {
@@ -87,7 +88,7 @@ export default class PageInforUser extends Component {
   chooseFile = () => {
     const options = {
       title: "Select Avatar",
-      
+
       storageOptions: {
         skipBackup: true,
         path: "images"
@@ -117,7 +118,13 @@ export default class PageInforUser extends Component {
   };
 
   handleNavigate = () => {
-    console.log(this.props, 'props');
+
+
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'User' })],
+    });
+    this.props.navigation.dispatch(resetAction);
     navigationService.navigate('Home');
   }
 
@@ -151,7 +158,7 @@ export default class PageInforUser extends Component {
                 ]}>
                 {LANG.INFOR_USER}
               </Text>
-              <TouchableOpacity onPress={ ()=> this.handleNavigate()}>
+              <TouchableOpacity onPress={() => this.handleNavigate()}>
                 <Text
                   style={[
                     CSS.fontQuiRegular,

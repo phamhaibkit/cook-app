@@ -9,7 +9,7 @@ export default class ImageProfile extends Component {
   }
 
   render() {
-    const { user, widthImage } = this.props;
+    const { user, widthImage, noRating } = this.props;
     let getLastCharacterName = '';
     if (!user.avatar) {
       const detailName = user.name ? user.name.split(' ') : '';
@@ -20,11 +20,12 @@ export default class ImageProfile extends Component {
       height: widthImage, width: widthImage, borderRadius: widthImage / 2
     };
     return (
-      <View style={{position: 'relative'}}>
+      <View>
         {user.avatar
-          ? <Image style={[styleCircle]} source={{ uri: user.avatar }} /> : <View style={[styleCircle, { backgroundColor: 'grey' }, CSS.justifyContentCenter, CSS.alignItemsCenter]}>
+          ? <Image style={[styleCircle, { position: 'relative' }]} source={{ uri: user.avatar }} />
+          : <View style={[styleCircle, { backgroundColor: 'grey', position: 'relative' }, CSS.justifyContentCenter, CSS.alignItemsCenter]}>
             <Text style={[CSS.fontQuiBold, { color: 'white' }]}>{getLastCharacterName}</Text></View>}
-        {user.rank && <View style={[styles.containerRank, CSS.lightBoxShadowItem]}>
+        {user.rank && !noRating && <View style={[styles.containerRank, CSS.lightBoxShadowItem]}>
           <Image source={IMG.rankHome} style={styles.rankImg} />
         </View>}
       </View>

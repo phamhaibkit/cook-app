@@ -16,7 +16,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E0E0E0',
     borderRadius: 5,
-    flex: 1,
+    height: 40,
     width: '100%',
     paddingHorizontal: 10,
   },

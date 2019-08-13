@@ -179,7 +179,7 @@ export class PageUser extends Component {
             {this.renderRecipeManage()}
             {this.renderCookerManage()}
             {this.renderSettingManage()}
-            <TouchableOpacity style={{ marginTop: 10 }}>
+            <TouchableOpacity style={{ marginTop: 10 }} onPress={() => this.props.navigation.navigate('SignIn')}>
               <Text style={[CSS.textAlignCenter, CSS.fontQuiBold, CSS.fontSize15, { color: '#FF0000', marginBottom: 30 }]}>Logout</Text>
             </TouchableOpacity>
 

@@ -7,8 +7,8 @@ import styles from './tex-input-style';
 export class TextInputRender extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
-    const { title, placeholder, value, onChangeText, error, inputErrorStyle, secureTextEntry, styleConfig, icon, } = this.props;
-    return <View style={styles.inputSection}>
+    const { title, placeholder, value, onChangeText, error, inputErrorStyle, secureTextEntry, styleConfig, icon, noMargin } = this.props;
+    return <View style={[!noMargin ? styles.inputSection : {}]}>
       {title && <Text style={[CSS.fontSize14, { fontFamily: CSS.fontTitle, color: '#444444', marginBottom: 6 }]}>{title}</Text>}
       <View style={styles.SectionStyle}>
         {icon && <View style={styles.ImageStyle}>

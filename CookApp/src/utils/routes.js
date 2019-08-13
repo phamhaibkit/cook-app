@@ -58,5 +58,8 @@ export const ROUTES = {
   },
   userDraftRecipe: {
     key: 'userDraftRecipe'
-  }
+  },
+  viewComment: {
+    key: 'viewComment'
+  },
 };

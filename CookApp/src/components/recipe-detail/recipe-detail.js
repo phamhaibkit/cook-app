@@ -144,7 +144,7 @@ export default class RecipeDetail extends Component {
   }
 
   renderOwner = (chef) => {
-    console.log(chef, 'chef')
+    console.log(chef, 'chef');
     return (chef && chef.owner && <View style={[styles.ownerStyles, CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
       <View style={styles.containerChef}>
         <ImageProfile user={chef.owner} widthImage={56} />
@@ -163,7 +163,7 @@ export default class RecipeDetail extends Component {
 
   renderInforRecipe = (recipe) => {
     const { rateAmount } = this.state;
-
+    const star = Math.round(_.get(recipe, 'evaluations.avgStar', 0));
     return (recipe && <View style={[{ marginTop: -90, alignItems: 'center' }]}>
       <View style={[styles.recipeInfor, CSS.lightBoxShadowItem]}>
         <View style={[CSS.justifyContentCenter]}>
@@ -175,7 +175,7 @@ export default class RecipeDetail extends Component {
           <Text style={[CSS.fontQuiBold, styles.mgTop10, CSS.fontSize20, { color: '#001D12' }]}>{recipe.name}</Text>
           <View style={[CSS.flexRow, styles.mgTop10]}>
             <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-              {this.renderStar(recipe.starNum || 0)}
+              {this.renderStar(star || 0)}
               <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#000000', paddingLeft: 8, paddingRight: 11 }]}>
                 {rateAmount} {LANG_VN.RATE}
               </Text>
@@ -280,6 +280,7 @@ export default class RecipeDetail extends Component {
     const arrayOfComment = _.get(recipe, 'evaluations.evaluationDetail', []);
     const starPercentArray = _.get(recipe, 'evaluations.starDetail', []);
     const commentNumber = _.get(recipe, 'evaluations.total', 0);
+    const star = Math.round(_.get(recipe, 'evaluations.avgStar', 0));
     return recipe && <View style={[styles.container]}>
       <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
         <Text style={[{ color: '#444444', textTransform: 'uppercase' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.RATE}</Text>
@@ -288,7 +289,7 @@ export default class RecipeDetail extends Component {
         <View style={[styles.boxRate, CSS.alignItemsCenter, CSS.justifyContentCenter]}>
           <Text style={[CSS.fontSize30, CSS.fontQuiBold, styles.colorTextDark]}>4.7<Text style={[CSS.fontSize18, CSS.fontQuiLight]}>/ 5</Text></Text>
           <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifyContentCenter, { marginTop: 5, marginBottom: 10 }]}>
-            {this.renderStar(3)}
+            {this.renderStar(star)}
           </View>
           <Text style={[CSS.fontQuiRegular, CSS.fontSize12, { color: '#767676' }]}>{commentNumber} {LANG_VN.RATE}</Text>
         </View>
@@ -350,17 +351,18 @@ export default class RecipeDetail extends Component {
           </View>
         </View>;
       })}
-      <View style={[CSS.flexRow]}>
-        <ImageProfile user={recipeDataDetail.owner} widthImage={42} />
+      <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+        <ImageProfile noRating user={recipeDataDetail.owner} widthImage={50} />
         <View style={{ flex: 1, marginLeft: 15 }}>
           <TextInputRender
             onChangeText={(value, err) => this.onChangeText(value, err, 'comment')
             }
+            noMargin
             placeholder="Nhập bình luận"
             value={comment} />
         </View>
         <TouchableOpacity>
-          <Text style={[CSS.fontQuiBold, CSS.fontSize15, { color: '#3ABF57', marginTop: 15, marginLeft: 5 }]}>Gửi</Text>
+          <Text style={[CSS.fontQuiBold, CSS.fontSize15, { color: '#3ABF57', marginLeft: 5 }]}>Gửi</Text>
         </TouchableOpacity>
       </View>
 
@@ -377,6 +379,9 @@ export default class RecipeDetail extends Component {
       break;
     case 'viewRating':
       navigationService.navigate(ROUTES.viewRating.key);
+      break;
+    case 'viewComment':
+      navigationService.navigate(ROUTES.viewComment.key);
       break;
     default:
     }
@@ -405,7 +410,7 @@ export default class RecipeDetail extends Component {
           <View style={styles.horizontalFlash}/>
           {this.renderRate(recipeDetail)}
           <View style={styles.horizontalFlash}/>
-          <ViewMoreHome type={LANG.COMMENT_PAGE} viewMore={() => this.viewMore('')} />
+          <ViewMoreHome type={LANG.COMMENT_PAGE} viewMore={() => this.viewMore('viewComment')} />
           <View style={styles.container}>
             {this.renderRowComment(recipeDetail)}
           </View>

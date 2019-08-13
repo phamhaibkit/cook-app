@@ -46,6 +46,7 @@ import PostRecipe from '../post-recipe/post-recipe';
 import UserDraftRecipe from '../user-draft-recipe/user-draft-recipe';
 import UserDraftOrders from '../user-draft-orders/user-draft-orders';
 import PageViewRating from '../page-rating/page-view-rating';
+import PageViewComment from '../page-view-comment/page-view-comment';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -127,6 +128,13 @@ const PageViewRatingScreen = {
   }
 }
 
+const PageViewCommentScreen = {
+  screen: PageViewComment,
+  navigationOptions: {
+    header: null
+  }
+}
+
 const RecipeDetailScreen = {
   screen: RecipeDetail,
 };
@@ -157,6 +165,7 @@ const HomeStack = createStackNavigator({
   [ROUTES.newsEventList.key]: NewsEventListScreen,
   [ROUTES.recipeRating.key]: PageRaingScreen,
   [ROUTES.viewRating.key]: PageViewRatingScreen,
+  [ROUTES.viewComment.key]: PageViewCommentScreen,
 });
 
 const StoreStack = createStackNavigator({
@@ -170,8 +179,6 @@ const StoreStack = createStackNavigator({
   Details: { screen: PageDetail },
   Profile: { screen: UserProfile }
 });
-
-
 
 const RecipeStack = createStackNavigator({
   Recipe: {
@@ -334,7 +341,9 @@ const bottomTabNav = createBottomTabNavigator(
       navigationOptions:
       {
         tabBarLabel: LANG.HOME
-      }
+      },
+      resetOnBlur: true,
+      initialRouteName: 'User'
     },
     Store: {
       screen: StoreStack,
