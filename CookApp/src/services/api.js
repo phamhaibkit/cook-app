@@ -26,6 +26,7 @@ export const API = {
   GET_RECIPE_SUGGEST_LIST: id=> HOST + '/recipe/suggestion-recipe?usr=' + id,
   GET_RECIPE_OTHER_LIST: HOST + '/recipe/other-recipe?recipe=10',
   GET_CATEGORY: HOST + '/recipe-catalog/all',
+  REPORT_RECIPE: HOST + '/recipe/report',
   //recipe highlight
   GET_RECIPE_HIGHLIGHT_LIST: HOST + '/recipe/highlight-recipe/all',
 
@@ -46,6 +47,7 @@ export const API = {
 
   //search recipe
   SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text,
+  MOST_SEARCH: HOST + '/recipe/search/trending',
   //// recipe detail
   GET_RECIPE_DETAIL: id => HOST + '/recipe/' + id,
   // home functions

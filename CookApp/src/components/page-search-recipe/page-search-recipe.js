@@ -7,19 +7,26 @@ import styles from './page-search-recipe-style';
 import searchService from '../../services/search.service';
 import recipeService from '../../services/recipe.service';
 import collectionService from '../../services/collection.service';
+import Spinner from '../spinner/spinner';
 
 export default class PageSearchRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
       textSearch : '',
-      recipes: recipeService.recipeHighLightData.recipes,
-      collections: collectionService.collectionData.data
+      recipes: [],
+      collections: [],
+      showMost: true
     };
   }
 
-  componentDidMount= () => {
-    
+  componentDidMount() {
+    searchService.mostSearch().then(() => {
+      this.setState({
+        recipes: searchService.recipeSearchData.recipes,
+        collections: searchService.recipeSearchData.recipe_collection
+      });
+    })
   }
 
   onCancel=() => {
@@ -28,32 +35,35 @@ export default class PageSearchRecipe extends Component {
     });
   }
 
-  onSearch=() => {
-    searchService.searchRecipe('bo').then(() => {
+  onSearch=(text) => {
+    searchService.searchRecipe(text).then(() => {
       this.setState({
         recipes: searchService.recipeSearchData.recipes,
-        collections: searchService.recipeSearchData.recipe_collection
-      })
-    })
+        collections: searchService.recipeSearchData.recipe_collection,
+        showMost: false
+      });
+    });
   }
 
-  onChangeText=(textData) => {
-    // alert('onChangeText');
+  onChangeText=(text) => {
     this.setState({
-      textSearch: textData
+      textSearch: text
     });
   }
 
   render() {
-    const { recipes, collections} = this.state;
-    console.log('ASDDDDDDDDDDS', recipes, collections)
+    const { recipes, collections, textSearch, showMost } = this.state;
     return (
       <View style={styles.container}>
-        <SearchBarInput onSearch={this.onSearch}/>
+        <SearchBarInput onSearch={this.onSearch} onChangeText={this.onChangeText} textData={textSearch}/>
         <ScrollView style={styles.bodyView}>
-          <Text style={styles.bestSellText}>{LANG.BEST_SEARCH}</Text>
-          <MostSearched label={LANG.RECIPE} data={recipes} subData={true} />
-          <MostSearched label={LANG.COLLECTION.name} data={collections} />
+          {searchService.recipeSearchData.loading ? <Spinner /> : (
+            <View>
+              { showMost && <Text style={styles.bestSellText}>{LANG.BEST_SEARCH}</Text> }
+              <MostSearched label={LANG.RECIPE} data={recipes} subData={true} />
+              <MostSearched label={LANG.COLLECTION.name} data={collections} />
+          </View>
+          )}
         </ScrollView>
       </View>
     );

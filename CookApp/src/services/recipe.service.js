@@ -174,6 +174,21 @@ class RecipeService {
       })
   }
 
+  reportRecipe = (id, content) => {
+    const url = API.REPORT_RECIPE;
+    const params = {
+      id: id,
+      reportContent: content
+    }
+    return HTTPService.post(url, params,null, null, null)
+      .then((data) => {
+        console.log('DATA RESPONSE==', data);
+        return Promise.resolve(data);
+      }).catch((err) => {
+        return Promise.reject(err);
+      })
+  }
+
 }
 
 export default new RecipeService();

@@ -9,46 +9,35 @@ export default class SearchBarInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isFocus: true,
       text: ''
-    }
+    };
   }
 
-  // onFocus = () => {
-  //   this.setState({
-  //     isFocus: true
-  //   })
-  // }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      text: nextProps.textData
+    });
+  }
 
-  // onBlur = () => {
-  //   this.setState({
-  //     isFocus: false
-  //   })
-  // }
   onClear = () => {
     this.setState({
       text: '',
-    })
+    });
   }
 
   onCancel = () => {
     this.onClear();
-    // Keyboard.dismiss();
     navigationService.goBack();
   }
 
   onSearch = () => {
-    this.props && this.props.onSearch();
-  }
-
-  onChangeText = (text) => {
-    this.setState({
-      text: text
-    })
+    const { text } = this.state;
+    this.props.onSearch && this.props.onSearch(text);
   }
 
   render() {
     const { text } = this.state;
+    const { onChangeText } = this.props;
     return (
       <View style={{ backgroundColor: COLOR.whiteColor, paddingHorizontal: CSS.padding15, paddingVertical: 8, flexDirection: 'row' }}>
         <View style={{ flex: 9, flexDirection: 'row', overflow: 'hidden', backgroundColor: '#F8F8F8', borderRadius: 10, paddingLeft: 10 }}>
@@ -56,26 +45,21 @@ export default class SearchBarInput extends Component {
             <Image source={IMG.searchGreen} style={{ width: 22, height: 22 }} />
           </TouchableOpacity>
           <TextInput
-            onFocus={this.onFocus}
-            autoFocus={true}
+            autoFocus
             style={{ flex: 9, height: 40 }}
-            onChangeText={(text) => this.onChangeText(text)}
-            value={this.state.text}
+            onChangeText={(text) => { onChangeText(text)}}
+            value={text}
           />
           {!!text && (
             <TouchableOpacity style={{ flex: 1, height: 40, justifyContent: 'center', alignItems: 'center' }} onPress={this.onClear}>
               <Image source={IMG.clearInput} style={{ width: 14, height: 14 }} />
             </TouchableOpacity>
           )}
-
         </View>
-
         <TouchableOpacity style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }} onPress={this.onCancel}>
           <Text style={{ fontFamily: CSS.fontTitle, fontSize: 15, color: COLOR.greenColor }}>{LANG.CANCEL}</Text>
         </TouchableOpacity>
-
       </View>
     );
   }
-
 }
