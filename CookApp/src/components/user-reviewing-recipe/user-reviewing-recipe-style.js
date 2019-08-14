@@ -12,14 +12,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginVertical: 20
   },
-  tabBarTextStyle: {
-    fontFamily: 'Quicksand-Bold',
-    fontSize: 14
-  },
-  tabBarUnderlineStyle   : {
-    backgroundColor: COLOR.greenColor,
-    height: 3
-  },
   frame: {
     height: height,
     width: width,

@@ -5,7 +5,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Modal from 'react-native-modal';
 
 import { COLOR, CSS, IMG } from '../../utils/variables';
-import {  LANG } from '../../lang/lang';
+import { LANG } from '../../lang/lang';
 import styles from './user-reviewing-recipe-style';
 import { getCurrencyStr, kFormatter } from '../../utils/general';
 import userService from '../../services/user.service';
@@ -123,12 +123,12 @@ export default class UserReviewingRecipe extends Component {
     return (
       <ScrollableTabView 
         tabBarActiveTextColor ={COLOR.greenColor} 
-        tabBarTextStyle={styles.tabBarTextStyle}
-        tabBarUnderlineStyle ={styles.tabBarUnderlineStyle }
+        tabBarTextStyle={CSS.tabBarTextStyle}
+        tabBarUnderlineStyle ={CSS.tabBarUnderlineStyle }
         tabBarInactiveTextColor="#999"
       >
-        <WaitingReviewRecipe tabLabel="Chờ duyệt" recipes={waitingReviewRecipes.waiting_recipes}/>
-        <RejectRecipe tabLabel="Từ chối" recipes={waitingReviewRecipes.reject_recipes}/>
+        <WaitingReviewRecipe tabLabel={LANG.WAITING_ACCEPT} recipes={waitingReviewRecipes.waiting_recipes}/>
+        <RejectRecipe tabLabel={LANG.REJECT} recipes={waitingReviewRecipes.reject_recipes}/>
       </ScrollableTabView>
     );
   }

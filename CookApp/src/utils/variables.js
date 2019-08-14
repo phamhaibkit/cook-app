@@ -325,7 +325,17 @@ export const CSS = {
     width: 15,
     height: 15,
     marginRight: 10
-  }
+  },
+
+  // tabBar ScrollView
+  tabBarTextStyle: {
+    fontFamily: 'Quicksand-Bold',
+    fontSize: 14
+  },
+  tabBarUnderlineStyle   : {
+    backgroundColor: '#3ABF57',
+    height: 3
+  },
 };
 
 export const COLOR = {
