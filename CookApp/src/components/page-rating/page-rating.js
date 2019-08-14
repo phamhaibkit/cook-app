@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions, KeyboardAvoidingView, TextInput, Keyboard, Platform, StyleSheet } from 'react-native'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions, KeyboardAvoidingView, TextInput, Keyboard, Platform, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
 import SwiperImage from '../swiper-image/swiper-image';
 import { CSS, IMG } from '../../utils/variables';
-import LinearGradient from 'react-native-linear-gradient';
 import { LANG_VN } from '../../lang/lang-vn';
 import recipeService from '../../services/recipe.service';
+
 const { height, width } = Dimensions.get('window');
 export default class RatingPage extends Component {
   static propTypes = {
@@ -23,7 +24,7 @@ export default class RatingPage extends Component {
       imageHeader: [
         'https://daubepgiadinh.vn/wp-content/uploads/2017/01/canh-chua-bong-dien-dien-600x400.jpg'
       ]
-    }
+    };
   }
 
   componentDidMount() {
@@ -33,53 +34,55 @@ export default class RatingPage extends Component {
     this.setState({
       recipe,
       number: 0
-    })
+    });
   }
 
   renderStar = (number) => {
     const star = [];
 
+    // eslint-disable-next-line no-plusplus
     for (let i = 1; i <= number; i++) {
-      const starYellow = <TouchableOpacity key={i} onPress={() => this.handleRating(i)}><Image style={styles.imageStar} source={IMG.starYellow}></Image></TouchableOpacity>
+      const starYellow = <TouchableOpacity key={i} onPress={() => this.handleRating(i)}><Image style={styles.imageStar} source={IMG.starYellow} /></TouchableOpacity>;
       star.push(starYellow);
     }
+    // eslint-disable-next-line no-plusplus
     for (let j = number; j < 5; j++) {
-      const starGray = <TouchableOpacity key={j + 1} onPress={() => this.handleRating(j + 1)} ><Image style={styles.imageStar} source={IMG.starGrey}></Image></TouchableOpacity>
+      const starGray = <TouchableOpacity key={j + 1} onPress={() => this.handleRating(j + 1)} ><Image style={styles.imageStar} source={IMG.starGrey} /></TouchableOpacity>;
       star.push(starGray);
     }
 
-    return star.map(item => {
-      return (item)
-    })
+    return star.map((item) => {
+      return (item);
+    });
   }
 
   handleRating = (number) => {
     console.log(number);
-    let rateText = ''
+    let rateText = '';
     switch (number) {
-      case 1:
-        rateText = 'Rất tệ'
-        break;
-      case 2:
-        rateText = 'Tệ'
-        break;
-      case 3:
-        rateText = 'Bình thường'
-        break;
-      case 4:
-        rateText = 'Tuyệt vời'
-        break;
-      case 5:
-        rateText = 'Xuất sắc'
-        break;
-      default:
-        break;
+    case 1:
+      rateText = 'Rất tệ';
+      break;
+    case 2:
+      rateText = 'Tệ';
+      break;
+    case 3:
+      rateText = 'Bình thường';
+      break;
+    case 4:
+      rateText = 'Tuyệt vời';
+      break;
+    case 5:
+      rateText = 'Xuất sắc';
+      break;
+    default:
+      break;
     }
     console.log(rateText, 'rateText');
     this.setState({
       number,
       rateText
-    })
+    });
   }
 
   onChangeText = (value) => {
@@ -89,7 +92,7 @@ export default class RatingPage extends Component {
   };
 
   onPressSendRate = () => {
-    const {comment, number, recipe} = this.state;
+    const { comment, number, recipe } = this.state;
     console.log(comment);
     const params = {
       id: recipe.id,
@@ -97,8 +100,8 @@ export default class RatingPage extends Component {
       comment,
     };
     recipeService.sendRecipeRating(params).then((res) => {
-      console.log(res, 'successful')
-    })
+      console.log(res, 'successful');
+    });
   }
 
   render() {
@@ -106,11 +109,11 @@ export default class RatingPage extends Component {
 
     let padding = 0;
     if (Platform.OS !== 'ios') {
-      padding = -500
+      padding = -500;
     }
     return (
-      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={padding}>
-        <HeaderScroll pageName={'Đánh giá'}>
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={padding}>
+        <HeaderScroll pageName="Đánh giá">
           <SwiperImage height={300} listItems={recipe.recipeImg} />
           <View style={[styles.container]}>
             <View style={[{ marginTop: -90, alignItems: 'center' }]}>
@@ -124,12 +127,12 @@ export default class RatingPage extends Component {
                   <TextInput
                     style={[styles.Input, CSS.fontQuiRegular]}
 
-                    placeholder={'Viết đánh giá'}
+                    placeholder="Viết đánh giá"
                     underlineColorAndroid="transparent"
                     onChangeText={this.onChangeText}
                     placeholderTextColor="#CECECE"
                     placeholderStyle={CSS.placeholderStyle}
-                    multiline={true}
+                    multiline
                   />
                 </View>
               </View>
@@ -145,7 +148,7 @@ export default class RatingPage extends Component {
 
         </HeaderScroll>
       </KeyboardAvoidingView>
-    )
+    );
   }
 }
 
@@ -170,4 +173,4 @@ const styles = StyleSheet.create({
     height: 31,
     marginRight: 1
   },
-})
+});

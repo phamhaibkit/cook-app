@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Modal, Image, KeyboardAvoidingView, Button } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { StackActions, NavigationActions } from 'react-navigation';
 import styles from './page-signin-style';
 import { LANG } from '../../lang/lang';
 
@@ -43,17 +44,24 @@ class PageSignin extends Component {
 
   onPressSignin = () => {
     const { email, password } = this.state;
-    let errorMessage = ''
+    let errorMessage = '';
 
     if (!password) {
-      errorMessage = 'Please input password'
+      errorMessage = 'Please input password';
     }
     if (!email) {
-      errorMessage = 'Please input user'
+      errorMessage = 'Please input user';
     }
 
     if (errorMessage === '') {
-      authService.manualLogin(this.state);
+      authService.getToken(email, password).then((infor) => {
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'User' })],
+        });
+        this.props.navigation.dispatch(resetAction);
+        navigationService.navigate('Home');
+      });
     } else {
       const content = {
         message: errorMessage,

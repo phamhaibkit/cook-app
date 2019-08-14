@@ -24,7 +24,7 @@ class AuthService {
 
   manualLogin = (data) => {
     console.log(data, 'data');
-    this.getToken(data.email, data.password)
+    this.getToken(data.email, data.password);
   }
 
   loginFacebook = (email, firstName, lastName, facebookId) => {
