@@ -67,4 +67,5 @@ export const API = {
   // user
   USER_DRAFT_RECIPE: userId => HOST + '/recipe/draft?usr=' + userId, 
   USER_DRAFT_ORDERS: userId => HOST + '/bill/draft?usr=' + userId,
+  USER_WAITING_REVIEW_RECIPES: userId => HOST + '/recipe/pending?usr=' + userId
 };

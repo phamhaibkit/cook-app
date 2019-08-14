@@ -140,5 +140,6 @@ export const LANG_VN = {
   ACCEPT: 'Đồng Ý',
   CODE_REDUCE_PRICE: 'Mã giảm giá',
   YOUR_RECIPE: 'Công Thức Của Bạn',
-  WAITING_ACCEPT_RECIPE: 'Công Thức Chờ Duyệt'
+  WAITING_ACCEPT_RECIPE: 'Công Thức Chờ Duyệt',
+  WAITING_NOTE: 'Nhằm đảm bảo chất lượng, ban quản trị sẽ xem xét và duyệt bài viết của bạn trong vòng 24-48 tiếng và sẽ đưa ra những yêu cầu thay đổi nếu cần thiết.'
 };
