@@ -21,9 +21,11 @@ export default class ConfirmModal extends Component {
   }
 
   hideModal = () => {
+    const { onHide } = this.props;
     this.setState({
       isVisible: false
     });
+    onHide && onHide();
   }
 
   render() {

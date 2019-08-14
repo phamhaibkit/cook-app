@@ -5,7 +5,7 @@ import { COLOR, CSS, IMG } from '../../utils/variables';
 const widthItem = Dimensions.get('window').width;
 export default class MostSearched extends Component {
   renderItem = (item) => {
-    const { subData } = this.props;
+    const { subData, onPress } = this.props;
     return (
       <View style={{
         width: widthItem - 30,
@@ -23,7 +23,7 @@ export default class MostSearched extends Component {
         elevation: 5,
         backgroundColor: 'white',
       }} >
-        <TouchableOpacity style={{ flexDirection: 'row', padding: 10 }}>
+        <TouchableOpacity style={{ flexDirection: 'row', padding: 10 }} onPress={() => {onPress && onPress(item)}}>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Image source={{ uri: item.recipeImg || item.recipeImage || item.collectionImage || (item.collectionImages && item.collectionImages[0]) }} style={{ width: 60, height: 50, borderRadius: 5 }} />
           </View>

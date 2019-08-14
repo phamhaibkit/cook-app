@@ -4,13 +4,10 @@ import {
   View,
   ScrollView,
   FlatList,
-  TouchableOpacity,
-  ImageBackground,
   TouchableWithoutFeedback,
   Image
 } from 'react-native';
 import styles from './category-recipe-style';
-import { LANG_VN } from '../../lang/lang-vn';
 import { IMG } from '../../utils/variables';
 
 export default class CategoryRecipe extends Component {
@@ -40,7 +37,7 @@ export default class CategoryRecipe extends Component {
   }
 
   onPress = (cateChoise) => {
-    const {canChoise} = this.props;
+    const {canChoise, selectedCate} = this.props;
     if(canChoise){
       const { category } = this.state;
       category && category.map((item, index) => {
@@ -51,6 +48,13 @@ export default class CategoryRecipe extends Component {
       });
       this.setState({
         category: category
+      }, () => {
+        const selected = category.filter(item => item.checked === true);
+        // const selectedArrr =[];
+        // selected.map(item => {
+        //   selectedArrr.push(item.name)
+        // })
+        selectedCate && selectedCate(selected);
       })
     }else{
       alert('9999999999999');

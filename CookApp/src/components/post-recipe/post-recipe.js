@@ -17,13 +17,13 @@ import { ROUTES } from '../../utils/routes';
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
 const dataDropdown = [{
-  value: '0 giờ 00 phút', index: 0
+  value: '15 phút', index: 0
 }, {
-  value: '0 giờ 30 phút', index: 1
+  value: '30 phút', index: 1
 }, {
-  value: '1 giờ 00 phút', index: 2
+  value: '45 phút', index: 2
 }, {
-  value: '2 giờ 00 phút', index: 3
+  value: '1 tiếng', index: 3
 }];
 
 const inputProps = {
@@ -60,7 +60,11 @@ export default class PostRecipe extends Component {
       times : dataDropdown,
       choosedTime: dataDropdown[0],
       modalDraft: false,
+      name: '',
+      description: '',
+      enabledBtn: true,
     }
+    this.categories = [];
   }
 
   componentDidMount() {
@@ -73,14 +77,15 @@ export default class PostRecipe extends Component {
     const { tags } = this.state;
     if (text.endsWith(',')) {
       const arrList = text.split(',');
-      tags.push(arrList)
+      arrList.pop();
+      tags.push(arrList[0])
       this.setState({
         tags: tags,
         text: '',
       })
     } else {
       if (text.length === 0) {
-        tags.push('')
+        // tags.push('')
         this.setState({
           text: text,
           tags: tags
@@ -102,7 +107,8 @@ export default class PostRecipe extends Component {
   }
 
   continue = () => {
-    navigationService.navigate(ROUTES.upRecipeStep2.key);;
+    const dataNavigate = this.makeData();
+    navigationService.navigate(ROUTES.upRecipeStep2.key, {dataNavigate});
   }
 
   getCategory = () => {
@@ -112,13 +118,6 @@ export default class PostRecipe extends Component {
       })
     })
   }
-
-  onSelectItem = (value, index, type) => {
-    console.log('777777777', value, index, type);
-    this.setState({
-      choosedTime: value
-    })
-  };
 
   showChooseTime = () => {
     this.setState({
@@ -134,21 +133,54 @@ export default class PostRecipe extends Component {
 
   slectedTime = (time) => {
     console.log('444444444444444444', time);
+    this.setState({
+      choosedTime: time
+    })
   } 
 
   slectedMeal = (meal) => {
     console.log('9999999999999999', meal);
   }
 
-  showModalDraft=() => {
+  showModalDraft =() => {
     this.setState({
       modalDraft: true
     })
   }
 
+  onAcceptSave = () => {
+    const dataSend = this.makeData();
+    recipeService.upOrSaveDraftRecipe(dataSend, false).then((data) => {
+      console.log('AAAAAAAAAAAAAAAAAAAAAAA', data);
+      navigationService.goBack();
+    })
+  }
+
+  makeData = () => {
+    const { name, description, choosedTime, tags } = this.state;
+    // const newCate = this.categories.concat(tags);
+    const dataSave = {
+      recipeImgs: [],
+      name: name,
+      description: description,
+      timeExecute: choosedTime.value,
+      categories: this.categories,
+    }
+    return dataSave;
+  }
+
+  onCancelSave = () => {
+    this.setState({
+      modalDraft: false
+    })
+  }
+
+  selectedCate = (selected) => {
+    this.categories = selected;
+  }
 
   renderStep1 = () => {
-    const { category, isChoiseTime, times, choosedTime } = this.state;
+    const { category, name, description, choosedTime } = this.state;
     return (
       <View>
         <View style={styles.containerInput}>
@@ -159,11 +191,11 @@ export default class PostRecipe extends Component {
           </TouchableOpacity>
           <Text style={styles.titleTxt}>{LANG.NAME_FOOD}</Text>
           <View style={styles.textInput}>
-            <TextInput placeholder={LANG.INPUT_NAME_FOOD} />
+            <TextInput placeholder={LANG.INPUT_NAME_FOOD} value={name} onChangeText={(text) => this.setState({name: text})}/>
           </View>
           <Text style={styles.titleTxt}>{LANG.DESCRIPTION}</Text>
           <View style={[styles.textInput, { height: 80 }]}>
-            <TextInput placeholder={LANG.INPUT_DESCRIPTION} editable={true} multiline={true} numberOfLines={4} />
+            <TextInput placeholder={LANG.INPUT_DESCRIPTION} multiline={true} numberOfLines={4} value={description} onChangeText={(text) => this.setState({description: text})}/>
           </View>
           <Text style={styles.titleTxt}>{LANG.TIME_COOK}</Text>
           <View style={styles.dropView}>
@@ -174,7 +206,7 @@ export default class PostRecipe extends Component {
             />
           </View>
           <Text style={styles.titleTxt}>{LANG.CATEGORY}</Text>
-          <CategoryRecipe category={category} canChoise />
+          <CategoryRecipe category={category} canChoise selectedCate={this.selectedCate}/>
           <Text style={styles.titleTxt}>{LANG.OTHER_CATEGORY}</Text>
           <Text>{LANG.NOTE}</Text>
           <View style={styles.textInput}>
@@ -196,7 +228,7 @@ export default class PostRecipe extends Component {
   }
 
   render() {
-    const { modalDraft } = this.state;
+    const { modalDraft, name } = this.state;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="position" enabled keyboardVerticalOffset={keyboardVerticalOffset}>
         <ScrollView>
@@ -207,6 +239,7 @@ export default class PostRecipe extends Component {
             <GradientButton
               label={LANG.CONTINUE}
               onPress={this.continue}
+              inActive={!name}
             />
           </View>
         </ScrollView>
@@ -214,6 +247,7 @@ export default class PostRecipe extends Component {
           modalVisible={modalDraft}
           onPressDelete={this.onAcceptSave}
           buttonAction={LANG.SAVE1}
+          onHide={this.onCancelSave}
           content={{
             title: `${LANG.SAVE_DRAFT_RECIPE}`,
             message: `${LANG.QUESTION_SAVE_DRAFT}`

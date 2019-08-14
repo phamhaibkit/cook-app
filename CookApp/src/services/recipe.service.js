@@ -2,6 +2,7 @@ import HTTPService from './http.service';
 import { API } from './api';
 import _ from 'lodash';
 import moment from 'moment';
+import { LANG } from '../lang/lang';
 
 const recipeHighLightData = {
   loading: true,
@@ -179,21 +180,27 @@ class RecipeService {
 
   upOrSaveDraftRecipe = (recipeData, isUp) => {
     const url = isUp ? API.UP_RECIPE : API.SAVE_DRAFT_RECIPE;
+    if(!recipeData.name){
+      recipeData.name = LANG.NAME_FOOD;
+    }
     const params = {
       name: recipeData.name,
       description: recipeData.description,
-      status: recipeData.status,
-      price: recipeData.price,
+      status: recipeData.status || 0,
+      price: recipeData.price || 0,
       timeExecute: recipeData.timeExecute,
-      numPeople: recipeData.numPeople,
-      recipeImgs: recipeData.recipeImgs,
-      calo: recipeData.calo,
-      owner: recipeData.owner,
-      categories: recipeData.categories,
-      products: recipeData.products,
-      steps: recipeData.steps
+      numPeople: recipeData.numPeople | 1,
+      recipeImgs: recipeData.recipeImgs || [],
+      calo: recipeData.calo || 0,
+      owner: recipeData.owner || {},
+      categories: recipeData.categories || [],
+      products: recipeData.products || [],
+      steps: recipeData.steps || [
+        { stepNumber: 1, stepDetail: 'Describe Step', stepImages: ['Image1.jpg','Image2.jpg']},
+      ]
     };
-    return HTTPService.post(url, params)
+    console.log('DATA-SEND', params);
+    return HTTPService.post(url, params, null, null, null)
       .then((data) => {
         console.log('DATA RESPONSE==', data);
         return Promise.resolve(data);

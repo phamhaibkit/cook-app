@@ -5,9 +5,9 @@ import MostSearched from '../most-searched/most-searched';
 import { LANG } from '../../lang/lang';
 import styles from './page-search-recipe-style';
 import searchService from '../../services/search.service';
-import recipeService from '../../services/recipe.service';
-import collectionService from '../../services/collection.service';
 import Spinner from '../spinner/spinner';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 export default class PageSearchRecipe extends Component {
   constructor(props) {
@@ -51,6 +51,15 @@ export default class PageSearchRecipe extends Component {
     });
   }
 
+  onPressRecipe = (recipe) => {
+    navigationService.navigate(ROUTES.recipeDetail.key,  { id: recipe.id});
+  }
+
+  onPressCollection = (collections) => {
+    console.log('collections====', collections);
+    navigationService.navigate(ROUTES.collectionDetail.key,  { id: collections.id});
+  }
+
   render() {
     const { recipes, collections, textSearch, showMost } = this.state;
     return (
@@ -60,8 +69,8 @@ export default class PageSearchRecipe extends Component {
           {searchService.recipeSearchData.loading ? <Spinner /> : (
             <View>
               { showMost && <Text style={styles.bestSellText}>{LANG.BEST_SEARCH}</Text> }
-              <MostSearched label={LANG.RECIPE} data={recipes} subData={true} />
-              <MostSearched label={LANG.COLLECTION.name} data={collections} />
+              <MostSearched label={LANG.RECIPE} data={recipes} subData={true} onPress={this.onPressRecipe}/>
+              <MostSearched label={LANG.COLLECTION.name} data={collections} onPress={this.onPressCollection}/>
           </View>
           )}
         </ScrollView>

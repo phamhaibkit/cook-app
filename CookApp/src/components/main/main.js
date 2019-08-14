@@ -198,6 +198,7 @@ const RecipeStack = createStackNavigator({
     }
   },
   [ROUTES.recipeDetail.key]: RecipeDetailScreen,
+  [ROUTES.collectionDetail.key]: CollectionDetailScreen,
   [ROUTES.collectionList.key]: CollectionListScreen,
   [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
   [ROUTES.comboList.key]: ComboListScreen,
