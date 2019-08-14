@@ -21,12 +21,15 @@ export const API = {
   //combo
   GET_COMBO_LIST: HOST + '/recipe-combo/all',
   GET_COMBO_DETAIL: id => HOST + '/recipe-combo?id=' + id,  
-  
+
   //recipe
   GET_RECIPE_SUGGEST_LIST: id=> HOST + '/recipe/suggestion-recipe?usr=' + id,
   GET_RECIPE_OTHER_LIST: HOST + '/recipe/other-recipe?recipe=10',
   GET_CATEGORY: HOST + '/recipe-catalog/all',
   REPORT_RECIPE: HOST + '/recipe/report',
+  UP_RECIPE: HOST + '/recipe/recipe',
+  SAVE_DRAFT_RECIPE: HOST + '/recipe/draft',
+
   //recipe highlight
   GET_RECIPE_HIGHLIGHT_LIST: HOST + '/recipe/highlight-recipe/all',
 
@@ -50,10 +53,12 @@ export const API = {
   MOST_SEARCH: HOST + '/recipe/search/trending',
   //// recipe detail
   GET_RECIPE_DETAIL: id => HOST + '/recipe/' + id,
+
   // home functions
   LIKE_EVENT : eventId => HOST + '/like/event?id=' + eventId,
   LIKE_RECIPE : recipeId => HOST + '/like/recipe?id=' + recipeId,
-  COMMENT_EVENT: HOST + 'evaluate/event',
+  COMMENT_EVENT: HOST + '/comment/event',
+  COMMENT_RECIPE: HOST + '/comment/recipe',
   SHARE_RECIPE : recipeId => HOST + '/share/recipe?id=' + recipeId,
   SHARE_EVENT : eventId => HOST + '/share/event?id=' + eventId,
   TOKEN_EMAIL : data => HOST + '/login?user=' + data.username +  '&&password=' + data.password,

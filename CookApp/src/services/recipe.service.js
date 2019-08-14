@@ -6,30 +6,30 @@ import moment from 'moment';
 const recipeHighLightData = {
   loading: true,
   recipes: []
-}
+};
 
 const recipeLikedData = {
   loading: true,
   recipes: []
-}
+};
 
 const recipeSuggestData = {
   loading: true,
   recipes: []
-}
+};
 
 const recipeOtherData = {
   loading: true,
   recipes: []
-}
+};
 
 const recipeDetail = {
-}
+};
 
 const categoryData = {
   loading: true,
   category: []
-}
+};
 
 
 class RecipeService {
@@ -47,74 +47,63 @@ class RecipeService {
   };
 
   getRecipeHighLightList = () => {
-    // console.log( 'recipeHightLightData' + Date());
-    // this.resetService();
     const url = API.GET_RECIPE_HIGHLIGHT_LIST;
     this.recipeHighLightData.loading = true;
     return HTTPService.get(url, null, null)
-      .then(data => {
-        // console.log( 'recipeHightLightData Done' + Date(), data);
+      .then((data) => {
         this.recipeHighLightData = _.cloneDeep({
           recipes: data,
           loading: false,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err);
-      })
+      });
   }
 
   getRecipeSuggestList = (userId) => {
-    // console.log( 'recipeHightLightData' + Date());
-    // this.resetService();
     const url = API.GET_RECIPE_SUGGEST_LIST(userId);
     this.recipeSuggestData.loading = true;
     return HTTPService.get(url, null, null)
-      .then(data => {
-        // console.log( 'recipeHightLightData Done' + Date(), data);
+      .then((data) => {
         this.recipeSuggestData = _.cloneDeep({
           recipes: data,
           loading: false,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err);
-      })
+      });
   }
 
   getRecipeOtherList = (userId) => {
-    // console.log( 'recipeHightLightData' + Date());
-    // this.resetService();
     const url = API.GET_RECIPE_OTHER_LIST;
     this.recipeOtherData.loading = true;
     return HTTPService.get(url, null, null)
-      .then(data => {
-        // console.log( 'recipeHightLightData Done' + Date(), data);
+      .then((data) => {
         this.recipeOtherData = _.cloneDeep({
           recipes: data,
           loading: false,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err);
-      })
+      });
   }
 
   getRecipeLikedList = (userId) => {
-    // this.resetService();
     const url = API.GET_RECIPE_LIKED(userId);
     this.recipeLikedData.loading = true;
     return HTTPService.get(url, null, null)
-      .then(data => {
-        // console.log( 'recipeLikedData Done' + Date(), data);
+      .then((data) => {
         this.recipeLikedData = _.cloneDeep({
           recipes: data,
           loading: false,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err);
-      })
+      });
   }
 
   getRecipeDetail = (id) => {
@@ -147,7 +136,7 @@ class RecipeService {
       comment: data.comment
     };
     console.log(params, 'params');
-    const url = API.SEND_RATING_COMMENT
+    const url = API.SEND_RATING_COMMENT;
     return HTTPService.post(url, params)
       .then((data) => {
         console.log(data, '$sasdsad');
@@ -162,16 +151,15 @@ class RecipeService {
     const url = API.GET_CATEGORY;
     this.categoryData.loading = true;
     return HTTPService.get(url, null, null)
-      .then(data => {
-        // console.log( 'recipeHightLightData Done' + Date(), data);
+      .then((data) => {
         this.categoryData = _.cloneDeep({
           category: data,
           loading: false,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err);
-      })
+      });
   }
 
   reportRecipe = (id, content) => {
@@ -180,13 +168,38 @@ class RecipeService {
       id: id,
       reportContent: content
     }
-    return HTTPService.post(url, params,null, null, null)
+    return HTTPService.post(url, params, null, null, null)
       .then((data) => {
         console.log('DATA RESPONSE==', data);
         return Promise.resolve(data);
       }).catch((err) => {
         return Promise.reject(err);
-      })
+      });
+  }
+
+  upOrSaveDraftRecipe = (recipeData, isUp) => {
+    const url = isUp ? API.UP_RECIPE : API.SAVE_DRAFT_RECIPE;
+    const params = {
+      name: recipeData.name,
+      description: recipeData.description,
+      status: recipeData.status,
+      price: recipeData.price,
+      timeExecute: recipeData.timeExecute,
+      numPeople: recipeData.numPeople,
+      recipeImgs: recipeData.recipeImgs,
+      calo: recipeData.calo,
+      owner: recipeData.owner,
+      categories: recipeData.categories,
+      products: recipeData.products,
+      steps: recipeData.steps
+    };
+    return HTTPService.post(url, params)
+      .then((data) => {
+        console.log('DATA RESPONSE==', data);
+        return Promise.resolve(data);
+      }).catch((err) => {
+        return Promise.reject(err);
+      });
   }
 
 }
