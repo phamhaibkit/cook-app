@@ -18,15 +18,19 @@ import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import { getCurrencyStr, kFormatter } from '../../utils/general';
 import homeService from '../../services/home.service';
+import { TextInput } from 'react-native-gesture-handler';
+import GradientButton from '../gradient-button/gradient-button';
 
 export default class RecipeHighlightHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isModalVisible: false,
+      isModalComment: false,
       recipe: {},
       recipes: [],
       ads: homeService.adsData,
+      cmtText: ''
     };
   }
 
@@ -54,9 +58,17 @@ export default class RecipeHighlightHome extends Component {
     })
   };
 
+  onComment= () => {
+    this.setState({
+      isModalVisible: false,
+      isModalComment: true
+    })
+  }
+
   openReport = (item) => {
     this.setState({
       isModalVisible: true,
+      isModalComment: false,
       recipe: item
     });
   };
@@ -72,6 +84,12 @@ export default class RecipeHighlightHome extends Component {
       isModalVisible: false
     });
   };
+
+  closeComment = () => {
+    this.setState({
+      isModalComment: false
+    })
+  }
 
   onPressLove = (recipe) => {
     const { recipes } = this.state;
@@ -162,7 +180,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableOpacity>
             </View>
 
-            <LikeCommentShare item={item} onLove={this.onPressLove} onShare={this.onShare} onSave={this.onPressSave}/>
+            <LikeCommentShare item={item} onLove={this.onPressLove} onShare={this.onShare} onSave={this.onPressSave} onComment={this.onComment}/>
           </View>
           {/* {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>} */}
         </View>
@@ -171,8 +189,8 @@ export default class RecipeHighlightHome extends Component {
   };
 
   render() {
-    const { isHorizontal, marTop } = this.props;
-    const { isModalVisible, recipes } = this.state;
+    const { isHorizontal, marTop, cmtText } = this.props;
+    const { isModalVisible, recipes, isModalComment } = this.state;
     return (
       <View style={[styles.container, { marginTop: marTop }]}>
         {recipes.length > 0 &&
@@ -192,9 +210,6 @@ export default class RecipeHighlightHome extends Component {
           style={styles.modal}
         >
           <View style={styles.containerModel}>
-            {/* <TouchableOpacity style={styles.barButton} onPress={this.closeReport}>
-              <Image source={IMG.modalBar} style={styles.modalImg} />
-            </TouchableOpacity> */}
             <TouchableOpacity style={styles.reportRow} onPress={this.openReportPage}>
               <Image source={IMG.reportRecipe} style={styles.reportImg} />
               <Text style={styles.reportText}>{LANG.REPORT_RECIPE}</Text>
@@ -204,6 +219,27 @@ export default class RecipeHighlightHome extends Component {
               <Image source={IMG.closeReport} style={styles.closeImg} />
               <Text style={styles.reportText}>{LANG.CLOSE}</Text>
             </TouchableOpacity>
+          </View>
+        </Modal>
+
+        <Modal
+          isVisible={isModalComment}
+          onBackdropPress={this.closeComment}
+          onBackButtonPress={this.closeComment}
+          swipeDirection={['down']}
+          style={styles.modal}
+        >
+          <View style={styles.commentView}>
+            <Text style={styles.titleTxt}>{LANG.WRITE_COMMENT}</Text>
+            <View style={styles.inputCmtView}>
+              <TextInput placeholder={LANG.RATE} value={cmtText} onChangeText={(text) => this.setState({cmtText: text})} multiline={true}/>
+            </View>
+            <View style={styles.bottomBtn}>
+              <GradientButton
+                label={LANG.SEND_RATING_COMMENT}
+                onPress={this.continue}
+              />
+            </View>
           </View>
         </Modal>
       </View>

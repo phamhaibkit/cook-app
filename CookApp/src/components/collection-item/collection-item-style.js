@@ -10,16 +10,16 @@ export default StyleSheet.create({
   }, 
   saveCollection: { 
     position: 'absolute',  
-    right: 10, 
+    right: 20, 
     padding: 7, 
     backgroundColor: '#fff', 
     borderRadius: 10 
   },
   saveCollectionHor: {
-    bottom: 10,
+    bottom: 20,
   },
   saveCollectionVer: {
-    top: 10,
+    top: 20,
   },
   saveIcon: { 
     height: 17, 

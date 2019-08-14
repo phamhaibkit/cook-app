@@ -161,7 +161,7 @@ export default class PostRecipe extends Component {
           <View style={styles.textInput}>
             <TextInput placeholder={LANG.INPUT_NAME_FOOD} />
           </View>
-          <Text style={styles.titleTxt}>{LANG.NAME_FOOD}</Text>
+          <Text style={styles.titleTxt}>{LANG.DESCRIPTION}</Text>
           <View style={[styles.textInput, { height: 80 }]}>
             <TextInput placeholder={LANG.INPUT_DESCRIPTION} editable={true} multiline={true} numberOfLines={4} />
           </View>

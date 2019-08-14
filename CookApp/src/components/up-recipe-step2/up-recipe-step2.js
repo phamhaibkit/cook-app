@@ -11,12 +11,32 @@ import { ROUTES } from '../../utils/routes';
 import navigationService from '../../services/navigation.service';
 import ConfirmModal from '../../components/modal/confirm-modal';
 
-let data = [
+const colCount = [
   { id: 1, name: '', show: true },
   { id: 2, name: '', show: true },
   { id: 3, name: '', show: true },
   { id: 4, name: '', show: true }
 ]
+
+const numPeople = [{
+  value: '1 người', index: 0
+}, {
+  value: '2 người', index: 1
+}, {
+  value: '3 người', index: 2
+}, {
+  value: '4 người', index: 3
+}, {
+  value: '5 người', index: 4
+}, {
+  value: '6 người', index: 5
+}, {
+  value: '7 người', index: 6
+}, {
+  value: '8 người', index: 7
+}, {
+  value: '9 người', index: 8
+}];
 
 const units = [{
   value: 'gram', index: 0
@@ -43,7 +63,7 @@ export default class UpRecipeStep2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: data,
+      data: colCount,
       modalDraft: false
     }
   }
@@ -53,8 +73,7 @@ export default class UpRecipeStep2 extends Component {
   }
 
   slectedMeal = (value) => {
-    const { slectedMeal } = this.props;
-    slectedMeal && slectedMeal(value);
+    console.log('Selected ====', value);
   }
 
   deleteRow = (row) => {
@@ -145,7 +164,6 @@ export default class UpRecipeStep2 extends Component {
   }
 
   render() {
-    const { dataMeal } = this.props;
     const { modalDraft } = this.state;
     return (
       <View style={styles.container}>
@@ -157,7 +175,7 @@ export default class UpRecipeStep2 extends Component {
             <View style={styles.dropView}>
               <DropDown
                 label={LANG.MEAL}
-                data={dataMeal}
+                data={numPeople}
                 slectedItem={this.slectedMeal}
               />
             </View>

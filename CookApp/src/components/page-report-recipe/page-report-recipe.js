@@ -8,26 +8,27 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import navigationService from "../../services/navigation.service";
-
+import recipeService from '../../services/recipe.service';
 import { COLOR, CSS } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
 import styles from './page-report-recipe-style';
 
 const reasonData = [
-  { name: 'Thieu dung dan', id: 1, select: false },
-  { name: 'Xau xuc pham nguoi nhin', id: 2, select: false },
-  { name: 'Khong thay ngon gi ca', id: 3, select: false },
-  { name: 'Cha ra gi', id: 4, select: false },
-  { name: 'Khong con gi de dien ta', id: 5, select: false },
-  { name: 'Qua chi la tho bao', id: 6, select: false },
-  { name: 'Khac', id: 7, select: false }
+  { name: 'Thiếu đứng đắn', id: 1, select: false },
+  { name: 'Hình ảnh món ăn hơi kém hấp dẫn', id: 2, select: false },
+  { name: 'Nấu theo nhưng ăn không ra gì', id: 3, select: false },
+  { name: 'Sai thứ tự các bước', id: 4, select: false },
+  { name: 'Không còn lời gì để nói', id: 5, select: false },
+  { name: 'Chuẩn bị nguyên liệu chưa đầy đủ', id: 6, select: false },
+  { name: 'Khác', id: 7, select: false }
 ];
 export default class PageReportRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reason: {},
-      data: reasonData
+      data: reasonData,
+      ortherText: ''
     };
   }
 
@@ -48,6 +49,26 @@ export default class PageReportRecipe extends Component {
       data: data
     });
   };
+
+  onReport = () => {
+    const { reason, ortherText } = this.state;
+    const { params } = this.props.navigation.state;
+    console.log('PARMASMASMDMASDM==', params);
+    if(!!reason.name){
+      if(reason.id !== 7){
+        recipeService.reportRecipe(params.recipe.id,  reason.name).then(() => {
+          navigationService.goBack();
+        })
+      }else{
+        if(!!ortherText){
+          console.log('TEXT-SEND===', ortherText);
+          recipeService.reportRecipe(params.recipe.id, ortherText).then(() => {
+            navigationService.goBack();
+          })
+        }
+      }      
+    }
+  }
 
   renderReason = (data) => {
     return data.map((item, index) => (
@@ -84,9 +105,7 @@ export default class PageReportRecipe extends Component {
       >
         <TouchableOpacity
           style={[styles.reasonButton, { alignItems: 'center' }]}
-          onPress={() => {
-            navigationService.goBack();
-          }}
+          onPress={this.onReport}
         >
           <Text style={styles.textBottom}>{LANG.SEND_REPORT}</Text>
         </TouchableOpacity>
@@ -95,14 +114,21 @@ export default class PageReportRecipe extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, ortherText } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView style={{ marginBottom: 50 }}>
           {this.renderReason(data)}
           {data[6].select && (
             <View style={styles.inputView}>
-              <TextInput multiline={true} numberOfLines={4} placeholder={LANG.REQUIRE_REPORT} style={styles.inputText}/>
+              <TextInput 
+                multiline={true}
+                numberOfLines={4}
+                placeholder={LANG.REQUIRE_REPORT} 
+                style={styles.inputText} 
+                value={ortherText}
+                onChangeText={(text) => this.setState({ortherText: text})}
+              />
             </View>
           )}
         </ScrollView>

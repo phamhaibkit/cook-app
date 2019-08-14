@@ -216,5 +216,37 @@ export default StyleSheet.create({
     height: 1,
     backgroundColor: COLOR.lineColor,
     width: '100%'
-  }
+  },
+  modalComment: {
+    width: '100%',
+    height: '100%'
+  },
+  commentView: {
+    width: '100%',
+    height: '50%',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10  
+  },
+  inputCmtView: {
+    paddingHorizontal: 15,
+    marginHorizontal: 15,
+    borderWidth: 1,
+    borderColor: COLOR.borderColor,
+    borderRadius: 5,
+    height: 80,
+    marginTop: 20
+  },
+  bottomBtn: {
+    marginTop: 50,
+    marginBottom: 22,
+    marginHorizontal: 15,
+  },
+  titleTxt: {
+    fontFamily: CSS.fontTitle,
+    fontSize: 14,
+    color: '#444444',
+    marginTop: 20,
+    marginLeft: 15
+  },
 });

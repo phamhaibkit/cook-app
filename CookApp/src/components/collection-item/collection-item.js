@@ -1,8 +1,9 @@
 /* eslint-disable indent */
 import React, { PureComponent } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import _ from 'lodash';
 
-import { Text, View, Image, TouchableWithoutFeedback, ImageBackground } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, ImageBackground, TouchableOpacity } from 'react-native';
 import { IMG } from '../../utils/variables';
 import styles from './collection-item-style';
 import { COLOR, CSS } from '../../utils/variables';
@@ -13,9 +14,25 @@ import Advertiment from '../advertiment/advertiment';
 import { kFormatter, capitalize } from '../../utils/general';
 
 class CollectionItem extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state={
+      item: this.props.item
+    }
+  }
+
   handlePress = () => {  
     const { item } = this.props;
     navigationService.navigate(ROUTES.collectionDetail.key, { id: item.id });
+  }
+
+  onSave = (item) => {
+    let i = _.cloneDeep(item);
+    i.isSavedByUser = !JSON.parse(i.isSavedByUser);
+    this.setState({
+      item: i
+    })
+    this.props.onSave && this.props.onSave(item);
   }
   
   render() {
@@ -23,9 +40,12 @@ class CollectionItem extends PureComponent {
       item, 
       imgBgWrap, 
       blockMargin, 
-      ads, 
+      ads,
+      onPressSave, 
       isVertical
     } = this.props;
+
+    const iconSave = JSON.parse(item.isSavedByUser) ? IMG.saveActiveHome: IMG.saveHome;
  
     return (
        <View>
@@ -40,10 +60,7 @@ class CollectionItem extends PureComponent {
                   style={[imgBgWrap, CSS.borderRadius5]}
                 />            
               </ImageBackground>
-              <View style={[imgBgWrap,{ marginTop: -imgBgWrap.height}]}>
-                <View style={isVertical ? [styles.saveCollection, styles.saveCollectionVer] : [styles.saveCollection, styles.saveCollectionHor]}>
-                  <Image style={styles.saveIcon} source={IMG.greenBookmarkIcon}/>
-                </View>
+              <View style={[imgBgWrap,{ marginTop: -imgBgWrap.height}]}>              
                 <View style={styles.blockContentWrap}>
                   <View>
                     <Text style={[styles.collectionTitle, CSS.fontTitle, CSS.fontQuiBold]}>{item.name}</Text>
@@ -73,6 +90,9 @@ class CollectionItem extends PureComponent {
               </View>
             </View>
           </TouchableWithoutFeedback>
+          <TouchableOpacity style={isVertical ? [styles.saveCollection, styles.saveCollectionVer] : [styles.saveCollection, styles.saveCollectionHor]} onPress={() => this.onSave(item)}>                  
+            <Image style={styles.saveIcon} source={iconSave}/>
+          </TouchableOpacity>
         </View>
         
         {/* <View>
