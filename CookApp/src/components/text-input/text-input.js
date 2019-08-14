@@ -20,6 +20,7 @@ export class TextInputRender extends Component {
         </View>}
 
         <TextInput
+          value={value}
           style={[styles.Input, icon ? { paddingLeft: 20 } : '', CSS.fontQuiRegular, styleConfig ? styleConfig : '']}
           secureTextEntry={secureTextEntry}
           placeholder={placeholder}

@@ -17,7 +17,7 @@ class CollectionItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state={
-      item: this.props.item
+      item: props.item
     }
   }
 
@@ -26,13 +26,15 @@ class CollectionItem extends PureComponent {
     navigationService.navigate(ROUTES.collectionDetail.key, { id: item.id });
   }
 
-  onSave = (item) => {
-    let i = _.cloneDeep(item);
-    i.isSavedByUser = !JSON.parse(i.isSavedByUser);
+  handleSave = () => {
+    const { item } = this.state;
+
+    const itemClone = _.cloneDeep(item);
+    itemClone.isSavedByUser = !JSON.parse(itemClone.isSavedByUser);
+
     this.setState({
-      item: i
+      item: itemClone
     })
-    this.props.onSave && this.props.onSave(item);
   }
   
   render() {
@@ -45,7 +47,7 @@ class CollectionItem extends PureComponent {
       isVertical
     } = this.props;
 
-    const iconSave = JSON.parse(item.isSavedByUser) ? IMG.saveActiveHome: IMG.saveHome;
+    const iconSave = JSON.parse(this.state.item.isSavedByUser) ? IMG.saveActiveHome: IMG.saveHome;
  
     return (
        <View>
@@ -90,7 +92,7 @@ class CollectionItem extends PureComponent {
               </View>
             </View>
           </TouchableWithoutFeedback>
-          <TouchableOpacity style={isVertical ? [styles.saveCollection, styles.saveCollectionVer] : [styles.saveCollection, styles.saveCollectionHor]} onPress={() => this.onSave(item)}>                  
+          <TouchableOpacity style={isVertical ? [styles.saveCollection, styles.saveCollectionVer] : [styles.saveCollection, styles.saveCollectionHor]} onPress={this.handleSave}>                  
             <Image style={styles.saveIcon} source={iconSave}/>
           </TouchableOpacity>
         </View>

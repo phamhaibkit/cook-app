@@ -12,9 +12,11 @@ import { ROUTES } from '../../../utils/routes';
 const HEADER_HEIGHT = 50;
 const SWIPER_HEIGHT = 300;
 const OVERFLOW_HEIGHT = 90;
+let scrollViewBottom;
 export class HeaderScroll extends Component {
   static propTypes = {
     // prop: PropTypes
+    onRef: PropTypes.any,
   }
 
   constructor(props) {
@@ -23,6 +25,15 @@ export class HeaderScroll extends Component {
       scrollY: new Animated.Value(0),
       isModalVisible: false
     };
+  }
+
+  scrollToBottom = () => {
+    this.setState({
+      isModalVisible: false,
+    }, () => {
+      console.log(scrollViewBottom, 'scrollViewBottom');
+      this.scrollView.scrollToEnd();
+    });
   }
 
   openReportBar = () => {
@@ -82,8 +93,13 @@ export class HeaderScroll extends Component {
           </View>
         </Animated.View>
         <ScrollView
+          onContentSizeChange={(contentWidth, contentHeight) => {
+            scrollViewBottom = contentHeight;
+          }}
           scrollEventThrottle={16}
           {...{ onScroll }}
+          // eslint-disable-next-line no-return-assign
+          ref={scrollView => this.scrollView = scrollView}
         >
           {children}
         </ScrollView>

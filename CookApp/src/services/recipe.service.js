@@ -1,8 +1,9 @@
-import HTTPService from './http.service';
-import { API } from './api';
 import _ from 'lodash';
 import moment from 'moment';
 import { LANG } from '../lang/lang';
+import HTTPService from './http.service';
+import { API } from './api';
+
 
 const recipeHighLightData = {
   loading: true,
@@ -112,7 +113,7 @@ class RecipeService {
     const url = API.GET_RECIPE_DETAIL(id);
 
     return HTTPService.get(url, null, null)
-      .then(data => {
+      .then((data) => {
         console.log(data);
         this.recipeDetail = _.cloneDeep({
           ...data
@@ -120,14 +121,14 @@ class RecipeService {
 
         console.log('get this.recipeDetail Done ' + JSON.stringify(this.recipeDetail));
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err);
-      })
+      });
   }
 
   sendRecipeRating = (data) => {
     let dateTime = new Date();
-    dateTime = moment(dateTime).format("YYYY-MM-DD HH:mm:ss");
+    dateTime = moment(dateTime).format('YYYY-MM-DD HH:mm:ss');
     console.log(dateTime, 'dateTime');
     this.resetService();
     const params = {
@@ -147,6 +148,28 @@ class RecipeService {
         return Promise.reject(err);
       });
   }
+
+  sendRecipeComment = (data) => {
+    let dateTime = new Date();
+    dateTime = moment(dateTime).format('YYYY-MM-DD HH:mm:ss');
+    this.resetService();
+    const params = {
+      recipeId: data.id,
+      time: dateTime,
+      comment: data.comment
+    };
+    console.log(params, 'params');
+    const url = API.COMMENT_RECIPE;
+    return HTTPService.post(url, params)
+      .then((data) => {
+        console.log(data, '$sasdsad');
+        return Promise.resolve(data);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
+
 
   getCategory = () => {
     const url = API.GET_CATEGORY;
@@ -168,7 +191,7 @@ class RecipeService {
     const params = {
       id: id,
       reportContent: content
-    }
+    };
     return HTTPService.post(url, params, null, null, null)
       .then((data) => {
         console.log('DATA RESPONSE==', data);
@@ -208,7 +231,6 @@ class RecipeService {
         return Promise.reject(err);
       });
   }
-
 }
 
 export default new RecipeService();

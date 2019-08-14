@@ -49,6 +49,7 @@ import PageViewRating from '../page-rating/page-view-rating';
 import PageViewComment from '../page-view-comment/page-view-comment';
 import UpRecipeStep2 from '../up-recipe-step2/up-recipe-step2';
 import UpRecipeStep3 from '../up-recipe-step3/up-recipe-step3';
+import UserReviewingRecipe from '../user-reviewing-recipe/user-reviewing-recipe';
 
 
 const CollectionListScreen = {
