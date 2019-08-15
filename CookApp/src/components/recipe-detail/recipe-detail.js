@@ -23,6 +23,7 @@ import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
 import { ROUTES } from '../../utils/routes';
 import navigationService from '../../services/navigation.service';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
+import ListProduct from './list-product';
 
 const recipeDataDetail = {
   likeTimes: 53,
@@ -197,45 +198,7 @@ export default class RecipeDetail extends Component {
 
   renderIngredient = (recipe) => {
     return (
-      recipe && <View style={[styles.container]}>
-        <View style={[CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
-          <Text style={[{ color: '#444444' }, CSS.fontSize15, CSS.fontNuExBold]}>{LANG_VN.INGREDIENT}</Text>
-          <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[{ padding: 10, borderRadius: 5 }]} colors={['#3BB556', '#72C91C']} >
-            <TouchableOpacity style={[CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={this.onPressSignin}>
-              <Text style={[CSS.fontSize15, CSS.fontQuiBold, { color: '#FFFFFF' }]}>{LANG_VN.BUY_INGREDIENT}</Text>
-            </TouchableOpacity>
-          </LinearGradient>
-        </View>
-        <View style={[{ paddingVertical: 20 }]}>
-          <View style={styles.cardWrap}>
-            <View style={{ flex: 3, flexDirection: 'row' }}>
-              <View style={{ flex: 3 }}>
-                <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.MEAL}:</Text>
-                <Text style={[styles.cardLabel, CSS.fontQuiRegular]}>{LANG.ESTIMATE_PRICE}:</Text>
-              </View>
-              <View style={{ flex: 2 }}>
-                <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{recipe.numPeople}{LANG.SPACE}{LANG.PERSON}</Text>
-                <Text style={[styles.cardLabel, CSS.fontQuiMedium]}>{formatNumberWithDot(recipe.price)}{LANG.SPACE}{LANG.VIETNAM_DONG}</Text>
-              </View>
-            </View>
-            <View style={styles.actionBtnGroup}>
-              <IncreaterButtonWithoutNumber btnStyle={{ marginRight: 5 }} />
-              <IncreaterButtonWithoutNumber isPlus />
-            </View>
-          </View>
-        </View>
-        <View style={[styles.ingrdientList, CSS.flexCol]}>
-          {recipe.products && recipe.products.map((item, index) => {
-            return <View key={index}>
-              <View style={[styles.rowIngredient, CSS.justifySpaceBetween, CSS.flexRow]}>
-                <Text style={[{ textDecorationLine: 'underline', color: COLOR.greenColor, textTransform: 'capitalize' }, CSS.fontSize14, CSS.fontQuiMedium]}>{item.name}</Text>
-                <Text style={[CSS.fontSize14, CSS.fontQuiRegular, { color: '#001D12' }]}>{item.unit}</Text>
-              </View>
-              <Image style={{ width: '100%', height: 1 }} source={IMG.borderDot} />
-            </View>;
-          })}
-        </View>
-      </View>
+      recipe && <ListProduct recipe={recipe} />
     );
   }
 
