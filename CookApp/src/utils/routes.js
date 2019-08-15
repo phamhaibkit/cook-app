@@ -56,8 +56,17 @@ export const ROUTES = {
   postRecipe: {
     key: 'postRecipe'
   },
+  userProfile: {
+    key: 'userProfile'
+  },
   userDraftRecipe: {
     key: 'userDraftRecipe'
+  },
+  userDraftOrder: {
+    key: 'userDraftOrder'
+  },
+  userReviewingRecipe: {
+    key: 'userReviewingRecipe'
   },
   viewComment: {
     key: 'viewComment'

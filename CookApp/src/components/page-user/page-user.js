@@ -12,6 +12,7 @@ import { IMG, CSS, ASYNC_STORAGE } from '../../utils/variables';
 import { setAccountInfo } from '../../reducers/page-account-info.reducer';
 import navigationService from '../../services/navigation.service';
 import ImageProfile from '../image-profile/image-profile';
+import { ROUTES } from '../../utils/routes';
 
 const user = {
   name: 'Hoang Thi Kieu Nga',
@@ -144,6 +145,28 @@ export class PageUser extends Component {
     return this.renderItemManage(arrayItem);
   }
 
+  goToPage = (key) => {
+    switch (key) {
+    case 'userProfile':
+      navigationService.navigate(ROUTES.userProfile.key);
+      break;
+    case LANG.COMBO:
+      navigationService.navigate(ROUTES.comboList.key);
+      break;
+    case LANG.RECIPE_HIGHLIGHT:
+      navigationService.navigate(ROUTES.recipeHighlightList.key);
+      break;
+    case LANG.LIKED_RECIPE:
+      navigationService.navigate(ROUTES.recipeLikedList.key);
+      break;
+    case LANG.INFO_EVENT:
+      navigationService.navigate(ROUTES.newsEventList.key);
+      break;
+    default:
+      break;
+    }
+  };
+
   render() {
     const { accountInfo } = this.props;
     return (
@@ -166,7 +189,7 @@ export class PageUser extends Component {
           <View style={[CSS.flexRow, CSS.justifySpaceBetween, { paddingHorizontal: 15 }]}>
             <View style={[CSS.flexCol, { justifyContent: 'space-around' }]}>
               <Text style={[CSS.fontNuBlack, CSS.fontSize20, { color: '#fff' }]}>{user.name}</Text>
-              <TouchableOpacity style={[CSS.flexRow, CSS.alignItemsCenter]}>
+              <TouchableOpacity style={[CSS.flexRow, CSS.alignItemsCenter]} onPress={() => this.goToPage('userProfile')}>
                 <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#fff' }]}>Xem thông tin </Text>
                 <Image source={IMG.arrowWhite} style={{ width: 12, height: 7 }} /></TouchableOpacity>
             </View>

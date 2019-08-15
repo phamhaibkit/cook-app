@@ -204,6 +204,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 15
   },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0
+  },
 });
 
 export default styles;

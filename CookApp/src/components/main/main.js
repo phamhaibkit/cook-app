@@ -151,8 +151,9 @@ const PageRaingScreen = {
 
 const HomeStack = createStackNavigator({
   Home: {
-    // screen: UserDraftOrders,
-    screen: PageHome,
+    screen: UserDraftOrders,
+    // screen: PageHome,
+    // screen: UserReviewingRecipe,
     navigationOptions: {
       header: null
     }
@@ -286,14 +287,17 @@ const UserStack = createStackNavigator({
       }
     }
   },
-  UserDraftRecipe: {
+  [ROUTES.userProfile.key]: { 
+    screen: UserProfile 
+  },
+  [ROUTES.userDraftRecipe.key]: {
     screen: UserDraftRecipe, 
     navigationOptions: {
       title: `${LANG.RECIPE_DRAFT}`,
       headerLeft: <BackButton isGreen/>,
     }
   },
-  UserDraftOrders: {
+  [ROUTES.userDraftOrder.key]: {
     screen: UserDraftOrders, 
     navigationOptions: {
       title: `${LANG.ORDER_DRAFT}`,
