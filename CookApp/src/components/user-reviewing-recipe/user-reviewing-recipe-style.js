@@ -12,20 +12,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginVertical: 20
   },
-  frame: {
-    height: height,
-    width: width,
-    backgroundColor: 'white',
-    marginLeft: CSS.padding15,
-    borderRadius: 5
-  },
-  endFrame: {
-    marginRight: CSS.padding15
-  },
   frameVer: {
-    height: height + 2 * CSS.padding15,
+    // height: height + 2 * CSS.padding15,
     width: widthVer - 2 * CSS.padding15,
-    backgroundColor: COLOR.whiteColor,
     marginVertical: CSS.padding10,
     borderRadius: 5
   },
@@ -98,9 +87,9 @@ const styles = StyleSheet.create({
     height: 10,
     marginTop: 3
   },
-  dollaImg: {
-    width: 6,
-    height: 12,
+  calendarImg: {
+    width: 11,
+    height: 11,
     marginTop: 3
   },
   personImg: {
@@ -117,13 +106,6 @@ const styles = StyleSheet.create({
   },
   textLight: {
     color: COLOR.madeIn
-  },
-  recipeView: {
-    height: 140,
-    marginTop: 18,
-    marginHorizontal: paddingContent,
-    borderRadius: 5,
-    overflow: 'hidden'
   },
   recipeIMG: {
     width: '100%',
@@ -214,31 +196,6 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: COLOR.lineColor,
     width: '100%'
-  },
-  modalComment: {
-    width: '100%',
-    height: '100%'
-  },
-  commentView: {
-    width: '100%',
-    height: '50%',
-    backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10  
-  },
-  inputCmtView: {
-    paddingHorizontal: 15,
-    marginHorizontal: 15,
-    borderWidth: 1,
-    borderColor: COLOR.borderColor,
-    borderRadius: 5,
-    height: 80,
-    marginTop: 20
-  },
-  bottomBtn: {
-    marginTop: 50,
-    marginBottom: 22,
-    marginHorizontal: 15,
   },
   titleTxt: {
     fontFamily: CSS.fontTitle,
