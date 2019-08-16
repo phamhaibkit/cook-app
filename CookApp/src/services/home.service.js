@@ -65,7 +65,7 @@ class HomeService {
 
   likeRecipe = (recipeId) => {
     const url = API.LIKE_RECIPE(recipeId);
-    this.likedRecipeData.loading = true;
+    // this.likedRecipeData.loading = true;
     return HTTPService.post(url)
       .then((data) => {
         return Promise.resolve(data);

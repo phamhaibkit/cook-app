@@ -124,6 +124,27 @@ export default class RecipeDetail extends Component {
     });
   };
 
+  onShare = (recipe) => {
+    homeService.shareRecipe(recipe.id).then(() => {
+      console.log('Share sucess!!');
+    });
+  };
+
+  onPressLove = (recipe) => {
+    const { recipes } = this.state;
+    homeService.likeRecipe(recipe.id).then(() => {
+      console.log('likedDatatatat', recipes);
+    });
+  }
+
+  onPressSave = (recipe) => {
+    const { recipes } = this.state;
+    console.log('onPressSave==', recipes);
+  }
+
+  onComment = (recipe) => {
+    navigationService.navigate(ROUTES.viewComment.key);
+  }
 
   renderStar = (number) => {
     const star = [];
@@ -190,7 +211,7 @@ export default class RecipeDetail extends Component {
           <Text style={[CSS.fontQuiRegular, styles.mgTop10, CSS.fontSize14, { color: '#001D12' }]}>
             {recipe.description}
           </Text>
-          <LikeCommentShare item={recipe} />
+          <LikeCommentShare item={recipe} onLove={this.onPressLove} onShare={this.onShare} onSave={this.onPressSave} onComment={this.onComment} showValueSaved />
         </View>
       </View>
     </View>);
@@ -315,17 +336,11 @@ export default class RecipeDetail extends Component {
         </View>;
       })}
       <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-        <ImageProfile noRating user={recipeDataDetail.owner} widthImage={50} />
-        <View style={{ flex: 1, marginLeft: 15 }}>
-          <TextInputRender
-            onChangeText={(value, err) => this.onChangeText(value, err, 'comment')
-            }
-            noMargin
-            placeholder="Nhập bình luận"
-            value={comment} />
-        </View>
-        <TouchableOpacity>
-          <Text style={[CSS.fontQuiBold, CSS.fontSize15, { color: '#3ABF57', marginLeft: 5 }]}>Gửi</Text>
+        <ImageProfile noRating user={recipeDataDetail.owner} widthImage={42} />
+        <TouchableOpacity onPress={() => this.viewMore('viewComment')} style={{ flex: 1, marginLeft: 15 }}>
+          <View style={{ borderWidth: 1, borderRadius: 5, padding: 10, borderColor: '#E0E0E0' }}>
+            <Text style={[styles.fontQuiRegular, styles.fontSize14, { color: '#CECECE' }]}>Nhập bình luận</Text>
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -366,13 +381,13 @@ export default class RecipeDetail extends Component {
             {this.renderInforRecipe(recipeDetail)}
             {this.renderOwner(recipeDetail)}
           </View>
-          <View style={styles.horizontalFlash}/>
+          <View style={styles.horizontalFlash} />
           {this.renderIngredient(recipeDetail)}
-          <View style={styles.horizontalFlash}/>
+          <View style={styles.horizontalFlash} />
           {this.renderStep(recipeDetail)}
-          <View style={styles.horizontalFlash}/>
+          <View style={styles.horizontalFlash} />
           {this.renderRate(recipeDetail)}
-          <View style={styles.horizontalFlash}/>
+          <View style={styles.horizontalFlash} />
           <ViewMoreHome type={LANG.COMMENT_PAGE} viewMore={() => this.viewMore('viewComment')} />
           <View style={styles.container}>
             {this.renderRowComment(recipeDetail)}

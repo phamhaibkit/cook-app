@@ -1,33 +1,46 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Share } from 'react-native'
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Share } from 'react-native';
 import { COLOR, CSS, IMG } from '../../utils/variables';
 import { kFormatter } from '../../utils/general';
 import { LANG } from '../../lang/lang';
 
 export default class LikeCommentShare extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      item : this.props.item
-    }
+      // eslint-disable-next-line react/destructuring-assignment
+      item: this.props.item
+    };
   }
+
   static propTypes = {
     // prop: PropTypes
   }
 
   onLove = (item) => {
+    const { onLove } = this.props;
+    if (item.isLiked) {
+      // eslint-disable-next-line no-unused-expressions
+      item.likeCount = item.likeCount ? item.likeCount - 1 : 0;
+    } else {
+      item.likeCount = item.likeCount ? item.likeCount + 1 : 1;
+    }
+    console.log(item);
     item.isLiked = !item.isLiked;
+
     this.setState({
       item: item
-    })
-    this.props.onLove && this.props.onLove(item);
+    });
+    onLove && onLove(item);
   }
 
   onComment = (item) => {
-    this.props.onComment && this.props.onComment(item);
+    const { onComment } = this.props;
+    onComment && onComment(item);
   }
 
   onShare = (item) => {
+    const { onShare } = this.props;
     Share.share(
       {
         title: 'BeChef share',
@@ -46,31 +59,39 @@ export default class LikeCommentShare extends Component {
       }
     ).then((res) => {
       console.log('Share result = ', res);
-      this.props.onShare && this.props.onShare(item);
+      onShare && onShare(item);
     });
   }
 
   onSave = (item) => {
+    const { onSave } = this.props;
+    if (item.isSaved) {
+      // eslint-disable-next-line no-unused-expressions
+      item.saveCount = item.saveCount ? item.saveCount - 1 : 0;
+    } else {
+      item.saveCount = item.saveCount ? item.saveCount + 1 : 1;
+    }
     item.isSaved = !item.isSaved;
     this.setState({
       item: item
-    })
-    this.props.onSave && this.props.onSave(item);
+    });
+    // eslint-disable-next-line no-unused-expressions
+    onSave && onSave(item);
   }
 
 
   render() {
-    const { notSave, notMarginTop} = this.props;
+    const { notSave, notMarginTop, showValueSaved } = this.props;
     const { item } = this.state;
     const iconLove = item && item.isLiked ? IMG.loveActiveHome : IMG.loveHome;
-    const iconSave = item.isSaved ? IMG.saveActiveHome: IMG.saveHome;
+    const iconSave = item.isSaved ? IMG.saveActiveHome : IMG.saveHome;
     const topAmount = notMarginTop ? 0 : 18;
     return (
       <View>
         <View style={[styles.containerTimePrice, { marginTop: topAmount }]}>
           <View style={styles.priceView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.likeTimes || 0)}
+              {kFormatter(item.likeCount || 0)}
               <Text style={styles.textLight}> {LANG.LIKE}</Text>
             </Text>
           </View>
@@ -117,15 +138,16 @@ export default class LikeCommentShare extends Component {
           </TouchableOpacity>
           {
             !notSave && (
-            <TouchableOpacity style={styles.saveView}  onPress={() => this.onSave(item)}>
-              <Image style={styles.saveImg} source={iconSave} />
-            </TouchableOpacity>
+              <TouchableOpacity style={[styles.saveView, CSS.flexRow]} onPress={() => this.onSave(item)}>
+                <Image style={styles.saveImg} source={iconSave} />
+                {showValueSaved && <Text style={[CSS.fontQuiRegular, CSS.fontSize13]}>  {kFormatter(item.saveCount || 0)} Lưu lại</Text>}
+              </TouchableOpacity>
             )
           }
-          
+
         </View>
       </View>
-    )
+    );
   }
 }
 
