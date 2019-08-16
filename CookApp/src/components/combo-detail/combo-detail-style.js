@@ -90,7 +90,7 @@ export default styles = StyleSheet.create({
     width: '100%', 
     height: 2, 
     backgroundColor: COLOR.lineHoriColor,
-    marginTop: 15
+    marginVertical: 15
   },
   numberStyle: {
     fontSize: 13,
@@ -144,14 +144,7 @@ export default styles = StyleSheet.create({
     paddingLeft: 15
   },
   cardBorder: {
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#CECECE'
-  },
-  lastCard: {
-    borderBottomWidth: 0,
-    borderBottomColor: COLOR.whiteColor,
-    paddingBottom: 0
+    flex: 1
   },
   customCheckBox: {
     width: 22, 

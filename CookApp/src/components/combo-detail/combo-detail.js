@@ -44,7 +44,7 @@ class IngredientCard extends Component {
     let dataIndex = data.length - 1;
 
     return (
-      <View style={(dataIndex === index) ? [styles.cardBorder, styles.lastCard] : styles.cardBorder}>
+      <View style={styles.cardBorder}>
         <CustomCheckbox
           style={styles.customCheckBox}
           isChecked={isChecked}
@@ -68,7 +68,14 @@ class IngredientCard extends Component {
             <IncreaterButtonWithoutNumber isPlus={true} onPress={onClickPlus} />
           </View>
         </View>
-      </View>
+        {!(dataIndex === index) &&
+          <Image 
+            style={[CSS.w100, { height: 1, marginTop: 20, marginBottom: 15 }]} 
+            source={IMG.borderDot}
+            resizeMode="repeat"
+          />
+        }         
+      </View>      
     );
   }
 }
@@ -312,11 +319,12 @@ export default class ComboDetail extends Component {
             </View>
 
             <View style={[styles.ingredients, styles.blockContainer, styles.backgroundWhite]}>
-              <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
-                <Text style={[{ height: 35 }, styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
+              <View style={[CSS.flexRow, CSS.dFlex, CSS.justifySpaceBetween, CSS.alignItemsCenter, {marginBottom: 15}]}>
+                <Text style={[styles.sectionTitle, CSS.fontNuExBold, CSS.alignItemsCenter]}>{LANG.INGREDIENT}</Text>
                 <GradientButton
                   label={LANG.BUY_INGREDIENT}
                   onPress={this.handlePressBuy}
+                  style={{paddingHorizontal: 9, height: 35, overflow: 'hidden'}}
                 />
               </View>
 

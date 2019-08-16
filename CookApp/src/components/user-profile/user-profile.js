@@ -149,7 +149,7 @@ export default class UserProfile extends Component {
                   <Text style={styles.statisticalNumber}>3</Text>
                   <Text style={styles.statisticalText}>{LANG.RECIPE}</Text>
                 </View>
-                <View style={{width: 0.5, height: 34, backgroundColor: '#d3d3d3'}}></View>
+                <View style={{width: 0.6, height: 34, backgroundColor: '#d3d3d3'}}></View>
                 <View>
                   <Text style={styles.statisticalNumber}>20</Text>
                   <Text style={styles.statisticalText}>{LANG.FOLLOWER}</Text>

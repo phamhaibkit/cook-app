@@ -81,14 +81,17 @@ export class HeaderScroll extends Component {
       outputRange: [borderWidthDefault || 0, 1],
       extrapolate: 'clamp',
     });
+
+    console.log('from header scroll ' + borderBottomWidth);
+    
     return (
       <View>
         <BottomActionModal isModalVisible={isModalVisible} closeReport={action => this.closeReport(action)} />
-        <Animated.View style={[{ backgroundColor, borderBottomWidth }, { position: 'absolute', width: '100%', zIndex: 1, paddingRight: 15, paddingVertical: 10 }, CSS.justifySpaceBetween, CSS.alignItemsCenter, CSS.flexRow]}>
+        <Animated.View style={[{ backgroundColor, borderBottomWidth, borderColor: 'rgba(0, 0, 0, 0.1)' }, { position: 'absolute', width: '100%', zIndex: 1, paddingRight: 15, paddingVertical: 10 }, CSS.justifySpaceBetween, CSS.alignItemsCenter, CSS.flexRow]}>
           <BackButton isGreen={!isWhite} />
           {pageName && <Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: colorPageName || '#fff' }]}>{pageName}</Text>}
           <View style={[{ minWidth: 26, height: 26 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
-            {haveCart ? <View><CartHome isTransparentHeader /></View> : <View />}
+            {haveCart ? <View><CartHome borderBottomWidth isTransparentHeader /></View> : <View />}
             {haveMore && <TouchableOpacity onPress={() => this.openReportBar()}><Animated.Text style={[{ color }, { fontSize: 26, paddingLeft: 10, marginTop: -8 }, CSS.fontNuExBold]}>...</Animated.Text></TouchableOpacity>}
           </View>
         </Animated.View>

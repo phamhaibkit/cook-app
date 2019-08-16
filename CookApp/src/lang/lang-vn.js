@@ -143,5 +143,7 @@ export const LANG_VN = {
   WAITING_ACCEPT_RECIPE: 'Công Thức Chờ Duyệt',
   WAITING_NOTE: 'Nhằm đảm bảo chất lượng, ban quản trị sẽ xem xét và duyệt bài viết của bạn trong vòng 24-48 tiếng và sẽ đưa ra những yêu cầu thay đổi nếu cần thiết.',
   REJECT: 'Từ chối',
-  WAITING_ACCEPT: 'Chờ duyệt'
+  REJECT_POST: 'Bài viết bị từ chối',
+  WAITING_ACCEPT: 'Chờ duyệt',
+  SEE_THE_REASON: 'Xem lí do'
 };

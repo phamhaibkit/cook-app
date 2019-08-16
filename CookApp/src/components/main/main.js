@@ -50,6 +50,7 @@ import PageViewComment from '../page-view-comment/page-view-comment';
 import UpRecipeStep2 from '../up-recipe-step2/up-recipe-step2';
 import UpRecipeStep3 from '../up-recipe-step3/up-recipe-step3';
 import UserReviewingRecipe from '../user-reviewing-recipe/user-reviewing-recipe';
+import UserDraftRecipeReject from '../user-draft-recipe-reject/user-draft-recipe-reject';
 
 
 const CollectionListScreen = {
@@ -151,9 +152,10 @@ const PageRaingScreen = {
 
 const HomeStack = createStackNavigator({
   Home: {
-    screen: UserDraftOrders,
+    // screen: UserDraftOrders,
     // screen: PageHome,
-    // screen: UserReviewingRecipe,
+    screen: UserReviewingRecipe,
+    // screen: UserDraftRecipeReject,
     navigationOptions: {
       header: null
     }
@@ -288,20 +290,46 @@ const UserStack = createStackNavigator({
     }
   },
   [ROUTES.userProfile.key]: { 
-    screen: UserProfile 
+    screen: UserProfile,
+    navigationOptions: {
+      headerLeft: <BackButton />,
+      headerTransparent: true,
+    }
   },
   [ROUTES.userDraftRecipe.key]: {
     screen: UserDraftRecipe, 
     navigationOptions: {
       title: `${LANG.RECIPE_DRAFT}`,
+      headerTitleStyle: styles.headerTitleStyle,
       headerLeft: <BackButton isGreen/>,
+       headerTitleContainerStyle: styles.headerTitleContainerStyle
     }
   },
   [ROUTES.userDraftOrder.key]: {
     screen: UserDraftOrders, 
     navigationOptions: {
       title: `${LANG.ORDER_DRAFT}`,
+      headerTitleStyle: styles.headerTitleStyle,
       headerLeft: <BackButton isGreen/>,
+       headerTitleContainerStyle: styles.headerTitleContainerStyle
+    }
+  },
+  [ROUTES.userReviewingRecipe.key]: {
+    screen: UserReviewingRecipe,
+    navigationOptions: {
+      title: `${LANG.RECIPE_WAITING}`,
+      headerTitleStyle: styles.headerTitleStyle,
+      headerLeft: <BackButton isGreen />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    }
+  },
+  [ROUTES.userDraftRecipeReject.key]: {
+    screen: UserDraftRecipeReject,
+    navigationOptions: {
+      title: `${LANG.REJECT_POST}`,
+      headerTitleStyle: [styles.headerTitleStyle, CSS.textCapitalize],
+      headerLeft: <BackButton isGreen />,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
     }
   }
 }, { initialRouteName: 'User' });

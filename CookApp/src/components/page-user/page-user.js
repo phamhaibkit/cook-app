@@ -66,13 +66,13 @@ export class PageUser extends Component {
     return <View style={[CSS.flexCol, styles.content]}>
       {arrayRender.map((item, index) => {
         const { action, name } = item;
-        return <View key={index}>
+        return <TouchableOpacity key={index} onPress={() => action && action()}>
           <View style={[{ paddingBottom: 10 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
             <Text style={[CSS.fontQuiMedium, CSS.fontSize15]}>{name}</Text>
             <Image source={IMG.arrowRightGreen} style={{ width: 24, height: 13 }} />
           </View>
           {index !== arrayRender.length - 1 && <Image style={{ width: '100%', height: 1, marginBottom: 10 }} source={IMG.borderDot} />}
-        </View>;
+        </TouchableOpacity>;
       })}
     </View>;
   }
@@ -93,7 +93,7 @@ export class PageUser extends Component {
       },
       {
         name: LANG.ORDER_DRAFT,
-        action: ''
+        action: () => navigationService.navigate(ROUTES.userDraftOrder.key)
       }
     ];
     return this.renderItemManage(arrayOrderManage);
@@ -107,11 +107,11 @@ export class PageUser extends Component {
       },
       {
         name: LANG.WAITING_ACCEPT_RECIPE,
-        action: ''
+        action: () => navigationService.navigate(ROUTES.userReviewingRecipe.key)
       },
       {
         name: LANG.RECIPE_DRAFT,
-        action: ''
+        action: () => navigationService.navigate(ROUTES.userDraftRecipe.key)
       },
       {
         name: LANG.SAVED_RECIPE,
@@ -143,29 +143,7 @@ export class PageUser extends Component {
       },
     ];
     return this.renderItemManage(arrayItem);
-  }
-
-  goToPage = (key) => {
-    switch (key) {
-    case 'userProfile':
-      navigationService.navigate(ROUTES.userProfile.key);
-      break;
-    case LANG.COMBO:
-      navigationService.navigate(ROUTES.comboList.key);
-      break;
-    case LANG.RECIPE_HIGHLIGHT:
-      navigationService.navigate(ROUTES.recipeHighlightList.key);
-      break;
-    case LANG.LIKED_RECIPE:
-      navigationService.navigate(ROUTES.recipeLikedList.key);
-      break;
-    case LANG.INFO_EVENT:
-      navigationService.navigate(ROUTES.newsEventList.key);
-      break;
-    default:
-      break;
-    }
-  };
+  }      
 
   render() {
     const { accountInfo } = this.props;
@@ -189,7 +167,7 @@ export class PageUser extends Component {
           <View style={[CSS.flexRow, CSS.justifySpaceBetween, { paddingHorizontal: 15 }]}>
             <View style={[CSS.flexCol, { justifyContent: 'space-around' }]}>
               <Text style={[CSS.fontNuBlack, CSS.fontSize20, { color: '#fff' }]}>{user.name}</Text>
-              <TouchableOpacity style={[CSS.flexRow, CSS.alignItemsCenter]} onPress={() => this.goToPage('userProfile')}>
+              <TouchableOpacity style={[CSS.flexRow, CSS.alignItemsCenter]} onPress={() => navigationService.navigate(ROUTES.userProfile.key)}>
                 <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#fff' }]}>Xem thông tin </Text>
                 <Image source={IMG.arrowWhite} style={{ width: 12, height: 7 }} /></TouchableOpacity>
             </View>

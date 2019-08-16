@@ -73,6 +73,7 @@ export const IMG = {
   addIngredient: require('../../assets/icons/add-ingredient.png'),
   arrowWhite: require('../../assets/icons/arrow-white.png'),
   stickNote:  require('../../assets/icons/stick.png'),
+  infoIcon: require('../../assets/icons/info.png'),
 };
 
 export const ASYNC_STORAGE = {

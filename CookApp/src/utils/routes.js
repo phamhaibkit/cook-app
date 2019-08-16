@@ -68,6 +68,9 @@ export const ROUTES = {
   userReviewingRecipe: {
     key: 'userReviewingRecipe'
   },
+  userDraftRecipeReject: {
+    key: 'UserDraftRecipeReject'
+  },
   viewComment: {
     key: 'viewComment'
   },

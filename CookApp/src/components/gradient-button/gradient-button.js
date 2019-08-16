@@ -10,23 +10,35 @@ export default class GradientButton extends Component {
   }
 
   render() {
-    const { label, onPress, inActive } = this.props;
+    const { label, onPress, inActive, style } = this.props;
     return (
       <LinearGradient 
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={inActive ? ['#DDDDDD','#DDDDDD'] : [COLOR.gradientLeft, COLOR.gradientRight]}
-        style={{
-          borderRadius: 5,
-          height: 40
-        }}>
+        style={
+          [
+            {
+              borderRadius: 5,
+              height: 40
+            },
+            style
+          ]
+        }
+      >
 
         <TouchableOpacity
-          style={{
-            height: 40, width: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          style={
+            [
+              {
+                height: 40,
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              },
+              style
+            ]
+          }
           onPress={() => onPress && onPress()}
           underlayColor={'transparent'}
           disabled={inActive}
