@@ -170,7 +170,7 @@ export default class PageViewComment extends Component {
     console.log(comments, 'comments');
     return (
       <KeyboardAvoidingView style={[{ flexGrow: 1, flex: 1 }, CSS.flexCol, CSS.justifySpaceBetween]} behavior="padding" keyboardVerticalOffset={padding}>
-        <HeaderScroll ref={child => { this.child = child }} colorDefault="#fff" colorPageName="#000" borderWidthDefault={1} pageName="Bình luận">
+        <HeaderScroll ref={(child) => { this.child = child; }} colorBorderDefault="#D2D2D2" colorDefault="#fff" colorPageName="#000" borderWidthDefault={1} pageName="Bình luận">
           <View style={styles.container}>
             {comments.length > 0 && comments.map((item, index) => {
               item.name = item.commentator;

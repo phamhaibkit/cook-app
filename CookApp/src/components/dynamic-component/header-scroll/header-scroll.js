@@ -56,7 +56,7 @@ export class HeaderScroll extends Component {
 
   render() {
     const { scrollY, isModalVisible } = this.state;
-    const { children, pageName, haveCart, colorDefault, borderWidthDefault, haveMore, isWhite, colorPageName } = this.props;
+    const { children, pageName, haveCart, colorDefault, borderWidthDefault, haveMore, isWhite, colorPageName, colorBorderDefault } = this.props;
     const onScroll = Animated.event([{
       nativeEvent: {
         contentOffset: {
@@ -81,10 +81,15 @@ export class HeaderScroll extends Component {
       outputRange: [borderWidthDefault || 0, 1],
       extrapolate: 'clamp',
     });
+    const borderBottomColor = scrollY.interpolate({
+      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
+      outputRange: [colorBorderDefault || 'transparent', '#D2D2D2'],
+      extrapolate: 'clamp',
+    });
     return (
       <View>
         <BottomActionModal isModalVisible={isModalVisible} closeReport={action => this.closeReport(action)} />
-        <Animated.View style={[{ backgroundColor, borderBottomWidth }, { position: 'absolute', width: '100%', zIndex: 1, paddingRight: 15, paddingVertical: 10 }, CSS.justifySpaceBetween, CSS.alignItemsCenter, CSS.flexRow]}>
+        <Animated.View style={[{ backgroundColor, borderBottomWidth, borderBottomColor }, { position: 'absolute', width: '100%', zIndex: 1, paddingRight: 15, paddingVertical: 10 }, CSS.justifySpaceBetween, CSS.alignItemsCenter, CSS.flexRow]}>
           <BackButton isGreen={!isWhite} />
           {pageName && <Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: colorPageName || '#fff' }]}>{pageName}</Text>}
           <View style={[{ minWidth: 26, height: 26 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
