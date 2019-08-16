@@ -41,10 +41,11 @@ export default class LikeCommentShare extends Component {
 
   onShare = (item) => {
     const { onShare } = this.props;
+    console.log('Share Share = ', item);
     Share.share(
       {
         title: 'BeChef share',
-        urlonShare: 'https://www.google.vn/',
+        urlonShare: item.recipeImage,
         message: 'Nau An Di Cung',
       },
       {

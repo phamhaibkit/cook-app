@@ -9,12 +9,13 @@ import GradientButton from '../gradient-button/gradient-button';
 import ConfirmModal from '../../components/modal/confirm-modal';
 import navigationService from '../../services/navigation.service';
 import ModalComponent from '../../components/modal/modal'
+import recipeService from '../../services/recipe.service';
 
 let data = [
-  {id: 1, show: true},
-  {id: 2, show: true},
-  {id: 3, show: true},
-  {id: 4, show: true}
+  {id: 1, show: true, stepDetail: '', stepImages: []},
+  {id: 2, show: true, stepDetail: '', stepImages: []},
+  {id: 3, show: true, stepDetail: '', stepImages: []},
+  {id: 4, show: true, stepDetail: '', stepImages: []}
 ]
 
 export default class UpRecipeStep3 extends Component {
@@ -37,12 +38,21 @@ export default class UpRecipeStep3 extends Component {
       images: [ {}, {}, {}, {}],
       modalDraft: false,
       modalFinish: false,
-      modalSuccess: false
+      modalSuccess: false,
+      dataSend: []
     }
     this.content = {
       title: LANG.UP_SUCCESS,
       message: LANG.ADMIN_APPROVE
     }
+  }
+
+  componentWillMount() {
+    const { params } = this.props.navigation.state;
+    console.log('PARAMPAMPARAM', params);
+    this.setState({
+      dataSend: params.dataNavigate
+    })
   }
 
   componentDidMount(){
@@ -81,10 +91,29 @@ export default class UpRecipeStep3 extends Component {
     })
   }
 
+  onChangeText = (row, text) => {
+    const { data } = this.state;
+    console.log('onChangeText=', row, text);
+    data.map((item, index) => {
+      if (item.id === row.id) {
+        item.stepDetail = text;
+      }
+    })
+    this.setState({
+      data: data
+    })
+  }
+
   showModalDraft=() => {
     this.setState({
       modalFinish: false,
       modalDraft: true,
+    })
+  }
+
+  closeModalDraft=() => {
+    this.setState({
+      modalDraft: false,
     })
   }
 
@@ -96,15 +125,59 @@ export default class UpRecipeStep3 extends Component {
   }
 
   onAcceptFinish = () => {
+    const dataSend = this.makeDataSend();
+    recipeService.upOrSaveDraftRecipe(dataSend, true)
+      .then(() => {
+        this.showSuccess();
+      }).catch((err) => {
+        this.showSuccess();
+      })
+  }
+
+  showSuccess = () => {
     this.setState({
       modalDraft: false,
       modalFinish: false,
       modalSuccess: true
     })
   }
-
+  
   onSuccess = () => {
     navigationService.navigate("Recipe");
+  }
+
+  closeFinish = () => {
+    this.setState({
+      modalFinish: false
+    })
+  }
+
+  onAcceptSave = () => {
+    const params = this.makeDataSend();
+    recipeService.upOrSaveDraftRecipe(params, false)
+      .then(() => {
+      this.closeModalDraft();
+      navigationService.navigate("Recipe");
+    }).catch(err => {
+      this.closeModalDraft();
+      navigationService.navigate("Recipe");
+    })
+  }
+
+  makeDataSend = () => {
+    const { dataSend, data} = this.state;
+    console.log('GGGGGGGGGGGGGGG', dataSend);
+    const steps = data.filter((item) => {
+      return item.show;
+    });
+    steps.map((item, index) => {
+      item.stepNumber = index + 1;
+      delete item.id;
+      delete item.show;
+    })
+    dataSend.steps = steps
+    console.log('MAKE-DATA===', dataSend, steps);
+    return dataSend;
   }
 
   renderImage = () => {
@@ -135,7 +208,13 @@ export default class UpRecipeStep3 extends Component {
                   {this.renderImage()}
                 </View>
                 <View style={styles.textInput}>
-                  <TextInput placeholder={LANG.INPUT_DESCRIPTION_1} editable={true} multiline={true} numberOfLines={4} />
+                  <TextInput
+                    placeholder={LANG.INPUT_DESCRIPTION_1}
+                    editable={true} multiline={true}
+                    numberOfLines={4}
+                    value={item.stepDetail}
+                    onChangeText={text => { this.onChangeText(item, text) }}
+                    />
                 </View>
               </View>
               <View style={styles.deleteView}>
@@ -178,7 +257,8 @@ export default class UpRecipeStep3 extends Component {
             content={{
               title: `${LANG.SAVE_DRAFT_RECIPE}`,
               message: `${LANG.QUESTION_SAVE_DRAFT}`
-            }}           
+            }}
+            onHide={this.closeModalDraft}  
         />
         <ConfirmModal
           modalVisible={modalFinish}
@@ -187,9 +267,15 @@ export default class UpRecipeStep3 extends Component {
           content={{
             title: `${LANG.FINISH}`,
             message: `${LANG.FINISH_RECIPE}`
-          }}           
+          }}
+          onHide={this.closeFinish} 
         />
-        <ModalComponent content={this.content} modalVisible={modalSuccess} closeModal={this.onSuccess}></ModalComponent>
+        <ModalComponent 
+          content={this.content}
+          modalVisible={modalSuccess}
+          closeModal={this.onSuccess}
+        >  
+        </ModalComponent>
       </ScrollView>
     );
   }

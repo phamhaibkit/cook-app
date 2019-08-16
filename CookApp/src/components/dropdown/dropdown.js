@@ -21,11 +21,15 @@ export default class DropDown extends Component {
   }
 
   onSelectItem = (value, index) => {
-    const { slectedItem } = this.props;
+    const { slectedItem, selectData } = this.props;
     this.setState({
       choosedItem: value
     });
-    slectedItem && slectedItem(value);
+    if(selectData){
+      slectedItem && slectedItem(selectData, value);
+    }else{
+      slectedItem && slectedItem(value);
+    }
   };
 
 

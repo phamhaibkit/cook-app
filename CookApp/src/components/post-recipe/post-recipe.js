@@ -106,11 +106,6 @@ export default class PostRecipe extends Component {
     })
   }
 
-  continue = () => {
-    const dataNavigate = this.makeData();
-    navigationService.navigate(ROUTES.upRecipeStep2.key, {dataNavigate});
-  }
-
   getCategory = () => {
     recipeService.getCategory().then(() => {
       this.setState({
@@ -154,6 +149,11 @@ export default class PostRecipe extends Component {
       console.log('AAAAAAAAAAAAAAAAAAAAAAA', data);
       navigationService.goBack();
     })
+  }
+
+  continue = () => {
+    const dataNavigate = this.makeData();
+    navigationService.navigate(ROUTES.upRecipeStep2.key, {dataNavigate});
   }
 
   makeData = () => {

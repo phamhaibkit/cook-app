@@ -62,7 +62,8 @@ export default StyleSheet.create({
     fontFamily: CSS.fontTitle,
     color: '#444444',
     fontSize: 14,
-    marginLeft: 10
+    marginLeft: 10,
+    marginTop: 15
   },
   imgBtn: {
     height: 60,

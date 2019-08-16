@@ -20,6 +20,7 @@ import { getCurrencyStr, kFormatter } from '../../utils/general';
 import homeService from '../../services/home.service';
 import { TextInput } from 'react-native-gesture-handler';
 import GradientButton from '../gradient-button/gradient-button';
+import recipeService from '../../services/recipe.service';
 
 export default class RecipeHighlightHome extends Component {
   constructor(props) {
@@ -58,10 +59,11 @@ export default class RecipeHighlightHome extends Component {
     })
   };
 
-  onComment= () => {
+  onComment= (item) => {
     this.setState({
       isModalVisible: false,
-      isModalComment: true
+      isModalComment: true,
+      item: item
     })
   }
 
@@ -111,6 +113,21 @@ export default class RecipeHighlightHome extends Component {
   onPressSave = (recipe) => {
     const { recipes } = this.state;
     console.log('onPressSave==', recipes);
+  }
+
+  sendComment = () => {
+    const { cmtText, item} = this.state;
+    console.log(cmtText, item);
+    const params = {
+      id: item.id,
+      comment: cmtText,
+    };
+    recipeService.sendRecipeComment(params)
+      .then(() => {
+        this.closeComment();
+      }).catch((err) => {
+        this.closeComment();
+      })
   }
 
   renderFrame = (recipes) => {
@@ -180,7 +197,7 @@ export default class RecipeHighlightHome extends Component {
               </TouchableOpacity>
             </View>
 
-            <LikeCommentShare item={item} onLove={this.onPressLove} onShare={this.onShare} onSave={this.onPressSave} onComment={this.onComment}/>
+            <LikeCommentShare item={item} onLove={this.onPressLove} onComment={this.onComment} onShare={this.onShare} onSave={this.onPressSave} />
           </View>
           {/* {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>} */}
         </View>
@@ -237,7 +254,7 @@ export default class RecipeHighlightHome extends Component {
             <View style={styles.bottomBtn}>
               <GradientButton
                 label={LANG.SEND_RATING_COMMENT}
-                onPress={this.continue}
+                onPress={this.sendComment}
               />
             </View>
           </View>

@@ -145,5 +145,7 @@ export const LANG_VN = {
   REJECT: 'Từ chối',
   REJECT_POST: 'Bài viết bị từ chối',
   WAITING_ACCEPT: 'Chờ duyệt',
-  SEE_THE_REASON: 'Xem lí do'
+  SEE_THE_REASON: 'Xem lí do',
+  WAITING_ACCEPT: 'Chờ duyệt',
+  NAME_INGREDIENT: 'Tên nguyên liệu',
 };

@@ -10,15 +10,16 @@ import GradientButton from '../gradient-button/gradient-button';
 import { ROUTES } from '../../utils/routes';
 import navigationService from '../../services/navigation.service';
 import ConfirmModal from '../../components/modal/confirm-modal';
+import recipeService from '../../services/recipe.service';
 
-const colCount = [
-  { id: 1, name: '', show: true },
-  { id: 2, name: '', show: true },
-  { id: 3, name: '', show: true },
-  { id: 4, name: '', show: true }
+const ingrdientData = [
+  { id: 1, name: '', show: true, quantity: '', unit: 'gram' },
+  { id: 2, name: '', show: true, quantity: '', unit: 'gram' },
+  { id: 3, name: '', show: true, quantity: '', unit: 'gram' },
+  { id: 4, name: '', show: true, quantity: '', unit: 'gram' }
 ]
 
-const numPeople = [{
+const numPeoples = [{
   value: '1 người', index: 0
 }, {
   value: '2 người', index: 1
@@ -63,17 +64,41 @@ export default class UpRecipeStep2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: colCount,
-      modalDraft: false
+      data: ingrdientData,
+      modalDraft: false,
+      dataSend: {},
+      numPeople: numPeoples[0].value
     }
+  }
+
+  componentWillMount() {
+    const { params } = this.props.navigation.state;
+    console.log('PARAMPAMPARAM', params);
+    this.setState({
+      dataSend: params.dataNavigate
+    })
   }
 
   componentDidMount() {
     this.props.navigation.setParams({ showModalDraft: this.showModalDraft });
   }
 
-  slectedMeal = (value) => {
-    console.log('Selected ====', value);
+  slectedMeal = (numPerson) => {
+    this.setState({
+      numPeople: numPerson.value
+    })
+  }
+
+  slectedUnit = (dataSelected, unit) => {
+    const { data } = this.state;
+    data.map((item) => {
+      if(item.id === dataSelected.id){
+        item.unit = unit.value
+      }
+    });
+    this.setState({
+      data: data
+    })
   }
 
   deleteRow = (row) => {
@@ -97,7 +122,7 @@ export default class UpRecipeStep2 extends Component {
     })
   }
 
-  onChangeText = (row, text) => {
+  onChangeName = (row, text) => {
     const { data } = this.state;
     console.log('onChangeText=', row, text);
     data.map((item, index) => {
@@ -110,14 +135,57 @@ export default class UpRecipeStep2 extends Component {
     })
   }
 
+  onChangeQuantity = ( row, text) => {
+    const { data } = this.state;
+    console.log('onChangeText=', row, text);
+    data.map((item, index) => {
+      if (item.id === row.id) {
+        item.quantity = text;
+      }
+    })
+    this.setState({
+      data: data
+    })
+
+  }
+
   showModalDraft = () => {
     this.setState({
       modalDraft: true
     })
   }
 
+  onCancelSave = () => {
+    this.setState({
+      modalDraft: false
+    })
+  }
+
+  onAcceptSave = () => {
+    const params = this.makeDataSend();
+    recipeService.upOrSaveDraftRecipe(params, false).then(() => {
+      this.onCancelSave();
+      navigationService.navigate("Recipe");
+    }).catch( (err) => {
+      console.log('ERROR==', err);
+      navigationService.navigate("Recipe");
+    })
+  }
+
   continue = () => {
-    navigationService.navigate(ROUTES.upRecipeStep3.key);;
+    const dataNavigate = this.makeDataSend();
+    navigationService.navigate(ROUTES.upRecipeStep3.key, { dataNavigate });;
+  }
+
+  makeDataSend = () => {
+    const { dataSend, data, numPeople} = this.state;
+    const products = data.filter((item) => {
+      return item.name !== '' && item.show;
+    });
+    dataSend.products = products;
+    dataSend.numPeople = numPeople;
+    console.log('Make-Data===', dataSend);
+    return dataSend;
   }
 
   renderIngredient = () => {
@@ -133,20 +201,28 @@ export default class UpRecipeStep2 extends Component {
                   <TextInput
                     style={styles.textInput}
                     maxLength={40}
-                    placeholder='Ten nguyen lieu'
-                    value={data.name}
-                    onChangeText={text => { this.onChangeText(item, text) }}
+                    placeholder={LANG.NAME_INGREDIENT}
+                    value={item.name}
+                    onChangeText={text => { this.onChangeName(item, text) }}
                   />
                 </View>
                 <View style={styles.upIngre}>
                   <View style={[styles.leftIngre, styles.borderRight]}>
-                    <TextInput style={styles.textInput} maxLength={40} placeholder='So luong' />
+                    <TextInput 
+                      style={styles.textInput}
+                      maxLength={40}
+                      placeholder={LANG.QUANTITY}
+                      value={item.quantity}
+                      onChangeText={text => { this.onChangeQuantity(item, text) }}
+                      keyboardType='numeric'
+                    />
                   </View>
                   <View style={styles.leftIngre}>
                     <DropDown
                       label={LANG.MEAL}
                       data={units}
-                      slectedItem={this.slectedMeal}
+                      slectedItem={this.slectedUnit}
+                      selectData={item}
                     />
                   </View>
                 </View>
@@ -175,7 +251,7 @@ export default class UpRecipeStep2 extends Component {
             <View style={styles.dropView}>
               <DropDown
                 label={LANG.MEAL}
-                data={numPeople}
+                data={numPeoples}
                 slectedItem={this.slectedMeal}
               />
             </View>
@@ -196,6 +272,7 @@ export default class UpRecipeStep2 extends Component {
             modalVisible={modalDraft}
             onPressDelete={this.onAcceptSave}
             buttonAction={LANG.SAVE1}
+            onHide={this.onCancelSave}
             content={{
               title: `${LANG.SAVE_DRAFT_RECIPE}`,
               message: `${LANG.QUESTION_SAVE_DRAFT}`

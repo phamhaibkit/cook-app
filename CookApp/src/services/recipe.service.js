@@ -219,7 +219,7 @@ class RecipeService {
       categories: recipeData.categories || [],
       products: recipeData.products || [],
       steps: recipeData.steps || [
-        { stepNumber: 1, stepDetail: 'Describe Step', stepImages: ['Image1.jpg','Image2.jpg']},
+        { stepNumber: 1, stepDetail: 'Describe Step', stepImages: []},
       ]
     };
     console.log('DATA-SEND', params);
