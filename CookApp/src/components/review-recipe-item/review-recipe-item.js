@@ -16,6 +16,7 @@ export default class ReviewRecipeItem extends Component {
     const { 
       item, 
       hasRejectLabel, 
+      hideSeeTheReason,
       onDetailPress, 
       onReportPress, 
       onReasonPress,
@@ -24,7 +25,7 @@ export default class ReviewRecipeItem extends Component {
 
     return (
       <View style={[CSS.frameWrap, lastCardStyle]}>
-        <View style={[styles.frameVer]}>
+        <View style={[styles.frameVer, CSS.lightBoxShadow]}>
           <View style={styles.containerTitle}>
             <TouchableOpacity style={styles.titleView} onPress={onDetailPress}>
               <Text numberOfLines={1} style={styles.titleText}>
@@ -84,12 +85,14 @@ export default class ReviewRecipeItem extends Component {
                 <Image style={styles.infoImg} source={IMG.infoIcon}/>
                 <Text style={styles.rejectText}>{LANG. REJECT_POST}</Text>
               </View>
-              <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+              {
+                !hideSeeTheReason && <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
                 <TouchableOpacity onPress={onReasonPress}>
                   <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { lineHeight: 13, color: COLOR.greenColor }]}>{LANG.SEE_THE_REASON}</Text>
                 </TouchableOpacity>
                 <Image source={IMG.arrowRightGreen} style={styles.arrowRightImg}/>
-              </View>
+                </View>
+              }
             </View> 
           }     
         </View>

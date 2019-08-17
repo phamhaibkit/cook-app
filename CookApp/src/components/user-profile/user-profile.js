@@ -5,7 +5,9 @@ import { Image, Avatar, Button  } from 'react-native-elements';
 import styles from './user-profile-style';
 import { CSS, IMG, COLOR } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
+import { ROUTES } from '../../utils/routes';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
+import navigationService from '../../services/navigation.service';
  
 export default class UserProfile extends Component {
   constructor(props){
@@ -113,6 +115,10 @@ export default class UserProfile extends Component {
       chefName: 'Nguyễn phạm hạ Vy'
     }
   }
+
+  navigateUserInfo = () => {
+    navigationService.navigate(ROUTES.userInfo.key);
+  }
   
   render() {
     return (
@@ -168,7 +174,7 @@ export default class UserProfile extends Component {
                   buttonStyle={[styles.buttonStyles]}
                   titleStyle={styles.buttonTitleStyle}
                   type="outline"
-                  onPress={()=>{alert('press')}}
+                  onPress={this.navigateUserInfo}
                 />
                 <Button
                   title="Đổi ảnh bìa"
@@ -176,7 +182,7 @@ export default class UserProfile extends Component {
                   titleStyle={styles.buttonTitleStyle}
                   containerStyle={[styles.buttonContainerStyle, {marginLeft: 5}]}
                   type="outline"
-                  onPress={()=>{alert('press')}}
+                  onPress={this.navigateUserInfo}
                 />
               </View>
             </View>

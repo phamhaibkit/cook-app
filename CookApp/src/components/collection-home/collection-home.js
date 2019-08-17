@@ -10,7 +10,7 @@ export default class CollectionHome extends Component {
 		super(props);		
 	}
 
-	renderItem = ({ item }) => (<CollectionItem item={item} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>);
+	renderItem = ({ item, index }) => (<CollectionItem item={item} isLastCard={index === (this.props.data.length - 1)} imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>);
 
 	render() { 
 		const { data, marTop } = this.props;   
@@ -28,6 +28,6 @@ export default class CollectionHome extends Component {
 					/>
 				}
 			</View>
-		);
+		);	
 	}
 }

@@ -171,6 +171,9 @@ export const CSS = {
   textAlignCenter: {
     textAlign: 'center'
   },
+  textAlignJustify: {
+    textAlign: 'justify'
+  },
   flexRow: {
     flexDirection: 'row',
   },

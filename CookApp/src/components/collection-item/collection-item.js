@@ -44,14 +44,18 @@ class CollectionItem extends PureComponent {
       blockMargin, 
       ads,
       onPressSave, 
-      isVertical
+      isVertical,
+      isLastCard
     } = this.props;
 
+    console.log('isLastCard: ' + isLastCard);
+
     const iconSave = JSON.parse(this.state.item.isSavedByUser) ? IMG.saveActiveHome: IMG.saveHome;
+    const lastCardStyle = isLastCard && (isVertical ? { marginBottom: 20 } : { marginRight: 20 })
  
     return (
        <View>
-         <View style={[styles.blockContainer, CSS.borderRadius5, blockMargin]} >
+         <View style={[styles.blockContainer, CSS.borderRadius5, blockMargin, lastCardStyle]} >
           <TouchableWithoutFeedback onPress={ this.handlePress }>
             <View>
               <ImageBackground style={[imgBgWrap, CSS.borderRadius5]} source={{ uri: item.collectionImages[0] }}>

@@ -64,28 +64,30 @@ export class HeaderScroll extends Component {
         }
       }
     }]);
+    const defaultInputRange = [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT];
 
     const backgroundColor = scrollY.interpolate({
-      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
+      inputRange: defaultInputRange,
       outputRange: [colorDefault || 'transparent', 'white'],
       extrapolate: 'clamp',
     });
     const color = scrollY.interpolate({
-      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
+      inputRange: defaultInputRange,
       outputRange: [colorDefault || 'white', 'black'],
       extrapolate: 'clamp',
     });
 
     const borderBottomWidth = scrollY.interpolate({
-      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
+      inputRange: defaultInputRange,
       outputRange: [borderWidthDefault || 0, 1],
       extrapolate: 'clamp',
     });
     const borderBottomColor = scrollY.interpolate({
-      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
+      inputRange: defaultInputRange,
       outputRange: [colorBorderDefault || 'transparent', '#D2D2D2'],
       extrapolate: 'clamp',
     });
+
     return (
       <View>
         <BottomActionModal isModalVisible={isModalVisible} closeReport={action => this.closeReport(action)} />

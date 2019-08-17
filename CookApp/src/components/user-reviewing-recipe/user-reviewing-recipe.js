@@ -25,7 +25,7 @@ class WaitingReviewRecipe extends Component {
     console.log('renderFrame: ', recipes);
     if(recipes){
       return recipes.map((item, index) => { 
-        const lastCardStyle = index === recipes.length - 1 ? { marginBottom: 15 } : {};
+        const lastCardStyle = index === recipes.length - 1 ? { marginBottom: 20 } : {};
         return <ReviewRecipeItem 
           key={item.id}
           item={item}
@@ -58,15 +58,14 @@ class WaitingReviewRecipe extends Component {
 
   render(){
     const { recipes } = this.props;
-
-    return (<View style={[CSS.draftContainer, {backgroundColor: COLOR.backgroundColor}]}>   
+    return (<View style={CSS.draftContainer}>   
       <ScrollView 
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
-        <View style={[CSS.flexRow, CSS.frameWrap]}>
+        <View style={[CSS.flexRow, CSS.frameWrap, {marginBottom: 5}]}>
           <Image source={IMG.stickNote} style={{width: 18, height: 18, marginRight: 5}}/>
-          <Text>{LANG.WAITING_NOTE}</Text>        
+          <Text style={[CSS.textAlignJustify, {flex: 9}]}>{LANG.WAITING_NOTE}</Text>        
         </View>
         { this.renderFrame(recipes) }
       </ScrollView>
@@ -90,6 +89,8 @@ class WaitingReviewRecipe extends Component {
         </View>
       </Modal>
     </View>)
+
+    
   }
 }
 
@@ -102,14 +103,14 @@ class RejectRecipe extends Component {
     }
   }
 
-  seeTheReason = (id) => {
-    navigationService.navigate(ROUTES.userDraftRecipeReject.key)
+  seeTheReason = (item) => {
+    navigationService.navigate(ROUTES.userDraftRecipeReject.key, { item })
   }
   
   renderFrame = (recipes) => {
     if(recipes){
       return recipes.map((item, index) => { 
-        const lastCardStyle = index === recipes.length - 1 ? { marginBottom: 15 } : {};
+        const lastCardStyle = index === recipes.length - 1 ? { marginBottom: 20 } : {};
         return <ReviewRecipeItem 
           key={item.id}
           item={item}
@@ -117,7 +118,7 @@ class RejectRecipe extends Component {
           lastCardStyle={lastCardStyle}
           onDetailPress={this.openReport}
           onReportPress={this.openReport}
-          onReasonPress={() => this.seeTheReason(item.id)}
+          onReasonPress={() => this.seeTheReason(item)}
         />
     })};
   }
@@ -144,11 +145,12 @@ class RejectRecipe extends Component {
   render(){
    const { recipes } = this.props;
 
-    return (<View style={[CSS.draftContainer, {backgroundColor: COLOR.backgroundColor}]}>   
+    return (<View style={CSS.draftContainer}>   
       <ScrollView 
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
+        <View style={{marginTop: 5}}></View>
         { this.renderFrame(recipes) }
       </ScrollView>
       <Modal
@@ -202,8 +204,10 @@ export default class UserReviewingRecipe extends Component {
       <ScrollableTabView 
         tabBarActiveTextColor ={COLOR.greenColor} 
         tabBarTextStyle={CSS.tabBarTextStyle}
-        tabBarUnderlineStyle ={CSS.tabBarUnderlineStyle }
+        tabBarUnderlineStyle ={CSS.tabBarUnderlineStyle}
         tabBarInactiveTextColor="#999"
+        tabStyle={[{borderWidth: 0, borderColor: '#fff', paddingBottom: 0}]}        
+        underlineStyle={{borderColor: 0, borderColor: '#fff'}}
       >
         <WaitingReviewRecipe tabLabel={LANG.WAITING_ACCEPT} recipes={waitingReviewRecipes.waiting_recipes}/>
         <RejectRecipe tabLabel={LANG.REJECT} recipes={waitingReviewRecipes.reject_recipes}/>

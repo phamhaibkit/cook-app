@@ -59,11 +59,17 @@ export const ROUTES = {
   userProfile: {
     key: 'userProfile'
   },
+  userInfo: {
+    key: 'InforUser'
+  },
   userDraftRecipe: {
     key: 'userDraftRecipe'
   },
   userDraftOrder: {
     key: 'userDraftOrder'
+  },
+  userDraftOrderDetail: {
+    key: 'userDraftOrderDetail'
   },
   userReviewingRecipe: {
     key: 'userReviewingRecipe'

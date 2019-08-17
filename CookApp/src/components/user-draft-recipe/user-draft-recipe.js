@@ -51,7 +51,7 @@ export default class UserDraftRecipe extends Component {
 
   renderDraftRecipe = (draftRecipe, index) => {
     const { draftRecipes } = this.state;
-    const blockStyles = (draftRecipes.length - 1) === index ? [CSS.block, {marginBottom: 15}] : CSS.block;
+    const blockStyles = (draftRecipes.length - 1) === index ? [CSS.block, {marginBottom: 20}] : CSS.block;
 
     return (
       <View style={CSS.frameWrap} key={draftRecipe.id}>
@@ -91,7 +91,7 @@ export default class UserDraftRecipe extends Component {
             message: `${LANG.DELETE_RECIPE_DRAFT_CONFIRM}`
           }}           
         />
-
+        <View style={{marginTop: 5}}></View>
         <FlatList 
           data = {draftRecipes}
           renderItem = {({item, index}) => this.renderDraftRecipe(item, index)}          

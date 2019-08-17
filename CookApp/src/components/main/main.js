@@ -51,7 +51,7 @@ import UpRecipeStep2 from '../up-recipe-step2/up-recipe-step2';
 import UpRecipeStep3 from '../up-recipe-step3/up-recipe-step3';
 import UserReviewingRecipe from '../user-reviewing-recipe/user-reviewing-recipe';
 import UserDraftRecipeReject from '../user-draft-recipe-reject/user-draft-recipe-reject';
-
+import UserDraftOrderDetail from '../user-draft-order-detail/user-draft-order-detail';
 
 const CollectionListScreen = {
   screen: CollectionList,
@@ -153,8 +153,8 @@ const PageRaingScreen = {
 const HomeStack = createStackNavigator({
   Home: {
     // screen: UserDraftOrders,
-    // screen: PageHome,
-    screen: UserReviewingRecipe,
+    screen: PageHome,
+    // screen: UserReviewingRecipe,
     // screen: UserDraftRecipeReject,
     navigationOptions: {
       header: null
@@ -311,7 +311,13 @@ const UserStack = createStackNavigator({
       title: `${LANG.ORDER_DRAFT}`,
       headerTitleStyle: styles.headerTitleStyle,
       headerLeft: <BackButton isGreen/>,
-       headerTitleContainerStyle: styles.headerTitleContainerStyle
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
+    }
+  },
+  [ROUTES.userDraftOrderDetail.key]: {
+    screen: UserDraftOrderDetail, 
+    navigationOptions: {
+      header: null
     }
   },
   [ROUTES.userReviewingRecipe.key]: {

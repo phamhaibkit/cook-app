@@ -10,6 +10,8 @@ import { CSS, COLOR, IMG } from '../../utils/variables';
 import { getCurrencyStr } from '../../utils/general';
 import { LANG } from '../../lang/lang';
 import ConfirmModal from '../../components/modal/confirm-modal';
+import navigationService from '../../services/navigation.service';
+import { ROUTES } from '../../utils/routes';
 
 const { width } = Dimensions.get('window');
 
@@ -97,57 +99,63 @@ export default class UserDraftOrders extends Component {
     });
   }
 
+  goToDetail = (draftOrder) => {
+    navigationService.navigate(ROUTES.userDraftOrderDetail.key, {draftOrder});
+  }
+
   renderDraftOrder = (draftOrder, index) => {
     const { draftOrders } = this.state;
-    const blockStyles = (draftOrders.length - 1) === index ? [CSS.block, {marginBottom: 15}] : CSS.block;
+    const blockStyles = (draftOrders.length - 1) === index ? [CSS.block, {marginBottom: 20}] : CSS.block;
 
     return (
-      <View style={CSS.frameWrap}  key={draftOrder.id}>
-        <View style={[blockStyles, CSS.lightBoxShadow]}>        
-          <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: COLOR.oldPrice, marginBottom: 6, textTransform: 'capitalize'}]}>{ draftOrder.billName }</Text>
-          <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-            <Image source={IMG.grayCalendar} style={CSS.calendarIcon}/>
-            <Text style={[CSS.fontQuiRegular, CSS.fontSize13, {color: '#767676'}]}>
-              {LANG.SAVED_DAY} 
-              <Text> { draftOrder.time }</Text>
-            </Text>
-          </View>
-          <View>
-            <Text style={styles.category}>{ LANG.DISH }</Text>
-            <View style={ CSS.flexRow }>
-              {this.renderBlockImages(draftOrder.recipes)}
-            </View>
-          </View>
-
-          <View>
-            <Text style={styles.category}>{ LANG.PRODUCT }</Text>
-            <View style={ CSS.flexRow }>
-              { this.renderBlockImages(draftOrder.products) }
-            </View>
-          </View>
-
-          <Image 
-            style={[CSS.w100, { height: 1, marginTop: 20, marginBottom: 15 }]} 
-            source={IMG.borderDot}
-            resizeMode="repeat"
-          />
-
-          <View style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
-              <Text style={[CSS.fontQuiBold, CSS.fontSize14, CSS.textUpperCase, {color: COLOR.oldPrice}]}>
-                {LANG.PROVISIONAL_SUMS}                 
+      <TouchableOpacity key={draftOrder.id} onPress={() => this.goToDetail(draftOrder)}>
+        <View style={CSS.frameWrap} >
+          <View style={[blockStyles, CSS.lightBoxShadow]}>        
+            <Text style={[CSS.fontQuiBold, CSS.fontSize14, { color: COLOR.oldPrice, marginBottom: 6, textTransform: 'capitalize'}]}>{ draftOrder.billName }</Text>
+            <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+              <Image source={IMG.grayCalendar} style={CSS.calendarIcon}/>
+              <Text style={[CSS.fontQuiRegular, CSS.fontSize13, {color: '#767676'}]}>
+                {LANG.SAVED_DAY} 
+                <Text> { draftOrder.time }</Text>
               </Text>
-              <Text style={[CSS.fontQuiBold, CSS.fontSize16,  {color: '#EE0000'}]}>{ getCurrencyStr(draftOrder.totalPrice) }</Text>
-          </View>
-        </View>
+            </View>
+            <View>
+              <Text style={styles.category}>{ LANG.DISH }</Text>
+              <View style={ CSS.flexRow }>
+                {this.renderBlockImages(draftOrder.recipes)}
+              </View>
+            </View>
 
-        <TouchableOpacity 
-          underlayColor="transparent"
-          style={CSS.closeBtn}
-          onPress={() => this.showConfirmModal(draftOrder.id)}
-        >
-          <Image source={IMG.clearInput} style={[CSS.w100, CSS.h100]}/>
-        </TouchableOpacity>
-      </View>
+            <View>
+              <Text style={styles.category}>{ LANG.PRODUCT }</Text>
+              <View style={ CSS.flexRow }>
+                { this.renderBlockImages(draftOrder.products) }
+              </View>
+            </View>
+
+            <Image 
+              style={[CSS.w100, { height: 1, marginTop: 20, marginBottom: 15 }]} 
+              source={IMG.borderDot}
+              resizeMode="repeat"
+            />
+
+            <View style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
+                <Text style={[CSS.fontQuiBold, CSS.fontSize14, CSS.textUpperCase, {color: COLOR.oldPrice}]}>
+                  {LANG.PROVISIONAL_SUMS}                 
+                </Text>
+                <Text style={[CSS.fontQuiBold, CSS.fontSize16,  {color: '#EE0000'}]}>{ getCurrencyStr(draftOrder.totalPrice) }</Text>
+            </View>
+          </View>
+
+          <TouchableOpacity 
+            underlayColor="transparent"
+            style={CSS.closeBtn}
+            onPress={() => this.showConfirmModal(draftOrder.id)}
+          >
+            <Image source={IMG.clearInput} style={[CSS.w100, CSS.h100]}/>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
     );
   }
 
@@ -164,6 +172,7 @@ export default class UserDraftOrders extends Component {
             message: `${LANG.DELETE_ORDER_DRAFT_CONFIRM}`
           }}           
         />
+        <View style={{marginTop: 5}}></View>
         <FlatList 
           data = {draftOrders}
           renderItem = {({item, index}) => this.renderDraftOrder(item, index)}          

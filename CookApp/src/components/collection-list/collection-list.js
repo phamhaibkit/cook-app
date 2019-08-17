@@ -25,7 +25,7 @@ export default class CollectionList extends Component {
     });
   }  
 
-  renderItem = ({ item }) => (<CollectionItem item={item} isVertical imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>);
+  renderItem = ({ item, index }) => (<CollectionItem item={item} isLastCard={index === (this.state.data.length - 1)} isVertical imgBgWrap={styles.imgBgWrap} blockMargin={styles.blockMargin}/>);
 
   render() {
     const { data }  = this.state;
@@ -34,7 +34,7 @@ export default class CollectionList extends Component {
 
     return  (
       <View style={styles.container}>
-       {
+       {         
          data &&
          <FlatList 
           data = {data}
