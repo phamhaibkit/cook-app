@@ -17,6 +17,7 @@ import collectionService from '../../services/collection.service';
 import { kFormatter, capitalize } from '../../utils/general';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
 import Spinner from '../spinner/spinner';
+import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
 
 export default class CollectionDetail extends Component {
   constructor(props) {
@@ -163,10 +164,12 @@ export default class CollectionDetail extends Component {
 
     const ads = {};
 
+    console.log('recipes from collection detail: ' + JSON.stringify(recipes));
+
     return this.state.loading ? (
           <Spinner />
         ) : (  
-        <ScrollView>
+        <HeaderScroll>
           <SwiperImage height={300} listItems={ collectionImages }/>
 
           <View style={styles.container}>
@@ -196,16 +199,19 @@ export default class CollectionDetail extends Component {
                 </View>
               </View>
               
-              <View style={styles.topRecipes}>
+              <View>
                 <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
-                <RecipeHighlightHome
-                  recipes={recipes}
-                  ads={ads}
-                />
+                {
+                  recipes &&
+                  <RecipeHighlightHome
+                    recipes={recipes}
+                    ads={ads}
+                  />
+                }
               </View>
             </View>
           </View>
-        </ScrollView>
+        </HeaderScroll>
     );
   }
 }

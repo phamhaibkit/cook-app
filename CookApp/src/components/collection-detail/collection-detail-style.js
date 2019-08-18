@@ -52,9 +52,6 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 1.714
   },
-  topRecipes: {
-    position: 'relative',
-  },
   frame: {
     height: frameHeight,
     width: frameWidth,

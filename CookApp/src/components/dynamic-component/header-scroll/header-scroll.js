@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, ScrollView } from 'react-native';
+import { View, Text, Animated, Platform } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 import BackButton from '../../back-button/back-button';
@@ -12,6 +13,7 @@ import { ROUTES } from '../../../utils/routes';
 const HEADER_HEIGHT = 50;
 const SWIPER_HEIGHT = 300;
 const OVERFLOW_HEIGHT = 90;
+const THRESHOLD_HEIGHT = HEADER_HEIGHT + OVERFLOW_HEIGHT;
 let scrollViewBottom;
 export class HeaderScroll extends Component {
   static propTypes = {
@@ -23,7 +25,8 @@ export class HeaderScroll extends Component {
     super(props);
     this.state = {
       scrollY: new Animated.Value(0),
-      isModalVisible: false
+      isModalVisible: false,
+      isChangeCartColor: false
     };
   }
 
@@ -55,15 +58,28 @@ export class HeaderScroll extends Component {
   }
 
   render() {
-    const { scrollY, isModalVisible } = this.state;
+    const { scrollY, isModalVisible, isChangeCartColor } = this.state;
     const { children, pageName, haveCart, colorDefault, borderWidthDefault, haveMore, isWhite, colorPageName, colorBorderDefault } = this.props;
-    const onScroll = Animated.event([{
-      nativeEvent: {
-        contentOffset: {
-          y: scrollY
+    const onScroll = Animated.event(
+      [{
+        nativeEvent: {
+          contentOffset: {
+            y: scrollY
+          }
+        }
+      }],
+      {
+        listener: (event) => {
+          if(Platform.OS === 'android') {
+            const offsetY = event.nativeEvent.contentOffset.y;
+            const isChangeCartColor = (offsetY >= THRESHOLD_HEIGHT) ? true : false;
+            this.setState({
+              isChangeCartColor
+            });
+          }
         }
       }
-    }]);
+    );
     const defaultInputRange = [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT];
 
     const backgroundColor = scrollY.interpolate({
@@ -95,7 +111,7 @@ export class HeaderScroll extends Component {
           <BackButton isGreen={!isWhite} />
           {pageName && <Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: colorPageName || '#fff' }]}>{pageName}</Text>}
           <View style={[{ minWidth: 26, height: 26 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
-            {haveCart ? <View><CartHome borderBottomWidth isTransparentHeader /></View> : <View />}
+            {haveCart ? <View><CartHome isChangeCartColor={isChangeCartColor} isTransparentHeader /></View> : <View />}
             {haveMore && <TouchableOpacity onPress={() => this.openReportBar()}><Animated.Text style={[{ color }, { fontSize: 26, paddingLeft: 10, marginTop: -8 }, CSS.fontNuExBold]}>...</Animated.Text></TouchableOpacity>}
           </View>
         </Animated.View>

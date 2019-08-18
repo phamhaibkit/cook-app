@@ -111,8 +111,7 @@ const ComboListScreen = {
 const CollectionDetailScreen = {
   screen: CollectionDetail,
   navigationOptions: {
-    headerLeft: <BackButton opacity={0} oppositeOpacity={1} />,
-    headerTransparent: true,
+    header: null
   }
 };
 
@@ -154,6 +153,8 @@ const HomeStack = createStackNavigator({
   Home: {
     // screen: UserDraftOrders,
     screen: PageHome,
+    // screen: CollectionDetail,
+    // screen: ComboDetail,
     // screen: UserReviewingRecipe,
     // screen: UserDraftRecipeReject,
     navigationOptions: {

@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, Button, TouchableHighlight, Image, Animated } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import _ from 'lodash';
 
 import styles from './combo-detail-style';
 import { IMG, CSS, COLOR } from '../../utils/variables';
 import { formatNumberWithDot, capitalize } from '../../utils/general';
 import SwiperImage from '../swiper-image/swiper-image';
-import { ScrollView } from 'react-native-gesture-handler';
 import MostSearched from '../most-searched/most-searched';
 import CustomCheckbox from '../../components/custom-checkbox/custom-checkbox';
 import GradientButton from '../../components/gradient-button/gradient-button';
 import IncreaterButtonWithNumber from '../increater-button-with-number/increater-button-with-number';
 import IncreaterButtonWithoutNumber from '../increater-button-without-number/increater-button-without-number';
-import BackButton from '../back-button/back-button';
-import CartHome from '../../components/cart-home/cart-home';
 import { LANG } from '../../lang/lang';
 import comboService from '../../services/combo.service';
 import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
 
-const HEADER_HEIGHT = 50;
 const SWIPER_HEIGHT = 300;
-const OVERFLOW_HEIGHT = 90;
 
 class IngredientCard extends Component {
   constructor(props) {
@@ -87,8 +83,7 @@ export default class ComboDetail extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      scrollY: new Animated.Value(0),
+    this.state = {      
       estimatePrice: 0,
       totalPrice: 0,
       mealQuantity: 1,
@@ -236,27 +231,10 @@ export default class ComboDetail extends Component {
   }
 
   render() {
-    let { data, mealQuantity, recipes, scrollY } = this.state;
-    const onScroll = Animated.event([{
-      nativeEvent: {
-        contentOffset: {
-          y: scrollY
-        }
-      }
-    }]);
-
-    const backgroundColor = scrollY.interpolate({
-      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
-      outputRange: ["transparent", "white"],
-      extrapolate: 'clamp',
-    });
-
-    const borderBottomWidth = scrollY.interpolate({
-      inputRange: [0, SWIPER_HEIGHT - HEADER_HEIGHT - OVERFLOW_HEIGHT],
-      outputRange: [0, 1],
-      extrapolate: 'clamp',
-    });
-
+    let { 
+      data, 
+      recipes, 
+    } = this.state;
 
     return (
       <View>
@@ -358,11 +336,14 @@ export default class ComboDetail extends Component {
             </View>
 
             <View style={[{ backgroundColor: COLOR.whiteColor }, styles.cookIntroductions]}>
-              <MostSearched
-                label={LANG.COOKING_INSTRUCTIONS}
-                data={this.state.recipes}
-                subData={true}
-              />
+              {
+                recipes &&
+                <MostSearched
+                  label={LANG.COOKING_INSTRUCTIONS}
+                  data={recipes}
+                  subData={true}
+                />
+              }
             </View>
           </View>
         </HeaderScroll>

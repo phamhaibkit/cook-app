@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from 'react-native';
+import { Image } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import Advertiment from '../advertiment/advertiment';
 import LikeCommentShare from '../like-comment-share/like-comment-share';
@@ -187,7 +188,7 @@ export default class RecipeHighlightHome extends Component {
             <View>
               <View style={isHorizontal ? styles.recipeView : styles.imgVer}>
                 <TouchableWithoutFeedback onPress={this.onPress}>
-                  <Image style={styles.recipeIMG} source={{ uri: item.recipeImage }} />
+                  <Image style={styles.recipeIMG} PlaceholderContent={<ActivityIndicator />} source={{ uri: item.recipeImage }} />
                 </TouchableWithoutFeedback>
               </View>
               <TouchableOpacity style={styles.containerChef}>

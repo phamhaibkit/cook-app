@@ -21,8 +21,8 @@ class CartHome extends Component {
   };
 
   render() {
-    const { count,  isTransparentHeader} = this.props;
-    const cartImg = Platform.OS === 'ios' ? IMG.cartHomeIos : IMG.cartHome;
+    const { count,  isTransparentHeader, isChangeCartColor} = this.props;
+    const cartImg = Platform.OS === 'ios' || isChangeCartColor === true ? IMG.cartHomeIos : IMG.cartHome;
     const cartNum = (Platform.OS === 'ios' || isTransparentHeader) ? COLOR.appNameIos : COLOR.redColor;
     
     return (
