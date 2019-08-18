@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
+import { ActivityIndicator, View, Text, Dimensions, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
 import { Image } from 'react-native-elements';
+
 import LinearGradient from 'react-native-linear-gradient';
 import _ from 'lodash';
 
@@ -73,7 +74,8 @@ export default class UserDraftOrders extends Component {
           <Image 
             source={{uri: e.recipeImage || e.productImage}} 
             style={imageStyles} 
-            key={index} 
+            key={index}
+            PlaceholderContent={<ActivityIndicator />} 
           />
         )
       }
