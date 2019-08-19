@@ -71,6 +71,7 @@ export const LANG_VN = {
   SKIP: 'Bỏ qua',
   USER_INFOR_PAGE_DES: 'Hãy cho chúng tôi biết về bạn để có thể phục vụ tốt hơn',
   ADD_TO_CART: 'Thêm vào giỏ hàng',
+  ADD_CART: 'Thêm vào giỏ',
   SAVE: 'lưu lại',
   ORDER_OWNER: 'người đặt',
   VIEW: 'xem',
@@ -151,4 +152,5 @@ export const LANG_VN = {
   SEE_THE_REASON: 'Xem lí do',
   WAITING_ACCEPT: 'Chờ duyệt',
   NAME_INGREDIENT: 'Tên nguyên liệu',
+  TRENDING: 'XU HƯỚNG'
 };

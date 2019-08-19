@@ -51,7 +51,7 @@ class PageHome extends Component {
     this.getCombos();
     this.getBestSellProducts();
     this.getFollowers(1);
-    this.getLikedRecipes(1);
+    this.getRecipeLikedList(1);
     this.getNewsEvents();
     this.getCart(1);
   }
@@ -118,7 +118,7 @@ class PageHome extends Component {
     })
   }
 
-  getLikedRecipes = (userId) => {
+  getRecipeLikedList = (userId) => {
     recipeService.getRecipeLikedList(userId).then(() => {
       this.setState({
         likeRecipes: recipeService.recipeLikedData
@@ -144,6 +144,9 @@ class PageHome extends Component {
       break;
     case LANG.RECIPE_HIGHLIGHT:
       navigationService.navigate(ROUTES.recipeHighlightList.key);
+      break;
+    case LANG.BEST_SELL:
+      navigationService.navigate('Store');
       break;
     case LANG.LIKED_RECIPE:
       navigationService.navigate(ROUTES.recipeLikedList.key);

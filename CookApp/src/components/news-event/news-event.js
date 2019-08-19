@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Image,
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
+import { Image } from 'react-native-elements';
 import Advertiment from '../advertiment/advertiment';
 import LikeCommentShare from '../like-comment-share/like-comment-share';
 import { IMG } from '../../utils/variables';

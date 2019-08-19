@@ -40,7 +40,6 @@ import NewsEventList from '../news-event-list/news-event-list';
 import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeDetail from '../recipe-detail/recipe-detail';
-import CartHome from '../../components/cart-home/cart-home';
 import RatingPage from '../page-rating/page-rating';
 import PostRecipe from '../post-recipe/post-recipe';
 import UserDraftRecipe from '../user-draft-recipe/user-draft-recipe';
@@ -64,16 +63,16 @@ const CollectionListScreen = {
   }
 };
 
-const RecipeHighlightListScreen = {
-  screen: RecipeHighlightList,
-  navigationOptions: {
-    title: LANG.RECIPE_HIGHLIGHT.name,
-    headerTitleStyle: styles.headerTitleStyle,
-    headerLeft: <BackButton isGreen />,
-    headerRight: <SearchButton />,
-    headerTitleContainerStyle: styles.headerTitleContainerStyle
-  }
-};
+// const RecipeHighlightListScreen = {
+//   screen: RecipeHighlightList,
+//   navigationOptions: {
+//     title: LANG.RECIPE_HIGHLIGHT.name,
+//     headerTitleStyle: styles.headerTitleStyle,
+//     headerLeft: <BackButton isGreen />,
+//     headerRight: <SearchButton />,
+//     headerTitleContainerStyle: styles.headerTitleContainerStyle
+//   }
+// };
 
 const RecipeLikedListScreen = {
   screen: RecipeLikedList,
@@ -81,7 +80,7 @@ const RecipeLikedListScreen = {
     title: LANG.LIKED_RECIPE.name,
     headerTitleStyle: styles.headerTitleStyle,
     headerLeft: <BackButton isGreen />,
-    headerRight: <SearchButton />,
+    // headerRight: <SearchButton />,
     headerTitleContainerStyle: styles.headerTitleContainerStyle
   }
 };
@@ -147,13 +146,12 @@ const PageRaingScreen = {
   navigationOptions: {
     header: null
   }
- }
+}
 
 const HomeStack = createStackNavigator({
   Home: {
     // screen: UserDraftOrders,
     screen: PageHome,
-    // screen: CollectionDetail,
     // screen: ComboDetail,
     // screen: UserReviewingRecipe,
     // screen: UserDraftRecipeReject,
@@ -163,7 +161,7 @@ const HomeStack = createStackNavigator({
   },
   Search: { screen: PageSearch },
   [ROUTES.collectionList.key]: CollectionListScreen,
-  [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
+  [ROUTES.recipeHighlightList.key]: { screen : RecipeHighlightList },
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.collectionDetail.key]: CollectionDetailScreen,
   [ROUTES.comboDetail.key]: ComboDetail,
@@ -174,10 +172,16 @@ const HomeStack = createStackNavigator({
   [ROUTES.recipeRating.key]: PageRaingScreen,
   [ROUTES.viewRating.key]: PageViewRatingScreen,
   [ROUTES.viewComment.key]: PageViewCommentScreen,
+  [ROUTES.pageSearchRecipe.key]: {
+    screen: PageSearchRecipe,
+    navigationOptions: {
+      header: null,
+    }
+  },
 });
 
 const StoreStack = createStackNavigator({
-  Store: {
+  [ROUTES.pageStore]: {
     screen: PageStore,
     navigationOptions: {
       header: null
@@ -196,7 +200,7 @@ const RecipeStack = createStackNavigator({
       header: null,
     }
   },
-  PageSearchRecipe: {
+  [ROUTES.pageSearchRecipe.key]: {
     screen: PageSearchRecipe,
     navigationOptions: {
       header: null,
@@ -205,7 +209,7 @@ const RecipeStack = createStackNavigator({
   [ROUTES.recipeDetail.key]: RecipeDetailScreen,
   [ROUTES.collectionDetail.key]: CollectionDetailScreen,
   [ROUTES.collectionList.key]: CollectionListScreen,
-  [ROUTES.recipeHighlightList.key]: RecipeHighlightListScreen,
+  [ROUTES.recipeHighlightList.key]: { screen : RecipeHighlightList },
   [ROUTES.comboList.key]: ComboListScreen,
   [ROUTES.pageReportRecipe.key]: PageReportRecipeScreen,
   [ROUTES.recipeRating.key]: PageRaingScreen,
@@ -386,7 +390,7 @@ const bottomTabNav = createBottomTabNavigator(
   {
     Home: {
       screen: HomeStack,
-      // screen: RecipeStack,
+      // screen: StoreStack,
       navigationOptions:
       {
         tabBarLabel: LANG.HOME

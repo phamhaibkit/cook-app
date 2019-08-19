@@ -20,7 +20,6 @@ export default StyleSheet.create({
     backgroundColor: COLOR.whiteColor,
     paddingHorizontal: CSS.padding15,
     paddingVertical: 8,
-    
   },
   advertisement: {
     marginTop: 30,

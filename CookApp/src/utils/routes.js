@@ -86,4 +86,10 @@ export const ROUTES = {
   upRecipeStep3: {
     key: 'upRecipeStep3'
   },
+  pageSearchRecipe: {
+    key: 'pageSearchRecipe'
+  },
+  pageStore: {
+    key: 'pageStore'
+  }
 };

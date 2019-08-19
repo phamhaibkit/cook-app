@@ -2,42 +2,40 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  ScrollView,
   FlatList,
   TouchableOpacity,
   ImageBackground,
   TouchableWithoutFeedback,
-  Image
+  // Image
 } from 'react-native';
-import styles from './product-list-home-style';
+import { Image } from 'react-native-elements';
+import styles from './product-list-style';
 import { LANG } from '../../lang/lang';
 import { getCurrencyStr } from '../../utils/general';
 import PlusSubsNumber from '../plus-subs-number/plus-subs-number';
 import { connect } from 'react-redux';
 import { increment, decrement } from '../../reducers/cart.reducer';
 import cartSerice from '../../services/cart.service';
+import productService from '../../services/product.service';
 
-class ProductListHome extends Component {
+class ProductList extends Component {
   constructor(props) {
     super(props);
-    const {data} = this.props;
-    this.numCols;
     this.state = {
-      data: data
+      data: []
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    const newData = nextProps.data;
-    newData && newData.map((item, index) => {
-      item.showAddCart = true;
-      item.number = 1;
-    });
-    this.numCols = newData.length % 2 === 0
-        ? newData.length / 2
-        : (newData.length + 1) / 2;
-    this.setState({
-      data : newData
+  componentWillMount() {
+    productService.getBestSellerProduct().then(() => {
+      const products = productService.bestSellerProduct.products;
+      products.map((item) => {
+        item.showAddCart = true;
+        item.number = 1;
+      });
+      this.setState({
+        data: products
+      })
     })
   }
 
@@ -76,7 +74,7 @@ class ProductListHome extends Component {
     })
   }
 
-  decrementCart= (product) => {
+  decrementCart = (product) => {
     const { data } = this.state;
     data && data.map((item, index) => {
       if (item.productId === product.productId) {
@@ -85,7 +83,7 @@ class ProductListHome extends Component {
           // console.log('ADD_TO_CART RESPONSE = ', cartSerice.addCartdata);
           this.props.decrement();
         })
-        if(item.number == 0){
+        if (item.number == 0) {
           item.showAddCart = true;
           return item;
         }
@@ -118,7 +116,7 @@ class ProductListHome extends Component {
               source={{ uri: 'https://www.laghim.vn/templates/laghim/images/vietgap.png' }}
             />
             <View style={styles.titleView}>
-              <Text numberOfLines={2} style={styles.title}>
+              <Text numberOfLines={3} style={styles.title}>
                 {item.productName}
               </Text>
             </View>
@@ -133,14 +131,14 @@ class ProductListHome extends Component {
           </View>
         </TouchableWithoutFeedback>
         {item.showAddCart ? (
-          <TouchableOpacity style={styles.addCart} onPress={() =>this.showAddNum(item, index)}>
-            <Text style={styles.addCartText}>{LANG.ADD_TO_CART}</Text>
+          <TouchableOpacity style={styles.addCart} onPress={() => this.showAddNum(item, index)}>
+            <Text style={styles.addCartText}>{LANG.ADD_CART}</Text>
           </TouchableOpacity>
         ) : (
-          <View style={{paddingLeft: 10}}>
-            <PlusSubsNumber number={item.number} incrementCart={() => this.incrementCart(item)} decrementCart={() => this.decrementCart(item)}/>
-          </View>
-        )}
+            <View style={styles.quantityView}>
+              <PlusSubsNumber number={item.number} incrementCart={() => this.incrementCart(item)} decrementCart={() => this.decrementCart(item)} />
+            </View>
+          )}
         <View style={styles.containerDiscount}>
           <View style={styles.discount}>
             <Text style={styles.discountText}>-{item.discount * 100 + '%'}</Text>
@@ -158,19 +156,15 @@ class ProductListHome extends Component {
     const { data } = this.state;
     return (
       <View style={styles.container}>
-      {this.numCols &&
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <FlatList
-            contentContainerStyle={{
-              alignSelf: 'flex-start'
-            }}
-            numColumns={this.numCols}
-            data={data}
-            renderItem={({ item, index }) => this.renderFrame(item, index)}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </ScrollView>
-      }
+        <FlatList
+          contentContainerStyle={{
+            alignSelf: 'flex-start'
+          }}
+          numColumns={2}
+          data={data}
+          renderItem={({ item, index }) => this.renderFrame(item, index)}
+          keyExtractor={(item, index) => index.toString()}
+        />
       </View>
     );
   }
@@ -181,4 +175,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect (mapStateToProps, {increment, decrement})(ProductListHome);
+export default connect(mapStateToProps, { increment, decrement })(ProductList);

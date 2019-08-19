@@ -65,7 +65,7 @@ export default class PageRecipe extends Component {
   }
 
   onPressSearch = () => {
-    navigationService.navigate('PageSearchRecipe');
+    navigationService.navigate(ROUTES.pageSearchRecipe.key);
   }
 
   viewMore = (type) => {
