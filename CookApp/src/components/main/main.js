@@ -151,7 +151,9 @@ const PageRaingScreen = {
 const HomeStack = createStackNavigator({
   Home: {
     // screen: UserDraftOrders,
+    // screen: UserDraftOrderDetail,
     screen: PageHome,
+    // screen: CollectionDetail,
     // screen: ComboDetail,
     // screen: UserReviewingRecipe,
     // screen: UserDraftRecipeReject,
@@ -297,8 +299,7 @@ const UserStack = createStackNavigator({
   [ROUTES.userProfile.key]: { 
     screen: UserProfile,
     navigationOptions: {
-      headerLeft: <BackButton />,
-      headerTransparent: true,
+      header:  null
     }
   },
   [ROUTES.userDraftRecipe.key]: {
@@ -307,7 +308,8 @@ const UserStack = createStackNavigator({
       title: `${LANG.RECIPE_DRAFT}`,
       headerTitleStyle: styles.headerTitleStyle,
       headerLeft: <BackButton isGreen/>,
-       headerTitleContainerStyle: styles.headerTitleContainerStyle
+      headerRight: <View></View>,
+      headerTitleContainerStyle: styles.headerTitleContainerStyle
     }
   },
   [ROUTES.userDraftOrder.key]: {

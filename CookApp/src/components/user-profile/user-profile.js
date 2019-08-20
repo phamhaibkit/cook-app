@@ -8,112 +8,23 @@ import { LANG } from '../../lang/lang';
 import { ROUTES } from '../../utils/routes';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
 import navigationService from '../../services/navigation.service';
+import recipeService from '../../services/recipe.service';
+import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
  
 export default class UserProfile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipes:  [
-          {
-            owner: {
-              name: "Nguyễn Thị A",
-              rank: 12,
-              id: 1,
-              avatar: "http://ttol.vietnamnetjsc.vn//2016/04/02/16/46/nhung-uan-khuc-trong-vu-co-gai-xinh-dep-tung-anh-to-chong-cu-bao-hanh_1.jpg"
-            },
-            shareCount: 25,
-            numberEvaluate: 12,
-            timeExecute: "30 phút",
-            recipeImage: "https://i.ytimg.com/vi/IRKgCXdOE3o/maxresdefault.jpg",
-            price: 90000,
-            name: "Cá Lóc Kho Tiêu",
-            numPeople: 2,
-            likeCount: 25,
-            id: 1,
-            viewCount: 100,
-            calo: 3000
-          },
-          {
-            owner: {
-            name: "Phan Thị T",
-            rank: 13,
-            id: 2,
-            avatar: "https://genknews.genkcdn.vn/thumb_w/690/2019/5/7/phong-cach-thoi-trang-goi-cam-cua-4-my-nhan-2-15572434664761630321762.jpg"
-            },
-            shareCount: 5,
-            numberEvaluate: 2,
-            timeExecute: "60 phút",
-            recipeImage: "https://i.cachnaumonan.com/wp-content/uploads/2018/08/cach-lam-mon-suon-heo-nau-lagu-4.jpg",
-            price: 90000,
-            name: "Sườn heo hầm rau củ",
-            numPeople: 2,
-            likeCount: 5,
-            id: 2,
-            viewCount: 10,
-            calo: 3000
-          },
-          {
-            owner: {
-            name: "Phan Thị T",
-            rank: 13,
-            id: 2,
-            avatar: "https://genknews.genkcdn.vn/thumb_w/690/2019/5/7/phong-cach-thoi-trang-goi-cam-cua-4-my-nhan-2-15572434664761630321762.jpg"
-            },
-            shareCount: 52,
-            numberEvaluate: 28,
-            timeExecute: "60 phút",
-            recipeImage: "http://file.freshfoods.vn/global/sn-nng-mt-ong.jpg",
-            price: 190000,
-            name: "Sườn bò sốt BBQ",
-            numPeople: 2,
-            likeCount: 53,
-            id: 4,
-            viewCount: 100,
-            calo: 3000
-          },
-          {
-            owner: {
-            name: "Trần Thị T",
-            rank: 13,
-            id: 7,
-            avatar: "https://photo-2-baomoi.zadn.vn/w1000_r1/2019_01_25_329_29473537/097a1d26bc6755390c76.jpg"
-            },
-            shareCount: 52,
-            numberEvaluate: 28,
-            timeExecute: "60 phút",
-            recipeImage: "https://www.heoquay.com/upload/blog/heo-quay-xao-cai-chua-4.png",
-            price: 100000,
-            name: "Heo quay kho dưa cải",
-            numPeople: 2,
-            likeCount: 53,
-            id: 5,
-            viewCount: 100,
-            calo: 3000
-          },
-          {
-            owner: {
-            name: "Trần Thị T",
-            rank: 13,
-            id: 7,
-            avatar: "https://photo-2-baomoi.zadn.vn/w1000_r1/2019_01_25_329_29473537/097a1d26bc6755390c76.jpg"
-            },
-            shareCount: 52,
-            numberEvaluate: 28,
-            timeExecute: "150 phút",
-            recipeImage: "https://flyfood.vn/vnt_upload/product/11_2017/lau-vit-nau-chao-flyfood-10.png",
-            price: 100000,
-            name: "Vịt nấu chao",
-            numPeople: 2,
-            likeCount: 53,
-            id: 6,
-            viewCount: 100,
-            calo: 3000
-          }
-        ]
-    };
-    data: {
-      chefName: 'Nguyễn phạm hạ Vy'
+      recipes: []
     }
+  }
+
+  componentWillMount() {
+    recipeService.getRecipeLikedList(1).then(() => {
+      this.setState({
+        recipes: recipeService.recipeLikedData.recipes
+      })
+    })
   }
 
   navigateUserInfo = () => {
@@ -121,9 +32,13 @@ export default class UserProfile extends Component {
   }
   
   render() {
+    const { recipes } = this.state;
     return (
-     <View style={{flex: 1}}>      
-      <ScrollView>
+      <HeaderScroll>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
         <Image source={{uri: 'https://media.cooky.vn/images/blog-2016/r1-1486524356412.jpg'}} style={{width: '100%', height: 220}} />
         <View style={styles.container}>
           <View style={[styles.userInfo, CSS.lightBoxShadow]}>
@@ -188,12 +103,10 @@ export default class UserProfile extends Component {
             </View>
           </View>
           <Text style={[CSS.textUpperCase, CSS.fontNuExBold, CSS.fontSize15, {color: '#444', marginTop: 30, marginBottom: 10}]}>{LANG.POSTED_RECIPE}</Text>
-          <RecipeHighlightHome
-            recipes={this.state.recipes}
-          />
+          <RecipeHighlightHome recipes={recipes} isLiked/>
         </View>
       </ScrollView>
-     </View>
+    </HeaderScroll>
     );
   }
 }

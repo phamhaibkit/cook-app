@@ -7,6 +7,7 @@ import { CSS, COLOR, IMG } from '../../utils/variables';
 import { LANG } from '../../lang/lang';
 import userService from '../../services/user.service';
 import ConfirmModal from '../../components/modal/confirm-modal';
+import Spinner from '../spinner/spinner';
 
 export default class UserDraftRecipe extends Component {
   constructor(props) {
@@ -78,26 +79,32 @@ export default class UserDraftRecipe extends Component {
   }
 
   render() {
-    const { draftRecipes, modalVisible } = this.state;
+    const { draftRecipes, modalVisible, loading } = this.state;
     console.log('draftRecipes ', draftRecipes);
 
     return (
       <View style={CSS.draftContainer}>
-        <ConfirmModal
-          modalVisible={modalVisible}
-          onPressDelete={this.handleDeleteConfirm}
-          content={{
-            title: `${LANG.DELETE_RECIPE_DRAFT}`,
-            message: `${LANG.DELETE_RECIPE_DRAFT_CONFIRM}`
-          }}           
-        />
-        <View style={{marginTop: 5}}></View>
-        <FlatList 
-          data = {draftRecipes}
-          renderItem = {({item, index}) => this.renderDraftRecipe(item, index)}          
-          keyExtractor={(item) => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-        />
+        {
+          loading ? <Spinner /> :(
+            <View>
+              <ConfirmModal
+                modalVisible={modalVisible}
+                onPressDelete={this.handleDeleteConfirm}
+                content={{
+                  title: `${LANG.DELETE_RECIPE_DRAFT}`,
+                  message: `${LANG.DELETE_RECIPE_DRAFT_CONFIRM}`
+                }}           
+              />
+              <View style={{marginTop: 5}}></View>
+              <FlatList 
+                data = {draftRecipes}
+                renderItem = {({item, index}) => this.renderDraftRecipe(item, index)}          
+                keyExtractor={(item) => item.id.toString()}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+          )
+        }
       </View>
     );
   }

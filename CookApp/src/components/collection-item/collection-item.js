@@ -3,7 +3,8 @@ import React, { PureComponent } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import _ from 'lodash';
 
-import { Text, View, Image, TouchableWithoutFeedback, ImageBackground, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableWithoutFeedback, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Image } from 'react-native-elements';
 import { IMG } from '../../utils/variables';
 import styles from './collection-item-style';
 import { COLOR, CSS } from '../../utils/variables';
@@ -11,14 +12,28 @@ import { LANG } from '../../lang/lang';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import Advertiment from '../advertiment/advertiment';
+import homeService from '../../services/home.service';
 import { kFormatter, capitalize } from '../../utils/general';
 
 class CollectionItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state={
-      item: props.item
+      item: props.item,
+      ads: homeService.adsData,
     }
+  }
+
+  componentDidMount(){
+    this.getAds();
+  }
+
+  getAds = () => {
+    homeService.getAds().then(() => {
+      this.setState({
+        ads: homeService.adsData
+      })
+    })
   }
 
   handlePress = () => {  
@@ -36,17 +51,24 @@ class CollectionItem extends PureComponent {
       item: itemClone
     })
   }
+
+  renderAds = () => {
+    const { isVertical } = this.props;
+    if(isVertical) return 
+    <Image source={{uri: 'https://thietkewebshop.vn/media/wysiwyg/thiet-ke-web-thuc-pham-sach.jpg'}} style={{width: '100%', height: 120}} PlaceholderContent={<ActivityIndicator />}/>
+  }
   
   render() {
     let { 
       item, 
       imgBgWrap, 
       blockMargin, 
-      ads,
       onPressSave, 
       isVertical,
       isLastCard
     } = this.props;
+
+    const { ads } = this.state;
 
     console.log('isLastCard: ' + isLastCard);
 
@@ -101,11 +123,11 @@ class CollectionItem extends PureComponent {
           </TouchableOpacity>
         </View>
         
-        {/* <View>
+        <View>
           {
-            isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
+            this.renderAds()
           }
-        </View> */}
+        </View>
        </View>
     );
   }

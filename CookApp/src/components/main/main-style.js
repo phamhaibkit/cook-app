@@ -49,7 +49,12 @@ export default StyleSheet.create({
   headerTitleStyle: {
     fontSize: 16,
     fontFamily: CSS.fontBold,
-    color: "#001D12"
+    color: "#001D12",
+    alignSelf: 'center',
+    textAlign: 'center',
+    justifyContent: "center",
+    flex: 1,
+   
   },
   headerTitleContainerStyle: {
     flex: 1,

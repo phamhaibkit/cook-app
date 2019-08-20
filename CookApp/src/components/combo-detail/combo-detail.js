@@ -337,7 +337,7 @@ export default class ComboDetail extends Component {
 
             <View style={[{ backgroundColor: COLOR.whiteColor }, styles.cookIntroductions]}>
               {
-                recipes &&
+                !!recipes &&
                 <MostSearched
                   label={LANG.COOKING_INSTRUCTIONS}
                   data={recipes}

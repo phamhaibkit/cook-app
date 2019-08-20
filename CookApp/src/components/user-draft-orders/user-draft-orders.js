@@ -13,6 +13,7 @@ import { LANG } from '../../lang/lang';
 import ConfirmModal from '../../components/modal/confirm-modal';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
+import Spinner from '../spinner/spinner';
 
 const { width } = Dimensions.get('window');
 
@@ -162,25 +163,31 @@ export default class UserDraftOrders extends Component {
   }
 
   render() {
-    const { draftOrders, modalVisible } = this.state;
+    const { draftOrders, modalVisible, loading } = this.state;
 
     return (
       <View style={CSS.draftContainer}>
-         <ConfirmModal
-          modalVisible={modalVisible}
-          onPressDelete={this.handleDeleteConfirm}
-          content={{
-            title: `${LANG.DELETE_ORDER_DRAFT}`,
-            message: `${LANG.DELETE_ORDER_DRAFT_CONFIRM}`
-          }}           
-        />
-        <View style={{marginTop: 5}}></View>
-        <FlatList 
-          data = {draftOrders}
-          renderItem = {({item, index}) => this.renderDraftOrder(item, index)}          
-          keyExtractor={(item) => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-        />
+        {
+           loading ? <Spinner /> :(
+            <View>
+              <ConfirmModal
+                modalVisible={modalVisible}
+                onPressDelete={this.handleDeleteConfirm}
+                content={{
+                  title: `${LANG.DELETE_ORDER_DRAFT}`,
+                  message: `${LANG.DELETE_ORDER_DRAFT_CONFIRM}`
+                }}           
+              />
+              <View style={{marginTop: 5}}></View>
+              <FlatList 
+                data = {draftOrders}
+                renderItem = {({item, index}) => this.renderDraftOrder(item, index)}          
+                keyExtractor={(item) => item.id.toString()}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+          )
+        }
       </View>
     );
   }

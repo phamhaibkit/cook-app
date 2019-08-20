@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ScrollView
+  ActivityIndicator
 } from 'react-native';
 
 import { IMG, CSS, COLOR, CONST } from '../../utils/variables';
@@ -201,13 +201,7 @@ export default class CollectionDetail extends Component {
               
               <View>
                 <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
-                {
-                  recipes &&
-                  <RecipeHighlightHome
-                    recipes={recipes}
-                    ads={ads}
-                  />
-                }
+                <RecipeHighlightHome recipes={recipes} isLiked/>
               </View>
             </View>
           </View>
