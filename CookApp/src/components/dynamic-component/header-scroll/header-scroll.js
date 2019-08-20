@@ -70,13 +70,11 @@ export class HeaderScroll extends Component {
       }],
       {
         listener: (event) => {
-          if(Platform.OS === 'android') {
-            const offsetY = event.nativeEvent.contentOffset.y;
-            const isChangeCartColor = (offsetY >= THRESHOLD_HEIGHT) ? true : false;
-            this.setState({
-              isChangeCartColor
-            });
-          }
+          const offsetY = event.nativeEvent.contentOffset.y;
+          const isChangeCartColor = (offsetY >= THRESHOLD_HEIGHT);
+          this.setState({
+            isChangeCartColor
+          });
         }
       }
     );

@@ -51,7 +51,7 @@ export default class RecipeHighlightHome extends Component {
 
   onPress = (item) => {
     console.log(item, 'item')
-    navigationService.navigate(ROUTES.recipeDetail.key, { id: item.id});
+    navigationService.navigate(ROUTES.recipeDetail.key, { id: item.id}, item.name);
   };
 
   onShare = (recipe) => {

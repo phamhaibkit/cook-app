@@ -83,7 +83,7 @@ export default class ContainerScroll extends Component {
           <View style={{ marginTop: HEADER_MIN_HEIGHT - 5 }}>{this.props.children}</View>
         </ScrollView>
         <View style={styles.cartView}>
-          <CartHome />
+          <CartHome isChangeCartColor={Platform.OS === 'ios'} isTransparentHeader={Platform.OS === 'ios'} />
         </View>
       </View>
     );

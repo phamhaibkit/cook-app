@@ -74,7 +74,6 @@ export default class RecipeDetail extends Component {
 
   componentDidMount() {
     const { navigation } = this.props;
-    console.log(navigation, 'navigation');
     const id = navigation.getParam('id', 1);
     recipeService.getRecipeDetail(id).then(() => {
       const recipeDetail = { ...recipeService.recipeDetail };
@@ -166,7 +165,6 @@ export default class RecipeDetail extends Component {
   }
 
   renderOwner = (chef) => {
-    console.log(chef, 'chef');
     return (chef && chef.owner && <View style={[styles.ownerStyles, CSS.flexRow, CSS.alignItemsCenter, CSS.justifySpaceBetween]}>
       <View style={styles.containerChef}>
         <ImageProfile user={chef.owner} widthImage={56} />
