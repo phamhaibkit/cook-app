@@ -6,7 +6,7 @@ import { CSS } from '../../utils/variables';
 
 export default class Header extends Component {
   static propTypes = {
-    prop: PropTypes
+    // prop: PropTypes
   }
 
   render() {

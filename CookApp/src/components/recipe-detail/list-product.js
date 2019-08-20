@@ -12,7 +12,7 @@ import IncreaterButtonWithoutNumber from '../increater-button-without-number/inc
 
 export default class ListProduct extends Component {
   static propTypes = {
-    prop: PropTypes
+    // prop: PropTypes
   }
 
   constructor(props) {
