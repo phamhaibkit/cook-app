@@ -74,7 +74,7 @@ export default class NewsEvent extends Component {
             </TouchableWithoutFeedback>
             <LikeCommentShare item={item} notMarginTop notSave onShare={this.onShare} onLove={this.onPressLove}/>
           </View>
-          {/* {isVertical && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={20}/>} */}
+          {isVertical && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={20}/>}
         </View>
       )
     })

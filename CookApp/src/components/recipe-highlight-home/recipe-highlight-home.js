@@ -200,7 +200,7 @@ export default class RecipeHighlightHome extends Component {
 
             <LikeCommentShare item={item} onLove={this.onPressLove} onComment={this.onComment} onShare={this.onShare} onSave={this.onPressSave} />
           </View>
-          {/* {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>} */}
+          {!isHorizontal && (index + 1) % 2 === 0 && <Advertiment data={ads} marginTop={10}/>}
         </View>
       )
     });
