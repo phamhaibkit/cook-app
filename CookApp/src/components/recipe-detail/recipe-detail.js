@@ -631,7 +631,8 @@ const styles = StyleSheet.create({
   detailRate: {
     alignItems: 'stretch',
     justifyContent: 'space-between',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingLeft: 10
   },
   rowCommentRate: {
     paddingBottom: 15,
