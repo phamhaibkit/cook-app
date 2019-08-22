@@ -8,6 +8,7 @@ import SwiperImage from '../swiper-image/swiper-image';
 import { CSS, IMG } from '../../utils/variables';
 import { LANG_VN } from '../../lang/lang-vn';
 import recipeService from '../../services/recipe.service';
+import navigationService from '../../services/navigation.service';
 
 const { height, width } = Dimensions.get('window');
 export default class RatingPage extends Component {
@@ -100,7 +101,7 @@ export default class RatingPage extends Component {
       comment,
     };
     recipeService.sendRecipeRating(params).then((res) => {
-      console.log(res, 'successful');
+      navigationService.goBack();
     });
   }
 
