@@ -187,7 +187,7 @@ export default class RecipeHighlightHome extends Component {
 
             <View>
               <View style={isHorizontal ? styles.recipeView : styles.imgVer}>
-                <TouchableWithoutFeedback onPress={this.onPress}>
+                <TouchableWithoutFeedback onPress={()=>this.onPress(item)}>
                   <Image style={styles.recipeIMG} PlaceholderContent={<ActivityIndicator />} source={{ uri: item.recipeImage }} />
                 </TouchableWithoutFeedback>
               </View>
