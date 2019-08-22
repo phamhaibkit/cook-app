@@ -4,8 +4,11 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ActivityIndicator
 } from 'react-native';
+
+import { Image } from 'react-native-elements';
 
 import styles from './combo-item-style';
 import { LANG } from '../../lang/lang';
@@ -13,12 +16,27 @@ import { CSS } from '../../utils/variables';
 import navigationService from '../../services/navigation.service';
 import { ROUTES } from '../../utils/routes';
 import { kFormatter } from '../../utils/general';
+import homeService from '../../services/home.service';
 import Advertiment from '../advertiment/advertiment';
 
 export default class ComboItem extends PureComponent {
 	constructor(props) {
 		super(props);
-    this.state = {}; 
+    this.state = {
+      ads: homeService.adsData,
+    }; 
+  }
+
+  componentDidMount(){
+    this.getAds();
+  }
+
+  getAds = () => {
+    homeService.getAds().then(() => {
+      this.setState({
+        ads: homeService.adsData
+      })
+    })
   }
   
   handlePress = () => {  
@@ -27,7 +45,7 @@ export default class ComboItem extends PureComponent {
   }
 
 	renderFrame = (item, index) => {
-    const { isVertical, ads } = this.props;
+    const { isVertical } = this.props;
  
     const styleFrame = isVertical ? [styles.frame, styles.frameVertical] : styles.frame;
     const styleEndFrame = isVertical ? [...styleFrame, styles.endFrameVertical] : [styleFrame, styles.endFrame];
@@ -55,9 +73,10 @@ export default class ComboItem extends PureComponent {
     return (
       <View>
         <View style={endStyle}>{combo}</View>
-        {/* {
-          isVertical && (item.id + 1) % 3 === 0 && (<Advertiment data={ads} marginTop={15}/>)     
-        } */}
+        {
+          // isVertical && (item.id + 1) % 2 === 0 && <Image source={{uri: 'https://vnseo.edu.vn/ads.jpg'}} style={{width: '100%', height: 120, marginTop: 10}} PlaceholderContent={<ActivityIndicator />}/>          
+          isVertical && (item.id + 1) % 2 === 0 && ads && <Advertiment data={ads} marginTop={10}/>
+        }
       </View>
     )
   };
@@ -188,7 +207,8 @@ export default class ComboItem extends PureComponent {
 
 	render() {
     const { item, index } = this.props;	
+    const { ads } = this.state;
    
-		return this.renderFrame(item, index);		
+		return this.renderFrame(item, index, ads);		
 	}
 }

@@ -15,11 +15,11 @@ const userDraftOrders = {
 }
 
 const waitingReviewRecipes = {
-  loading: true
+  reviewRecipeLoading: true
 }
 
 const userRejectRecipes = {
-  loading: true
+  rejectRecipeloading: true
 }
 
 class UserService {
@@ -84,13 +84,13 @@ class UserService {
 
   getWaitingReviewRecipes = (userId) => {
     const url = API.USER_WAITING_REVIEW_RECIPES(userId);
-    this.waitingReviewRecipes.loading = true;
+    this.waitingReviewRecipes.reviewRecipeLoading = true;
 
     return HTTPService.get(url,null,null)
       .then(data => {
         this.waitingReviewRecipes = _.cloneDeep({
           waitingReviewRecipes: data,
-          loading: false,
+          reviewRecipeLoading: false,
         });
       })
       .catch(err => {
@@ -100,13 +100,13 @@ class UserService {
 
   getUserRejectRecipes = (userId) => {
     const url = API.USER_REJECT_RECIPES(userId);
-    this.userRejectRecipes.loading = true;
+    this.userRejectRecipes.rejectRecipeloading = true;
 
     return HTTPService.get(url,null,null)
       .then(data => {
         this.userRejectRecipes = _.cloneDeep({
           userRejectRecipes: data,
-          loading: false,
+          rejectRecipeloading: false,
         });
       })
       .catch(err => {

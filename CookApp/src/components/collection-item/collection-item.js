@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import _ from 'lodash';
 
-import { Text, View, TouchableWithoutFeedback, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Image } from 'react-native-elements';
+import { Text, View, TouchableWithoutFeedback, ImageBackground, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+// import { Image } from 'react-native-elements';
 import { IMG } from '../../utils/variables';
 import styles from './collection-item-style';
 import { COLOR, CSS } from '../../utils/variables';
@@ -50,12 +50,6 @@ class CollectionItem extends PureComponent {
     this.setState({
       item: itemClone
     })
-  }
-
-  renderAds = () => {
-    const { isVertical } = this.props;
-    if(isVertical) return 
-    <Image source={{uri: 'https://thietkewebshop.vn/media/wysiwyg/thiet-ke-web-thuc-pham-sach.jpg'}} style={{width: '100%', height: 120}} PlaceholderContent={<ActivityIndicator />}/>
   }
   
   render() {
@@ -122,12 +116,10 @@ class CollectionItem extends PureComponent {
             <Image style={styles.saveIcon} source={iconSave}/>
           </TouchableOpacity>
         </View>
-        
-        <View>
-          {
-            this.renderAds()
-          }
-        </View>
+        {
+          // isVertical && (item.id + 1) % 2 === 0 && (<Image source={{uri: 'https://vnseo.edu.vn/ads.jpg'}} style={{width: '100%', height: 120, marginTop: 10}} PlaceholderContent={<ActivityIndicator />}/>)
+          isVertical && (item.id + 1) % 2 === 0 && ads && <Advertiment data={ads} marginTop={10}/>
+        }        
        </View>
     );
   }

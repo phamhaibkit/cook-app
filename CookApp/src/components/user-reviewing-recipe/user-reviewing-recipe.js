@@ -22,8 +22,8 @@ class WaitingReviewRecipe extends Component {
     }
   }
   
-  renderFrame = (recipes) => {
-    if(!recipes.loading){
+  renderFrame = (recipes, reviewRecipeLoading) => {
+    if(reviewRecipeLoading === false){
       return recipes.map((item, index) => { 
         const lastCardStyle = index === recipes.length - 1 ? { marginBottom: 20 } : {};
         return <ReviewRecipeItem 
@@ -60,11 +60,11 @@ class WaitingReviewRecipe extends Component {
   };
 
   render(){
-    const { recipes } = this.props;
+    const { recipes, reviewRecipeLoading } = this.props;
     return (
       <View>
         {
-          !!recipes.loading ? <Spinner /> :
+          !!reviewRecipeLoading ? <Spinner /> :
           <View>
             <ScrollView 
               showsHorizontalScrollIndicator={false}
@@ -74,7 +74,7 @@ class WaitingReviewRecipe extends Component {
                 <Image source={IMG.stickNote} style={{width: 18, height: 18, marginRight: 5}}/>
                 <Text style={[CSS.textAlignJustify, {flex: 9}]}>{LANG.WAITING_NOTE}</Text>        
               </View>
-              { this.renderFrame(recipes) }
+              { this.renderFrame(recipes, reviewRecipeLoading) }
             </ScrollView>
             <Modal
               isVisible={this.state.isModalVisible}
@@ -119,8 +119,8 @@ class RejectRecipe extends Component {
     navigationService.navigate(ROUTES.userDraftRecipeReject.key, { item })
   }
   
-  renderFrame = (recipes) => {
-    if(!recipes.loading){
+  renderFrame = (recipes, rejectRecipeloading) => {
+    if(rejectRecipeloading === false){
       return recipes.map((item, index) => { 
         const lastCardStyle = index === recipes.length - 1 ? { marginBottom: 20 } : {};
         return <ReviewRecipeItem 
@@ -155,11 +155,11 @@ class RejectRecipe extends Component {
   };
 
   render(){
-   const { recipes } = this.props;
+   const { recipes, rejectRecipeloading } = this.props;
 
     return (<View style={CSS.draftContainer}>   
       {
-        !!recipes.loading ? <Spinner /> :
+        !!rejectRecipeloading ? <Spinner /> :
         (
           <View>
              <ScrollView 
@@ -167,7 +167,7 @@ class RejectRecipe extends Component {
               showsVerticalScrollIndicator={false}
             >
               <View style={{marginTop: 5}}></View>
-              { this.renderFrame(recipes) }
+              { this.renderFrame(recipes, rejectRecipeloading) }
             </ScrollView>
             <Modal
               isVisible={this.state.isModalVisible}
@@ -199,8 +199,8 @@ export default class UserReviewingRecipe extends Component {
   constructor(props){
     super(props);
     this.state = {
-      waitingReviewRecipes: userService.waitingReviewRecipes,
-      userRejectRecipes: userService.userRejectRecipes
+      ...userService.waitingReviewRecipes,
+      ...userService.userRejectRecipes
     }
   }
 
@@ -227,7 +227,7 @@ export default class UserReviewingRecipe extends Component {
 
 
   render() {
-    const { waitingReviewRecipes, userRejectRecipes } = this.state;
+    const { waitingReviewRecipes, userRejectRecipes, reviewRecipeLoading, rejectRecipeloading } = this.state;
     return (
       <ScrollableTabView 
         tabBarActiveTextColor ={COLOR.greenColor} 
@@ -237,8 +237,8 @@ export default class UserReviewingRecipe extends Component {
         tabStyle={[{borderWidth: 0, borderColor: '#fff', paddingBottom: 0}]}        
         underlineStyle={{borderColor: 0, borderColor: '#fff'}}
       >
-        <WaitingReviewRecipe tabLabel={LANG.WAITING_ACCEPT} recipes={waitingReviewRecipes}/>
-        <RejectRecipe tabLabel={LANG.REJECT} recipes={userRejectRecipes}/>
+        <WaitingReviewRecipe tabLabel={LANG.WAITING_ACCEPT} reviewRecipeLoading={reviewRecipeLoading} recipes={waitingReviewRecipes}/>
+        <RejectRecipe tabLabel={LANG.REJECT} rejectRecipeloading={rejectRecipeloading} recipes={userRejectRecipes}/>
       </ScrollableTabView>
     );
   }
