@@ -261,7 +261,8 @@ export const CSS = {
   },
   backIconStyle: {
     width: 26,
-    height: 16
+    height: 16,
+    position: 'absolute'
   },
   pendingStatus: {
     paddingVertical: 2,
