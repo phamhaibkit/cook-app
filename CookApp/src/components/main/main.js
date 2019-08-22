@@ -318,6 +318,7 @@ const UserStack = createStackNavigator({
       title: `${LANG.ORDER_DRAFT}`,
       headerTitleStyle: styles.headerTitleStyle,
       headerLeft: <BackButton isGreen/>,
+      headerRight: <View></View>,
       headerTitleContainerStyle: styles.headerTitleContainerStyle
     }
   },
@@ -333,6 +334,7 @@ const UserStack = createStackNavigator({
       title: `${LANG.RECIPE_WAITING}`,
       headerTitleStyle: styles.headerTitleStyle,
       headerLeft: <BackButton isGreen />,
+      headerRight: <View></View>,
       headerTitleContainerStyle: styles.headerTitleContainerStyle
     }
   },
@@ -342,6 +344,7 @@ const UserStack = createStackNavigator({
       title: `${LANG.REJECT_POST}`,
       headerTitleStyle: [styles.headerTitleStyle, CSS.textCapitalize],
       headerLeft: <BackButton isGreen />,
+      headerRight: <View></View>,
       headerTitleContainerStyle: styles.headerTitleContainerStyle
     }
   }
