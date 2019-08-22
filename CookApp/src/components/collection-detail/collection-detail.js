@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  TouchableHighlight,
   ActivityIndicator
 } from 'react-native';
 
@@ -18,12 +19,15 @@ import { kFormatter, capitalize } from '../../utils/general';
 import RecipeHighlightHome from '../recipe-highlight-home/recipe-highlight-home';
 import Spinner from '../spinner/spinner';
 import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
+import recipeService from '../../services/recipe.service';
 
 export default class CollectionDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...collectionService.collectionDetail
+      ...collectionService.collectionDetail,
+      isSavedByUser: 'false',
+      savedCount: 0
     };    
   }
 
@@ -33,120 +37,31 @@ export default class CollectionDetail extends Component {
         ...collectionService.collectionDetail
       });
     });
+    recipeService.getRecipeLikedList(1).then(() => {
+      this.setState({
+        recipes: recipeService.recipeLikedData.recipes
+      })
+    })
   }
 
   componentDidMount () { 
     const { navigation } = this.props;
     const id = navigation.getParam('id', 1);     
-    this.getCollectionDetail(id);
+    this.getCollectionDetail(1);
   }
 
-  renderFrame = (item, index) => {
-    const  { recipes }  = this.state;
-    const endStyle =
-      recipes.length - 1 === index
-        ? [styles.frame, styles.endFrame]
-        : styles.frame;
-    const iconLove = item.isLove ? IMG.loveActiveHome : IMG.loveHome;
-    return (
-      <View style={endStyle}>
-        <View style={styles.containerTitle}>
-          <TouchableOpacity style={styles.titleView} onPress={this.onPress}>
-            <Text numberOfLines={1} style={styles.titleText}>
-              { item.name }
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.reportView}>
-            <Image style={styles.dotImg} source={IMG.reportHome} />
-          </TouchableOpacity>
-        </View>
+  handleSave = () => {
+    let { isSavedByUser, savedCount } = this.state;
+    let tempVariable = JSON.parse(isSavedByUser);
 
-        <View style={styles.containerTimePrice}>
-          <View style={styles.priceView}>
-            <Image style={styles.sandImg} source={IMG.sandClokHome} />
-            <Text style={styles.textTime}>{ item.timeExecute }</Text>
-            <Text style={styles.textTime}>{LANG.MINUTE}</Text>
-          </View>
-          <View style={styles.lineView}>
-            <View style={styles.line} />
-          </View>
-          <View style={styles.dollaView}>
-            <Image style={styles.dollaImg} source={IMG.dollaHome} />
-            <Text style={styles.textTime}>{ item.price }</Text>
-            <Text style={styles.textTime}>{LANG.VIETNAM_DONG}</Text>
-          </View>
-          <View style={styles.lineView}>
-            <View style={styles.line} />
-          </View>
-          <View style={styles.dollaView}>
-            <Image style={styles.personImg} source={IMG.personHome} />
-            <Text style={styles.textTime}>{ item.numPeople }</Text>              
-            <Text style={styles.textTime}>{LANG.PERSON}</Text>
-          </View>
-        </View>
+    isSavedByUser = !tempVariable;
+    savedCount = tempVariable ? savedCount - 1 : savedCount + 1;
 
-        <View>
-          <View style={styles.recipeView}>
-            <TouchableWithoutFeedback onPress={this.onPress}>
-              <Image style={styles.recipeIMG} source={{ uri: item.recipeImage }} />
-            </TouchableWithoutFeedback>
-          </View>
-          <TouchableOpacity style={styles.containerChef}>
-            <Image style={styles.avataImg} source={{ uri: item.owner.avatar }} />
-            <Text style={styles.nameChef}>{ item.owner.name }</Text>
-            {
-              item.owner.rank > CONST.chefRank && (<Image style={styles.rankImg} source={IMG.rankHome} />)
-            }
-          </TouchableOpacity>
-        </View>
-
-        <View style={[styles.containerTimePrice, { marginTop: 18 }]}>
-          <View style={styles.priceView}>
-            <Text style={styles.textTime}>{ item.likeTimes }</Text>
-            <Text style={[styles.textTime, styles.textLight]}>{LANG.LIKE}</Text>
-          </View>
-          <View style={styles.lineLikeView}>
-            <View style={styles.line} />
-          </View>
-          <View style={styles.likeView}>
-            <Text style={styles.textTime}>{ item.numberEvaluate }</Text>
-            <Text style={[styles.textTime, styles.textLight]}>{LANG.COMMENT}</Text>
-          </View>
-          <View style={styles.lineLikeView}>
-            <View style={styles.line} />
-          </View>
-          <View style={styles.likeView}>
-            <Text style={styles.textTime}>{ item.shareTimes }</Text>
-            <Text style={[styles.textTime, styles.textLight]}>{LANG.SHARE}</Text>
-          </View>
-          <View style={styles.lineLikeView}>
-            <View style={styles.line} />
-          </View>
-          <View style={styles.likeView}>
-            <Text style={styles.textTime}>{ kFormatter(item.viewTimes) }</Text>
-            <Text style={[styles.textTime, styles.textLight]}>{LANG.VIEW}</Text>
-          </View>
-        </View>
-
-        <View style={styles.lineHori} />
-
-        <View style={styles.containerLoveCmt}>
-          <TouchableOpacity>
-            <Image style={styles.loveImg} source={iconLove} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={styles.cmtImg} source={IMG.commentHome} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={styles.shareImg} source={IMG.shareHome} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.saveView}>
-            <Image style={styles.saveImg} source={IMG.saveHome} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
+    this.setState({
+      isSavedByUser,
+      savedCount
+    })
+  }
 
   render() {
     const { 
@@ -159,17 +74,20 @@ export default class CollectionDetail extends Component {
       numberRecipe,
       savedCount,
       likeCount,
+      loading,
       viewCount
     } = this.state;
 
     const ads = {};
+    const iconSave = JSON.parse(isSavedByUser) ? IMG.saveActiveHome: IMG.saveHome;
 
     console.log('recipes from collection detail: ' + JSON.stringify(recipes));
 
-    return this.state.loading ? (
+    return loading ? (
           <Spinner />
         ) : (  
-        <HeaderScroll>
+      <View>
+          <HeaderScroll>
           <SwiperImage height={300} listItems={ collectionImages }/>
 
           <View style={styles.container}>
@@ -190,22 +108,28 @@ export default class CollectionDetail extends Component {
                       <Text style={styles.textTime}>{ kFormatter(viewCount) }</Text>
                       <Text style={[styles.textTime, styles.textLight]}>{LANG.VIEW}</Text>
                     </View>               
-                </View>
-
-                  <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
-                    <Image source={IMG.saveHome} style={styles.saveImg} />
-                    <Text style={styles.textTime}>{ kFormatter(savedCount) } {capitalize(LANG.SAVE)}</Text>
                   </View>
+
+                  <TouchableOpacity 
+                    onPress={this.handleSave}
+                    style={{paddingVertical: 10, zIndex: 100}}                    
+                  >                                                              
+                      <View style={[CSS.flexRow, CSS.alignItemsCenter]}>
+                      <View><Image source={iconSave} style={styles.saveImg} /></View>
+                      <Text style={styles.textTime}>{ kFormatter(savedCount) } {capitalize(LANG.SAVE)}</Text>  
+                      </View>                                                         
+                  </TouchableOpacity>
                 </View>
               </View>
-              
-              <View>
-                <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
-                <RecipeHighlightHome recipes={recipes} isLiked/>
-              </View>
+              <Text style={[CSS.fontSize18, CSS.fontQuiBold, { color: COLOR.blackColor }]}>{ numberRecipe } { LANG.RECIPE.toUpperCase() }</Text>
+              {
+                !!recipes &&
+                <RecipeHighlightHome recipes={recipes} isLiked/>  
+              }    
             </View>
           </View>
         </HeaderScroll>
+      </View>
     );
   }
 }

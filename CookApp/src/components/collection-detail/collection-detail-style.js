@@ -141,7 +141,8 @@ export default StyleSheet.create({
     fontSize: 13,
     fontFamily: CSS.fontText,
     color: COLOR.blackColor,
-    letterSpacing: -0.5
+    letterSpacing: -0.5,
+    zIndex: -1,
   },
   textLight: {
     color: COLOR.madeIn
@@ -220,6 +221,7 @@ export default StyleSheet.create({
     width: 19,
     height: 20,
     marginRight: 7, 
+    padding: 10
   },
   saveTime: {
     fontSize: 13, 
