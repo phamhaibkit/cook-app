@@ -12,7 +12,7 @@ import {
 import PropTypes from "prop-types";
 import LinearGradient from "react-native-linear-gradient";
 import moment from "moment";
-// import ImagePicker from "react-native-image-picker";
+import ImagePicker from "react-native-image-picker";
 import { LANG } from "../../lang/lang";
 import { CSS, IMG } from "../../utils/variables";
 import SigninByFacebook from "../signin-by-facebook/signin-by-facebook";
@@ -95,26 +95,26 @@ export default class PageInforUser extends Component {
       }
     };
 
-    // ImagePicker.showImagePicker(options, response => {
-    //   console.log("Response = ", response);
+    ImagePicker.showImagePicker(options, response => {
+      console.log("Response = ", response);
 
-    //   if (response.didCancel) {
-    //     console.log("User cancelled image picker");
-    //   } else if (response.error) {
-    //     console.log("ImagePicker Error: ", response.error);
-    //   } else if (response.customButton) {
-    //     console.log("User tapped custom button: ", response.customButton);
-    //   } else {
-    //     const source = { uri: response.uri };
+      if (response.didCancel) {
+        console.log("User cancelled image picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        const source = { uri: response.uri };
 
-    //     // You can also display the image using data:
-    //     // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-    //     this.setState({
-    //       avatarSource: source
-    //     });
-    //   }
-    // });
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
   };
 
   handleNavigate = () => {

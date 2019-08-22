@@ -76,6 +76,17 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginLeft: 7
   },
+  imageCover: {
+    height: 60,
+    width: (width - 30 - 20 - 7*3) / 4,
+    borderRadius: 5,
+    overflow: 'hidden',
+    marginLeft: 7
+  },
+  imgStep: {
+    height: 60,
+    width: '100%'
+  },
   postImg: {
     width: 22,
     height: 21

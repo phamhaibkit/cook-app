@@ -10,12 +10,13 @@ import ConfirmModal from '../../components/modal/confirm-modal';
 import navigationService from '../../services/navigation.service';
 import ModalComponent from '../../components/modal/modal'
 import recipeService from '../../services/recipe.service';
+import ImagePicker from "react-native-image-picker";
 
 let data = [
-  {id: 1, show: true, stepDetail: '', stepImages: []},
-  {id: 2, show: true, stepDetail: '', stepImages: []},
-  {id: 3, show: true, stepDetail: '', stepImages: []},
-  {id: 4, show: true, stepDetail: '', stepImages: []}
+  {id: 1, show: true, stepDetail: '', stepImages: [{uri: ''},{uri: ''},{uri: ''},{uri: ''}]},
+  {id: 2, show: true, stepDetail: '', stepImages: [{uri: ''},{uri: ''},{uri: ''},{uri: ''}]},
+  {id: 3, show: true, stepDetail: '', stepImages: [{uri: ''},{uri: ''},{uri: ''},{uri: ''}]},
+  {id: 4, show: true, stepDetail: '', stepImages: [{uri: ''},{uri: ''},{uri: ''},{uri: ''}]}
 ]
 
 export default class UpRecipeStep3 extends Component {
@@ -35,7 +36,6 @@ export default class UpRecipeStep3 extends Component {
     super(props);
     this.state= {
       data : data,
-      images: [ {}, {}, {}, {}],
       modalDraft: false,
       modalFinish: false,
       modalSuccess: false,
@@ -82,9 +82,9 @@ export default class UpRecipeStep3 extends Component {
     const lastArrData = data[data.length - 1];
     console.log('ADD-ROW', lastArrData)
     if(lastArrData){
-      data.push({id: lastArrData.id + 1, show: true});
+      data.push({id: lastArrData.id + 1, show: true, stepDetail: '', stepImages: [{uri: ''},{uri: ''},{uri: ''},{uri: ''}] });
     }else{
-      data.push({id: 1});
+      data.push({id: 1, show: true, stepDetail: '', stepImages: [{uri: ''},{uri: ''},{uri: ''},{uri: ''}]});
     }
     this.setState({
       data: data
@@ -180,14 +180,59 @@ export default class UpRecipeStep3 extends Component {
     return dataSend;
   }
 
-  renderImage = () => {
-    const { images } = this.state;
-    return images.map((item, index) => {
+  onPressImage =(stepId, indexImg) => {
+    console.log('KKKKKKKKKKKKKKKKKL', stepId, indexImg);
+    const options = {
+      title: "Select Avatar",
+
+      storageOptions: {
+        skipBackup: true,
+        path: "images"
+      }
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      console.log("Response = ", response);
+
+      if (response.didCancel) {
+        console.log("User cancelled image picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        const { data } = this.state;
+        const source = { uri: response.uri };
+        data.map((item, index) => {
+          if(item.id === stepId) {
+            item.stepImages[indexImg] = source;
+          }
+        })
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  }
+
+  renderImage = (step) => {
+    // const { images } = this.state;
+    return step.stepImages.map((item, index) => {
       return (
         <View key={index}>
-          <TouchableOpacity style={styles.imgBtn}>
-            <Image source={IMG.addImage} style={styles.postImg}></Image>
-          </TouchableOpacity>  
+          {!!item.uri ? (
+            <View  style={styles.imageCover}>
+              <Image source={item} style={styles.imgStep}/>
+            </View>
+            ) : (
+            <TouchableOpacity style={styles.imgBtn} onPress={() => {this.onPressImage(step.id, index)}}>
+              <Image source={IMG.addImage} style={styles.postImg}></Image>
+            </TouchableOpacity> 
+          )}
         </View>
       )
     });
@@ -205,7 +250,7 @@ export default class UpRecipeStep3 extends Component {
               <View style={styles.containerFrame}>
                 <Text style={styles.stepTxt}>{LANG.STEP + ' ' + num}</Text>
                 <View style={styles.imagesView}>
-                  {this.renderImage()}
+                  {this.renderImage(item)}
                 </View>
                 <View style={styles.textInput}>
                   <TextInput
