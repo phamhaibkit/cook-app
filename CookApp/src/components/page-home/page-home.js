@@ -148,6 +148,9 @@ class PageHome extends Component {
       case LANG.BEST_SELL:
         navigationService.navigate('Store');
         break;
+      case LANG.FOLLOWING_LIST:
+        alert('Ongoing');
+        break;
       case LANG.LIKED_RECIPE:
         navigationService.navigate(ROUTES.recipeLikedList.key);
         break;
