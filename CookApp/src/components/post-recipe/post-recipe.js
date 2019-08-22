@@ -12,6 +12,7 @@ import recipeService from '../../services/recipe.service';
 import DropDown from '../dropdown/dropdown';
 import ConfirmModal from '../../components/modal/confirm-modal';
 import navigationService from '../../services/navigation.service';
+import ImagePicker from "react-native-image-picker";
 import { ROUTES } from '../../utils/routes';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
@@ -50,14 +51,14 @@ export default class PostRecipe extends Component {
 
   constructor(props) {
     super(props);
-    this.props.navigation.setParams({onSaveFraft: this._onSaveFraft});
+    this.props.navigation.setParams({ onSaveFraft: this._onSaveFraft });
     this.state = {
       activeStep: STEPS.INFO,
       tags: [],
       text: "",
       category: [],
       isChoiseTime: false,
-      times : dataDropdown,
+      times: dataDropdown,
       choosedTime: dataDropdown[0],
       modalDraft: false,
       name: '',
@@ -68,10 +69,41 @@ export default class PostRecipe extends Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({showModalDraft: this.showModalDraft});
+    this.props.navigation.setParams({ showModalDraft: this.showModalDraft });
     this.getCategory();
   }
 
+  chooseFile = () => {
+    const options = {
+      title: "Select Avatar",
+
+      storageOptions: {
+        skipBackup: true,
+        path: "images"
+      }
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      console.log("Response = ", response);
+
+      if (response.didCancel) {
+        console.log("User cancelled image picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        const source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  };
 
   onChangeText = (text) => {
     const { tags } = this.state;
@@ -131,13 +163,13 @@ export default class PostRecipe extends Component {
     this.setState({
       choosedTime: time
     })
-  } 
+  }
 
   slectedMeal = (meal) => {
     console.log('9999999999999999', meal);
   }
 
-  showModalDraft =() => {
+  showModalDraft = () => {
     this.setState({
       modalDraft: true
     })
@@ -153,7 +185,7 @@ export default class PostRecipe extends Component {
 
   continue = () => {
     const dataNavigate = this.makeData();
-    navigationService.navigate(ROUTES.upRecipeStep2.key, {dataNavigate});
+    navigationService.navigate(ROUTES.upRecipeStep2.key, { dataNavigate });
   }
 
   makeData = () => {
@@ -180,33 +212,43 @@ export default class PostRecipe extends Component {
   }
 
   renderStep1 = () => {
-    const { category, name, description, choosedTime } = this.state;
+    const { category, name, description, avatarSource } = this.state;
     return (
       <View>
         <View style={styles.containerInput}>
-          <TouchableOpacity style={styles.addImgBtn}>
-            <Image source={IMG.addImage} style={styles.addImg}></Image>
-            <Text style={styles.addImgTxt}>{LANG.ADD_IMAGE_FOOD}</Text>
-            <Text style={styles.addImgLimit}>{LANG.LIMIT_IMAGE}</Text>
-          </TouchableOpacity>
+          {!avatarSource ? (
+            <TouchableOpacity style={styles.addImgBtn} onPress={this.chooseFile}>
+              <Image source={IMG.addImage} style={styles.addImg}></Image>
+              <Text style={styles.addImgTxt}>{LANG.ADD_IMAGE_FOOD}</Text>
+              {/* <Text style={styles.addImgLimit}>{LANG.LIMIT_IMAGE}</Text> */}
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.imageCover}>
+              <Image
+                style={styles.imageFood}
+                source={avatarSource}
+                resizeMode="cover"
+              />
+            </View>
+          )}
           <Text style={styles.titleTxt}>{LANG.NAME_FOOD}</Text>
           <View style={styles.textInput}>
-            <TextInput placeholder={LANG.INPUT_NAME_FOOD} value={name} onChangeText={(text) => this.setState({name: text})}/>
+            <TextInput placeholder={LANG.INPUT_NAME_FOOD} value={name} onChangeText={(text) => this.setState({ name: text })} />
           </View>
           <Text style={styles.titleTxt}>{LANG.DESCRIPTION}</Text>
           <View style={[styles.textInput, { height: 80 }]}>
-            <TextInput placeholder={LANG.INPUT_DESCRIPTION} multiline={true} numberOfLines={4} value={description} onChangeText={(text) => this.setState({description: text})}/>
+            <TextInput placeholder={LANG.INPUT_DESCRIPTION} multiline={true} numberOfLines={4} value={description} onChangeText={(text) => this.setState({ description: text })} />
           </View>
           <Text style={styles.titleTxt}>{LANG.TIME_COOK}</Text>
           <View style={styles.dropView}>
-            <DropDown 
+            <DropDown
               label={LANG.CHOOSE_TIME_COOK}
               data={dataDropdown}
               slectedItem={this.slectedTime}
             />
           </View>
           <Text style={styles.titleTxt}>{LANG.CATEGORY}</Text>
-          <CategoryRecipe category={category} canChoise selectedCate={this.selectedCate}/>
+          <CategoryRecipe category={category} canChoise selectedCate={this.selectedCate} />
           <Text style={styles.titleTxt}>{LANG.OTHER_CATEGORY}</Text>
           <Text>{LANG.NOTE}</Text>
           <View style={styles.textInput}>
@@ -232,7 +274,7 @@ export default class PostRecipe extends Component {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="position" enabled keyboardVerticalOffset={keyboardVerticalOffset}>
         <ScrollView>
-          <StepsUpRecipe activeStep={STEPS.INFO}/>
+          <StepsUpRecipe activeStep={STEPS.INFO} />
           <View style={styles.spaceBorder}></View>
           {this.renderStep1()}
           <View style={styles.bottomBtn}>
@@ -251,7 +293,7 @@ export default class PostRecipe extends Component {
           content={{
             title: `${LANG.SAVE_DRAFT_RECIPE}`,
             message: `${LANG.QUESTION_SAVE_DRAFT}`
-          }}           
+          }}
         />
       </KeyboardAvoidingView>
     );

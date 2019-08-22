@@ -63,6 +63,19 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  imageCover: {
+    marginTop: 20,
+    height: 150,
+    // width: '100%',
+    borderRadius: 5,
+    borderStyle: 'dashed',
+    backgroundColor: 'lightgreen',
+    overflow: 'hidden'
+  },
+  imageFood: {
+    width: '100%',
+    height: 150
+  },  
   addImgTxt: {
     fontFamily: CSS.fontTitle,
     fontSize: 14,
