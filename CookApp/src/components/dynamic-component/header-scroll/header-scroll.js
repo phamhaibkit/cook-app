@@ -105,11 +105,11 @@ export class HeaderScroll extends Component {
     return (
       <View>
         <BottomActionModal isModalVisible={isModalVisible} closeReport={action => this.closeReport(action)} />
-        <Animated.View style={[{ backgroundColor, borderBottomWidth, borderBottomColor }, { position: 'absolute', left: 0, width: '100%', zIndex: 1, paddingVertical: 10, minHeight: 50 }, CSS.justifySpaceBetween, CSS.alignItemsCenter, CSS.flexRow]}>
+        <Animated.View style={[{ backgroundColor, borderBottomWidth, borderBottomColor }, { position: 'absolute', width: '100%', zIndex: 1, paddingRight: 15, paddingVertical: 10 }, CSS.justifySpaceBetween, CSS.alignItemsCenter, CSS.flexRow]}>
           <BackButton isGreen={!isWhite} />
-          {pageName && <View style={{ flex: 1 }}><Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: colorPageName || '#fff' }]}>{pageName}</Text></View>}
-          <View style={[{ minWidth: 26, height: 26, position: 'absolute', right: 15 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
-            {haveCart ? <View><CartHome isChangeCartColor={isChangeCartColor} isTransparentHeader /></View> : <View style={{ width: 1 }} />}
+          {pageName && <Text style={[CSS.textAlignCenter, CSS.fontNuExBold, CSS.fontSize16, { color: colorPageName || '#fff' }]}>{pageName}</Text>}
+          <View style={[{ minWidth: 26, height: 26 }, CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter]}>
+            {haveCart ? <View><CartHome isChangeCartColor={isChangeCartColor} isTransparentHeader /></View> : <View />}
             {haveMore && <TouchableOpacity onPress={() => this.openReportBar()}><Animated.Text style={[{ color }, { fontSize: 26, paddingLeft: 10, marginTop: -8 }, CSS.fontNuExBold]}>...</Animated.Text></TouchableOpacity>}
           </View>
         </Animated.View>
