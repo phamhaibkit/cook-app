@@ -46,6 +46,7 @@ export default class ComboItem extends PureComponent {
 
 	renderFrame = (item, index) => {
     const { isVertical } = this.props;
+    const { ads } = this.state;
  
     const styleFrame = isVertical ? [styles.frame, styles.frameVertical] : styles.frame;
     const styleEndFrame = isVertical ? [...styleFrame, styles.endFrameVertical] : [styleFrame, styles.endFrame];
