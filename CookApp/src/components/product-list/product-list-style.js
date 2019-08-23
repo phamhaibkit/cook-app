@@ -8,12 +8,7 @@ const widthImg = widthFrame - 2 * CSS.padding10;
 const heightImg = widthImg / 2 + 15;
 export default StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: COLOR.backgroundColor,
-    // marginHorizontal: CSS.padding15,
-    // borderRadius: 10,
-    // paddingBottom: 20,
-    // marginTop: CSS.padding15
   },
   containerlabel: {
     paddingVertical: 4,
@@ -27,21 +22,16 @@ export default StyleSheet.create({
     marginLeft: CSS.padding15,
     marginTop: CSS.padding15,
     borderRadius: 10,
-    padding: CSS.padding10
+    padding: CSS.padding10,
   },
   endFrame: {
     marginBottom: CSS.padding15,
-  },
-  containerTouch: {
-    // flex: 2,
-    // paddingLeft: CSS.padding10,
   },
   imgView: {
     width: widthImg,
     height: heightImg,
     overflow: 'hidden',
     borderRadius: 4,
-    // margin: CSS.padding10
   },
   img: {
     width: widthImg,
@@ -87,7 +77,6 @@ export default StyleSheet.create({
     fontFamily: CSS.fontTitle,
   },
   madeIn: {
-    // marginVertical: 5,
     fontSize: 13,
     fontFamily: CSS.fontText,
     lineHeight: 18,
@@ -101,10 +90,6 @@ export default StyleSheet.create({
     fontSize: 14,
     fontFamily: CSS.fontTitle,
     color: COLOR.blackColor
-  },
-  containerDown: {
-    // paddingHorizontal: 10,
-    // marginTop: 30
   },
   priceView: {
     flexDirection: 'row',
@@ -154,5 +139,8 @@ export default StyleSheet.create({
     fontSize: 15,
     alignSelf: 'center',
     marginBottom: 4
+  },
+  adsView: {
+    paddingHorizontal: CSS.padding15
   }
 });

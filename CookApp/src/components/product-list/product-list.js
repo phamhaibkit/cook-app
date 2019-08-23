@@ -17,12 +17,15 @@ import { connect } from 'react-redux';
 import { increment, decrement } from '../../reducers/cart.reducer';
 import cartSerice from '../../services/cart.service';
 import productService from '../../services/product.service';
+import Advertiment from '../advertiment/advertiment';
+import homeService from '../../services/home.service';
 
 class ProductList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      ads: homeService.adsData,
     }
   }
 
@@ -107,7 +110,7 @@ class ProductList extends Component {
     return (
       <View style={endStyle}>
         <TouchableWithoutFeedback onPress={() => this.onPress(item)} style={{ zIndex: 2 }}>
-          <View style={styles.containerTouch}>
+          <View>
             <View style={styles.imgView}>
               <Image style={styles.img} source={{ uri: item.productImage }} />
             </View>
@@ -120,7 +123,7 @@ class ProductList extends Component {
                 {item.productName}
               </Text>
             </View>
-            <View style={styles.containerDown}>
+            <View>
               <Text style={styles.madeIn}>{item.origin}</Text>
               <View style={styles.priceView}>
                 <Text style={styles.newPrice}>{getCurrencyStr(item.newPrice)}</Text>
@@ -152,19 +155,30 @@ class ProductList extends Component {
     );
   };
 
-  render() {
-    const { data } = this.state;
+  renderUpdown = (productData) => {
     return (
-      <View style={styles.container}>
-        <FlatList
+      <FlatList
           contentContainerStyle={{
             alignSelf: 'flex-start'
           }}
           numColumns={2}
-          data={data}
+          data={productData}
           renderItem={({ item, index }) => this.renderFrame(item, index)}
           keyExtractor={(item, index) => index.toString()}
         />
+    )
+  }
+
+  render() {
+    const { data, ads } = this.state;
+    const upData = data.splice(0, 4);
+    return (
+      <View style={styles.container}>
+        {this.renderUpdown(upData)}
+        <View style={styles.adsView}>
+          <Advertiment data={ads} marginTop={10}/>
+        </View>
+        {this.renderUpdown(data)}
       </View>
     );
   }
