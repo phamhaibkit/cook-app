@@ -283,17 +283,7 @@ const UserStack = createStackNavigator({
   ForgotPassword: {
     screen: ForgotPasswordPage,
     navigationOptions: {
-      title: 'Quên mật khẩu',
-      tabBarVisible: false,
-      gesturesEnabled: false,
-      headerTitleStyle: styles.headerTitleStyle,
-      headerLeft: <BackButton />,
-      headerTitleContainerStyle: styles.headerTitleContainerStyle,
-      headerStyle: {
-        elevation: 0,
-        shadowOpacity: 0,
-        borderBottomWidth: 0,
-      }
+      header: null
     }
   },
   [ROUTES.userProfile.key]: { 

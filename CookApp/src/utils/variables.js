@@ -1,3 +1,4 @@
+import _ from 'lodash';
 /* eslint-env es6 */
 export const IMG = {
   bookmark: require('../../assets/book-mark.png'),
@@ -72,7 +73,7 @@ export const IMG = {
   arrowDownGreen: require('../../assets/icons/arrow-down-green.png'),
   addIngredient: require('../../assets/icons/add-ingredient.png'),
   arrowWhite: require('../../assets/icons/arrow-white.png'),
-  stickNote:  require('../../assets/icons/stick.png'),
+  stickNote: require('../../assets/icons/stick.png'),
   infoIcon: require('../../assets/icons/info.png'),
 };
 
@@ -337,7 +338,7 @@ export const CSS = {
     fontFamily: 'Quicksand-Bold',
     fontSize: 14
   },
-  tabBarUnderlineStyle   : {
+  tabBarUnderlineStyle: {
     backgroundColor: '#3ABF57',
     height: 3
   },

@@ -10,6 +10,7 @@ import styles from './signin-by-facebook.style';
 import navigationService from '../../services/navigation.service';
 import { setAccountInfo } from '../../reducers/page-account-info.reducer';
 import authService from '../../services/auth.service';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 class SigninByFacebook extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class SigninByFacebook extends Component {
       fetch(api)
         .then(response => response.json())
         .then((responseData) => {
-          return this._loginFacebookHandle(
+          return this.loginFacebookHandle(
             responseData.email,
             responseData.first_name,
             responseData.last_name,
@@ -41,29 +42,35 @@ class SigninByFacebook extends Component {
         })
         .done();
     } else {
-      const email = user.profile.email;
+      const { email } = user.profile;
       const firstname = user.profile.first_name;
       const lastname = user.profile.last_name;
       const facebookId = user.profile.id;
-      return this._loginFacebookHandle(email, firstname, lastname, facebookId);
+      return this.loginFacebookHandle(email, firstname, lastname, facebookId);
     }
   };
 
-  _loginFacebookHandle = (email, firstname, lastname, id) => {
-    const { getLoginFaceBookInfor, goto } = this.props;
+  loginFacebookHandle = (email, firstname, lastname, id) => {
+    const { getLoginFaceBookInfor, goto, navigation } = this.props;
     return authService
       .loginFacebook(email, firstname, lastname, id)
-      .then(data => {
-        console.log(data, "Logged");
+      .then((data) => {
+        // debugger
+        console.log(data, 'Logged');
         this.timeout = setTimeout(() => this.hideLoading(), 200);
         this.hideLoading();
         this.props.setAccountInfo(data);
         // FBLoginManager.logout(() => {
         // 	console.log('Logout-Facebook');
         // });
-        this._retrieveData();
+        this.retrieveData();
         if (goto) {
-          navigationService.navigate(goto);
+          const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'User' })],
+          });
+          navigation.dispatch(resetAction);
+          navigationService.navigate('Home');
         }
         if (getLoginFaceBookInfor) {
           const objectFaceBookInfor = {
@@ -76,16 +83,16 @@ class SigninByFacebook extends Component {
         }
         // navigationService.goBack();
       })
-      .catch(error => {
+      .catch((error) => {
         // FBLoginManager.logout(() => {
         // 	console.log('Logout-Facebook');
         // });
         this.timeout = setTimeout(() => this.hideLoading(), 200);
-        console.log("ERRRRR", error);
+        console.log('ERRRRR', error);
       });
   };
 
-  _retrieveData = async () => {
+  retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('userInfo');
       if (value !== null) {
@@ -120,16 +127,16 @@ class SigninByFacebook extends Component {
           <TouchableOpacity
             style={styles.loginWithFacebook}
             onPress={() => {
-              FBLoginManager.loginWithPermissions(["email", "user_friends"], (error, data) => {
+              FBLoginManager.loginWithPermissions(['email', 'user_friends'], (error, data) => {
                 if (!error) {
                   this.onLoginFbSucess(data);
                 } else {
-                  console.log("Error: ", error);
+                  console.log('Error: ', error);
                 }
-              })
+              });
               FBLoginManager.getCredentials((err, data) => {
-                console.log(data,'data')
-              })
+                console.log(data, 'data');
+              });
             }}
           >
             <Icon name="facebook-f" size={26} color="white" style={styles.iconFacebook} />
@@ -144,9 +151,9 @@ class SigninByFacebook extends Component {
             }}
             permissions={['email']}
             loginBehavior={FBLoginManager.LoginBehaviors.Native}
-            // onLogin={(user) => {
-            //   this.onLoginFbSucess(user);
-            // }}
+          // onLogin={(user) => {
+          //   this.onLoginFbSucess(user);
+          // }}
           />
         </View>
       </View>

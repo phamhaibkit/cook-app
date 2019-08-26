@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, Platform } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, Animated, Platform, ScrollView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import BackButton from '../../back-button/back-button';
 import CartHome from '../../cart-home/cart-home';

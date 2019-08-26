@@ -39,6 +39,7 @@ export class PageUser extends Component {
 
   logOut = () => {
     AsyncStorage.removeItem('userInfo');
+    this.props.navigation.navigate('SignIn')
   }
 
   retrieveData = async () => {
@@ -143,7 +144,7 @@ export class PageUser extends Component {
       },
     ];
     return this.renderItemManage(arrayItem);
-  }      
+  }
 
   render() {
     const { accountInfo } = this.props;
@@ -180,7 +181,7 @@ export class PageUser extends Component {
             {this.renderRecipeManage()}
             {this.renderCookerManage()}
             {this.renderSettingManage()}
-            <TouchableOpacity style={{ marginTop: 10 }} onPress={() => this.props.navigation.navigate('SignIn')}>
+            <TouchableOpacity style={{ marginTop: 10 }} onPress={() => this.logOut()}>
               <Text style={[CSS.textAlignCenter, CSS.fontQuiBold, CSS.fontSize15, { color: '#FF0000', marginBottom: 30 }]}>Logout</Text>
             </TouchableOpacity>
 

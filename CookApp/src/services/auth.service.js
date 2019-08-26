@@ -27,44 +27,69 @@ class AuthService {
     this.getToken(data.email, data.password);
   }
 
-  loginFacebook = (email, firstName, lastName, facebookId) => {
-    // const url = API.LOGIN_FACEBOOK;rr
+  loginFacebook = async (email, firstName, lastName, facebookId) => {
     const params = {
       email,
       firstname: firstName,
       lastname: lastName,
       facebookid: facebookId,
     };
-    return this.handleSuccess(params, true, {
-      email: params.email,
-      password: params.facebookid,
-    });
+    const data = await this.getTokenSocial(params);
+
+    // return this.handleSuccess(params, true, {
+    //   email: params.email,
+    //   password: params.facebookid,
+    // });
+  };
+
+  getTokenSocial = () => {
+    const url = API.LOGIN_SOCIAL;
+    const params = {
+      // platform: 'string',
+      socialUId: params.facebookId,
+      displayName: 'Sone',
+      accessToken: 'string',
+      refreshToken: 'string',
+      email: 'string',
+      avatar: 'string'
+    };
+    return HTTPService.post(url, params)
+      .then((data) => {
+        // return (this.token = data);
+        return Promise.resolve(this.handleSaveInforSuccess(data));
+        // return data;
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
   };
 
   handleSuccess = (loginData, isFacebook, moreData) => {
     let userInfo = loginData;
     if (isFacebook) {
       userInfo = loginData;
-      return this._handleSuccess(userInfo);
+      return this.handleSaveInforSuccess(userInfo);
     }
     return {};
   };
 
-  _handleSuccess = async (userInfo, token) => {
+  handleSaveInforSuccess = async (userInfo, token) => {
     this.userInfo = await setUserInfo(userInfo, 'token');
     // accountService.setUserInfoLocal(this.userInfo);
     return Promise.resolve(this.userInfo);
   };
 
   getToken = (username, password) => {
-    const url = API.TOKEN_EMAIL({ username, password });
+    const url = API.LOGIN;
     const params = {
-      username,
-      password,
+      mobile: username,
+      password: password,
     };
-    return HTTPService.get(url)
+    return HTTPService.post(url, params)
       .then((data) => {
-        return (this.token = data);
+        // return (this.token = data);
+        return Promise.resolve(this.handleSaveInforSuccess(data));
+        // return data;
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -103,11 +128,12 @@ class AuthService {
       email: data.email,
       gender: 1,
       avatar: '',
-      birthday: ''
+      birthday: '',
+      password: '123'
     };
     const url = API.REGISTER;
     return HTTPService.post(url, param).then((data) => {
-      debugger
+      debugger;
     })
       .catch((err) => {
         return Promise.reject(err);

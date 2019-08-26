@@ -1,63 +1,46 @@
-import Joi from 'joi';
-// import { configs, fetchObject } from '../../../utils';
-import _ from 'lodash';
+// eslint-disable-next-line consistent-return
+export const validateEmail = (email) => {
+  if (email.length > 0) {
+    // eslint-disable-next-line no-useless-escape
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(email)) {
+      return 'Sai định dạng email';
+    }
+  } else {
+    return 'Vui lòng nhập email';
+  }
+};
 
-const createUserPasswordSchema = Joi.object().keys({
-	passwordConfirm: Joi.string().required().valid(Joi.ref('password')).error(getErrorConfirmFormat),
-	password: Joi.string().required().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/).error(getErrorFormat),
-});
+// eslint-disable-next-line consistent-return
+export const requireField = (text, name) => {
+  if (text.length === 0) {
+    return `Vui lòng nhập ${name}`;
+  }
+};
 
+// eslint-disable-next-line consistent-return
+export const validatePhone = (phone) => {
+  if (phone.length > 0) {
+    // eslint-disable-next-line no-useless-escape
+    const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (!re.test(phone)) {
+      return 'Sai định dạng số điện thoại';
+    }
+  } else {
+    return 'Vui lòng nhập số điện thoại';
+  }
+};
 
+export const validateForm = (stateValue) => {
+  const { password, email } = stateValue;
+  const valiPhone = validatePhone(email);
+  const validateName = requireField(password, 'mật khẩu');
+  if (valiPhone) {
+    return valiPhone;
+  }
+  if (validateName) {
+    return validateName;
+  }
 
-export function getUserPasswordObjectToValidate(object) {
-	const {
-		user, password
-	} = object;
-	return {
-		password, passwordConfirm
-	};
-}
-
-function getErrorFormat(error) {
-	const errorType = fetchObject(error, '0.type');
-	let message;
-	switch (errorType) {
-	case 'any.empty':
-		message = 'Please enter your New password';
-		break;
-	case 'string.regex.base':
-		message = 'Password must contain as least: one lower, one upper case letter, one digit, one of these special characters and as least 6 characters';
-		break;
-	default:
-		message = 'Please enter your New password';
-		break;
-	}
-	return { message };
-}
-
-
-function getErrorConfirmFormat(error) {
-	console.log(error);
-	const errorType = fetchObject(error, '0.type');
-	let message;
-
-	switch (errorType) {
-	case 'any.empty':
-		message = 'Please enter your Confirm New Password';
-		break;
-	case 'any.allowOnly':
-		message = 'Confirm Password not match!';
-		break;
-	default:
-		message = 'Please enter your Confirm New Password';
-		break;
-	}
-	return { message };
-}
-
-export function validateResetPassword(object) {
-	const toBeValidated = getUserPasswordObjectToValidate(object);
-	return Joi.validate(toBeValidated, createUserPasswordSchema, {
-		abortEarly: false
-	});
-}
+  return false;
+};

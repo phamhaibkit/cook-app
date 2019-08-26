@@ -73,4 +73,6 @@ export const API = {
   USER_REJECT_RECIPES: userId => `${HOST}/recipe/reject?usr=${userId}`,
 
   REGISTER: `${HOST}/authen/register`,
+  LOGIN: `${HOST}/authen/login`,
+  LOGIN_SOCIAL: `${HOST}/authen/login/social`,
 };

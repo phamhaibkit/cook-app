@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import _ from 'lodash';
 
 export const ASYNC_STORAGE = {
   CART_ID: 'CART_ID',
@@ -8,11 +9,11 @@ export const ASYNC_STORAGE = {
 };
 export async function setUserInfo(userInfo, token) {
   console.log(userInfo, 'userInfo');
-  userInfo.token = token;
-  const briefName = createBriefName(userInfo.lastname, userInfo.firstname);
-  const userName = `${userInfo.lastname} ${userInfo.firstname}`;
-  userInfo.userNameBrief = briefName;
-  userInfo.userName = userName;
+  // userInfo.token = token;
+  // const briuserNameefName = userInfo.fullName;
+  // const userName = `${userInfo.lastname} ${userInfo.firstname}`;
+  // userInfo.userNameBrief = briefName;
+  // userInfo.userName = userName;
   await AsyncStorage.setItem(ASYNC_STORAGE.USER_INFO, JSON.stringify(userInfo)).catch((e) => {
     return userInfo;
   });
@@ -64,4 +65,10 @@ export function getCurrencyStr(num) {
 
 export function kFormatter(num) {
   return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
+}
+
+export const handleError = (error) => {
+  const errorString = _.get(error, 'data.error.errorMessage');
+  console.log(error);
+  return errorString;
 }

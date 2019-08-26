@@ -14,6 +14,8 @@ import TextInputRender from '../text-input/text-input';
 import { IMG, CSS } from '../../utils/variables';
 import authService from '../../services/auth.service';
 import ErrorModalComponent from '../modal/errorModal';
+import { validateForm } from './validation';
+import { handleError } from '../../utils/general';
 
 const TYPE_MODAL = {
   EMAIL: 'email',
@@ -40,47 +42,48 @@ class PageSignin extends Component {
 
   onPressSignin = () => {
     const { email, password } = this.state;
-    let errorMessage = '';
 
-    if (!password) {
-      errorMessage = 'Please input password';
-    }
-    if (!email) {
-      errorMessage = 'Please input user';
-    }
-
-    if (errorMessage === '') {
+    const isInvalidName = validateForm(this.state);
+    if (isInvalidName) {
+      const content = {
+        message: isInvalidName,
+        title: 'Lỗi'
+      };
+      this.setState({
+        showErrorMessage: content,
+      });
+    } else {
       authService.getToken(email, password).then((infor) => {
         const resetAction = StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'User' })],
         });
         this.props.navigation.dispatch(resetAction);
-        navigationService.navigate('Home');
+        navigationService.navigate('User');
+      }, (error) => {
+        const content = {
+          message: handleError(error),
+          title: 'Lỗi'
+        };
+        this.setState({
+          showErrorMessage: content,
+        });
       });
-    } else {
-      const content = {
-        message: errorMessage,
-        title: 'Error'
-      }
-      this.setState({
-        errorMessage: content,
-        showErrorMessage: true,
-      })
     }
   }
 
   closeErrorModal = () => {
     this.setState({
       showErrorMessage: false
-    })
+    });
   }
 
   render() {
-    let { email, password, showModalLoading, notMatch, errorMessage, showErrorMessage } = this.state;
+    const { navigation } = this.props;
+    const { email, password, showModalLoading, notMatch, errorMessage, showErrorMessage } = this.state;
     // return <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
     return <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      {showErrorMessage && <ErrorModalComponent onBackdropPress={this.closeErrorModal} content={errorMessage}></ErrorModalComponent>}
+      {showErrorMessage && <ErrorModalComponent onBackdropPress={this.closeErrorModal} content={showErrorMessage} />}
       <View style={[styles.container]}>
         <View style={styles.loginPage}>
           <View style={styles.headerLayoutLogin}>
@@ -113,7 +116,7 @@ class PageSignin extends Component {
               <Text style={CSS.textTitleButton}>{LANG.SIGN_IN_UPTO_CASE}</Text>
             </TouchableOpacity>
           </LinearGradient>
-          <SigninByFacebook style={styles.loginFacebookSection} goto={'User'} />
+          <SigninByFacebook navigation={navigation} style={styles.loginFacebookSection} goto="Home" />
           <TouchableOpacity style={styles.createNewButton} onPress={() => navigationService.navigate('SignUp')}>
             <Text style={styles.createNewButtonText}>Đăng ký tài khoản</Text>
           </TouchableOpacity>
