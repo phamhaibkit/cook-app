@@ -44,7 +44,6 @@ class CartHome extends Component {
               justifyContent: 'center',
               borderWidth: 2,
               borderColor: COLOR.whiteColor,
-              borderRadius: 9
             }}
           >
             <Text

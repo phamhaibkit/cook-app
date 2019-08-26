@@ -1,5 +1,7 @@
 /* eslint-env es6 */
+// const HOST = 'http://www.api.bechef.vn';
 const HOST = '45.122.222.214:8181';
+
 
 export const API = {
   GET_HOME: `${HOST}/home?usr=1`,
@@ -69,4 +71,6 @@ export const API = {
   USER_DRAFT_ORDERS: userId => `${HOST}/bill/draft?usr=${userId}`,
   USER_WAITING_REVIEW_RECIPES: userId => `${HOST}/recipe/pending?usr=${userId}`,
   USER_REJECT_RECIPES: userId => `${HOST}/recipe/reject?usr=${userId}`,
+
+  REGISTER: `${HOST}/authen/register`,
 };

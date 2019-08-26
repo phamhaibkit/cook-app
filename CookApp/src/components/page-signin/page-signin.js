@@ -38,10 +38,6 @@ class PageSignin extends Component {
     });
   };
 
-  onSubmitEditing = () => {
-    this.onPressSignin();
-  };
-
   onPressSignin = () => {
     const { email, password } = this.state;
     let errorMessage = '';
@@ -97,7 +93,7 @@ class PageSignin extends Component {
           </View>
           <TextInputRender
             onChangeText={(value, err) => this.onChangeText(value, err, TYPE_MODAL.EMAIL)}
-            placeholder="Số điện thoại/Email"
+            placeholder="Số điện thoại"
             value={email}
             icon={IMG.user}
           />

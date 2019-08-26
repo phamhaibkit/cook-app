@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, KeyboardAvoidingView, Image, TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
+import { View, AsyncStorage, Text, KeyboardAvoidingView, Image, TouchableOpacity, StyleSheet, Platform, Dimensions, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import moment from 'moment';
@@ -148,7 +148,7 @@ export default class PageViewComment extends Component {
       });
       this.setState({
         comment: ''
-      }, () => this.child.scrollToBottom());
+      }, () => this.scrollView.scrollToEnd());
     });
   }
 
@@ -162,7 +162,7 @@ export default class PageViewComment extends Component {
     // const { recipe } = this.props;
     const { comment, recipeDetail } = this.state;
     // const comments = _.get(recipeDetail, 'comments', []);
-    let padding = 0;
+    let padding = 15;
     if (Platform.OS !== 'ios') {
       padding = -480;
     }
@@ -170,8 +170,19 @@ export default class PageViewComment extends Component {
     console.log(comments, 'comments');
     return (
       <KeyboardAvoidingView style={[{ flexGrow: 1, flex: 1 }, CSS.flexCol, CSS.justifySpaceBetween]} behavior="padding" keyboardVerticalOffset={padding}>
-        <HeaderScroll ref={(child) => { this.child = child; }} colorBorderDefault="#D2D2D2" colorDefault="#fff" colorPageName="#000" borderWidthDefault={1} pageName="Bình luận">
-          <View style={styles.container}>
+        <HeaderScroll style={{ zIndex: 1 }} ref={(child) => { this.child = child; }} colorBorderDefault="#D2D2D2" colorDefault="#fff" colorPageName="#000" borderWidthDefault={1} pageName="Bình luận">
+          <Text>asdsad</Text>
+        </HeaderScroll>
+        <ScrollView
+          style={{ marginTop: 30 }}
+          onContentSizeChange={(contentWidth, contentHeight) => {
+            // scrollViewBottom = contentHeight;
+          }}
+          scrollEventThrottle={16}
+          // eslint-disable-next-line no-return-assign
+          ref={scrollView => this.scrollView = scrollView}
+        >
+          <View style={[styles.container]}>
             {comments.length > 0 && comments.map((item, index) => {
               item.name = item.commentator;
               return <View key={index} style={[styles.rowCommentRate]}>
@@ -190,9 +201,12 @@ export default class PageViewComment extends Component {
             })}
 
           </View>
-        </HeaderScroll>
+        </ScrollView>
         <View style={[CSS.flexRow, CSS.alignItemsCenter,
-        { paddingHorizontal: 15, position: 'absolute', bottom: 0, backgroundColor: 'white', borderBottomColor: '#E9E9E9', borderTopColor: '#E9E9E9', borderWidth: 1, paddingVertical: 10, borderLeftWidth: 0, borderRightWidth: 0 }]}>
+          {
+            paddingHorizontal: 15, backgroundColor: 'white', borderBottomColor: '#E9E9E9',
+            borderTopColor: '#E9E9E9', borderWidth: 1, paddingVertical: 10, borderLeftWidth: 0, borderRightWidth: 0
+          }]}>
           <View style={{ flex: 1 }}>
             <TextInputRender
               onChangeText={(value, err) => this.onChangeText(value, err, 'comment')
@@ -213,7 +227,7 @@ export default class PageViewComment extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 70,
+    marginTop: 40,
     marginHorizontal: 15,
     flex: 1,
     marginBottom: 200,

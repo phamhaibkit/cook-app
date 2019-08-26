@@ -430,7 +430,7 @@ const bottomTabNav = createBottomTabNavigator(
       {
         tabBarLabel: LANG.USER
       }
-    }
+    },
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

@@ -36,7 +36,7 @@ export default class PageConfirmPassword extends Component {
   };
 
   handelConfirmPassword = () => {
-    navigationService.navigate('InforUser')
+    navigationService.navigate('InforUser');
   }
 
   render() {
@@ -44,49 +44,49 @@ export default class PageConfirmPassword extends Component {
     const pageName = _.get(params, 'params.pageName');
     return (
       <KeyboardAvoidingView style={{ flexGrow: 1 }} behavior="padding" keyboardVerticalOffset={40}>
-      
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-        <View style={[styles.container]}>
-          <View style={{
-            flex: 1,
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}>
-          <View style={{ flex: 1,}}>
-            <Text style={[
-                styles.titlePage,
-                CSS.justifyContentCenter,
-                CSS.alignItemsCenter,
-                CSS.textAlignCenter,
-                CSS.fontNuExBold]}>
-                {pageName}
-              </Text>
-              <TextInputRender
-                onChangeText={(value, err) => this.onChangeText(value, err, 'password')}
-                title="Mật khẩu"
-                placeholder="Nhập Mật khẩu"
-                value={password}
-                secureTextEntry
-              />
-              <TextInputRender
-                onChangeText={(value, err) => this.onChangeText(value, err, 'rePassword')}
-                title="Nhập lại mật khẩu"
-                placeholder="Nhập lại mật khẩu"
-                value={rePassword}
-                secureTextEntry
-              />
+
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
+          <View style={[styles.container]}>
+            <View style={{
+              flex: 1,
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}>
+              <View style={{ flex: 1, }}>
+                <Text style={[
+                  styles.titlePage,
+                  CSS.justifyContentCenter,
+                  CSS.alignItemsCenter,
+                  CSS.textAlignCenter,
+                  CSS.fontNuExBold]}>
+                  {pageName}
+                </Text>
+                <TextInputRender
+                  onChangeText={(value, err) => this.onChangeText(value, err, 'password')}
+                  title="Mật khẩu"
+                  placeholder="Nhập Mật khẩu"
+                  value={password}
+                  secureTextEntry
+                />
+                <TextInputRender
+                  onChangeText={(value, err) => this.onChangeText(value, err, 'rePassword')}
+                  title="Nhập lại mật khẩu"
+                  placeholder="Nhập lại mật khẩu"
+                  value={rePassword}
+                  secureTextEntry
+                />
+              </View>
+              <ModalComponent content={content}/>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
+                <TouchableOpacity style={[styles.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={() => this.handelConfirmPassword()}>
+                  <Text style={CSS.textTitleButton}>Tiếp tục</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            </View>
           </View>
-          <ModalComponent content={content}></ModalComponent>
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#3BB556', '#72C91C']} style={CSS.linearGradientButton}>
-              <TouchableOpacity style={[styles.buttonText, CSS.alignItemsCenter, CSS.justifyContentCenter]} onPress={() => this.handelConfirmPassword()}>
-                <Text style={CSS.textTitleButton}>Tiếp tục</Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          </View>
-        </View>
-      </ScrollView >
+        </ScrollView >
       </KeyboardAvoidingView>
-      
+
     );
   }
 }

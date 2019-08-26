@@ -1,10 +1,10 @@
 import { AsyncStorage } from 'react-native';
+import _ from 'lodash';
 import HTTPService from './http.service';
 import { API } from './api';
 
 // import { ASYNC_STORAGE } from '../utils/variables';
 import { setUserInfo } from '../utils/general';
-import _ from 'lodash';
 import accountService from './account.service';
 
 const defaultRegisterData = {
@@ -57,7 +57,7 @@ class AuthService {
   };
 
   getToken = (username, password) => {
-    const url = API.TOKEN_EMAIL({username, password});
+    const url = API.TOKEN_EMAIL({ username, password });
     const params = {
       username,
       password,
@@ -95,6 +95,24 @@ class AuthService {
       // AsyncStorage.removeItem(ASYNC_STORAGE.RECENT_SEARCH),
     ]);
   };
+
+  register = (data) => {
+    const param = {
+      mobile: data.phone,
+      fullname: data.name,
+      email: data.email,
+      gender: 1,
+      avatar: '',
+      birthday: ''
+    };
+    const url = API.REGISTER;
+    return HTTPService.post(url, param).then((data) => {
+      debugger
+    })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
 }
 
 export default new AuthService();

@@ -99,7 +99,7 @@ export default class ForgotPasswordPage extends Component {
               onChangeText={(value, err) =>
                 this.onChangeText(value, err, "email")
               }
-              placeholder="Số điện thoại/Email"
+              placeholder="Số điện thoại"
               value={email}
               styleConfig={styles.Input}
             />
