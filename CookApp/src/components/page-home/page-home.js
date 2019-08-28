@@ -32,10 +32,10 @@ class PageHome extends Component {
     super(props);
     this.state = {
       trendings: homeService.trendingData,
-      collections: collectionService.collectionData,
+      collections: collectionService.collectionHome,
       ads: homeService.adsData,
       recipeHighLights: recipeService.recipeHighLightData,
-      combos: comboService.comboData,
+      combos: comboService.comboHome,
       products: productService.bestSellerProduct,
       followers: userService.followerData,
       likeRecipes: recipeService.recipeLikedData,
@@ -45,10 +45,10 @@ class PageHome extends Component {
 
   componentDidMount() {
     this.getTrendings();
-    this.getCollections();
+    this.getCollections(5);
     this.getAds();
     this.getRecipeHighLights();
-    this.getCombos();
+    this.getCombos(5);
     this.getBestSellProducts();
     this.getFollowers(1);
     this.getRecipeLikedList(1);
@@ -70,10 +70,10 @@ class PageHome extends Component {
     })
   }
 
-  getCollections = () => {
-    collectionService.getCollections().then(() => {
+  getCollections = (number) => {
+    collectionService.getCollectionHome(number).then(() => {
       this.setState({
-        collections: collectionService.collectionData.data
+        collections: collectionService.collectionHome.data
       })
     })
   }
@@ -94,10 +94,10 @@ class PageHome extends Component {
     })
   }
 
-  getCombos = () => {
-    comboService.getCombo().then(() => {
+  getCombos = (number) => {
+    comboService.getComboHome(number).then(() => {
       this.setState({
-        combos: comboService.comboData
+        combos: comboService.comboHome
       })
     })
   }

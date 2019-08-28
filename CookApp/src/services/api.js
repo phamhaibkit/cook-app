@@ -17,10 +17,12 @@ export const API = {
   GET_ADS: `${HOST}/ads?position=1`,
 
   // collection
+  GET_COLLECTION_HOME: number => HOST + '/recipe-collection/hot/?top=' + number,
   GET_COLLECTION_LIST: HOST + '/recipe-collection/all',
   GET_COLLECTION_DETAIL: id => HOST + '/recipe-collection?id=' + id,
 
   //combo
+  GET_COMBO_HOME: number => HOST + '/recipe-combo/hot?top=' + number,
   GET_COMBO_LIST: HOST + '/recipe-combo/all',
   GET_COMBO_DETAIL: id => HOST + '/recipe-combo?id=' + id,  
 
