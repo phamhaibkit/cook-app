@@ -113,14 +113,40 @@ class AuthService {
       mobile: data.phone,
       fullname: data.name,
       email: data.email,
-      gender: 1,
-      avatar: '',
-      birthday: '',
-      password: '123'
     };
     const url = API.REGISTER;
     return HTTPService.post(url, param).then((data) => {
-      debugger;
+      return Promise.resolve(data);
+    })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
+
+  sendOTP = (data) => {
+    const url = API.VALIDATE_OTP;
+    return HTTPService.post(url, data).then((data) => {
+      return Promise.resolve(data);
+    })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
+
+  setPassword = (data) => {
+    const url = API.SET_PASSWORD;
+    return HTTPService.post(url, data).then((data) => {
+      return Promise.resolve(data);
+    })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
+
+  forgotPassword = (data) => {
+    const url = API.FORGOT_PASSWORD;
+    return HTTPService.post(url, data).then((data) => {
+      return Promise.resolve(data);
     })
       .catch((err) => {
         return Promise.reject(err);

@@ -15,6 +15,7 @@ import { IMG, CSS } from '../../utils/variables';
 import { validateEmail, requireField, validateForm } from './validation';
 import ErrorModalComponent from '../modal/errorModal';
 import authService from '../../services/auth.service';
+import { handleError } from '../../utils/general';
 // import { validateEmail } from './validation';
 
 const TYPE_MODAL = {
@@ -52,9 +53,18 @@ class PageSignUp extends Component {
         showErrorMessage: content,
       });
     } else {
-      authService.register(this.state).then((res)=> {
-
-      }, error => console.log(error));
+      authService.register(this.state).then((res) => {
+        console.log(res, 'res');
+        navigationService.navigate('OTP', { infor: res });
+      }, (error) => {
+        const content = {
+          message: handleError(error),
+          title: 'Lỗi'
+        };
+        this.setState({
+          showErrorMessage: content,
+        });
+      });
     }
   };
 

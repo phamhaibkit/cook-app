@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView, Modal, Image, KeyboardAvoidingView, Button } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { StackActions, NavigationActions } from 'react-navigation';
 import styles from './page-signin-style';
@@ -42,6 +42,7 @@ class PageSignin extends Component {
 
   onPressSignin = () => {
     const { email, password } = this.state;
+    const { navigation } = this.props;
 
     const isInvalidName = validateForm(this.state);
     if (isInvalidName) {
@@ -58,7 +59,7 @@ class PageSignin extends Component {
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'User' })],
         });
-        this.props.navigation.dispatch(resetAction);
+        navigation.dispatch(resetAction);
         navigationService.navigate('User');
       }, (error) => {
         const content = {

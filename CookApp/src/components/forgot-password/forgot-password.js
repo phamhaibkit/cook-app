@@ -8,7 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
-
+import _ from 'lodash';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -18,6 +18,10 @@ import TextInputRender from '../text-input/text-input';
 import Header from '../header/header';
 import navigationService from '../../services/navigation.service';
 import { HeaderScroll } from '../dynamic-component/header-scroll/header-scroll';
+import { validateForm } from './validation';
+import authService from '../../services/auth.service';
+import { handleError } from '../../utils/general';
+import ErrorModalComponent from '../modal/errorModal';
 
 export default class ForgotPasswordPage extends Component {
   constructor(props) {
@@ -63,17 +67,51 @@ export default class ForgotPasswordPage extends Component {
 
   onChangeText = (value, err, type) => {
     this.setState({
-      [type]: {
-        value,
-        err
-      }
+      [type]: value
     });
   };
 
+  onPressContinue = () => {
+    const isInvalidName = validateForm(this.state);
+    if (isInvalidName) {
+      const content = {
+        message: isInvalidName,
+        title: 'Lỗi'
+      };
+      this.setState({
+        showErrorMessage: content,
+      });
+    } else {
+      const { email } = this.state;
+      const data = {
+        mobileOrEmail: email,
+      };
+      authService.forgotPassword(data).then((res) => {
+        console.log(res, 'res');
+        navigationService.navigate('OTP', { infor: res });
+      }, (error) => {
+        const content = {
+          message: handleError(error),
+          title: 'Lỗi'
+        };
+        this.setState({
+          showErrorMessage: content,
+        });
+      });
+    }
+  }
+
+  closeErrorModal = () => {
+    this.setState({
+      showErrorMessage: false,
+    });
+  }
+
   render() {
-    const { email } = this.state;
+    const { email, showErrorMessage } = this.state;
     return (
       <KeyboardAvoidingView style={{ flexGrow: 1 }} behavior="padding" keyboardVerticalOffset={0}>
+        {showErrorMessage && <ErrorModalComponent onBackdropPress={this.closeErrorModal} content={showErrorMessage} />}
         <HeaderScroll style={{ zIndex: 1 }} ref={(child) => { this.child = child; }} colorBorderDefault="#D2D2D2" colorDefault="#fff" colorPageName="#000" borderWidthDefault={0} pageName="Quên mật khẩu">
           <View style={[styles.container, { position: 'relative' }]}>
             <View style={styles.contentPage}>
@@ -124,7 +162,7 @@ export default class ForgotPasswordPage extends Component {
                     CSS.alignItemsCenter,
                     CSS.justifyContentCenter
                   ]}
-                  onPress={this.onPressSignin}
+                  onPress={this.onPressContinue}
                 >
                   <Text style={CSS.textTitleButton}>Tiếp tục</Text>
                 </TouchableOpacity>

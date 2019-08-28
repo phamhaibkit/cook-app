@@ -75,4 +75,7 @@ export const API = {
   REGISTER: `${HOST}/authen/register`,
   LOGIN: `${HOST}/authen/login`,
   LOGIN_SOCIAL: `${HOST}/authen/login/social`,
+  VALIDATE_OTP: `${HOST}/authen/validate-otp`,
+  SET_PASSWORD: `${HOST}/authen/set-password`,
+  FORGOT_PASSWORD: `${HOST}/authen/forgot-password`
 };

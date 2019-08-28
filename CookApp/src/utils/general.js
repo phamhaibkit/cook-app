@@ -72,3 +72,9 @@ export const handleError = (error) => {
   console.log(error);
   return errorString;
 }
+
+export const requireField = (text, name) => {
+  if (text.length === 0) {
+    return `Vui lòng nhập ${name}`;
+  }
+};
