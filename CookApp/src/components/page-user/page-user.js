@@ -117,7 +117,7 @@ export class PageUser extends Component {
       },
       {
         name: LANG.SAVED_RECIPE,
-        action: ''
+        action: () => navigationService.navigate(ROUTES.recipeDetail.key, { id: 6917 }, 'item.name')
       },
     ];
     return this.renderItemManage(arrayItem);

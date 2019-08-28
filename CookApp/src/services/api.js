@@ -54,7 +54,7 @@ export const API = {
   SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text,
   MOST_SEARCH: HOST + '/recipe/search/trending',
   //// recipe detail
-  GET_RECIPE_DETAIL: id => HOST + '/recipe/' + id,
+  GET_RECIPE_DETAIL: id => HOST + '/recipe/detail/info?recipeId=' + id,
 
   // home functions
   LIKE_EVENT : eventId => HOST + '/like/event?id=' + eventId,

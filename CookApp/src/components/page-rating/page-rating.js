@@ -115,7 +115,7 @@ export default class RatingPage extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={padding}>
         <HeaderScroll pageName="Đánh giá">
-          <SwiperImage height={300} listItems={recipe.recipeImg} />
+          <SwiperImage height={300} listItems={recipe.images} />
           <View style={[styles.container]}>
             <View style={[{ marginTop: -90, alignItems: 'center' }]}>
               <View style={[styles.recipeRating, CSS.lightBoxShadow, CSS.justifyContentCenter]}>
