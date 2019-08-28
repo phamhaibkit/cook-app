@@ -56,7 +56,7 @@ export const API = {
   SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text,
   MOST_SEARCH: HOST + '/recipe/search/trending',
   //// recipe detail
-  GET_RECIPE_DETAIL: id => HOST + '/recipe/' + id,
+  GET_RECIPE_DETAIL: id => HOST + '/recipe/detail/info?recipeId=' + id,
 
   // home functions
   LIKE_EVENT : eventId => HOST + '/like/event?id=' + eventId,
@@ -77,4 +77,7 @@ export const API = {
   REGISTER: `${HOST}/authen/register`,
   LOGIN: `${HOST}/authen/login`,
   LOGIN_SOCIAL: `${HOST}/authen/login/social`,
+  VALIDATE_OTP: `${HOST}/authen/validate-otp`,
+  SET_PASSWORD: `${HOST}/authen/set-password`,
+  FORGOT_PASSWORD: `${HOST}/authen/forgot-password`
 };

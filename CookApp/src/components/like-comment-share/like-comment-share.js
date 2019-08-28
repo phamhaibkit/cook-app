@@ -21,9 +21,9 @@ export default class LikeCommentShare extends Component {
     const { onLove } = this.props;
     if (item.isLiked) {
       // eslint-disable-next-line no-unused-expressions
-      item.likeCount = item.likeCount ? item.likeCount - 1 : 0;
+      item.likedCount = item.likedCount ? item.likedCount - 1 : 0;
     } else {
-      item.likeCount = item.likeCount ? item.likeCount + 1 : 1;
+      item.likedCount = item.likedCount ? item.likedCount + 1 : 1;
     }
     console.log(item);
     item.isLiked = !item.isLiked;
@@ -92,7 +92,7 @@ export default class LikeCommentShare extends Component {
         <View style={[styles.containerTimePrice, { marginTop: topAmount }]}>
           <View style={styles.priceView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.likeCount || 0)}
+              {kFormatter(item.likedCount || 0)}
               <Text style={styles.textLight}> {LANG.LIKE}</Text>
             </Text>
           </View>
@@ -101,7 +101,7 @@ export default class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.numberEvaluate || item.evaluateNumber || 0)}
+              {kFormatter(item.numberEvaluate || item.evaluateNumber || item.commentCount || 0)}
               <Text style={styles.textLight}> {LANG.COMMENT}</Text>
             </Text>
           </View>
@@ -110,7 +110,7 @@ export default class LikeCommentShare extends Component {
           </View>
           <View style={styles.likeView}>
             <Text style={styles.textTime}>
-              {kFormatter(item.shareCount || 0)}
+              {kFormatter(item.sharedCount || 0)}
               <Text style={styles.textLight}> {LANG.SHARE}</Text>
             </Text>
           </View>
@@ -141,7 +141,7 @@ export default class LikeCommentShare extends Component {
             !notSave && (
               <TouchableOpacity style={[styles.saveView, CSS.flexRow]} onPress={() => this.onSave(item)}>
                 <Image style={styles.saveImg} source={iconSave} />
-                {showValueSaved && <Text style={[CSS.fontQuiRegular, CSS.fontSize13]}>  {kFormatter(item.saveCount || 0)} Lưu lại</Text>}
+                {showValueSaved && <Text style={[CSS.fontQuiRegular, CSS.fontSize13]}>  {kFormatter(item.savedCount || 0)} Lưu lại</Text>}
               </TouchableOpacity>
             )
           }

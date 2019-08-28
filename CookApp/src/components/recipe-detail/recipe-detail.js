@@ -82,7 +82,7 @@ export default class RecipeDetail extends Component {
         recipeDetail,
       });
       // this.initData(data);
-    });
+    }, error => console.log(error));
     this.getSuggestRecipes(1);
     this.getOtherRecipes();
   }
@@ -250,8 +250,8 @@ export default class RecipeDetail extends Component {
       const row = <View key={j} style={[CSS.flexRow, CSS.justifySpaceBetween, CSS.alignItemsCenter, styles.rowRate]}>
         <Text style={[CSS.fontQuiMedium, CSS.fontSize13, styles.colorTextDark]}>{5 - j} </Text>
         <Image style={[styles.imageStar, { marginRight: 5 }]} source={IMG.starYellow} />
-        <Progress.Bar progress={starDetail[j] / 100} borderColor="white" unfilledColor="rgba(58, 191, 87, 0.1)" width={160} color="#3ABF57" />
-        <Text style={[CSS.fontQuiRegular, CSS.fontSize13, styles.colorTextDark]}> {starDetail[j]}%</Text>
+        <Progress.Bar progress={starDetail[j] ? starDetail[j] / 100 : 0} borderColor="white" unfilledColor="rgba(58, 191, 87, 0.1)" width={160} color="#3ABF57" />
+        <Text style={[CSS.fontQuiRegular, CSS.fontSize13, styles.colorTextDark]}> {starDetail[j] || 0}%</Text>
       </View>;
       progress.push(row);
     }
@@ -347,19 +347,19 @@ export default class RecipeDetail extends Component {
 
   viewMore = (type) => {
     switch (type) {
-    case LANG.OTHER_RECIPE:
-      navigationService.navigate(ROUTES.recipeHighlightList.key);
-      break;
-    case LANG.RECIPE_MAYBE_LIKE:
-      navigationService.navigate(ROUTES.recipeHighlightList.key);
-      break;
-    case 'viewRating':
-      navigationService.navigate(ROUTES.viewRating.key);
-      break;
-    case 'viewComment':
-      navigationService.navigate(ROUTES.viewComment.key);
-      break;
-    default:
+      case LANG.OTHER_RECIPE:
+        navigationService.navigate(ROUTES.recipeHighlightList.key);
+        break;
+      case LANG.RECIPE_MAYBE_LIKE:
+        navigationService.navigate(ROUTES.recipeHighlightList.key);
+        break;
+      case 'viewRating':
+        navigationService.navigate(ROUTES.viewRating.key);
+        break;
+      case 'viewComment':
+        navigationService.navigate(ROUTES.viewComment.key);
+        break;
+      default:
     }
   };
 
@@ -370,7 +370,7 @@ export default class RecipeDetail extends Component {
     if (Platform.OS !== 'ios') {
       padding = -500;
     }
-    const recipeImg = _.get(recipeDetail, 'recipeImg', []);
+    const recipeImg = _.get(recipeDetail, 'images', []);
     return (
       <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={padding}>
         <HeaderScroll haveMore haveCart recipe={recipeDetail}>
