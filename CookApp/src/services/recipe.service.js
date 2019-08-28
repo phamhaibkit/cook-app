@@ -115,6 +115,7 @@ class RecipeService {
 
     return HTTPService.get(url, null, null)
       .then((data) => {
+        Promise.resolve(data);
         console.log(data);
         this.recipeDetail = _.cloneDeep({
           ...data

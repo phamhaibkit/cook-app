@@ -32,10 +32,10 @@ class PageHome extends Component {
     super(props);
     this.state = {
       trendings: homeService.trendingData,
-      collections: collectionService.collectionData,
+      collections: collectionService.collectionHome,
       ads: homeService.adsData,
       recipeHighLights: recipeService.recipeHighLightData,
-      combos: comboService.comboData,
+      combos: comboService.comboHome,
       products: productService.bestSellerProduct,
       followers: userService.followerData,
       likeRecipes: recipeService.recipeLikedData,
@@ -45,10 +45,12 @@ class PageHome extends Component {
 
   componentDidMount() {
     this.getTrendings();
-    // this.getCollections();
+    this.getCollections(5);
     this.getAds();
     this.getRecipeHighLights();
-    // this.getCombos();
+    this.getCombos(5);
+    this.getAds();
+    this.getRecipeHighLights();
     this.getBestSellProducts();
     // this.getFollowers();
     // this.getRecipeLikedList();
@@ -70,10 +72,10 @@ class PageHome extends Component {
     })
   }
 
-  getCollections = () => {
-    collectionService.getCollections().then(() => {
+  getCollections = (number) => {
+    collectionService.getCollectionHome(number).then(() => {
       this.setState({
-        collections: collectionService.collectionData.data
+        collections: collectionService.collectionHome.data
       })
     })
   }
@@ -94,10 +96,10 @@ class PageHome extends Component {
     })
   }
 
-  getCombos = () => {
-    comboService.getCombo().then(() => {
+  getCombos = (number) => {
+    comboService.getComboHome(number).then(() => {
       this.setState({
-        combos: comboService.comboData
+        combos: comboService.comboHome
       })
     })
   }
@@ -171,13 +173,13 @@ class PageHome extends Component {
       >
         <View style={styles.container}>
           {trendings.loading ? <Spinner /> : <Trending data={trendings.trendings} />}
-          {/* <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
+          <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
           {collections.loading ? <Spinner /> : (
             <CollectionHome
               data={collections}
               marTop={CSS.padding15}
             />
-          )} */}
+          )}
           <Advertiment paddingHori={CSS.padding15} data={ads.ads[0]} marginTop={30} />
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
           {recipeHighLights.loading ? <Spinner /> : (
@@ -187,13 +189,13 @@ class PageHome extends Component {
               marTop={CSS.padding15}
             />
           )}
-          {/* <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
+          <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
           {combos.loading ? <Spinner /> : (
             <ComboHome
               data={combos}
               marTop={CSS.padding15}
             />
-          )} */}
+          )}
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
           <ProductListHome data={products.products} />
           <Advertiment paddingHori={CSS.padding15} data={ads.ads[1]} marginTop={30} />

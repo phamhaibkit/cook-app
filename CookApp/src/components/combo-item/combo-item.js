@@ -55,7 +55,7 @@ export default class ComboItem extends PureComponent {
         ? styleEndFrame
         : styleFrame;
     let combo;
-    switch (item && item.comboImages.length) {
+    switch (item && item.images.length) {
     case 2:
       combo = this.render2or4Item(item, false);
       break;
@@ -75,7 +75,6 @@ export default class ComboItem extends PureComponent {
       <View>
         <View style={endStyle}>{combo}</View>
         {
-          // isVertical && (item.id + 1) % 2 === 0 && <Image source={{uri: 'https://vnseo.edu.vn/ads.jpg'}} style={{width: '100%', height: 120, marginTop: 10}} PlaceholderContent={<ActivityIndicator />}/>          
           isVertical && (item.id + 1) % 2 === 0 && ads && <Advertiment data={ads} marginTop={10}/>
         }
       </View>
@@ -123,32 +122,32 @@ export default class ComboItem extends PureComponent {
     const imgContainerWidth = isVertical ? [styles.containerImg, styles.containerImgVertical, CSS.flexRow] : [styles.containerImg, CSS.flexRow];
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.name, item.numberOrder, item.viewCount)}
+        {this.renderTitle(item.name, item.orderCount, item.viewCount)}
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={styles.container2Img}>
             <View style={imgContainerWidth}>
               <View>
                 <ImageBackground
                   style={imgLeftStyle}
-                  source={{ uri: item.comboImages[0] }}
+                  source={{ uri: item.images[0] }}
                 />
                 {is4 && (
                   <ImageBackground
                     style={imgLeftDown}
-                    source={{ uri:  item.comboImages[2] }}
+                    source={{ uri:  item.images[2] }}
                   />
                 )}
               </View>
               <View>
                 <ImageBackground
                   style={imgRightStyle}
-                  source={{ uri:  item.comboImages[1] }}
+                  source={{ uri:  item.images[1] }}
 
                 />
                 {is4 && (
                   <ImageBackground
                     style={imgRightDown}
-                    source={{ uri:  item.comboImages[3] }}
+                    source={{ uri:  item.images[3] }}
                   />
                 )}
               </View>
@@ -165,36 +164,36 @@ export default class ComboItem extends PureComponent {
     const imgDownStyle = is5 ? (isVertical ? [styles.imgDown5, styles.imgDown5Ver] : styles.imgDown5) : (isVertical ? [styles.imgDown3, styles.imgDown3Ver] : styles.imgDown3);
     return (
       <View style={styles.containerFluid}>
-        {this.renderTitle(item.name, item.numberOrder, item.viewCount)}
+        {this.renderTitle(item.name, item.orderCount, item.viewCount)}
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.container2Img}>
             <View style={styles.containerImg}>
               <ImageBackground
                 style={isVertical ? [styles.imgLeftView, styles.imgLeftViewVertical] : styles.imgLeftView}
-                source={{ uri:  item.comboImages[0] }}
+                source={{ uri:  item.images[0] }}
               />
               <View style={styles.imgRightView}>
                 <View style={styles.addImgView}>
                   <ImageBackground
                     style={imgUpStyle}
-                    source={{ uri:  item.comboImages[1] }}
+                    source={{ uri:  item.images[1] }}
                   />
                   {is5 && (
                     <ImageBackground
                       style={isVertical ? [styles.imgRightUp5, styles.imgRightUp5Ver] : styles.imgRightUp5}
-                      source={{ uri:  item.comboImages[3] }}
+                      source={{ uri:  item.images[3] }}
                     />
                   )}
                 </View>
                 <View style={styles.addImgView}>
                   <ImageBackground
                     style={imgDownStyle}
-                    source={{ uri:  item.comboImages[2] }}
+                    source={{ uri:  item.images[2] }}
                   />
                   {is5 && (
                     <ImageBackground
                       style={isVertical ? [styles.imgRightDown5, styles.imgRightDown5Ver] : styles.imgRightDown5}
-                      source={{ uri:  item.comboImages[4] }}
+                      source={{ uri:  item.images[4] }}
                     />
                   )}
                 </View>

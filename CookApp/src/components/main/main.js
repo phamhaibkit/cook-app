@@ -383,7 +383,6 @@ RecipeStack.navigationOptions = ({ navigation }) => {
 
 const bottomTabNav = createBottomTabNavigator(
   {
-    
     Home: {
       screen: HomeStack,
       // screen: StoreStack,

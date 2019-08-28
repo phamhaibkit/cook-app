@@ -1,3 +1,5 @@
+import { requireField } from '../../utils/general';
+
 // eslint-disable-next-line consistent-return
 export const validateEmail = (email) => {
   if (email.length > 0) {
@@ -8,13 +10,6 @@ export const validateEmail = (email) => {
     }
   } else {
     return 'Vui lòng nhập email';
-  }
-};
-
-// eslint-disable-next-line consistent-return
-export const requireField = (text, name) => {
-  if (text.length === 0) {
-    return `Vui lòng nhập ${name}`;
   }
 };
 

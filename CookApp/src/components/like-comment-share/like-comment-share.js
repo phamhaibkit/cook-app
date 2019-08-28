@@ -21,9 +21,9 @@ export default class LikeCommentShare extends Component {
     const { onLove } = this.props;
     if (item.isLiked) {
       // eslint-disable-next-line no-unused-expressions
-      item.likeCount = item.likeCount ? item.likeCount - 1 : 0;
+      item.likedCount = item.likedCount ? item.likedCount - 1 : 0;
     } else {
-      item.likeCount = item.likeCount ? item.likeCount + 1 : 1;
+      item.likedCount = item.likedCount ? item.likedCount + 1 : 1;
     }
     console.log(item);
     item.isLiked = !item.isLiked;
