@@ -8,6 +8,7 @@ const trendingData = {
 };
 
 const adsData = {
+  ads: [],
   loading: false,
 };
 
@@ -36,15 +37,14 @@ class HomeService {
       })
   }
 
-  getAds = () => {
-    const temAds = {"image":"https://vnseo.edu.vn/ads.jpg","position":"ABC"}
-    const url = API.GET_ADS;
+  getAds = (position) => {
+    const url = API.GET_ADS(position);
     this.adsData.loading = true;
     return HTTPService.get(url)
       .then((data) => {
         this.adsData = _.cloneDeep({
           // ...data,
-          ...temAds,
+          ads: data,
           loading: false,
         })
       })

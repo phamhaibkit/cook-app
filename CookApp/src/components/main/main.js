@@ -383,13 +383,7 @@ RecipeStack.navigationOptions = ({ navigation }) => {
 
 const bottomTabNav = createBottomTabNavigator(
   {
-    User: {
-      screen: UserStack,
-      navigationOptions:
-      {
-        tabBarLabel: LANG.USER
-      }
-    },
+    
     Home: {
       screen: HomeStack,
       // screen: StoreStack,
@@ -421,7 +415,13 @@ const bottomTabNav = createBottomTabNavigator(
         tabBarLabel: LANG.NOTI
       }
     },
-    
+    User: {
+      screen: UserStack,
+      navigationOptions:
+      {
+        tabBarLabel: LANG.USER
+      }
+    },
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

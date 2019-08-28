@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View} from 'react-native';
+import { Image } from 'react-native-elements';
 
 export default class Advertiment extends Component {
   render() {
@@ -12,7 +13,11 @@ export default class Advertiment extends Component {
         borderRadius: 10,
         overflow: 'hidden'
       }}>
-        <Image style={{ height: 120, width: '100%' }} source={{ uri: data && data.image }} resizeMode="stretch" />
+        <Image 
+          style={{ height: 120, width: '100%' }}
+          source={{ uri: data && data.image}}
+          resizeMode="stretch"
+          />
       </View>
     );
   }

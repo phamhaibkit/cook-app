@@ -4,17 +4,16 @@ const HOST = 'http://www.api.bechef.vn';
 
 
 export const API = {
-  GET_HOME: `${HOST}/home?usr=1`,
 
   // cart
   GET_NUMBER_CART: userId => `${HOST}/cart/number-of-product?usr=${userId}`,
   ADD_TO_CART : `${HOST}/cart/add`,
 
   // trending
-  GET_TRENDING: `${HOST}/trend/all`,
+  GET_TRENDING: `${HOST}/trending/home`,
 
   // ads
-  GET_ADS: `${HOST}/ads?position=1`,
+  GET_ADS: position => HOST + '/get-ads?position=' + position,
 
   // collection
   GET_COLLECTION_LIST: HOST + '/recipe-collection/all',
@@ -33,22 +32,20 @@ export const API = {
   SAVE_DRAFT_RECIPE: HOST + '/recipe/draft',
 
   //recipe highlight
-  GET_RECIPE_HIGHLIGHT_LIST: HOST + '/recipe/highlight-recipe/all',
+  GET_RECIPE_HIGHLIGHT_LIST: number => HOST + '/recipe/highlight?top=' + number,
 
   //recipe liked
-  GET_RECIPE_LIKED: id => HOST + '/recipe/favorite-recipe?usr=' + id,
+  GET_RECIPE_LIKED: (page, size) => HOST + '/favorite-recipe?page=' + page + '&pageSize=' + size,
 
   //best-product
-  GET_BEST_SELLER_PRODUCT: HOST + '/product/best-seller/all',
+  GET_BEST_SELLER_PRODUCT: (page, size) => HOST + '/product/best-seller?page=' + page + '&pageSize=' + size,
+  GET_PRODUCT_LIST: (page, size) => HOST + '/product/list?page=' + page + '&pageSize=' + size,
 
   //follower
   GET_FOLLOWER: userId =>  HOST + '/user/follower/all?usr=' + userId,
 
-  //liked-recipe
-  GET_LIKED_RECIPE: userId => HOST + '/recipe/favorite-recipe?usr=' + userId,
-
   //news-event
-  GET_NEWS_EVENT : HOST + '/event/all',
+  GET_NEWS_EVENT : number => HOST + '/news-event/hot?top=' + number,
 
   //search recipe
   SEARCH_RECIPE: text => HOST + '/recipe/search?name=' + text,

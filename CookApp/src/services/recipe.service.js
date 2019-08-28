@@ -48,10 +48,10 @@ class RecipeService {
     this.categoryData = _.cloneDeep(categoryData);
   };
 
-  getRecipeHighLightList = () => {
-    const url = API.GET_RECIPE_HIGHLIGHT_LIST;
+  getRecipeHighLightList = (number) => {
+    const url = API.GET_RECIPE_HIGHLIGHT_LIST(number);
     this.recipeHighLightData.loading = true;
-    return HTTPService.get(url, null, null)
+    return HTTPService.get(url)
       .then((data) => {
         this.recipeHighLightData = _.cloneDeep({
           recipes: data,
@@ -93,11 +93,12 @@ class RecipeService {
       });
   }
 
-  getRecipeLikedList = (userId) => {
-    const url = API.GET_RECIPE_LIKED(userId);
+  getRecipeLikedList = (page, size) => {
+    const url = API.GET_RECIPE_LIKED(page, size);
     this.recipeLikedData.loading = true;
-    return HTTPService.get(url, null, null)
+    return HTTPService.get(url)
       .then((data) => {
+        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', data)
         this.recipeLikedData = _.cloneDeep({
           recipes: data,
           loading: false,

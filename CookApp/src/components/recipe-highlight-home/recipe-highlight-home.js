@@ -30,7 +30,7 @@ export default class RecipeHighlightHome extends Component {
       isModalVisible: false,
       isModalComment: false,
       recipe: {},
-      recipes: [],
+      recipes: this.props.recipes,
       ads: homeService.adsData,
       cmtText: ''
     };
@@ -38,12 +38,12 @@ export default class RecipeHighlightHome extends Component {
 
   componentWillReceiveProps(nextProps){
     const newRecipes = nextProps.recipes;
-    const {isLiked} = this.props;
-    if(isLiked){
-      newRecipes.map((item, index) => {
-        item.isLiked = true;
-      })
-    }
+    // const {isLiked} = this.props;
+    // if(isLiked){
+    //   newRecipes.map((item, index) => {
+    //     item.isLiked = true;
+    //   })
+    // }
     this.setState({
       recipes: newRecipes
     })
@@ -139,7 +139,7 @@ export default class RecipeHighlightHome extends Component {
       recipes.length - 1 === index
         ? [styles.frame, styles.endFrame]
         : styles.frame;
-      const priceFormat = getCurrencyStr(item.price);
+      const priceFormat = getCurrencyStr(item.estimatedPrice);
       return (
         <View style={[{ flex: 1, paddingVertical: 5 }, CSS.lightBoxShadowItem]} key={index}>
           <View style={isHorizontal ? horizaltalStyle : styles.frameVer}>
@@ -161,7 +161,7 @@ export default class RecipeHighlightHome extends Component {
               <View style={styles.priceView}>
                 <Image style={styles.sandImg} source={IMG.sandClokHome} />
                 <Text style={styles.textTime}>
-                  {item.timeExecute}
+                  {item.cookingTimeInMinute}{' ' + LANG.MINUTE}
                 </Text>
               </View>
               <View style={styles.lineView}>
@@ -179,7 +179,7 @@ export default class RecipeHighlightHome extends Component {
               <View style={styles.dollaView}>
                 <Image style={styles.personImg} source={IMG.personHome} />
                 <Text style={styles.textTime}>
-                  {kFormatter(item.numPeople)}
+                  {kFormatter(item.servingPeople)}
                   <Text> {LANG.PERSON}</Text>
                 </Text>
               </View>
@@ -188,12 +188,12 @@ export default class RecipeHighlightHome extends Component {
             <View>
               <View style={isHorizontal ? styles.recipeView : styles.imgVer}>
                 <TouchableWithoutFeedback onPress={()=>this.onPress(item)}>
-                  <Image style={styles.recipeIMG} PlaceholderContent={<ActivityIndicator />} source={{ uri: item.recipeImage }} />
+                  <Image style={styles.recipeIMG} PlaceholderContent={<ActivityIndicator />} source={{ uri: item.images[0] }} />
                 </TouchableWithoutFeedback>
               </View>
               <TouchableOpacity style={styles.containerChef}>
                 <Image style={styles.avataImg} source={{ uri: item.owner && item.owner.avatar }} />
-                <Text style={styles.nameChef}>{item.owner && item.owner.name}</Text>
+                <Text style={styles.nameChef}>{item.owner && item.owner.fullName}</Text>
                 <Image style={styles.rankImg} source={IMG.rankHome} />
               </TouchableOpacity>
             </View>

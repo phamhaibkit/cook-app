@@ -7,14 +7,14 @@ const CancelToken = axios.CancelToken;
 
 const TEST = true;
 
-export const DEFAULT_TOKEN = 'b1ja8rrbc5uinw55lmrnxaqb4o9sh8k6';
+export const DEFAULT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMDk4OTIzNDEyMyIsInVzZXJfaWQiOiIzMjQ0MjgiLCJtb2JpbGUiOiIwOTg5MjM0MTIzIiwiZGlzbGF5X25hbWUiOiIxMjMxMjMiLCJleHAiOjE1Njc2MDU3OTYsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzg3LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzg3LyJ9.dpSofmylgJKFbHBvSL5qweba1IFBlKt0w3dAErBB9YI";
 const configObj = {
 	baseURL: TEST ? 'http://' : 'https://',
-	// headers: {
-	// 	Accept: 'application/json',
-	// 	'Content-Type': 'application/json',
-	// 	Authorization: 'Bearer ' + DEFAULT_TOKEN,
-	// },
+	headers: {
+		Accept: 'application/json',
+		'Content-Type': 'application/json',
+		Authorization: 'Bearer ' + DEFAULT_TOKEN,
+	},
 };
 
 class HTTPService {

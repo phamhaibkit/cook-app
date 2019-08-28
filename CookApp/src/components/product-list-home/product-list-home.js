@@ -111,24 +111,24 @@ class ProductListHome extends Component {
         <TouchableWithoutFeedback onPress={() => this.onPress(item)} style={{ zIndex: 2 }}>
           <View style={styles.containerTouch}>
             <View style={styles.imgView}>
-              <Image style={styles.img} source={{ uri: item.productImage }} />
+              <Image style={styles.img} source={{ uri: item.images[0] }} />
             </View>
             <ImageBackground
               style={styles.guarantImg}
-              source={{ uri: 'https://www.laghim.vn/templates/laghim/images/vietgap.png' }}
+              source={{ uri: item.providerLogo}}
             />
             <View style={styles.titleView}>
-              <Text numberOfLines={2} style={styles.title}>
-                {item.productName}
+              <Text numberOfLines={1} style={styles.title}>
+                {item.name}
               </Text>
             </View>
             <View style={styles.containerDown}>
               <Text style={styles.madeIn}>{item.origin}</Text>
               <View style={styles.priceView}>
-                <Text style={styles.newPrice}>{getCurrencyStr(item.newPrice)}</Text>
-                <Text style={styles.unitText}>{'/ ' + item.quality}</Text>
+                <Text style={styles.newPrice}>{getCurrencyStr(item.sellPrice)}</Text>
+                <Text style={styles.unitText}>{'/ ' + item.weight + item.unitName}</Text>
               </View>
-              <Text style={styles.oldPrice}>{getCurrencyStr(item.oldPrice)}</Text>
+              <Text style={styles.oldPrice}>{getCurrencyStr(item.originalPrice)}</Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -143,7 +143,7 @@ class ProductListHome extends Component {
         )}
         <View style={styles.containerDiscount}>
           <View style={styles.discount}>
-            <Text style={styles.discountText}>-{item.discount * 100 + '%'}</Text>
+            <Text style={styles.discountText}>-{item.discountPercent}%</Text>
           </View>
           <View style={styles.selling}>
             <Text style={styles.discountText}>{LANG.HOT_SELLIING}</Text>

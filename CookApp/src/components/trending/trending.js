@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  Image,
   FlatList,
   TouchableWithoutFeedback,
   Platform
 } from "react-native";
+import { Image } from 'react-native-elements';
 import LinearGradient from "react-native-linear-gradient";
 import styles from "./trending-style";
 import { COLOR } from "../../utils/variables";
@@ -32,7 +32,7 @@ export default class Trending extends Component {
           <View style={styles.square}>
             <Image
               style={styles.img}
-              source={{ uri: item.trendingImage }}
+              source={{ uri: item.image }}
               resizeMode="cover"
             />
           </View>

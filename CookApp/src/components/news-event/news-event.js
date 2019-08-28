@@ -24,10 +24,6 @@ export default class NewsEvent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const newData = nextProps.data;
-    newData && newData.map((item, index) => {
-      item.isLoved = false;
-    })
     this.setState({
       data: nextProps.data
     })
@@ -61,14 +57,14 @@ export default class NewsEvent extends Component {
             <TouchableWithoutFeedback onPress={this.onPress} >
               <View>
                 <View style={isVertical ? styles.imageVer : styles.imageView}>
-                  <Image style={styles.recipeIMG} source={{ uri: item.eventImage }} />
+                  <Image style={styles.recipeIMG} source={{ uri: item.image }} />
                 </View>
                 <View style={styles.dateView}>
                   <Image source={IMG.calenderHome} style={styles.dateImg} />
                   <Text style={styles.dateText}> {LANG.FROM + ' ' + item.fromDate + ' ' + LANG.TO + ' ' + item.toDate} </Text>
                 </View>
                 <Text numberOfLines={1} style={styles.titleText}>
-                  {item.eventName}
+                  {item.title}
                 </Text>
               </View>
             </TouchableWithoutFeedback>

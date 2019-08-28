@@ -45,15 +45,15 @@ class PageHome extends Component {
 
   componentDidMount() {
     this.getTrendings();
-    this.getCollections();
+    // this.getCollections();
     this.getAds();
     this.getRecipeHighLights();
-    this.getCombos();
+    // this.getCombos();
     this.getBestSellProducts();
-    this.getFollowers(1);
-    this.getRecipeLikedList(1);
+    // this.getFollowers();
+    // this.getRecipeLikedList();
     this.getNewsEvents();
-    this.getCart(1);
+    // this.getCart();
   }
 
   getCart = (userId) => {
@@ -79,7 +79,7 @@ class PageHome extends Component {
   }
 
   getAds = () => {
-    homeService.getAds().then(() => {
+    homeService.getAds('home').then(() => {
       this.setState({
         ads: homeService.adsData
       })
@@ -87,7 +87,7 @@ class PageHome extends Component {
   }
 
   getRecipeHighLights = () => {
-    recipeService.getRecipeHighLightList().then(() => {
+    recipeService.getRecipeHighLightList(5).then(() => {
       this.setState({
         recipeHighLights: recipeService.recipeHighLightData
       })
@@ -103,7 +103,7 @@ class PageHome extends Component {
   }
 
   getBestSellProducts = () => {
-    productService.getBestSellerProduct().then(() => {
+    productService.getBestSellerProduct(1, 10).then(() => {
       this.setState({
         products: productService.bestSellerProduct
       })
@@ -118,8 +118,8 @@ class PageHome extends Component {
     })
   }
 
-  getRecipeLikedList = (userId) => {
-    recipeService.getRecipeLikedList(userId).then(() => {
+  getRecipeLikedList = () => {
+    recipeService.getRecipeLikedList(1, 10).then(() => {
       this.setState({
         likeRecipes: recipeService.recipeLikedData
       })
@@ -127,7 +127,7 @@ class PageHome extends Component {
   }
 
   getNewsEvents = () => {
-    newsEventService.getNewsEventData().then(() => {
+    newsEventService.getNewsEventData(5).then(() => {
       this.setState({
         newsEvents: newsEventService.newsEventData
       })
@@ -164,18 +164,21 @@ class PageHome extends Component {
 
   render() {
     const { trendings, collections, ads, recipeHighLights, combos, products, followers, likeRecipes, newsEvents } = this.state;
+    console.log('NewsEvent====', newsEvents);
     return (
-      <ContainerScroll enableScroll={!trendings.loading && !collections.loading && !combos.loading && !products.loading && !followers.loading && !likeRecipes.loading && !newsEvents.loading}>
+      <ContainerScroll
+      // enableScroll={!trendings.loading && !collections.loading && !combos.loading && !products.loading && !followers.loading && !likeRecipes.loading && !newsEvents.loading}
+      >
         <View style={styles.container}>
           {trendings.loading ? <Spinner /> : <Trending data={trendings.trendings} />}
-          <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
+          {/* <ViewMoreHome type={LANG.COLLECTION} viewMore={this.viewMore} />
           {collections.loading ? <Spinner /> : (
             <CollectionHome
               data={collections}
               marTop={CSS.padding15}
             />
-          )}
-          <Advertiment paddingHori={CSS.padding15} data={ads} marginTop={30} />
+          )} */}
+          <Advertiment paddingHori={CSS.padding15} data={ads.ads[0]} marginTop={30} />
           <ViewMoreHome type={LANG.RECIPE_HIGHLIGHT} viewMore={this.viewMore} />
           {recipeHighLights.loading ? <Spinner /> : (
             <RecipeHighlightHome
@@ -184,23 +187,21 @@ class PageHome extends Component {
               marTop={CSS.padding15}
             />
           )}
-          <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
+          {/* <ViewMoreHome type={LANG.COMBO} viewMore={this.viewMore} />
           {combos.loading ? <Spinner /> : (
             <ComboHome
               data={combos}
               marTop={CSS.padding15}
             />
-          )}
+          )} */}
           <ViewMoreHome type={LANG.BEST_SELL} viewMore={this.viewMore} />
-          {/* { products.loading ? <Spinner /> : ( */}
           <ProductListHome data={products.products} />
-          {/* )} */}
-          <Advertiment paddingHori={CSS.padding15} data={ads} marginTop={30} />
-          <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
+          <Advertiment paddingHori={CSS.padding15} data={ads.ads[1]} marginTop={30} />
+          {/* <ViewMoreHome type={LANG.FOLLOWING_LIST} viewMore={this.viewMore} />
           {followers.loading ? <Spinner /> : (
             <FollowingHome data={followers.followers} />
-          )}
-          <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
+          )} */}
+          {/* <ViewMoreHome type={LANG.LIKED_RECIPE} viewMore={this.viewMore} />
           {likeRecipes.loading ? <Spinner /> : (
             <RecipeHighlightHome
               recipes={likeRecipes.recipes}
@@ -208,7 +209,7 @@ class PageHome extends Component {
               isLiked
               marTop={CSS.padding15}
             />
-          )}
+          )} */}
           <ViewMoreHome type={LANG.INFO_EVENT} viewMore={this.viewMore} />
           {newsEvents.loading ? <Spinner /> : (
             <NewsEvent data={newsEvents.newsEvents} />
