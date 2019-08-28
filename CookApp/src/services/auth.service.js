@@ -27,33 +27,20 @@ class AuthService {
     this.getToken(data.email, data.password);
   }
 
-  loginFacebook = async (email, firstName, lastName, facebookId) => {
-    const params = {
-      email,
-      firstname: firstName,
-      lastname: lastName,
-      facebookid: facebookId,
-    };
-    const data = await this.getTokenSocial(params);
-
-    // return this.handleSuccess(params, true, {
-    //   email: params.email,
-    //   password: params.facebookid,
-    // });
-  };
-
-  getTokenSocial = () => {
+  loginFacebook = (email, firstName, lastName, facebookId, token) => {
     const url = API.LOGIN_SOCIAL;
-    const params = {
+    const userName = `${lastName} ${firstName}`;
+    const dataLogin = {
       // platform: 'string',
-      socialUId: params.facebookId,
-      displayName: 'Sone',
-      accessToken: 'string',
+      socialUId: '1',
+      fullName: userName,
+      accessToken: token,
       refreshToken: 'string',
       email: 'string',
-      avatar: 'string'
+      avatar: `http://graph.facebook.com/${facebookId}/picture?width=500&height=500`
     };
-    return HTTPService.post(url, params)
+
+    return HTTPService.post(url, dataLogin)
       .then((data) => {
         // return (this.token = data);
         return Promise.resolve(this.handleSaveInforSuccess(data));

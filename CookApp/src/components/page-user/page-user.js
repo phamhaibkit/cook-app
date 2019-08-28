@@ -14,12 +14,12 @@ import navigationService from '../../services/navigation.service';
 import ImageProfile from '../image-profile/image-profile';
 import { ROUTES } from '../../utils/routes';
 
-const user = {
-  name: 'Hoang Thi Kieu Nga',
-  rank: 13,
-  id: 7,
-  avatar: ''
-};
+// const user = {
+//   name: 'Hoang Thi Kieu Nga',
+//   rank: 13,
+//   id: 7,
+//   avatar: ''
+// };
 
 const { width } = Dimensions.get('window');
 
@@ -32,8 +32,6 @@ export class PageUser extends Component {
   }
 
   componentWillMount() {
-    console.log(JSON.stringify(user));
-    console.log('asdasdasd');
     this.retrieveData();
   }
 
@@ -47,6 +45,9 @@ export class PageUser extends Component {
       await AsyncStorage.getItem('userInfo').then((value) => {
         const user = JSON.parse(value);
         console.log(user, 'user');
+        this.setState({
+          user,
+        })
       });
     } catch (error) {
       console.log(error, 'error');
@@ -148,6 +149,7 @@ export class PageUser extends Component {
 
   render() {
     const { accountInfo } = this.props;
+    const { user } = this.state;
     return (
       <ScrollView style={styles.container}>
         <LinearGradient
@@ -167,12 +169,12 @@ export class PageUser extends Component {
         >
           <View style={[CSS.flexRow, CSS.justifySpaceBetween, { paddingHorizontal: 15 }]}>
             <View style={[CSS.flexCol, { justifyContent: 'space-around' }]}>
-              <Text style={[CSS.fontNuBlack, CSS.fontSize20, { color: '#fff' }]}>{user.name}</Text>
+              {user && <Text style={[CSS.fontNuBlack, CSS.fontSize20, { color: '#fff' }]}>{user.fullName}</Text>}
               <TouchableOpacity style={[CSS.flexRow, CSS.alignItemsCenter]} onPress={() => navigationService.navigate(ROUTES.userProfile.key)}>
                 <Text style={[CSS.fontQuiRegular, CSS.fontSize13, { color: '#fff' }]}>Xem thông tin </Text>
                 <Image source={IMG.arrowWhite} style={{ width: 12, height: 7 }} /></TouchableOpacity>
             </View>
-            <ImageProfile user={user} widthImage={60} />
+            {user && <ImageProfile user={user} widthImage={60} />}
           </View>
         </LinearGradient>
         <View style={[styles.container, CSS.alignItemsCenter]}>
@@ -196,7 +198,7 @@ export class PageUser extends Component {
 
 function mapStateToProps(state) {
   return {
-    accountInfo: state.accountInfo,
+    // accountInfo: state.accountInfo,
     scrollTop: state.scrollTop,
   };
 }

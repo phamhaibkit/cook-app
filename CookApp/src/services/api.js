@@ -1,6 +1,6 @@
 /* eslint-env es6 */
-// const HOST = 'http://www.api.bechef.vn';
-const HOST = '45.122.222.214:8181';
+const HOST = 'http://www.api.bechef.vn';
+// const HOST = '45.122.222.214:8181';
 
 
 export const API = {

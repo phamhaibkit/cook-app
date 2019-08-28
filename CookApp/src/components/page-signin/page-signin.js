@@ -116,7 +116,7 @@ class PageSignin extends Component {
               <Text style={CSS.textTitleButton}>{LANG.SIGN_IN_UPTO_CASE}</Text>
             </TouchableOpacity>
           </LinearGradient>
-          <SigninByFacebook navigation={navigation} style={styles.loginFacebookSection} goto="Home" />
+          <SigninByFacebook navigation={navigation} style={styles.loginFacebookSection} goto="User" />
           <TouchableOpacity style={styles.createNewButton} onPress={() => navigationService.navigate('SignUp')}>
             <Text style={styles.createNewButtonText}>Đăng ký tài khoản</Text>
           </TouchableOpacity>

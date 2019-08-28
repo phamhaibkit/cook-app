@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, Platform, Modal, View, AsyncStorage } from 'react-native';
-
 import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import _ from 'lodash';
 // FBLoginManager.setLoginBehavior(FBLoginManager.LoginBehaviors.WebView);
 // import navigationService from '../../services/navigation.service'
 import { connect } from 'react-redux';
@@ -29,7 +29,8 @@ class SigninByFacebook extends Component {
   onLoginFbSucess = (user) => {
     this.showLoading();
     if (Platform.OS === 'ios') {
-      const api = `https://graph.facebook.com/v3.1/${user.credentials.userId}?fields=name,email,first_name,last_name&access_token=${user.credentials.token}`;
+      const token = _.get(user, 'credentials.token');
+      const api = `https://graph.facebook.com/v3.1/${user.credentials.userId}?fields=name,email,first_name,last_name&access_token=${token}`;
       fetch(api)
         .then(response => response.json())
         .then((responseData) => {
@@ -37,7 +38,8 @@ class SigninByFacebook extends Component {
             responseData.email,
             responseData.first_name,
             responseData.last_name,
-            responseData.id
+            responseData.id,
+            token
           );
         })
         .done();
@@ -50,12 +52,11 @@ class SigninByFacebook extends Component {
     }
   };
 
-  loginFacebookHandle = (email, firstname, lastname, id) => {
+  loginFacebookHandle = (email, firstname, lastname, id, token) => {
     const { getLoginFaceBookInfor, goto, navigation } = this.props;
     return authService
-      .loginFacebook(email, firstname, lastname, id)
+      .loginFacebook(email, firstname, lastname, id, token)
       .then((data) => {
-        // debugger
         console.log(data, 'Logged');
         this.timeout = setTimeout(() => this.hideLoading(), 200);
         this.hideLoading();
@@ -70,7 +71,7 @@ class SigninByFacebook extends Component {
             actions: [NavigationActions.navigate({ routeName: 'User' })],
           });
           navigation.dispatch(resetAction);
-          navigationService.navigate('Home');
+          navigationService.navigate('User');
         }
         if (getLoginFaceBookInfor) {
           const objectFaceBookInfor = {
